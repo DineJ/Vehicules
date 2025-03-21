@@ -3,6 +3,7 @@
 
 <h2>Liste des Users</h2>
 <a href="<?= site_url('User/create') ?>" class="btn btn-success">Ajouter</a>
+
 <table class="table table-bordered mt-3">
     <thead>
         <tr>
@@ -33,5 +34,7 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<?= $pager->links() ?>
 
 <?= $this->endSection() ?>

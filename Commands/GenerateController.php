@@ -9,7 +9,7 @@ class GenerateController extends BaseCommand
 {
     protected $group       = 'custom';
     protected $name        = 'generate:controller';
-    protected $description = 'Génère automatiquement un contrôleur basé sur une entité.';
+    protected $description = 'Génère automatiquement un contrôleur basé sur une entité avec pagination.';
 
     public function run(array $params)
     {
@@ -21,35 +21,25 @@ class GenerateController extends BaseCommand
         $entityName = ucfirst($params[0]);
         $modelName = $entityName . 'Model';
         $controllerName = $entityName . 'Controller';
+        $controllerPath = "../app/Controllers/$controllerName.php";
 
         // Vérifier si l'entité existe
         if (!file_exists("../app/Entities/$entityName.php")) {
-            CLI::error("❌ L'entité '$entityName' n'existe pas dans 'app/Entities/'.");
+            CLI::error("❌ L'entité '$entityName' n'existe pas.");
             return;
         }
 
         // Vérifier si le modèle existe
         if (!file_exists("../app/Models/$modelName.php")) {
-            CLI::error("❌ Le modèle '$modelName' n'existe pas dans 'app/Models/'.");
+            CLI::error("❌ Le modèle '$modelName' n'existe pas.");
             return;
         }
 
-        // Choix du type de contrôleur (REST ou standard)
-        CLI::write("Quel type de contrôleur souhaitez-vous générer ?");
-        CLI::write("1. Contrôleur classique (avec méthodes show, create, update, delete)");
-        CLI::write("2. Contrôleur RESTful (avec API)");
-
-        $type = CLI::prompt("Entrez 1 ou 2", [1, 2]);
-
-        if ($type == 1) {
-            $controllerContent = $this->generateClassicController($controllerName, $modelName, $entityName);
-        } else {
-            $controllerContent = $this->generateRestController($controllerName, $modelName, $entityName);
-        }
+        // Générer le contenu du contrôleur avec pagination
+        $controllerContent = $this->generateClassicController($controllerName, $modelName, $entityName);
 
         // Écriture du fichier contrôleur
-        $filePath = "../app/Controllers/$controllerName.php";
-        file_put_contents($filePath, $controllerContent);
+        file_put_contents($controllerPath, $controllerContent);
 
         CLI::write("✅ Contrôleur généré : app/Controllers/$controllerName.php", 'green');
     }
@@ -74,43 +64,52 @@ class $controllerName extends Controller
         \$this->model = new $modelName();
     }
 
+    // LISTE AVEC PAGINATION
     public function index()
     {
-        return view('{$entityName}/index', ['items' => \$this->model->findAll()]);
+        \$data['items'] = \$this->model->paginate(5); // Affiche 5 résultats par page
+        \$data['pager'] = \$this->model->pager; // Ajoute le pager
+
+        return view('$entityName/index', \$data);
     }
 
+    // AFFICHAGE D'UN SEUL ÉLÉMENT
     public function show(\$id)
     {
-        return view('{$entityName}/show', ['item' => \$this->model->find(\$id)]);
+        \$data['item'] = \$this->model->find(\$id);
+        return view('$entityName/show', \$data);
     }
 
+    // FORMULAIRE DE CRÉATION
     public function create()
     {
-        \$data['title'] = 'Ajouter un nouvel {$entityName}';
-        return view('{$entityName}/create', \$data);
+        \$data['title'] = "Créer un nouvel élément";
+        return view('$entityName/create', \$data);
     }
 
+    // INSERTION DANS LA BASE
     public function store()
     {
         \$data = \$this->request->getPost();
         \$entity = new $entityName();
         \$entity->fill(\$data);
-        
+
         if (!\$this->model->insert(\$entity)) {
             return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
         }
         
-        return redirect()->to('/{$entityName}');
+        return redirect()->to('/$entityName');
     }
 
+    // FORMULAIRE DE MODIFICATION
     public function edit(\$id)
     {
-        \$model = new $modelName();
-        \$data['item'] = \$model->find(\$id);
-        \$data['title'] = "Modifier {$entityName}";
-        return view('{$entityName}/edit', \$data);
+        \$data['item'] = \$this->model->find(\$id);
+        \$data['title'] = "Modifier l'élément";
+        return view('$entityName/edit', \$data);
     }
 
+    // MISE À JOUR DES DONNÉES
     public function update(\$id)
     {
         \$data = \$this->request->getPost();
@@ -121,85 +120,14 @@ class $controllerName extends Controller
             return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
         }
 
-        return redirect()->to('/{$entityName}');
+        return redirect()->to('/$entityName');
     }
 
+    // SUPPRESSION D'UN ÉLÉMENT
     public function delete(\$id)
     {
         \$this->model->delete(\$id);
-        return redirect()->to('/{$entityName}');
-    }
-}
-EOD;
-    }
-
-    private function generateRestController($controllerName, $modelName, $entityName)
-    {
-        return <<<EOD
-<?php
-
-namespace App\Controllers;
-
-use CodeIgniter\RESTful\ResourceController;
-use App\Models\\$modelName;
-use App\Entities\\$entityName;
-
-class $controllerName extends ResourceController
-{
-    protected \$modelName = $modelName::class;
-    protected \$format    = 'json';
-
-    public function index()
-    {
-        return $this->respond(\$this->model->findAll());
-    }
-
-    public function show(\$id = null)
-    {
-        \$item = \$this->model->find(\$id);
-        if (\$item) {
-            return $this->respond(\$item);
-        }
-        return $this->failNotFound('Non trouvé');
-    }
-
-    public function create()
-    {
-        \$data = \$this->request->getPost();
-        \$entity = new $entityName();
-        \$entity->fill(\$data);
-
-        if (!\$this->model->insert(\$entity)) {
-            return $this->failValidationErrors(\$this->model->errors());
-        }
-
-        return $this->respondCreated(\$entity);
-    }
-
-    public function update(\$id = null)
-    {
-        \$data = \$this->request->getRawInput();
-        \$entity = \$this->model->find(\$id);
-        if (!\$entity) {
-            return $this->failNotFound('Non trouvé');
-        }
-
-        \$entity->fill(\$data);
-        if (!\$this->model->save(\$entity)) {
-            return $this->failValidationErrors(\$this->model->errors());
-        }
-
-        return $this->respondUpdated(\$entity);
-    }
-
-    public function delete(\$id = null)
-    {
-        if (!\$this->model->find(\$id)) {
-            return $this->failNotFound('Non trouvé');
-        }
-
-        \$this->model->delete(\$id);
-        return $this->respondDeleted(['message' => 'Supprimé']);
+        return redirect()->to('/$entityName');
     }
 }
 EOD;

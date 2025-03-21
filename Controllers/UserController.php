@@ -15,28 +15,36 @@ class UserController extends Controller
         $this->model = new UserModel();
     }
 
+    // LISTE AVEC PAGINATION
     public function index()
     {
-        return view('User/index', ['items' => $this->model->findAll()]);
+        $data['items'] = $this->model->paginate(5); // Affiche 5 résultats par page
+        $data['pager'] = $this->model->pager; // Ajoute le pager
+
+        return view('User/index', $data);
     }
 
+    // AFFICHAGE D'UN SEUL ÉLÉMENT
     public function show($id)
     {
-        return view('User/show', ['item' => $this->model->find($id)]);
+        $data['item'] = $this->model->find($id);
+        return view('User/show', $data);
     }
 
+    // FORMULAIRE DE CRÉATION
     public function create()
     {
-        $data['title'] = 'Ajouter un nouvel User';
+        $data['title'] = "Créer un nouvel élément";
         return view('User/create', $data);
     }
 
+    // INSERTION DANS LA BASE
     public function store()
     {
         $data = $this->request->getPost();
         $entity = new User();
         $entity->fill($data);
-        
+
         if (!$this->model->insert($entity)) {
             return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
         }
@@ -44,14 +52,15 @@ class UserController extends Controller
         return redirect()->to('/User');
     }
 
+    // FORMULAIRE DE MODIFICATION
     public function edit($id)
     {
-        $model = new UserModel();
-        $data['item'] = $model->find($id);
-        $data['title'] = "Modifier User";
+        $data['item'] = $this->model->find($id);
+        $data['title'] = "Modifier l'élément";
         return view('User/edit', $data);
     }
 
+    // MISE À JOUR DES DONNÉES
     public function update($id)
     {
         $data = $this->request->getPost();
@@ -65,6 +74,7 @@ class UserController extends Controller
         return redirect()->to('/User');
     }
 
+    // SUPPRESSION D'UN ÉLÉMENT
     public function delete($id)
     {
         $this->model->delete($id);

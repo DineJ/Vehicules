@@ -6,13 +6,11 @@ use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use Config\Database;
 
-use App\Models\UsersModel;
-
 class GenerateViews extends BaseCommand
 {
     protected $group       = 'custom';
     protected $name        = 'generate:views';
-    protected $description = 'Génère automatiquement les vues CRUD pour une entité.';
+    protected $description = 'Génère automatiquement les vues CRUD avec validation JS dynamique.';
 
     public function run(array $params)
     {
@@ -22,7 +20,7 @@ class GenerateViews extends BaseCommand
         }
 
         $entityName = ucfirst($params[0]);
-        $modelName = $entityName . 'Model';
+        $modelName = "App\\Models\\" . $entityName . "Model";
         $folderPath = "../app/Views/{$entityName}";
 
         // Vérifier si l'entité existe
@@ -32,23 +30,16 @@ class GenerateViews extends BaseCommand
         }
 
         // Vérifier si le modèle existe
-        if (!file_exists("../app/Models/$modelName.php")) {
+        if (!class_exists($modelName)) {
             CLI::error("❌ Le modèle '$modelName' n'existe pas.");
             return;
         }
 
-        // Récupérer les champs de la table
+        // Instancier dynamiquement le modèle
+        $model = new $modelName();
         $db = Database::connect();
-	$modelName = "App\\Models\\" . $entityName . "Model";
-	if (!class_exists($modelName)) {
-    		CLI::error("❌ Le modèle '$modelName' n'existe pas.");
-    		return;
-	}
-	$model = new $modelName();
-	// $model = new $modelName();
-	// $model = new UsersModel();
         $table = $model->table;
-        $fields = $db->getFieldNames($table);
+        $fields = $db->getFieldData($table);
 
         if (!$fields) {
             CLI::error("❌ Impossible de récupérer les champs de la table '$table'.");
@@ -71,8 +62,8 @@ class GenerateViews extends BaseCommand
 
     private function generateIndexView($entityName, $fields)
     {
-        $columns = implode("\n                    ", array_map(fn($f) => "<th>$f</th>", $fields));
-        $rows = implode("\n                    ", array_map(fn($f) => "<td><?= \$item->$f ?></td>", $fields));
+        $columns = implode("\n                    ", array_map(fn($f) => "<th>$f->name</th>", $fields));
+        $rows = implode("\n                    ", array_map(fn($f) => "<td><?= \$item->{$f->name} ?></td>", $fields));
 
         return <<<EOD
 <?= \$this->extend('layouts/main') ?>
@@ -80,6 +71,7 @@ class GenerateViews extends BaseCommand
 
 <h2>Liste des {$entityName}s</h2>
 <a href="<?= site_url('$entityName/create') ?>" class="btn btn-success">Ajouter</a>
+
 <table class="table table-bordered mt-3">
     <thead>
         <tr>
@@ -101,13 +93,15 @@ class GenerateViews extends BaseCommand
     </tbody>
 </table>
 
+<?= \$pager->links() ?>
+
 <?= \$this->endSection() ?>
 EOD;
     }
 
     private function generateShowView($entityName, $fields)
     {
-        $details = implode("\n        ", array_map(fn($f) => "<p><strong>$f:</strong> <?= \$item->$f ?></p>", $fields));
+        $details = implode("\n        ", array_map(fn($f) => "<p><strong>$f->name:</strong> <?= \$item->{$f->name} ?></p>", $fields));
 
         return <<<EOD
 <?= \$this->extend('layouts/main') ?>
@@ -123,19 +117,54 @@ EOD;
 
     private function generateFormView($entityName, $fields, $type)
     {
-        $action = $type === 'create' ? "$entityName/store" : "$entityName/update/<?= \$item->id ?>";
-        $inputs = implode("\n            ", array_map(fn($f) => "<label>$f</label><input type='text' name='$f' value='<?= isset(\$item) ? \$item->$f : '' ?>' class='form-control'>", $fields));
+        $action = $type === 'create' ? "$entityName/store" : "$entityName/update/\$item->id";
+        
+        $inputs = "";
+        $validationJS = "";
+
+        foreach ($fields as $field) {
+            if ($field->name == 'id') continue; // Ignore la clé primaire
+
+            // Détecter le type de champ
+            $inputType = match (true) {
+                str_contains($field->type, 'int') => 'number',
+                str_contains($field->type, 'varchar') => 'text',
+                str_contains($field->type, 'date') => 'date',
+                default => 'text'
+            };
+
+            // Génération des inputs HTML
+            $inputs .= "<label>{$field->name}</label>\n";
+            $inputs .= "<input type='$inputType' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n";
+
+            // Ajout de validation JS
+            $validationJS .= "let {$field->name} = document.getElementById('{$field->name}');\n";
+            $validationJS .= "if ({$field->name}.value.trim() === '') {\n";
+            $validationJS .= "    alert('Le champ {$field->name} est obligatoire.');\n";
+            $validationJS .= "    {$field->name}.focus();\n";
+            $validationJS .= "    return false;\n";
+            $validationJS .= "}\n";
+        }
 
         return <<<EOD
 <?= \$this->extend('layouts/main') ?>
 <?= \$this->section('content') ?>
 
 <h2>{$entityName} - <?= \$title ?></h2>
-<form method="post" action="<?= site_url('$action') ?>">
+
+<form method="post" action="<?= site_url('$action') ?>" onsubmit="return validateForm()">
     $inputs
     <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
+
 <a href="<?= site_url('$entityName') ?>" class="btn btn-secondary mt-3">Retour</a>
+
+<script>
+function validateForm() {
+    $validationJS
+    return true;
+}
+</script>
 
 <?= \$this->endSection() ?>
 EOD;
