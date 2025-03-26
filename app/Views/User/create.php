@@ -13,7 +13,7 @@
 	
 	<label>admin</label>
 	<div>
-		<input type='checkbox' checked id='admin' name='admin' value='<?= isset($item) ? $item->admin : '' ?>'>
+		<input type='checkbox' id='admin' name='admin' value='1' <?= (isset($item) && $item->admin) ? 'checked' : '' ?>>
 	</div>
 		
 	<label>telephone</label>
@@ -22,6 +22,7 @@
 	<label>mail</label>
 	<input type='email' pattern="^[a-z0-9]+([_\-\.]{1}[a-z0-9]+)*@[a-z]+\.[a-z]{2,3}$" id='mail' name='mail' value='<?= isset($item) ? $item->mail : '' ?>' class='form-control' required>
 
+	<input type='hidden' id='actif' name='actif' value='0'>
     <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 

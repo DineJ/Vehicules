@@ -22,7 +22,7 @@
 	
 	<label>telephone</label>
 	<input type='tel' pattern="[0-9]{10}" id='telephone' name='telephone' value='<?= isset($item) ? $item->telephone : '' ?>' class='form-control' required>
-	<input type='hidden' id='oldtelelephone' name='oldtelephone' value='<?= isset($item) ? $item->telephone : '' ?>'>
+	<input type='hidden' id='oldtelephone' name='oldtelephone' value='<?= isset($item) ? $item->telephone : '' ?>'>
 	
 	<label>mail</label>
 	<input type='email' pattern="^[a-z0-9]+([_\-\.]{1}[a-z0-9]+)*@[a-z]+\.[a-z]{2,3}$" id='mail' name='mail' value='<?= isset($item) ? $item->mail : '' ?>' class='form-control' required>
@@ -40,39 +40,41 @@ function setUpper(element) {
 
 function validateForm() {
 	let compare = 0;
+
+    let nom = document.getElementById('nom').value;
+	let oldnom = document.getElementById('oldnom').value;
+	if (nom == oldnom) {
+		compare++;
+	}
+
+	let prenom = document.getElementById('prenom').value;
+	let oldprenom = document.getElementById('oldprenom').value;
+	if (prenom == oldprenom) {
+		compare++;
+	}
+
 	
-    let nom = document.getElementById('nom');
-	let oldnom = document.getElementById('oldnom');
-	if (nom.value == oldnom.value) {
+	let admin = document.getElementById('admin').checked;
+	let oldadmin = document.getElementById('oldadmin').checked;
+	if (admin == oldadmin) {
 		compare++;
 	}
 	
-let prenom = document.getElementById('prenom');
-if (prenom.value.trim() === '') {
-    alert('Le champ prenom est obligatoire.');
-    prenom.focus();
-    return false;
-}
-let admin = document.getElementById('admin');
+	let telephone = document.getElementById('telephone').value;
+	let oldtelephone = document.getElementById('oldtelephone').value;
+	if (telephone == oldtelephone) {
+		compare++;
+	}
 
-
-let telephone = document.getElementById('telephone');
-if (telephone.value.trim() === '') {
-    alert('Le champ telephone est obligatoire.');
-    telephone.focus();
-    return false;
-}
-let mail = document.getElementById('mail');
-if (mail.value.trim() === '') {
-    alert('Le champ mail est obligatoire.');
-    mail.focus();
-    return false;
-}
-
+	let mail = document.getElementById('mail').value;
+	let oldmail = document.getElementById('oldmail').value;
+	if (mail == oldmail) {
+		compare++;
+	}
 	if (compare == 5)
 	{
 		alert('les valeurs sont identiques');
-		//return false;
+		return false;
 	}
     return true;
 }

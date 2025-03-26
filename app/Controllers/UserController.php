@@ -42,6 +42,13 @@ class UserController extends Controller
     public function store()
     {
         $data = $this->request->getPost();
+        
+        if (!isset($data['admin']))
+			$data['admin']=0;
+			
+		if (!isset($data['actif']))
+			$data['actif']=0;
+        
         $entity = new User();
         $entity->fill($data);
 
