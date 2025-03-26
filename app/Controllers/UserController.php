@@ -70,7 +70,7 @@ class UserController extends Controller
         if (!$this->model->save($entity)) {
             return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
         }
-
+	
         return redirect()->to('/User');
     }
 
