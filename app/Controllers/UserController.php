@@ -64,9 +64,16 @@ class UserController extends Controller
     public function update($id)
     {
         $data = $this->request->getPost();
+        
+        
+        if (!isset($data['admin']))
+			$data['admin']=0;
+			
+		if (!isset($data['actif']))
+			$data['actif']=0;
+	
         $entity = $this->model->find($id);
         $entity->fill($data);
-
         if (!$this->model->save($entity)) {
             return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
         }

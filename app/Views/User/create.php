@@ -12,16 +12,15 @@
 	<input type='text' onchange="setUpper(document.getElementById('prenom'));" pattern="[a-zA-Z]+([\- ]?[a-zA-Z]+)*" id='prenom' name='prenom' value='<?= isset($item) ? $item->prenom : '' ?>' class='form-control' required>
 	
 	<label>admin</label>
-	<input type='number' min="0" max="1" id='permission' name='permission' value='<?= isset($item) ? $item->permission : '' ?>' class='form-control' required>
-	
+	<div>
+		<input type='checkbox' checked id='admin' name='admin' value='<?= isset($item) ? $item->admin : '' ?>'>
+	</div>
+		
 	<label>telephone</label>
 	<input type='tel' pattern="[0-9]{10}" id='telephone' name='telephone' value='<?= isset($item) ? $item->telephone : '' ?>' class='form-control' required>
 	
 	<label>mail</label>
 	<input type='email' pattern="^[a-z0-9]+([_\-\.]{1}[a-z0-9]+)*@[a-z]+\.[a-z]{2,3}$" id='mail' name='mail' value='<?= isset($item) ? $item->mail : '' ?>' class='form-control' required>
-	
-	<label>actif</label>
-	<input type='number' id='actif' name='actif' value='<?= isset($item) ? $item->actif : '' ?>' class='form-control' required>
 
     <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
