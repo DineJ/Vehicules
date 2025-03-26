@@ -11,9 +11,10 @@ use CodeIgniter\Validation\ValidationException;
  * @property $id
  * @property $nom
  * @property $prenom
- * @property $permission
+ * @property $admin
  * @property $telephone
  * @property $mail
+ * @property $actif
  */
 class User extends Entity
 {
@@ -21,18 +22,20 @@ class User extends Entity
         'id' => 'integer',
         'nom' => 'string',
         'prenom' => 'string',
-        'permission' => 'integer',
+        'admin' => 'integer',
         'telephone' => 'string',
         'mail' => 'string',
+        'actif' => 'integer',
     ];
 
     protected $validationRules = [
         'id' => 'integer|max_length[11]',
         'nom' => 'string|max_length[50]',
         'prenom' => 'string|max_length[50]',
-        'permission' => 'integer|max_length[1]',
+        'admin' => 'integer|max_length[1]',
         'telephone' => 'string|max_length[10]',
         'mail' => 'string|max_length[100]',
+        'actif' => 'integer|max_length[1]',
     ];
 
     public function getid()
@@ -89,21 +92,21 @@ class User extends Entity
         return $this;
     }
 
-    public function getpermission()
+    public function getadmin()
     {
-        return $this->attributes['permission'] ?? null;
+        return $this->attributes['admin'] ?? null;
     }
 
-    public function setpermission($permission)
+    public function setadmin($admin)
     {
         $validation = \Config\Services::validation();
-        $validation->setRules(['permission' => 'integer']);
+        $validation->setRules(['admin' => 'integer']);
 
-        if (!$validation->run(['permission' => $permission])) {
-            throw new \InvalidArgumentException("❌ Valeur invalide pour 'permission': " . implode(', ', $validation->getErrors()));
+        if (!$validation->run(['admin' => $admin])) {
+            throw new \InvalidArgumentException("❌ Valeur invalide pour 'admin': " . implode(', ', $validation->getErrors()));
         }
 
-        $this->attributes['permission'] = $permission;
+        $this->attributes['admin'] = $admin;
         return $this;
     }
 
@@ -140,6 +143,24 @@ class User extends Entity
         }
 
         $this->attributes['mail'] = $mail;
+        return $this;
+    }
+
+    public function getactif()
+    {
+        return $this->attributes['actif'] ?? null;
+    }
+
+    public function setactif($actif)
+    {
+        $validation = \Config\Services::validation();
+        $validation->setRules(['actif' => 'integer']);
+
+        if (!$validation->run(['actif' => $actif])) {
+            throw new \InvalidArgumentException("❌ Valeur invalide pour 'actif': " . implode(', ', $validation->getErrors()));
+        }
+
+        $this->attributes['actif'] = $actif;
         return $this;
     }
 }

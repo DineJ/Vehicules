@@ -19,6 +19,8 @@
 	
 	<label>mail</label>
 	<input type='email' pattern="^[a-z0-9]+([_\-\.]{1}[a-z0-9]+)*@[a-z]+\.[a-z]{2,3}$" id='mail' name='mail' value='<?= isset($item) ? $item->mail : '' ?>' class='form-control' required>
+<label>actif</label>
+<input type='number' id='actif' name='actif' value='<?= isset($item) ? $item->actif : '' ?>' class='form-control' required>
 
     <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
@@ -43,10 +45,10 @@ if (prenom.value.trim() === '') {
     prenom.focus();
     return false;
 }
-let permission = document.getElementById('permission');
-if (permission.value.trim() === '') {
-    alert('Le champ permission est obligatoire.');
-    permission.focus();
+let admin = document.getElementById('admin');
+if (admin.value.trim() === '') {
+    alert('Le champ admin est obligatoire.');
+    admin.focus();
     return false;
 }
 let telephone = document.getElementById('telephone');
@@ -59,6 +61,12 @@ let mail = document.getElementById('mail');
 if (mail.value.trim() === '') {
     alert('Le champ mail est obligatoire.');
     mail.focus();
+    return false;
+}
+let actif = document.getElementById('actif');
+if (actif.value.trim() === '') {
+    alert('Le champ actif est obligatoire.');
+    actif.focus();
     return false;
 }
 

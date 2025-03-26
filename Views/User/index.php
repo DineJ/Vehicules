@@ -10,9 +10,10 @@
             <th>id</th>
                     <th>nom</th>
                     <th>prenom</th>
-                    <th>permission</th>
+                    <th>admin</th>
                     <th>telephone</th>
                     <th>mail</th>
+                    <th>actif</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -22,9 +23,10 @@
             <td><?= $item->id ?></td>
                     <td><?= $item->nom ?></td>
                     <td><?= $item->prenom ?></td>
-                    <td><?= $item->permission ?></td>
+                    <td><?= $item->admin ?></td>
                     <td><?= $item->telephone ?></td>
                     <td><?= $item->mail ?></td>
+                    <td><?= $item->actif ?></td>
             <td>
                 <a href="<?= site_url('User/show/'.$item->id) ?>" class="btn btn-info">Voir</a>
                 <a href="<?= site_url('User/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
