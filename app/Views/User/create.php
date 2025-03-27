@@ -29,50 +29,51 @@
 <a href="<?= site_url('User') ?>" class="btn btn-secondary mt-3">Retour</a>
 
 <script>
-function setUpper(element) {
-	element.value=element.value.toUpperCase();
-}
+	function setUpper(element) {
+		element.value=element.value.toUpperCase();
+	}
 
-function validateForm() {
-    let nom = document.getElementById('nom');
-if (nom.value.trim() === '') {
-    alert('Le champ nom est obligatoire.');
-    nom.focus();
-    return false;
-}
-let prenom = document.getElementById('prenom');
-if (prenom.value.trim() === '') {
-    alert('Le champ prenom est obligatoire.');
-    prenom.focus();
-    return false;
-}
-let admin = document.getElementById('admin');
-if (admin.value.trim() === '') {
-    alert('Le champ admin est obligatoire.');
-    admin.focus();
-    return false;
-}
-let telephone = document.getElementById('telephone');
-if (telephone.value.trim() === '') {
-    alert('Le champ telephone est obligatoire.');
-    telephone.focus();
-    return false;
-}
-let mail = document.getElementById('mail');
-if (mail.value.trim() === '') {
-    alert('Le champ mail est obligatoire.');
-    mail.focus();
-    return false;
-}
-let actif = document.getElementById('actif');
-if (actif.value.trim() === '') {
-    alert('Le champ actif est obligatoire.');
-    actif.focus();
-    return false;
-}
+	function validateForm() {
+		let nom = document.getElementById('nom');
+	if (nom.value.trim() === '') {
+		alert('Le champ nom est obligatoire.');
+		nom.focus();
+		return false;
+	}
+	let prenom = document.getElementById('prenom');
+	if (prenom.value.trim() === '') {
+		alert('Le champ prenom est obligatoire.');
+		prenom.focus();
+		return false;
+	}
+	let admin = document.getElementById('admin');
+	if (admin.value.trim() === '') {
+		alert('Le champ admin est obligatoire.');
+		admin.focus();
+		return false;
+	}
+	let telephone = document.getElementById('telephone');
+	if (telephone.value.trim() === '') {
+		alert('Le champ telephone est obligatoire.');
+		telephone.focus();
+		return false;
+	}
+	let mail = document.getElementById('mail');
+	if (mail.value.trim() === '') {
+		alert('Le champ mail est obligatoire.');
+		mail.focus();
+		return false;
+	}
+	let actif = document.getElementById('actif');
+	if (actif.value.trim() === '') {
+		alert('Le champ actif est obligatoire.');
+		actif.focus();
+		return false;
+	}
 
-    return true;
-}
+		return true;
+	}
+
 </script>
 
 <?= $this->endSection() ?>

@@ -19,7 +19,6 @@ class UserController extends Controller
     public function index()
     {
 		// BARRE DE RECHERCHE
-
 		$search = $this->request->getGet('q');
 		if ($search)
 		{
