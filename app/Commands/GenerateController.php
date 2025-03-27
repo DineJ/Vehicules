@@ -67,6 +67,21 @@ class $controllerName extends Controller
     // LISTE AVEC PAGINATION
     public function index()
     {
+		/*
+		// BARRE DE RECHERCHE
+		\$search = \$this->request->getGet('q');
+		if (\$search)
+		{
+			\$query = '%'.\$search.'%';
+			\$this->model->like('champ1', \$query);
+						->orLike('champ2', \$query)
+						->orLike('champ3', \$query)
+						->orLike('...', \$query);
+		}
+
+		\$data['search'] = \$search;
+		*/
+
         \$data['items'] = \$this->model->paginate(5); // Affiche 5 résultats par page
         \$data['pager'] = \$this->model->pager; // Ajoute le pager
 
