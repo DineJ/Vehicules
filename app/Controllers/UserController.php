@@ -18,8 +18,21 @@ class UserController extends Controller
     // LISTE AVEC PAGINATION
     public function index()
     {
+		// BARRE DE RECHERCHE
+
+		$search = $this->request->getGet('q');
+		if ($search)
+		{
+			$query = '%'.$search.'%';
+			$this->model->like('nom', $query)
+						->orLike('prenom', $query)
+						->orLike('telephone', $query)
+						->orLike('mail', $query);
+		}
+
         $data['items'] = $this->model->paginate(5); // Affiche 5 résultats par page
         $data['pager'] = $this->model->pager; // Ajoute le pager
+		$data['search'] = $search;
 
         return view('User/index', $data);
     }
@@ -87,6 +100,7 @@ class UserController extends Controller
 	
         return redirect()->to('/User');
     }
+
 
     // SUPPRESSION D'UN ÉLÉMENT
     public function delete($id)
