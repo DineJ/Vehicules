@@ -71,17 +71,17 @@ class GenerateViews extends BaseCommand
 
 <h2>Liste des {$entityName}s</h2>
 <a href="<?= site_url('$entityName/create') ?>" class="btn btn-success">Ajouter</a>
-
-<form method="get" action="<?= site_url('User') ?>" class="mb-3">
+<!--
+<form method="get" action="<?= site_url('$entityName') ?>" class="mb-3">
 	<div class="input-group">
 		<input type="text" name="q" class="form-control" placeholder="Rechercher..." value="<?= esc(\$search) ?>">
 		<button type="submit" class="btn btn-primary">Rechercher</button>
 		<?php if (!empty(\$search)) : ?>
-			<a href="<?= site_url('User') ?>" class="btn btn-outline-secondary">Réinitialiser</a>
+			<a href="<?= site_url('$entityName') ?>" class="btn btn-outline-secondary">Réinitialiser</a>
 		<?php endif; ?>
 	</div>
 </form>
-
+-->
 <table class="table table-bordered mt-3">
     <thead>
         <tr>
