@@ -39,5 +39,41 @@
 	</tbody>
 </table>
 
-<?= $pager->links() ?>
+<!-- Liens de pagination -->
+<div class="pagination-container">
+	<?= $pager->links() ?>
+</div>
+
+<style>
+	.pagination {
+		display: flex;
+		justify-content: center;
+		margin-top: 30px;
+	}
+
+	.pagination li {
+		margin: 0 5px;
+	}
+
+	.pagination li a {
+		border-radius: 5px;  /* Légèrement arrondi */
+		background-color: #fff;  /* Fond blanc pour toutes les pages */
+		color: #000;  /* Texte en noir */
+		padding: 8px 16px;
+		font-weight: bold;
+		transition: background-color 0.3s ease;
+		text-decoration: none;  /* Enlever le soulignement */
+		border: none;  /* Supprimer la bordure autour des chiffres */
+	}
+
+	.pagination li a:hover {
+		background-color: #f1f1f1;  /* Légère teinte de fond au survol */
+	}
+
+	.pagination .active a {
+		background-color: #fff;  /* Fond blanc pour la page active */
+		color: black;  /* Texte en noir pour la page active */
+		border: 2px solid;
+	}
+</style>
 <?= $this->endSection() ?>
