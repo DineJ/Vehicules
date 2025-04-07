@@ -18,17 +18,17 @@ class UserController extends Controller
     // LISTE AVEC PAGINATION
     public function index()
     {
+		/*
 		// BARRE DE RECHERCHE
 		$search = $this->request->getGet('q');
 		if ($search)
 		{
 			$query = '%'.$search.'%';
-			$this->model->like('nom', $query)
-						->orLike('prenom', $query)
+			$this->model->like('prenom', $query);
 						->orLike('telephone', $query)
-						->orLike('mail', $query);
+						->orLike('mail', $query)
 		}
-
+		*/
         $data['items'] = $this->model->paginate(5); // Affiche 5 résultats par page
         $data['pager'] = $this->model->pager; // Ajoute le pager
 		$data['search'] = $search;
@@ -54,13 +54,6 @@ class UserController extends Controller
     public function store()
     {
         $data = $this->request->getPost();
-        
-        if (!isset($data['admin']))
-			$data['admin']=0;
-			
-		if (!isset($data['actif']))
-			$data['actif']=0;
-        
         $entity = new User();
         $entity->fill($data);
 
@@ -83,23 +76,15 @@ class UserController extends Controller
     public function update($id)
     {
         $data = $this->request->getPost();
-        
-        
-        if (!isset($data['admin']))
-			$data['admin']=0;
-			
-		if (!isset($data['actif']))
-			$data['actif']=0;
-	
         $entity = $this->model->find($id);
         $entity->fill($data);
+
         if (!$this->model->save($entity)) {
             return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
         }
-	
+
         return redirect()->to('/User');
     }
-
 
     // SUPPRESSION D'UN ÉLÉMENT
     public function delete($id)
