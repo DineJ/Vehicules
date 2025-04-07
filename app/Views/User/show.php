@@ -1,14 +1,40 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<h2>Détails de User</h2>
-<p><strong>id:</strong> <?= $item->id ?></p>
-<p><strong>nom:</strong> <?= $item->nom ?></p>
-<p><strong>prenom:</strong> <?= $item->prenom ?></p>
-<p><strong>admin:</strong> <?= $item->admin ?></p>
-<p><strong>telephone:</strong> <?= $item->telephone ?></p>
-<p><strong>mail:</strong> <?= $item->mail ?></p>
-<p><strong>actif:</strong> <?= $item->actif ?></p>
-<a href="<?= site_url('User') ?>" class="btn btn-secondary">Retour</a>
+<div class="container mt-5">
+    <h2>Détails de l'utilisateur</h2>
+
+    <table class="table table-striped table-primary table-bordered">
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td><?= $item->nom ?></td>
+            </tr>
+				<tr>
+                <th>Prénom</th>
+                <td><?= $item->prenom ?></td>
+            </tr>
+            <tr>
+                <th>Admin</th>
+                <td><?= $item->admin ? 'Oui' : 'Non' ?></td>
+            </tr>
+            <tr>
+                <th>Téléphone</th>
+                <td><?= $item->telephone ?></td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td><?= $item->mail ?></td>
+            </tr>
+            <tr>
+                <th>Actif</th>
+                <td><?= $item->actif ? 'Oui' : 'Non' ?></td>
+            </tr>           
+        </tbody>
+    </table>
+
+<div class="mb-3">
+	<a href="<?= site_url('User') ?>" class="btn btn-secondary">Retour</a>
+</div>
 
 <?= $this->endSection() ?>
