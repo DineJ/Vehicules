@@ -17,7 +17,7 @@
 	<label>admin</label>
 	<div>
 		<input type='checkbox' id='admin' name='admin' value='1' <?= (isset($item) && $item->admin) ? 'checked' : '' ?>>
-		<input type='hidden' id='oldadmin' name='oldadmin' value='1' <?= (isset($item) && $item->admin) ? 'checked' : '' ?>>
+		<input type='hidden' id='oldadmin' name='oldadmin' value='<?= (isset($item) && $item->admin) ? 1 : 0 ?>'>
 	</div>
 	
 	<label>telephone</label>
@@ -54,8 +54,8 @@
 		}
 
 		
-		let admin = document.getElementById('admin').checked;
-		let oldadmin = document.getElementById('oldadmin').checked;
+		let admin = (document.getElementById('admin').checked ? 1 : 0 );
+		let oldadmin = document.getElementById('oldadmin').value;
 		if (admin == oldadmin) {
 			compare++;
 		}
