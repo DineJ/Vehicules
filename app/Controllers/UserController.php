@@ -18,17 +18,16 @@ class UserController extends Controller
     // LISTE AVEC PAGINATION
     public function index()
     {
-		/*
 		// BARRE DE RECHERCHE
 		$search = $this->request->getGet('q');
 		if ($search)
 		{
 			$query = '%'.$search.'%';
-			$this->model->like('prenom', $query);
+			$this->model->like('prenom', $query)
 						->orLike('telephone', $query)
-						->orLike('mail', $query)
+						->orLike('mail', $query);
 		}
-		*/
+
         $data['items'] = $this->model->paginate(5); // Affiche 5 résultats par page
         $data['pager'] = $this->model->pager; // Ajoute le pager
 		$data['search'] = $search;
