@@ -71,6 +71,7 @@ class GenerateViews extends BaseCommand
 
 <h2>Liste des {$entityName}s</h2>
 <a href="<?= site_url('$entityName/create') ?>" class="btn btn-success">Ajouter</a>
+
 <!--
 <form method="get" action="<?= site_url('$entityName') ?>" class="mb-3">
 	<div class="input-group">
@@ -82,6 +83,7 @@ class GenerateViews extends BaseCommand
 	</div>
 </form>
 -->
+
 <table class="table table-bordered mt-3">
     <thead>
         <tr>
@@ -89,14 +91,15 @@ class GenerateViews extends BaseCommand
             <th>Actions</th>
         </tr>
     </thead>
+
     <tbody>
         <?php foreach (\$items as \$item): ?>
-        <tr>
-            $rows
-            <td>
-                <a href="<?= site_url('$entityName/show/'.\$item->id) ?>" class="btn btn-info">Voir</a>
-            </td>
-        </tr>
+			<tr>
+				$rows
+				<td>
+					<a href="<?= site_url('$entityName/show/'.\$item->id) ?>" class="btn btn-info">Voir</a>
+				</td>
+			</tr>
         <?php endforeach; ?>
     </tbody>
 </table>
