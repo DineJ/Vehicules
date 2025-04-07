@@ -95,8 +95,6 @@ class GenerateViews extends BaseCommand
             $rows
             <td>
                 <a href="<?= site_url('$entityName/show/'.\$item->id) ?>" class="btn btn-info">Voir</a>
-                <a href="<?= site_url('$entityName/edit/'.\$item->id) ?>" class="btn btn-warning">Modifier</a>
-                <a href="<?= site_url('$entityName/delete/'.\$item->id) ?>" class="btn btn-danger" onclick="return confirm('Supprimer ?')">Supprimer</a>
             </td>
         </tr>
         <?php endforeach; ?>

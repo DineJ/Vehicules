@@ -33,8 +33,6 @@
 				<td><?= $item->telephone ?></td>
 				<td><?= $item->mail ?></td>
 				<td><a href="<?= site_url('User/show/'.$item->id) ?>" class="btn btn-info">Voir</a>
-					<a href="<?= site_url('User/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
-					<a href="<?= site_url('User/delete/'.$item->id) ?>" class="btn btn-danger" onclick="return confirm('Supprimer ?')">Supprimer</a>
 				</td>
 			</tr>
 		<?php endforeach; ?>
