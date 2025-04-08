@@ -33,8 +33,14 @@
         </tbody>
     </table>
 
-<div class="mb-3">
-	<a href="<?= site_url('User') ?>" class="btn btn-secondary">Retour</a>
+<div>
+	<form method="post" action="<?= site_url('User/update/'.$item->id) ?>">
+		<a href="<?= site_url('User') ?>" class="btn btn-secondary">Retour</a>
+		<input type="hidden" name="actif" id="actif" value="<?= $item->actif ? 0 : 1 ?>">
+		<button type="submit" class="btn <?= $item->actif ? 'btn-danger' : 'btn-success' ?>"> <?= $item->actif ? 'Rendre inactif' : 'Rendre actif' ?></button>
+	</form>
 </div>
+
+
 
 <?= $this->endSection() ?>
