@@ -40,9 +40,16 @@
 </table>
 
 <!-- Liens de pagination -->
-<div class="pagination-container">
-	<?= $pager->links() ?>
-</div>
+<!-- <div class="pagination-container">
+	<?php /* $pager->links()*/ ?>
+</div> -->
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item <?= $pager->getCurrentPage() != 1 ? '' : 'disabled' ?>"><a class="page-link" href="<?= $pager->getPreviousPageURI() ?>">Previous</a></li>
+    <li class="page-item <?= $pager->hasMore() ? '' : 'disabled' ?>"><a class="page-link" href="<?= $pager->getNextPageURI() ?>">Next</a></li>
+  </ul>
+</nav>
 
 <style>
 	.pagination {
@@ -57,7 +64,6 @@
 
 	.pagination li a {
 		border-radius: 5px;  /* Légèrement arrondi */
-		background-color: #fff;  /* Fond blanc pour toutes les pages */
 		color: #000;  /* Texte en noir */
 		padding: 8px 16px;
 		font-weight: bold;
@@ -71,8 +77,6 @@
 	}
 
 	.pagination .active a {
-		background-color: #fff;  /* Fond blanc pour la page active */
-		color: black;  /* Texte en noir pour la page active */
 		border: 2px solid;
 	}
 </style>
