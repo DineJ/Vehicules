@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <h2>Détails de l'utilisateur</h2>
 
-    <table class="table table-striped table-primary table-bordered">
+    <table class="table table-striped table-bordered">
         <tbody>
             <tr>
                 <th>Nom</th>

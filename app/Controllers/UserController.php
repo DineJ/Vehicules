@@ -45,7 +45,7 @@ class UserController extends Controller
     // FORMULAIRE DE CRÉATION
     public function create()
     {
-        $data['title'] = "Créer un nouvel élément";
+        $data['title'] = "Créer un nouvel utilisateur";
         return view('User/create', $data);
     }
 
@@ -67,7 +67,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $data['item'] = $this->model->find($id);
-        $data['title'] = "Modifier l'élément";
+        $data['title'] = "Modifier l'utilisateur";
         return view('User/edit', $data);
     }
 

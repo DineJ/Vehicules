@@ -14,8 +14,8 @@
 	</div>
 </form>
 
-<table class="table table-bordered mt-3">
-	<thead>
+<table class="table table-striped table-bordered">
+	<thead class="thead">
 		<tr>
 			<th>nom</th>
 			<th>prenom</th>
@@ -69,33 +69,4 @@
 	</nav>
 <?php } ?>
 
-<style>
-	.pagination {
-		display: flex;
-		justify-content: center;
-		margin-top: 30px;
-	}
-
-	.pagination li {
-		margin: 0 5px;
-	}
-
-	.pagination li a {
-		border-radius: 5px;  /* Légèrement arrondi */
-		color: #000;  /* Texte en noir */
-		padding: 8px 16px;
-		font-weight: bold;
-		transition: background-color 0.3s ease;
-		text-decoration: none;  /* Enlever le soulignement */
-		border: none;  /* Supprimer la bordure autour des chiffres */
-	}
-
-	.pagination li a:hover {
-		background-color: #f1f1f1;  /* Légère teinte de fond au survol */
-	}
-
-	.pagination .active a {
-		border: 2px solid;
-	}
-</style>
 <?= $this->endSection() ?>

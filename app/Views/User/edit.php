@@ -28,10 +28,10 @@
 	<input type='email' pattern="^[a-z0-9]+([_\-\.]{1}[a-z0-9]+)*@[a-z]+\.[a-z]{2,3}$" id='mail' name='mail' value='<?= isset($item) ? $item->mail : '' ?>' class='form-control' required>
 	<input type='hidden' id='oldmail' name='oldmail' value='<?= isset($item) ? $item->mail : '' ?>'>
 	
+    <a href="<?= site_url('User') ?>" class="btn btn-secondary mt-3">Retour</a>	
     <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 
-<a href="<?= site_url('User') ?>" class="btn btn-secondary mt-3">Retour</a>
 
 <script>
 	function setUpper(element) {
