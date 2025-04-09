@@ -106,7 +106,7 @@ class GenerateViews extends BaseCommand
 
 <!-- Liens de pagination -->
 <div class="pagination-container">
-	<?= $pager->links() ?>
+	<?= \$pager->links() ?>
 </div>
 
 <style>
