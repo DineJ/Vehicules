@@ -140,15 +140,27 @@ EOD;
 
     private function generateShowView($entityName, $fields)
     {
-        $details = implode("\n        ", array_map(fn($f) => "<p><strong>$f->name:</strong> <?= \$item->{$f->name} ?></p>", $fields));
+        $details = implode("\n        ", array_map(fn($f) => "<tr>\n			<th>$f->name:</th>\n			<td><?= \$item->{$f->name} ?></td>\n		</tr>\n", $fields));
 
         return <<<EOD
 <?= \$this->extend('layouts/main') ?>
 <?= \$this->section('content') ?>
 
+<div class="container mt-5">
 <h2>Détails de {$entityName}</h2>
-$details
-<a href="<?= site_url('$entityName') ?>" class="btn btn-secondary">Retour</a>
+
+<table class="table table-striped table-bordered">
+	<tbody>
+		$details
+	</tbody>
+</table>
+
+<div>
+	<form method="post" action="<?= site_url('$entityName/update/'.\$item->id) ?>">
+		<a href="<?= site_url('$entityName') ?>" class="btn btn-secondary">Retour</a>
+		<a href="<?= site_url('$entityName/edit/'.\$item->id) ?>" class="btn btn-warning">Modifier</a>
+	</form>
+</div>
 
 <?= \$this->endSection() ?>
 EOD;
