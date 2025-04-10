@@ -140,7 +140,7 @@ EOD;
 
     private function generateShowView($entityName, $fields)
     {
-        $details = implode("\n        ", array_map(fn($f) => "<tr>\n			<th>$f->name:</th>\n			<td><?= \$item->{$f->name} ?></td>\n		</tr>\n", $fields));
+        $details = implode("\n        ", array_map(fn($f) => "<tr>\n			<td>$f->name</td>\n			<td><?= \$item->{$f->name} ?></td>\n		</tr>\n", $fields));
 
         return <<<EOD
 <?= \$this->extend('layouts/main') ?>
