@@ -141,6 +141,15 @@ EOD;
     private function generateShowView($entityName, $fields)
     {
         $details = implode("\n        ", array_map(fn($f) => "<tr>\n			<td>$f->name</td>\n			<td><?= \$item->{$f->name} ?></td>\n		</tr>\n", $fields));
+		$bouton = '';
+		foreach ($fields as $field) {
+            if ($field->name == 'actif')
+            {
+				$bouton = '<input type="hidden" name="actif" id="actif" value="<?= $item->actif ? 0 : 1 ?>">'. "\n		"
+				         .'<button type="submit" class="btn <?= $item->actif ? \'btn-danger\' : \'btn-success\' ?>"> '
+				         .'<?= $item->actif ? \'Rendre inactif\' : \'Rendre actif\' ?></button>';
+			}
+		}
 
         return <<<EOD
 <?= \$this->extend('layouts/main') ?>
@@ -159,6 +168,7 @@ EOD;
 	<form method="post" action="<?= site_url('$entityName/update/'.\$item->id) ?>">
 		<a href="<?= site_url('$entityName') ?>" class="btn btn-secondary">Retour</a>
 		<a href="<?= site_url('$entityName/edit/'.\$item->id) ?>" class="btn btn-warning">Modifier</a>
+		$bouton
 	</form>
 </div>
 
