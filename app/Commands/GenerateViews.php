@@ -142,7 +142,7 @@ EOD;
 
             // Génération des inputs HTML
             $inputs .= "<label>{$field->name}</label>\n";
-            $inputs .= "<input type='$inputType' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n";
+            $inputs .= "<input type='$inputType' onchange='setUpper(document.getElementById('$field->name'));' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n";
         }
 
         return <<<EOD
@@ -156,6 +156,13 @@ EOD;
     <a href="<?= site_url('$entityName') ?>" class="btn btn-secondary mt-3">Retour</a>
     <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
+
+<script>
+	function setUpper(element) {
+		element.value=element.value.toUpperCase();
+	}
+</script>
+
 <?= \$this->endSection() ?>
 EOD;
     }
