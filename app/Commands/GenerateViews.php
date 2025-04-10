@@ -75,7 +75,7 @@ class GenerateViews extends BaseCommand
 <!--
 <form method="get" action="<?= site_url('$entityName') ?>" class="mb-3">
 	<div class="input-group">
-		<input type="text" name="q" class="form-control" placeholder="Rechercher..." value="<?= esc(\$search) ?>">
+		<input type="text" name="q" class="form-control" placeholder="Rechercher..." value="<?= isset(\$search) ?  esc(\$search) : '' ?>">
 		<button type="submit" class="btn btn-primary">Rechercher</button>
 		<?php if (!empty(\$search)) : ?>
 			<a href="<?= site_url('$entityName') ?>" class="btn btn-outline-secondary">Réinitialiser</a>
@@ -103,6 +103,7 @@ class GenerateViews extends BaseCommand
         <?php endforeach; ?>
     </tbody>
 </table>
+
 <?= \$this->endSection() ?>
 EOD;
     }
