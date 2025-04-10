@@ -84,7 +84,7 @@ class GenerateViews extends BaseCommand
 </form>
 -->
 
-<table class="table table-bordered mt-3">
+<table class="table table-striped table-bordered mt-3">
     <thead>
         <tr>
             $columns
