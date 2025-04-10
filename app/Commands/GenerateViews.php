@@ -200,10 +200,9 @@ EOD;
 
 <form method="post" action="<?= site_url('$action') ?>" onsubmit="return validateForm()">
     $inputs
+    <a href="<?= site_url('$entityName') ?>" class="btn btn-secondary mt-3">Retour</a>
     <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
-
-<a href="<?= site_url('$entityName') ?>" class="btn btn-secondary mt-3">Retour</a>
 
 <script>
 function validateForm() {
