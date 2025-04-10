@@ -128,7 +128,6 @@ EOD;
         $action = $type === 'create' ? "$entityName/store" : "$entityName/update/\$item->id";
         
         $inputs = "";
-        $validationJS = "";
 
         foreach ($fields as $field) {
             if ($field->name == 'id') continue; // Ignore la clé primaire
@@ -144,14 +143,6 @@ EOD;
             // Génération des inputs HTML
             $inputs .= "<label>{$field->name}</label>\n";
             $inputs .= "<input type='$inputType' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n";
-
-            // Ajout de validation JS
-            $validationJS .= "let {$field->name} = document.getElementById('{$field->name}');\n";
-            $validationJS .= "if ({$field->name}.value.trim() === '') {\n";
-            $validationJS .= "    alert('Le champ {$field->name} est obligatoire.');\n";
-            $validationJS .= "    {$field->name}.focus();\n";
-            $validationJS .= "    return false;\n";
-            $validationJS .= "}\n";
         }
 
         return <<<EOD
@@ -165,14 +156,6 @@ EOD;
     <a href="<?= site_url('$entityName') ?>" class="btn btn-secondary mt-3">Retour</a>
     <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
-
-<script>
-function validateForm() {
-    $validationJS
-    return true;
-}
-</script>
-
 <?= \$this->endSection() ?>
 EOD;
     }
