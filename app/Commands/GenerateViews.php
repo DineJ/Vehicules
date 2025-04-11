@@ -198,7 +198,7 @@ EOD;
             // Génération des inputs HTML
 
             $inputs .= "\n	<label>{$field->name}</label>\n".
-					   "	<input type='$inputType' onchange='setUpper(document.getElementById('$field->name'));' id='$field->name' name='$field->name' value='<?= isset(\$item) ? \$item->$field->name : '' ?>' class='form-control' required>\n";
+					   "	<input type='$inputType' onchange=\"setUpper(document.getElementById('$field->name'));\" id='$field->name' name='$field->name' value='<?= isset(\$item) ? \$item->$field->name : '' ?>' class='form-control' required>\n";
 
             if ($type != 'create') {
 				$inputs .= "	<input type='hidden' id='old{$field->name}' name='old{$field->name}' value='<?= isset(\$item) ? \$item->$field->name : '' ?>'>\n";
@@ -212,8 +212,8 @@ EOD;
 			}
 		}
 		if ($type != 'create') {
-			$onsubmit = 'onsubmit="return validateForm()"';
-			$startfunction = 'function validateForm() {'."\n".
+			$onsubmit = ' onsubmit="return validateForm()"';
+			$startfunction = '	function validateForm() {'."\n".
 					         '		let compare = 0;'."\n".
 								$validationJS.
 							 '		if (compare == '.$row.') {'."\n".
@@ -221,7 +221,7 @@ EOD;
 							 '			return false;'."\n".
 							 '		}'."\n".
 							 '		return true;'."\n".
-							 '	}'."\n";
+							 '	}';
 		}
         return <<<EOD
 <?= \$this->extend('layouts/main') ?>
@@ -229,7 +229,7 @@ EOD;
 
 <h2>{$entityName} - <?= \$title ?></h2>
 
-<form method="post" action="<?= site_url($action) ?>" $onsubmit>
+<form method="post" action="<?= site_url($action) ?>"{$onsubmit}>
 $inputs
     <a href="<?= site_url('$entityName') ?>" class="btn btn-secondary mt-3">Retour</a>
     <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
@@ -239,8 +239,7 @@ $inputs
 	function setUpper(element) {
 		element.value=element.value.toUpperCase();
 	}
-
-	$startfunction
+$startfunction
 </script>
 
 <?= \$this->endSection() ?>
