@@ -205,7 +205,7 @@ EOD;
 
 				$validationJS .= "		let $field->name = document.getElementById('$field->name').value;\n".
 								 "		let old{$field->name} = document.getElementById('old{$field->name}').value;\n".
-								 "		$row++;\n".
+								 "		row++;\n".
 								 "		if ($field->name == old{$field->name}) {\n".
 								 "			compare++;\n".
 								 "		}\n\n";
@@ -215,8 +215,9 @@ EOD;
 			$onsubmit = ' onsubmit="return validateForm()"';
 			$startfunction = '	function validateForm() {'."\n".
 					         '		let compare = 0;'."\n".
+					         '		let row = 0;'."\n".
 								$validationJS.
-							 '		if (compare == '.$row.') {'."\n".
+							 '		if (compare == row) {'."\n".
 					         '			alert("les valeurs sont identiques");'."\n".
 							 '			return false;'."\n".
 							 '		}'."\n".
