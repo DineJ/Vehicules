@@ -7,7 +7,7 @@
 
 <form method="get" action="<?= site_url('User') ?>" class="mb-3">
 	<div class="input-group">
-		<input type="text" name="q" class="form-control" placeholder="Rechercher..." value="<?= esc($search) ?>">
+		<input type="text" name="q" class="form-control" placeholder="Rechercher..." value="<?= isset($search) ?  esc($search) : '' ?>">
 		<button type="submit" class="btn btn-primary">Rechercher</button>
 		<?php if (!empty($search)) : ?>
 			<a href="<?= site_url('User') ?>" class="btn btn-outline-secondary">Réinitialiser</a>
