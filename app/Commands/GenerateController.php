@@ -73,7 +73,7 @@ class $controllerName extends Controller
 		if (\$search)
 		{
 			\$query = '%'.\$search.'%';
-			\$this->model->like('champ1', \$query);
+			\$this->model->like('champ1', \$query)
 						->orLike('champ2', \$query)
 						->orLike('champ3', \$query)
 						->orLike('...', \$query);
@@ -98,7 +98,7 @@ class $controllerName extends Controller
     // FORMULAIRE DE CRÉATION
     public function create()
     {
-        \$data['title'] = "Créer un nouvel élément";
+        \$data['title'] = "Créer $entityName";
         return view('$entityName/create', \$data);
     }
 
@@ -120,7 +120,7 @@ class $controllerName extends Controller
     public function edit(\$id)
     {
         \$data['item'] = \$this->model->find(\$id);
-        \$data['title'] = "Modifier l'élément";
+        \$data['title'] = "Modifier $entityName";
         return view('$entityName/edit', \$data);
     }
 
