@@ -180,6 +180,10 @@ EOD;
     {
         $action = $type === 'create' ? "'$entityName/store/'" : "'$entityName/update/' .\$item->id";
         $inputs = "";
+        $validationJS = "";
+        $row = 0;
+        $onsubmit = '';
+        $startfunction = '';
         foreach ($fields as $field) {
             if ($field->name == 'id') continue; // Ignore la clé primaire
 
@@ -192,17 +196,39 @@ EOD;
             };
 
             // Génération des inputs HTML
-            $inputs .= "<label>{$field->name}</label>\n";
-            $inputs .= "<input type='$inputType' onchange='setUpper(document.getElementById('$field->name'));' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n";
-        }
 
+            $inputs .= "<label>{$field->name}</label>\n";
+            $inputs .= "<input type='$inputType' onchange='setUpper(document.getElementById('$field->name'));' id='$field->name' name='$field->name' value='<?= isset(\$item) ? \$item->$field->name : '' ?>' class='form-control' required>\n";
+            if ($type != 'create') {
+				$row++;
+				$inputs .= "<input type='hidden' id='old{$field->name}' name='old{$field->name}' value='<?= isset(\$item) ? \$item->$field->name : '' ?>'>\n";
+
+				$validationJS .= "	let $field->name = document.getElementById('$field->name').value;\n".
+								 "	let old{$field->name} = document.getElementById('old{$field->name}').value ;\n".
+								 "	if ($field->name == old{$field->name}) {\n".
+								 "		compare++;\n".
+								 "	}\n\n";
+			}
+		}
+		if ($type != 'create') {
+			$onsubmit = 'onsubmit="return validateForm()"';
+			$startfunction = 'function validateForm() {'."\n".
+					         '	let compare = 0;'."\n".
+								$validationJS.
+							 '	if (compare == '.$row.') {'."\n".
+					         '		alert("les valeurs sont identiques");'."\n".
+							 '		return false;'."\n".
+							 '	}'."\n".
+							 '	return true;'."\n".
+							 '}'."\n";
+		}
         return <<<EOD
 <?= \$this->extend('layouts/main') ?>
 <?= \$this->section('content') ?>
 
 <h2>{$entityName} - <?= \$title ?></h2>
 
-<form method="post" action="<?= site_url($action) ?>">
+<form method="post" action="<?= site_url($action) ?>" $onsubmit >
     $inputs
     <a href="<?= site_url('$entityName') ?>" class="btn btn-secondary mt-3">Retour</a>
     <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
@@ -212,6 +238,8 @@ EOD;
 	function setUpper(element) {
 		element.value=element.value.toUpperCase();
 	}
+
+$startfunction
 </script>
 
 <?= \$this->endSection() ?>
