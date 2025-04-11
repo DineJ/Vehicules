@@ -178,10 +178,8 @@ EOD;
 
     private function generateFormView($entityName, $fields, $type)
     {
-        $action = $type === 'create' ? "$entityName/store" : "$entityName/update/\$item->id";
-        
+        $action = $type === 'create' ? "'$entityName/store/'" : "'$entityName/update/' .\$item->id";
         $inputs = "";
-
         foreach ($fields as $field) {
             if ($field->name == 'id') continue; // Ignore la clé primaire
 
@@ -204,7 +202,7 @@ EOD;
 
 <h2>{$entityName} - <?= \$title ?></h2>
 
-<form method="post" action="<?= site_url('$action') ?>">
+<form method="post" action="<?= site_url($action) ?>">
     $inputs
     <a href="<?= site_url('$entityName') ?>" class="btn btn-secondary mt-3">Retour</a>
     <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
