@@ -201,11 +201,11 @@ EOD;
 					   "	<input type='$inputType' onchange='setUpper(document.getElementById('$field->name'));' id='$field->name' name='$field->name' value='<?= isset(\$item) ? \$item->$field->name : '' ?>' class='form-control' required>\n";
 
             if ($type != 'create') {
-				$row++;
 				$inputs .= "	<input type='hidden' id='old{$field->name}' name='old{$field->name}' value='<?= isset(\$item) ? \$item->$field->name : '' ?>'>\n";
 
 				$validationJS .= "		let $field->name = document.getElementById('$field->name').value;\n".
 								 "		let old{$field->name} = document.getElementById('old{$field->name}').value;\n".
+								 "		$row++;
 								 "		if ($field->name == old{$field->name}) {\n".
 								 "			compare++;\n".
 								 "		}\n\n";
