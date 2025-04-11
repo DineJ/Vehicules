@@ -205,7 +205,7 @@ EOD;
 
 				$validationJS .= "		let $field->name = document.getElementById('$field->name').value;\n".
 								 "		let old{$field->name} = document.getElementById('old{$field->name}').value;\n".
-								 "		$row++;
+								 "		$row++;\n".
 								 "		if ($field->name == old{$field->name}) {\n".
 								 "			compare++;\n".
 								 "		}\n\n";
