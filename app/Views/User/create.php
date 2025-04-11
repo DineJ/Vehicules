@@ -3,7 +3,7 @@
 
 <h2>User - <?= $title ?></h2>
 
-<form method="post" action="<?= site_url('User/store') ?>" onsubmit="return validateForm()">
+<form method="post" action="<?= site_url('User/store/') ?>">
 
 	<label>nom</label>
 	<input type='text' onchange="setUpper(document.getElementById('nom'));" pattern="^[a-zA-Z]+([\- ]?[a-zA-Z]+)*$" id='nom' name='nom' value='<?= isset($item) ? $item->nom : '' ?>' class='form-control' required>
@@ -31,46 +31,6 @@
 	function setUpper(element) {
 		element.value=element.value.toUpperCase();
 	}
-
-	function validateForm() {
-
-		let nom = document.getElementById('nom');
-	if (nom.value.trim() === '') {
-		alert('Le champ nom est obligatoire.');
-		nom.focus();
-		return false;
-	}
-
-	let prenom = document.getElementById('prenom');
-	if (prenom.value.trim() === '') {
-		alert('Le champ prenom est obligatoire.');
-		prenom.focus();
-		return false;
-	}
-
-	let admin = document.getElementById('admin');
-	if (admin.value.trim() === '') {
-		alert('Le champ admin est obligatoire.');
-		admin.focus();
-		return false;
-	}
-
-	let telephone = document.getElementById('telephone');
-	if (telephone.value.trim() === '') {
-		alert('Le champ telephone est obligatoire.');
-		telephone.focus();
-		return false;
-	}
-
-	let mail = document.getElementById('mail');
-	if (mail.value.trim() === '') {
-		alert('Le champ mail est obligatoire.');
-		mail.focus();
-		return false;
-	}
-		return true;
-	}
-
 </script>
 
 <?= $this->endSection() ?>
