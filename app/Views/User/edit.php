@@ -40,15 +40,17 @@
 
 	function validateForm() {
 		let compare = 0;
-
+		let row = 0;
 		let nom = document.getElementById('nom').value;
 		let oldnom = document.getElementById('oldnom').value;
+		row++;
 		if (nom == oldnom) {
 			compare++;
 		}
 
 		let prenom = document.getElementById('prenom').value;
 		let oldprenom = document.getElementById('oldprenom').value;
+		row++;
 		if (prenom == oldprenom) {
 			compare++;
 		}
@@ -56,24 +58,27 @@
 		
 		let admin = (document.getElementById('admin').checked ? 1 : 0 );
 		let oldadmin = document.getElementById('oldadmin').value;
+		row++;
 		if (admin == oldadmin) {
 			compare++;
 		}
 		
 		let telephone = document.getElementById('telephone').value;
 		let oldtelephone = document.getElementById('oldtelephone').value;
+		row++;
 		if (telephone == oldtelephone) {
 			compare++;
 		}
 
 		let mail = document.getElementById('mail').value;
 		let oldmail = document.getElementById('oldmail').value;
+		row++;
 		if (mail == oldmail) {
 			compare++;
 		}
-		if (compare == 5)
-		{
-			alert('les valeurs sont identiques');
+
+		if (compare == row) {
+			alert("les valeurs sont identiques");
 			return false;
 		}
 		return true;
