@@ -77,11 +77,12 @@ class $controllerName extends Controller
 						->orLike('champ2', \$query)
 						->orLike('champ3', \$query)
 						->orLike('...', \$query);
+						->orderBy('column_name');
 		}
 
 		\$data['search'] = \$search;
-		*/
-
+		\$this->model->orderBy('column_name'); // Change column_name to match the field you want to sort by.
+ 		*/
         \$data['items'] = \$this->model->paginate(5); // Affiche 5 résultats par page
         \$data['pager'] = \$this->model->pager; // Ajoute le pager
 
