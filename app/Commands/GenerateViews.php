@@ -59,11 +59,23 @@ class GenerateViews extends BaseCommand
 
         CLI::write("✅ Vues générées dans : app/Views/$entityName", 'green');
     }
+	
+	private function deleteId($f, $type)
+	{
+		if ($f->primary_key == 1)
+			return null;
+		elseif ($type == 'columns')
+			return "<th>$f->name</th>\n			";
+		elseif ($type == 'rows')
+			return "<td><?= \$item->{$f->name} ?></td>\n				";
+		elseif ($type == 'details')
+			return "<tr>\n			<td>$f->name</td>\n			<td><?= \$item->{$f->name} ?></td>\n		</tr>\n		";
+	}
 
     private function generateIndexView($entityName, $fields)
     {
-        $columns = implode("\n			", array_map(fn($f) => "<th>$f->name</th>", $fields));
-        $rows = implode("\n				", array_map(fn($f) => "<td><?= \$item->{$f->name} ?></td>", $fields));
+        $columns = implode(array_map(fn($f) => $this->deleteId($f,'columns'), $fields));
+        $rows = implode(array_map(fn($f) => $this->deleteId($f,'rows'), $fields));
 
         return <<<EOD
 <?= \$this->extend('layouts/main') ?>
@@ -87,16 +99,14 @@ class GenerateViews extends BaseCommand
 <table class="table table-striped table-bordered mt-3">
     <thead>
         <tr>
-            $columns
-            <th>Actions</th>
+            $columns<th>Actions</th>
         </tr>
     </thead>
 
     <tbody>
         <?php foreach (\$items as \$item): ?>
 			<tr>
-				$rows
-				<td>
+				$rows<td>
 					<a href="<?= site_url('$entityName/show/'.\$item->id) ?>" class="btn btn-info">Voir</a>
 				</td>
 			</tr>
@@ -140,7 +150,7 @@ EOD;
 
     private function generateShowView($entityName, $fields)
     {
-        $details = implode("\n        ", array_map(fn($f) => "<tr>\n			<td>$f->name</td>\n			<td><?= \$item->{$f->name} ?></td>\n		</tr>\n", $fields));
+        $details = implode(array_map(fn($f) => $this->deleteId($f,'details'), $fields));
 		$bouton = '';
 		foreach ($fields as $field) {
             if ($field->name == 'actif')
