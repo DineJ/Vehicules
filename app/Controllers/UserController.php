@@ -18,18 +18,20 @@ class UserController extends Controller
     // LISTE AVEC PAGINATION
     public function index()
     {
+		/*
 		// BARRE DE RECHERCHE
 		$search = $this->request->getGet('q');
 		if ($search)
 		{
 			$query = '%'.$search.'%';
-			$this->model->like('prenom', $query)
-						->orLike('nom', $query)
-						->orLike('mail', $query)
-						->orLike('telephone', $query);
+			$this->model->like('champ1', $query)
+						->orLike('champ2', $query)
+						->orLike('champ3', $query)
+						->orLike('...', $query);
 		}
 
 		$data['search'] = $search;
+		*/
 
         $data['items'] = $this->model->paginate(5); // Affiche 5 résultats par page
         $data['pager'] = $this->model->pager; // Ajoute le pager
@@ -47,7 +49,7 @@ class UserController extends Controller
     // FORMULAIRE DE CRÉATION
     public function create()
     {
-        $data['title'] = "Créer un nouvel utilisateur";
+        $data['title'] = "Créer User";
         return view('User/create', $data);
     }
 
@@ -69,7 +71,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $data['item'] = $this->model->find($id);
-        $data['title'] = "Modifier l'utilisateur";
+        $data['title'] = "Modifier User";
         return view('User/edit', $data);
     }
 
