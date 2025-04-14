@@ -62,8 +62,8 @@ class GenerateViews extends BaseCommand
 
     private function generateIndexView($entityName, $fields)
     {
-        $columns = implode("\n                    ", array_map(fn($f) => "<th>$f->name</th>", $fields));
-        $rows = implode("\n                    ", array_map(fn($f) => "<td><?= \$item->{$f->name} ?></td>", $fields));
+        $columns = implode("\n			", array_map(fn($f) => "<th>$f->name</th>", $fields));
+        $rows = implode("\n				", array_map(fn($f) => "<td><?= \$item->{$f->name} ?></td>", $fields));
 
         return <<<EOD
 <?= \$this->extend('layouts/main') ?>
