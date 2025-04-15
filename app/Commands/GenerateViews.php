@@ -60,22 +60,45 @@ class GenerateViews extends BaseCommand
         CLI::write("✅ Vues générées dans : app/Views/$entityName", 'green');
     }
 	
-	private function deleteId($f, $type)
+	private function isPrimaryKey($f)
 	{
-		if ($f->primary_key == 1)
-			return null;
-		elseif ($type == 'columns')
-			return "<th>$f->name</th>\n			";
-		elseif ($type == 'rows')
-			return "<td><?= \$item->{$f->name} ?></td>\n				";
-		elseif ($type == 'details')
-			return "<tr>\n			<td>$f->name</td>\n			<td><?= \$item->{$f->name} ?></td>\n		</tr>\n		";
+		return ($f->primary_key == 1);
+	}
+
+	private function allForm ($f, $type) {
+
+		if ($this->isPrimaryKey($f))
+			return "";
+
+		switch ($type) {
+			case $f->primary_key == 1:
+				$r = $this->deleteId($f->primary_key);
+				break;
+
+			case 'columns':
+				$r = "<th>$f->name</th>\n			";
+				break;
+
+			case 'rows':
+				$r = "<td><?= \$item->{$f->name} ?></td>\n				";
+				break;
+
+			case 'details':
+				{
+				if ($f->type == 'tinyint')
+					$r = "<tr>\n			<td>$f->name</td>\n			<td><?= \$item->{$f->name} ? 'Oui' : 'Non' ?></td>\n		</tr>\n		";
+				else
+					$r = "<tr>\n			<td>$f->name</td>\n			<td><?= \$item->{$f->name} ?></td>\n		</tr>\n		";
+				}
+				break;
+		}
+		return $r;
 	}
 
     private function generateIndexView($entityName, $fields)
     {
-        $columns = implode(array_map(fn($f) => $this->deleteId($f,'columns'), $fields));
-        $rows = implode(array_map(fn($f) => $this->deleteId($f,'rows'), $fields));
+        $columns = implode(array_map(fn($f) => $this->allForm($f,'columns'), $fields));
+        $rows = implode(array_map(fn($f) => $this->allForm($f,'rows'), $fields));
 
         return <<<EOD
 <?= \$this->extend('layouts/main') ?>
@@ -150,9 +173,10 @@ EOD;
 
     private function generateShowView($entityName, $fields)
     {
-        $details = implode(array_map(fn($f) => $this->deleteId($f,'details'), $fields));
+        $details = '';
 		$bouton = '';
 		foreach ($fields as $field) {
+			$details .= $this->allForm($field,'details');
             if ($field->name == 'actif')
             {
 				$bouton = '<input type="hidden" name="actif" id="actif" value="<?= $item->actif ? 0 : 1 ?>">'. "\n		"
@@ -185,7 +209,6 @@ EOD;
 <?= \$this->endSection() ?>
 EOD;
     }
-
     private function generateFormView($entityName, $fields, $type)
     {
         $action = $type === 'create' ? "'$entityName/store/'" : "'$entityName/update/'.\$item->id";
@@ -197,19 +220,8 @@ EOD;
         foreach ($fields as $field) {
             if ($field->name == 'id') continue; // Ignore la clé primaire
 
-            // Détecter le type de champ
-            $inputType = match (true) {
-                str_contains($field->type, 'int') => 'number',
-                str_contains($field->type, 'varchar') => 'text',
-                str_contains($field->type, 'date') => 'date',
-                default => 'text'
-            };
-
             // Génération des inputs HTML
-
-            $inputs .= "\n	<label>{$field->name}</label>\n".
-					   "	<input type='$inputType' onchange=\"setUpper(document.getElementById('$field->name'));\" id='$field->name' name='$field->name' value='<?= isset(\$item) ? \$item->$field->name : '' ?>' class='form-control' required>\n";
-
+			$inputs .= $this->messageArray($field);
             if ($type != 'create') {
 				$inputs .= "	<input type='hidden' id='old{$field->name}' name='old{$field->name}' value='<?= isset(\$item) ? \$item->$field->name : '' ?>'>\n";
 
