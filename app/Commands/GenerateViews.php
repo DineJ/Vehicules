@@ -8,6 +8,7 @@ use Config\Database;
 
 class GenerateViews extends BaseCommand
 {
+	protected $primaryKey = '';
     protected $group       = 'custom';
     protected $name        = 'generate:views';
     protected $description = 'Génère automatiquement les vues CRUD avec validation JS dynamique.';
@@ -44,6 +45,13 @@ class GenerateViews extends BaseCommand
         if (!$fields) {
             CLI::error("❌ Impossible de récupérer les champs de la table '$table'.");
             return;
+        }
+
+		// Get primarykey's name
+		foreach ($fields as $field)
+		{
+			if ($field->primary_key)
+				$this->primaryKey = $field->name;
         }
 
         // Créer le dossier des vues s'il n'existe pas
@@ -130,7 +138,7 @@ class GenerateViews extends BaseCommand
         <?php foreach (\$items as \$item): ?>
 			<tr>
 				$rows<td>
-					<a href="<?= site_url('$entityName/show/'.\$item->id) ?>" class="btn btn-info">Voir</a>
+					<a href="<?= site_url('$entityName/show/'.\$item->{$this->primaryKey}) ?>" class="btn btn-info">Voir</a>
 				</td>
 			</tr>
         <?php endforeach; ?>
@@ -199,9 +207,9 @@ EOD;
 </table>
 
 <div>
-	<form method="post" action="<?= site_url('$entityName/update/'.\$item->id) ?>">
+	<form method="post" action="<?= site_url('$entityName/update/'.\$item->{$this->primaryKey}) ?>">
 		<a href="<?= site_url('$entityName') ?>" class="btn btn-secondary">Retour</a>
-		<a href="<?= site_url('$entityName/edit/'.\$item->id) ?>" class="btn btn-warning">Modifier</a>
+		<a href="<?= site_url('$entityName/edit/'.\$item->{$this->primaryKey}) ?>" class="btn btn-warning">Modifier</a>
 		$bouton
 	</form>
 </div>
@@ -239,14 +247,14 @@ EOD;
 
     private function generateFormView($entityName, $fields, $type)
     {
-        $action = $type === 'create' ? "'$entityName/store/'" : "'$entityName/update/'.\$item->id";
+        $action = $type === 'create' ? "'$entityName/store/'" : "'$entityName/update/'.\$item->{$this->primaryKey}";
         $inputs = "";
         $validationJS = "";
         $row = 0;
         $onsubmit = '';
         $startfunction = '';
         foreach ($fields as $field) {
-            if ($field->name == 'id') continue; // Ignore la clé primaire
+            if ($field->name == $this->primaryKey) continue; // Ignore la clé primaire
 
             // Génération des inputs HTML
 			$inputs .= $this->messageArray($field);
