@@ -260,11 +260,14 @@ EOD;
 			$inputs .= $this->messageArray($field);
             if ($type != 'create') {
 				$inputs .= "	<input type='hidden' id='old{$field->name}' name='old{$field->name}' value='<?= isset(\$item) ? \$item->$field->name : '' ?>'>\n";
+				if ($field->type == 'tinyint')
+					$validationJS .= "		let {$field->name} = (document.getElementById('{$field->name}').checked ? 1 : 0 );\n";
+				else
+					$validationJS .= "		let {$field->name} = document.getElementById('{$field->name}').value;\n";
 
-				$validationJS .= "		let $field->name = document.getElementById('$field->name').value;\n".
-								 "		let old{$field->name} = document.getElementById('old{$field->name}').value;\n".
+				$validationJS .= "		let old{$field->name} = document.getElementById('old{$field->name}').value;\n".
 								 "		row++;\n".
-								 "		if ($field->name == old{$field->name}) {\n".
+								 "		if ({$field->name} == old{$field->name}) {\n".
 								 "			compare++;\n".
 								 "		}\n\n";
 			}
@@ -273,7 +276,7 @@ EOD;
 			$onsubmit = ' onsubmit="return validateForm()"';
 			$startfunction = '	function validateForm() {'."\n".
 					         '		let compare = 0;'."\n".
-					         '		let row = 0;'."\n".
+					         '		let row = 0;'."\n\n".
 								$validationJS.
 							 '		if (compare == row) {'."\n".
 					         '			alert("les valeurs sont identiques");'."\n".
