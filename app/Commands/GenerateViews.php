@@ -15,7 +15,8 @@ class GenerateViews extends BaseCommand
 
 	public function run(array $params)
 	{
-		if (empty($params)) {
+		if (empty($params))
+		{
 			CLI::error("❌ Veuillez spécifier le nom de l'entité.");
 			return;
 		}
@@ -25,13 +26,15 @@ class GenerateViews extends BaseCommand
 		$folderPath = "../app/Views/{$entityName}";
 
 		// Vérifier si l'entité existe
-		if (!file_exists("../app/Entities/$entityName.php")) {
+		if (!file_exists("../app/Entities/$entityName.php"))
+		{
 			CLI::error("❌ L'entité '$entityName' n'existe pas.");
 			return;
 		}
 
 		// Vérifier si le modèle existe
-		if (!class_exists($modelName)) {
+		if (!class_exists($modelName))
+		{
 			CLI::error("❌ Le modèle '$modelName' n'existe pas.");
 			return;
 		}
@@ -42,7 +45,8 @@ class GenerateViews extends BaseCommand
 		$table = $model->table;
 		$fields = $db->getFieldData($table);
 
-		if (!$fields) {
+		if (!$fields)
+		{
 			CLI::error("❌ Impossible de récupérer les champs de la table '$table'.");
 			return;
 		}
@@ -55,7 +59,8 @@ class GenerateViews extends BaseCommand
 		}
 
 		// Créer le dossier des vues s'il n'existe pas
-		if (!is_dir($folderPath)) {
+		if (!is_dir($folderPath))
+		{
 			mkdir($folderPath, 0777, true);
 		}
 
@@ -73,12 +78,13 @@ class GenerateViews extends BaseCommand
 		return ($f->primary_key == 1);
 	}
 
-	private function allForm ($f, $type) {
-
+	private function allForm ($f, $type)
+	{
 		if ($this->isPrimaryKey($f))
 			return "";
 
-		switch ($type) {
+		switch ($type) 
+		{
 			case $f->primary_key == 1:
 				$r = $this->deleteId($f->primary_key);
 				break;
@@ -146,7 +152,7 @@ class GenerateViews extends BaseCommand
 </table>
 
 <!-- Liens de pagination -->
-<?php if (\$pager->getPageCount() > 1) { ?>
+<?php if (\$pager->getPageCount() > 1)\n	 { ?>
 	<nav aria-label="Page navigation example">
 		<ul class="pagination">
 			<li class="page-item <?= \$pager->getCurrentPage() != 1 ? '' : 'disabled' ?>"><a class="page-link" href="<?= \$pager->getPreviousPageURI() ?>">Précédent</a></li>
@@ -157,15 +163,18 @@ class GenerateViews extends BaseCommand
 				\$v1 = \$cur - \$nb_page;
 				\$v2 = \$cur + \$nb_page;
 
-				if (\$v1 < 1) {
+				if (\$v1 < 1)
+				{
 					\$v1 = 1;
 				}
 
-				if (\$v2 > \$count) {
+				if (\$v2 > \$count)
+				{
 					\$v2 = \$count;
 				}
 
-				for (\$value = \$v1 ; \$value <= \$v2; \$value++ ) {
+				for (\$value = \$v1 ; \$value <= \$v2; \$value++ )
+				{
 					echo '<li '.(\$cur == \$value ? 'class="active"' : 'class="page-item"' ).'><a class="page-link" href="'.\$pager->getPageURI(\$value).'">'.\$value.'</a></li>';
 				}
 				?>
@@ -183,7 +192,8 @@ EOD;
 	{
 		$details = '';
 		$bouton = '';
-		foreach ($fields as $field) {
+		foreach ($fields as $field)
+		{
 			$details .= $this->allForm($field,'details');
 			if ($field->name == 'actif')
 			{
@@ -253,12 +263,18 @@ EOD;
 		$row = 0;
 		$onsubmit = '';
 		$startfunction = '';
-		foreach ($fields as $field) {
-			if ($field->name == $this->primaryKey) continue; // Ignore la clé primaire
+		foreach ($fields as $field) 
+		{
+			 // Ignore la clé primaire
+			if ($field->name == $this->primaryKey)
+			{
+				continue;
+			}
 
 			// Génération des inputs HTML
 			$inputs .= $this->messageArray($field);
-			if ($type != 'create') {
+			if ($type != 'create')
+			{
 				$inputs .= "	<input type='hidden' id='old{$field->name}' name='old{$field->name}' value='<?= isset(\$item) ? \$item->$field->name : '' ?>'>\n";
 				if ($field->type == 'tinyint')
 					$validationJS .= 	"		let {$field->name} = (document.getElementById('{$field->name}').checked ? 1 : 0 );\n";
@@ -267,18 +283,20 @@ EOD;
 
 				$validationJS .= 	"		let old{$field->name} = document.getElementById('old{$field->name}').value;\n".
 									"		row++;\n".
-									"		if ({$field->name} == old{$field->name}) {\n".
+									"		if ({$field->name} == old{$field->name})\n		{\n".
 									"			compare++;\n".
 									"		}\n\n";
 			}
 		}
 		if ($type != 'create') {
 			$onsubmit = ' onsubmit="return validateForm()"';
-			$startfunction = 	'	function validateForm() {'."\n".
+			$startfunction = 	'	function validateForm()'."\n".
+								'	{'."\n".
 								'		let compare = 0;'."\n".
 								'		let row = 0;'."\n\n".
 								$validationJS.
-								'		if (compare == row) {'."\n".
+								'		if (compare == row)'."\n".
+								'		{'."\n".
 								'			alert("les valeurs sont identiques");'."\n".
 								'			return false;'."\n".
 								'		}'."\n".
@@ -298,7 +316,8 @@ $inputs
 </form>
 
 <script>
-	function setUpper(element) {
+	function setUpper(element)
+	{
 		element.value=element.value.toUpperCase();
 	}
 $startfunction
