@@ -10,6 +10,7 @@ class GenerateController extends BaseCommand
 	protected $group       = 'custom';
 	protected $name        = 'generate:controller';
 	protected $description = 'Génère automatiquement un contrôleur basé sur une entité avec pagination.';
+	protected $searchs = array();
 
 	public function run(array $params)
 	{
@@ -19,6 +20,11 @@ class GenerateController extends BaseCommand
 		}
 
 		$entityName = ucfirst($params[0]);
+		if (isset($params[1]))
+		{
+			$this->searchs = explode(',',$params[1]);
+		}
+
 		$modelName = $entityName . 'Model';
 		$controllerName = $entityName . 'Controller';
 		$controllerPath = "../app/Controllers/$controllerName.php";
@@ -44,8 +50,35 @@ class GenerateController extends BaseCommand
 		CLI::write("✅ Contrôleur généré : app/Controllers/$controllerName.php", 'green');
 	}
 
+	private function makeSearchBar($searchs)
+	{
+		if (count($searchs) == 0)
+			return "";
+
+		$searchBar = "// SEARCH BAR\n".
+					 "		\$search = \$this->request->getGet('q');\n".
+					"		if (\$search) \n".
+					"		{\n".
+					"			\$query = '%'.\$search. '%';\n".
+					"			\$this->model->like('".$searchs[0]."', \$query)\n";
+
+		for($x = 1; isset($searchs[$x]); $x++)
+		{
+			$searchBar .= "				->orLike('".$searchs[$x]."', \$query)\n";
+		}
+		$searchBar .= "				->orderBy('".$searchs[0]."');\n".
+					  "		}\n".
+					  "		else\n".
+					  "		{\n".
+					  "			\$this->model->orderBy('".$searchs[0]."');\n".
+					  "		}\n".
+					  "		\$data['search'] = \$search;";
+		return $searchBar;
+	}
+
 	private function generateClassicController($controllerName, $modelName, $entityName)
 	{
+		$searchs = $this->makeSearchBar($this->searchs);
 		return <<<EOD
 <?php
 
@@ -67,22 +100,7 @@ class $controllerName extends Controller
 	// LISTE AVEC PAGINATION
 	public function index()
 	{
-		/*
-		// BARRE DE RECHERCHE
-		\$search = \$this->request->getGet('q');
-		if (\$search)
-		{
-			\$query = '%'.\$search.'%';
-			\$this->model->like('champ1', \$query)
-						->orLike('champ2', \$query)
-						->orLike('champ3', \$query)
-						->orLike('...', \$query);
-						->orderBy('column_name');
-		}
-
-		\$data['search'] = \$search;
-		\$this->model->orderBy('column_name'); // Change column_name to match the field you want to sort by.
- 		*/
+		$searchs
 		\$data['items'] = \$this->model->paginate(5); // Affiche 5 résultats par page
 		\$data['pager'] = \$this->model->pager; // Ajoute le pager
 

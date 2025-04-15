@@ -12,6 +12,7 @@ class GenerateViews extends BaseCommand
 	protected $group       = 'custom';
 	protected $name        = 'generate:views';
 	protected $description = 'Génère automatiquement les vues CRUD avec validation JS dynamique.';
+	protected $searchs = array();
 
 	public function run(array $params)
 	{
@@ -22,6 +23,11 @@ class GenerateViews extends BaseCommand
 		}
 
 		$entityName = ucfirst($params[0]);
+		if (isset($params[1]))
+		{
+			$this->searchs = explode(',',$params[1]);
+		}
+
 		$modelName = "App\\Models\\" . $entityName . "Model";
 		$folderPath = "../app/Views/{$entityName}";
 
@@ -109,10 +115,31 @@ class GenerateViews extends BaseCommand
 		return $r;
 	}
 
+	private function makeSearchBar($searchs, $entityName)
+	{
+		$searchBar = "";
+		if (count($searchs) == 0)
+			return "";
+		else
+		{
+			$seachBar = '<form method="get" action="<?= site_url("'.$entityName.'") ?>" class="mb-3">'."\n".
+						'	<div class="input-group">'."\n".
+						'		<input type="text" name="q" class="form-control" placeholder="Rechercher..." value="<?= isset($search) ?  esc($search) : "" ?>">'."\n".
+						'		<button type="submit" class="btn btn-primary">Rechercher</button>'."\n".
+						'		<?php if (!empty($search)) : ?>'."\n".
+						'			<a href="<?= site_url("'.$entityName.'") ?>" class="btn btn-outline-secondary">Réinitialiser</a>'."\n".
+						'		<?php endif; ?>'."\n".
+						'	</div>'."\n".
+						'</form>'."\n";
+		}
+		return $seachBar;
+	}
+
 	private function generateIndexView($entityName, $fields)
 	{
 		$columns = implode(array_map(fn($f) => $this->allForm($f,'columns'), $fields));
 		$rows = implode(array_map(fn($f) => $this->allForm($f,'rows'), $fields));
+		$searchBar = $this->makeSearchBar($this->searchs, $entityName);
 
 		return <<<EOD
 <?= \$this->extend('layouts/main') ?>
@@ -121,17 +148,7 @@ class GenerateViews extends BaseCommand
 <h2>Liste des {$entityName}s</h2>
 <a href="<?= site_url('$entityName/create') ?>" class="btn btn-success">Ajouter</a>
 
-<!--
-<form method="get" action="<?= site_url('$entityName') ?>" class="mb-3">
-	<div class="input-group">
-		<input type="text" name="q" class="form-control" placeholder="Rechercher..." value="<?= isset(\$search) ?  esc(\$search) : '' ?>">
-		<button type="submit" class="btn btn-primary">Rechercher</button>
-		<?php if (!empty(\$search)) : ?>
-			<a href="<?= site_url('$entityName') ?>" class="btn btn-outline-secondary">Réinitialiser</a>
-		<?php endif; ?>
-	</div>
-</form>
--->
+$searchBar
 
 <table class="table table-striped table-bordered mt-3">
 	<thead>
