@@ -22,15 +22,16 @@
 	<label>mail</label>
 	<input type='email' pattern="^[a-zA-Z0-9]+([_\-\.]{1}[a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}$" id='mail' name='mail' value='<?= isset($item) ? $item->mail : '' ?>' class='form-control' required>
 
-    <a href="<?= site_url('User') ?>" class="btn btn-secondary mt-3">Retour</a>
-    <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
+	<a href="<?= site_url('User') ?>" class="btn btn-secondary mt-3">Retour</a>
+	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 
-
 <script>
-	function setUpper(element) {
+	function setUpper(element)
+	{
 		element.value=element.value.toUpperCase();
 	}
+
 </script>
 
 <?= $this->endSection() ?>

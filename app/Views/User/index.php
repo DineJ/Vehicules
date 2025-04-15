@@ -16,18 +16,18 @@
 </form>
 
 <table class="table table-striped table-bordered mt-3">
-    <thead>
-        <tr>
+	<thead>
+		<tr>
 			<th>nom</th>
 			<th>prenom</th>
 			<th>telephone</th>
 			<th>mail</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
+			<th>Actions</th>
+		</tr>
+	</thead>
 
-    <tbody>
-        <?php foreach ($items as $item): ?>
+	<tbody>
+		<?php foreach ($items as $item): ?>
 			<tr>
 				<td><?= $item->nom ?></td>
 				<td><?= $item->prenom ?></td>
@@ -37,12 +37,13 @@
 					<a href="<?= site_url('User/show/'.$item->id) ?>" class="btn btn-info">Voir</a>
 				</td>
 			</tr>
-        <?php endforeach; ?>
-    </tbody>
+		<?php endforeach; ?>
+	</tbody>
 </table>
 
 <!-- Liens de pagination -->
-<?php if ($pager->getPageCount() > 1) { ?>
+<?php if ($pager->getPageCount() > 1)
+	 { ?>
 	<nav aria-label="Page navigation example">
 		<ul class="pagination">
 			<li class="page-item <?= $pager->getCurrentPage() != 1 ? '' : 'disabled' ?>"><a class="page-link" href="<?= $pager->getPreviousPageURI() ?>">Précédent</a></li>
@@ -53,15 +54,18 @@
 				$v1 = $cur - $nb_page;
 				$v2 = $cur + $nb_page;
 
-				if ($v1 < 1) {
+				if ($v1 < 1)
+				{
 					$v1 = 1;
 				}
 
-				if ($v2 > $count) {
+				if ($v2 > $count)
+				{
 					$v2 = $count;
 				}
 
-				for ($value = $v1 ; $value <= $v2; $value++ ) {
+				for ($value = $v1 ; $value <= $v2; $value++ )
+				{
 					echo '<li '.($cur == $value ? 'class="active"' : 'class="page-item"' ).'><a class="page-link" href="'.$pager->getPageURI($value).'">'.$value.'</a></li>';
 				}
 				?>

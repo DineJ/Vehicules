@@ -10,27 +10,22 @@
 			<td>Nom</td>
 			<td><?= $item->nom ?></td>
 		</tr>
-
 		<tr>
 			<td>Prénom</td>
 			<td><?= $item->prenom ?></td>
 		</tr>
-
 		<tr>
 			<td>Admin</td>
 			<td><?= $item->admin ? 'Oui' : 'Non' ?></td>
 		</tr>
-
 		<tr>
 			<td>Téléphone</td>
 			<td><?= $item->telephone ?></td>
 		</tr>
-
 		<tr>
 			<td>Mail</td>
 			<td><?= $item->mail ?></td>
 		</tr>
-
 		<tr>
 			<td>Actif</td>
 			<td><?= $item->actif ? 'Oui' : 'Non' ?></td>

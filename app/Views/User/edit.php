@@ -13,7 +13,7 @@
 	<label>prenom</label>
 	<input type='text' onchange="setUpper(document.getElementById('prenom'));" pattern="[a-zA-Z]+([\- ]?[a-zA-Z]+)*" id='prenom' name='prenom' value='<?= isset($item) ? $item->prenom : '' ?>' class='form-control' required>
 	<input type='hidden' id='oldprenom' name='oldprenom' value='<?= isset($item) ? $item->prenom : '' ?>'>
-	
+
 	<label>admin</label>
 	<div>
 		<input type='checkbox' id='admin' name='admin' value='1' <?= (isset($item) && $item->admin) ? 'checked' : '' ?>>
@@ -23,67 +23,71 @@
 	<label>telephone</label>
 	<input type='tel' pattern="[0-9]{10}" id='telephone' name='telephone' value='<?= isset($item) ? $item->telephone : '' ?>' class='form-control' required>
 	<input type='hidden' id='oldtelephone' name='oldtelephone' value='<?= isset($item) ? $item->telephone : '' ?>'>
-	
+
 	<label>mail</label>
 	<input type='email' pattern="^[a-zA-Z0-9]+([_\-\.]{1}[a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}$" id='mail' name='mail' value='<?= isset($item) ? $item->mail : '' ?>' class='form-control' required>
 	<input type='hidden' id='oldmail' name='oldmail' value='<?= isset($item) ? $item->mail : '' ?>'>
-	
-    <a href="<?= site_url('User') ?>" class="btn btn-secondary mt-3">Retour</a>	
-    <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
+
+	<a href="<?= site_url('User') ?>" class="btn btn-secondary mt-3">Retour</a>
+	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 
-
 <script>
-	function setUpper(element) {
+	function setUpper(element)
+	{
 		element.value=element.value.toUpperCase();
 	}
-
-	function validateForm() {
+	function validateForm()
+	{
 		let compare = 0;
 		let row = 0;
 		let nom = document.getElementById('nom').value;
 		let oldnom = document.getElementById('oldnom').value;
 		row++;
-		if (nom == oldnom) {
+		if (nom == oldnom)
+		{
 			compare++;
 		}
 
 		let prenom = document.getElementById('prenom').value;
 		let oldprenom = document.getElementById('oldprenom').value;
 		row++;
-		if (prenom == oldprenom) {
+		if (prenom == oldprenom)
+		{
 			compare++;
 		}
 
-		
 		let admin = (document.getElementById('admin').checked ? 1 : 0 );
 		let oldadmin = document.getElementById('oldadmin').value;
 		row++;
-		if (admin == oldadmin) {
+		if (admin == oldadmin)
+		{
 			compare++;
 		}
-		
+
 		let telephone = document.getElementById('telephone').value;
 		let oldtelephone = document.getElementById('oldtelephone').value;
 		row++;
-		if (telephone == oldtelephone) {
+		if (telephone == oldtelephone)
+		{
 			compare++;
 		}
 
 		let mail = document.getElementById('mail').value;
 		let oldmail = document.getElementById('oldmail').value;
 		row++;
-		if (mail == oldmail) {
+		if (mail == oldmail)
+		{
 			compare++;
 		}
 
-		if (compare == row) {
+		if (compare == row)
+		{
 			alert("les valeurs sont identiques");
 			return false;
 		}
 		return true;
 	}
-
 </script>
 
 <?= $this->endSection() ?>
