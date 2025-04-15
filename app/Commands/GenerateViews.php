@@ -209,6 +209,34 @@ EOD;
 <?= \$this->endSection() ?>
 EOD;
     }
+
+	/* private function arrayType($field)
+	{
+		return match($field->type)
+		{
+			'tinyint' => 'checkbox',
+			'text' => 'textarea',
+			'enum' => 'select',
+			'date' => 'date',
+			'int' => 'number',
+			default => 'text'
+		};
+	} */
+
+	private function messageArray($field)
+	{
+		//$type = $this->arrayType($field);
+		return match($field->type)
+		{
+			'text' => "\n	<label>{$field->name}</label>\n	<textarea id='{$field->name}' name='{$field->name}'><?= isset(\$item) ? \$item->{$field->name} : '' ?></textarea>",
+			'enum' => "\n	<label>{$field->name}</label>\n	<select id='{$field->name}' name='{$field->name}'></select>",
+			'date' => "\n	<label>{$field->name}</label>\n	<input type='date' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
+			'int' => "\n	<label>{$field->name}</label>\n	<input type='number' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
+			'tinyint' => "\n	<label>{$field->name}</label>\n	<div>\n		<input type='checkbox' id='{$field->name}' name='{$field->name}' value='1' <?= (isset(\$item) && \$item->{$field->name}) ? 'checked' : '' ?>>\n	</div>\n",
+			default => "\n	<label>{$field->name}</label>\n	<input type='text' onchange=\"setUpper(document.getElementById('{$field->name}'));\" id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
+		};
+	}
+
     private function generateFormView($entityName, $fields, $type)
     {
         $action = $type === 'create' ? "'$entityName/store/'" : "'$entityName/update/'.\$item->id";
