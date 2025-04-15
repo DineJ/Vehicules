@@ -9,64 +9,64 @@ use Config\Database;
 class GenerateViews extends BaseCommand
 {
 	protected $primaryKey = '';
-    protected $group       = 'custom';
-    protected $name        = 'generate:views';
-    protected $description = 'Génère automatiquement les vues CRUD avec validation JS dynamique.';
+	protected $group       = 'custom';
+	protected $name        = 'generate:views';
+	protected $description = 'Génère automatiquement les vues CRUD avec validation JS dynamique.';
 
-    public function run(array $params)
-    {
-        if (empty($params)) {
-            CLI::error("❌ Veuillez spécifier le nom de l'entité.");
-            return;
-        }
+	public function run(array $params)
+	{
+		if (empty($params)) {
+			CLI::error("❌ Veuillez spécifier le nom de l'entité.");
+			return;
+		}
 
-        $entityName = ucfirst($params[0]);
-        $modelName = "App\\Models\\" . $entityName . "Model";
-        $folderPath = "../app/Views/{$entityName}";
+		$entityName = ucfirst($params[0]);
+		$modelName = "App\\Models\\" . $entityName . "Model";
+		$folderPath = "../app/Views/{$entityName}";
 
-        // Vérifier si l'entité existe
-        if (!file_exists("../app/Entities/$entityName.php")) {
-            CLI::error("❌ L'entité '$entityName' n'existe pas.");
-            return;
-        }
+		// Vérifier si l'entité existe
+		if (!file_exists("../app/Entities/$entityName.php")) {
+			CLI::error("❌ L'entité '$entityName' n'existe pas.");
+			return;
+		}
 
-        // Vérifier si le modèle existe
-        if (!class_exists($modelName)) {
-            CLI::error("❌ Le modèle '$modelName' n'existe pas.");
-            return;
-        }
+		// Vérifier si le modèle existe
+		if (!class_exists($modelName)) {
+			CLI::error("❌ Le modèle '$modelName' n'existe pas.");
+			return;
+		}
 
-        // Instancier dynamiquement le modèle
-        $model = new $modelName();
-        $db = Database::connect();
-        $table = $model->table;
-        $fields = $db->getFieldData($table);
+		// Instancier dynamiquement le modèle
+		$model = new $modelName();
+		$db = Database::connect();
+		$table = $model->table;
+		$fields = $db->getFieldData($table);
 
-        if (!$fields) {
-            CLI::error("❌ Impossible de récupérer les champs de la table '$table'.");
-            return;
-        }
+		if (!$fields) {
+			CLI::error("❌ Impossible de récupérer les champs de la table '$table'.");
+			return;
+		}
 
 		// Get primarykey's name
 		foreach ($fields as $field)
 		{
 			if ($field->primary_key)
 				$this->primaryKey = $field->name;
-        }
+		}
 
-        // Créer le dossier des vues s'il n'existe pas
-        if (!is_dir($folderPath)) {
-            mkdir($folderPath, 0777, true);
-        }
+		// Créer le dossier des vues s'il n'existe pas
+		if (!is_dir($folderPath)) {
+			mkdir($folderPath, 0777, true);
+		}
 
-        // Générer les fichiers de vues
-        file_put_contents("$folderPath/index.php", $this->generateIndexView($entityName, $fields));
-        file_put_contents("$folderPath/show.php", $this->generateShowView($entityName, $fields));
-        file_put_contents("$folderPath/create.php", $this->generateFormView($entityName, $fields, 'create'));
-        file_put_contents("$folderPath/edit.php", $this->generateFormView($entityName, $fields, 'edit'));
+		// Générer les fichiers de vues
+		file_put_contents("$folderPath/index.php", $this->generateIndexView($entityName, $fields));
+		file_put_contents("$folderPath/show.php", $this->generateShowView($entityName, $fields));
+		file_put_contents("$folderPath/create.php", $this->generateFormView($entityName, $fields, 'create'));
+		file_put_contents("$folderPath/edit.php", $this->generateFormView($entityName, $fields, 'edit'));
 
-        CLI::write("✅ Vues générées dans : app/Views/$entityName", 'green');
-    }
+		CLI::write("✅ Vues générées dans : app/Views/$entityName", 'green');
+	}
 	
 	private function isPrimaryKey($f)
 	{
@@ -103,12 +103,12 @@ class GenerateViews extends BaseCommand
 		return $r;
 	}
 
-    private function generateIndexView($entityName, $fields)
-    {
-        $columns = implode(array_map(fn($f) => $this->allForm($f,'columns'), $fields));
-        $rows = implode(array_map(fn($f) => $this->allForm($f,'rows'), $fields));
+	private function generateIndexView($entityName, $fields)
+	{
+		$columns = implode(array_map(fn($f) => $this->allForm($f,'columns'), $fields));
+		$rows = implode(array_map(fn($f) => $this->allForm($f,'rows'), $fields));
 
-        return <<<EOD
+		return <<<EOD
 <?= \$this->extend('layouts/main') ?>
 <?= \$this->section('content') ?>
 
@@ -128,21 +128,21 @@ class GenerateViews extends BaseCommand
 -->
 
 <table class="table table-striped table-bordered mt-3">
-    <thead>
-        <tr>
-            $columns<th>Actions</th>
-        </tr>
-    </thead>
+	<thead>
+		<tr>
+			$columns<th>Actions</th>
+		</tr>
+	</thead>
 
-    <tbody>
-        <?php foreach (\$items as \$item): ?>
+	<tbody>
+		<?php foreach (\$items as \$item): ?>
 			<tr>
 				$rows<td>
 					<a href="<?= site_url('$entityName/show/'.\$item->{$this->primaryKey}) ?>" class="btn btn-info">Voir</a>
 				</td>
 			</tr>
-        <?php endforeach; ?>
-    </tbody>
+		<?php endforeach; ?>
+	</tbody>
 </table>
 
 <!-- Liens de pagination -->
@@ -177,23 +177,23 @@ class GenerateViews extends BaseCommand
 
 <?= \$this->endSection() ?>
 EOD;
-    }
+	}
 
-    private function generateShowView($entityName, $fields)
-    {
-        $details = '';
+	private function generateShowView($entityName, $fields)
+	{
+		$details = '';
 		$bouton = '';
 		foreach ($fields as $field) {
 			$details .= $this->allForm($field,'details');
-            if ($field->name == 'actif')
-            {
+			if ($field->name == 'actif')
+			{
 				$bouton = '<input type="hidden" name="actif" id="actif" value="<?= $item->actif ? 0 : 1 ?>">'. "\n		"
-				         .'<button type="submit" class="btn <?= $item->actif ? \'btn-danger\' : \'btn-success\' ?>"> '
-				         .'<?= $item->actif ? \'Rendre inactif\' : \'Rendre actif\' ?></button>';
+						.'<button type="submit" class="btn <?= $item->actif ? \'btn-danger\' : \'btn-success\' ?>"> '
+						.'<?= $item->actif ? \'Rendre inactif\' : \'Rendre actif\' ?></button>';
 			}
 		}
 
-        return <<<EOD
+		return <<<EOD
 <?= \$this->extend('layouts/main') ?>
 <?= \$this->section('content') ?>
 
@@ -216,7 +216,7 @@ EOD;
 
 <?= \$this->endSection() ?>
 EOD;
-    }
+	}
 
 	/* private function arrayType($field)
 	{
@@ -245,47 +245,47 @@ EOD;
 		};
 	}
 
-    private function generateFormView($entityName, $fields, $type)
-    {
-        $action = $type === 'create' ? "'$entityName/store/'" : "'$entityName/update/'.\$item->{$this->primaryKey}";
-        $inputs = "";
-        $validationJS = "";
-        $row = 0;
-        $onsubmit = '';
-        $startfunction = '';
-        foreach ($fields as $field) {
-            if ($field->name == $this->primaryKey) continue; // Ignore la clé primaire
+	private function generateFormView($entityName, $fields, $type)
+	{
+		$action = $type === 'create' ? "'$entityName/store/'" : "'$entityName/update/'.\$item->{$this->primaryKey}";
+		$inputs = "";
+		$validationJS = "";
+		$row = 0;
+		$onsubmit = '';
+		$startfunction = '';
+		foreach ($fields as $field) {
+			if ($field->name == $this->primaryKey) continue; // Ignore la clé primaire
 
-            // Génération des inputs HTML
+			// Génération des inputs HTML
 			$inputs .= $this->messageArray($field);
-            if ($type != 'create') {
+			if ($type != 'create') {
 				$inputs .= "	<input type='hidden' id='old{$field->name}' name='old{$field->name}' value='<?= isset(\$item) ? \$item->$field->name : '' ?>'>\n";
 				if ($field->type == 'tinyint')
-					$validationJS .= "		let {$field->name} = (document.getElementById('{$field->name}').checked ? 1 : 0 );\n";
+					$validationJS .= 	"		let {$field->name} = (document.getElementById('{$field->name}').checked ? 1 : 0 );\n";
 				else
-					$validationJS .= "		let {$field->name} = document.getElementById('{$field->name}').value;\n";
+					$validationJS .=	"		let {$field->name} = document.getElementById('{$field->name}').value;\n";
 
-				$validationJS .= "		let old{$field->name} = document.getElementById('old{$field->name}').value;\n".
-								 "		row++;\n".
-								 "		if ({$field->name} == old{$field->name}) {\n".
-								 "			compare++;\n".
-								 "		}\n\n";
+				$validationJS .= 	"		let old{$field->name} = document.getElementById('old{$field->name}').value;\n".
+									"		row++;\n".
+									"		if ({$field->name} == old{$field->name}) {\n".
+									"			compare++;\n".
+									"		}\n\n";
 			}
 		}
 		if ($type != 'create') {
 			$onsubmit = ' onsubmit="return validateForm()"';
-			$startfunction = '	function validateForm() {'."\n".
-					         '		let compare = 0;'."\n".
-					         '		let row = 0;'."\n\n".
+			$startfunction = 	'	function validateForm() {'."\n".
+								'		let compare = 0;'."\n".
+								'		let row = 0;'."\n\n".
 								$validationJS.
-							 '		if (compare == row) {'."\n".
-					         '			alert("les valeurs sont identiques");'."\n".
-							 '			return false;'."\n".
-							 '		}'."\n".
-							 '		return true;'."\n".
-							 '	}';
+								'		if (compare == row) {'."\n".
+								'			alert("les valeurs sont identiques");'."\n".
+								'			return false;'."\n".
+								'		}'."\n".
+								'		return true;'."\n".
+								'	}';
 		}
-        return <<<EOD
+		return <<<EOD
 <?= \$this->extend('layouts/main') ?>
 <?= \$this->section('content') ?>
 
@@ -293,8 +293,8 @@ EOD;
 
 <form method="post" action="<?= site_url($action) ?>"{$onsubmit}>
 $inputs
-    <a href="<?= site_url('$entityName') ?>" class="btn btn-secondary mt-3">Retour</a>
-    <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
+	<a href="<?= site_url('$entityName') ?>" class="btn btn-secondary mt-3">Retour</a>
+	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 
 <script>
@@ -306,6 +306,6 @@ $startfunction
 
 <?= \$this->endSection() ?>
 EOD;
-    }
+	}
 }
 
