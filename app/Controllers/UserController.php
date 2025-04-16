@@ -18,7 +18,7 @@ class UserController extends Controller
 	// LISTE AVEC PAGINATION
 	public function index()
 	{
-		// BARRE DE RECHERCHE
+		// SEARCH BAR
 		$search = $this->request->getGet('q');
 		if ($search)
 		{
@@ -26,7 +26,7 @@ class UserController extends Controller
 			$this->model->like('nom', $query)
 						->orLike('prenom', $query)
 						->orLike('mail', $query)
-						->orLike('telephone', $query);
+						->orLike('telephone', $query)
 						->orderBy('nom');
 		}
 		else
