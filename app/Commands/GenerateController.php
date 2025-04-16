@@ -55,7 +55,7 @@ class GenerateController extends BaseCommand
 		if (count($searchs) == 0)
 			return "";
 
-		$searchBar = "		// SEARCH BAR\n".
+		$searchBar = "\n		// SEARCH BAR\n".
 					 "		\$search = \$this->request->getGet('q');\n".
 					 "		if (\$search)\n".
 					 "		{\n".
@@ -99,8 +99,7 @@ class $controllerName extends Controller
 
 	// LISTE AVEC PAGINATION
 	public function index()
-	{
-$searchs
+	{{$searchs}
 		\$data['items'] = \$this->model->paginate(5); // Affiche 5 résultats par page
 		\$data['pager'] = \$this->model->pager; // Ajoute le pager
 
