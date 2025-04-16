@@ -18,25 +18,25 @@ use CodeIgniter\Validation\ValidationException;
  */
 class User extends Entity
 {
-	protected $casts = [
-		'id' => 'integer',
-		'nom' => 'string',
-		'prenom' => 'string',
-		'admin' => 'integer',
-		'telephone' => 'string',
-		'mail' => 'string',
-		'actif' => 'integer',
-	];
+    protected $casts = [
+        'id' => 'integer',
+        'nom' => 'string',
+        'prenom' => 'string',
+        'admin' => 'integer',
+        'telephone' => 'string',
+        'mail' => 'string',
+        'actif' => 'integer',
+    ];
 
-	protected $validationRules = [
-		'id' => 'integer|max_length[11]',
-		'nom' => 'string|max_length[50]',
-		'prenom' => 'string|max_length[50]',
-		'admin' => 'integer|max_length[1]',
-		'telephone' => 'string|max_length[10]',
-		'mail' => 'string|max_length[100]',
-		'actif' => 'integer|max_length[1]',
-	];
+    protected $validationRules = [
+        'id' => 'integer|max_length[11]',
+        'nom' => 'string|max_length[50]',
+        'prenom' => 'string|max_length[50]',
+        'admin' => 'integer|max_length[1]',
+        'telephone' => 'string|max_length[10]',
+        'mail' => 'string|max_length[100]',
+        'actif' => 'integer|max_length[1]',
+    ];
 
 	public function getid()
 	{

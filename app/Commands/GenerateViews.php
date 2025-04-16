@@ -106,9 +106,9 @@ class GenerateViews extends BaseCommand
 			case 'details':
 				{
 				if ($f->type == 'tinyint')
-					$r = "<tr>\n			<td>$f->name</td>\n			<td><?= \$item->{$f->name} ? 'Oui' : 'Non' ?></td>\n		</tr>\n		";
+					$r = "	<tr>\n			<td>$f->name</td>\n			<td><?= \$item->{$f->name} ? 'Oui' : 'Non' ?></td>\n		</tr>\n	";
 				else
-					$r = "<tr>\n			<td>$f->name</td>\n			<td><?= \$item->{$f->name} ?></td>\n		</tr>\n		";
+					$r = "	<tr>\n			<td>$f->name</td>\n			<td><?= \$item->{$f->name} ?></td>\n		</tr>\n	";
 				}
 				break;
 		}
@@ -229,8 +229,7 @@ EOD;
 
 <table class="table table-striped table-bordered">
 	<tbody>
-		$details
-	</tbody>
+		$details</tbody>
 </table>
 
 <div>

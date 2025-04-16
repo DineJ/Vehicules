@@ -6,7 +6,7 @@
 
 <table class="table table-striped table-bordered">
 	<tbody>
-		<tr>
+			<tr>
 			<td>Nom</td>
 			<td><?= $item->nom ?></td>
 		</tr>
@@ -30,7 +30,6 @@
 			<td>Actif</td>
 			<td><?= $item->actif ? 'Oui' : 'Non' ?></td>
 		</tr>
-
 	</tbody>
 </table>
 
