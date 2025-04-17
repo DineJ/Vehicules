@@ -280,8 +280,9 @@ EOD;
 		return match($field->type)
 		{
 			'text' => "\n	<label>{$field->name}</label>\n	<textarea id='{$field->name}' name='{$field->name}'><?= isset(\$item) ? \$item->{$field->name} : '' ?></textarea>",
-			'enum' => "\n	<label>{$field->name}</label>\n	<div>\n		<select id='{$field->name}' name='{$field->name}'>\n".$this->getOptions($field, $entityName)."		</select>\n	</div>\n",
+			'enum' => "\n	<label>{$field->name}</label>\n	<div>\n		<select id='{$field->name}' name='{$field->name}'>\n			<option>--Please choose an option--</option>\n".$this->getOptions($field, $entityName)."		</select>\n	</div>\n",
 			'date' => "\n	<label>{$field->name}</label>\n	<input type='date' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
+			'datetime' => "\n	<label>{$field->name}</label>\n	<input type='date' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
 			'int' => "\n	<label>{$field->name}</label>\n	<input type='number' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
 			'tinyint' => "\n	<label>{$field->name}</label>\n	<div>\n		<input type='checkbox' id='{$field->name}' name='{$field->name}' value='1' <?= (isset(\$item) && \$item->{$field->name}) ? 'checked' : '' ?>>\n	</div>\n",
 			default => "\n	<label>{$field->name}</label>\n	<input type='text' onchange=\"setUpper(document.getElementById('{$field->name}'));\" id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
