@@ -13,6 +13,8 @@ class GenerateViews extends BaseCommand
 	protected $name        = 'generate:views';
 	protected $description = 'Génère automatiquement les vues CRUD avec validation JS dynamique.';
 	protected $searchs = array();
+	protected $enum_values = array();
+	protected $db = null;
 
 	public function run(array $params)
 	{
@@ -47,9 +49,10 @@ class GenerateViews extends BaseCommand
 
 		// Instancier dynamiquement le modèle
 		$model = new $modelName();
-		$db = Database::connect();
+		$this->db = Database::connect();
+		//$query = $this->db->query("SHOW COLUMNS FROM permis WHERE Field LIKE 'permis_type';");
 		$table = $model->table;
-		$fields = $db->getFieldData($table);
+		$fields = $this->db->getFieldData($table);
 
 		if (!$fields)
 		{
@@ -257,13 +260,27 @@ EOD;
 		};
 	} */
 
-	private function messageArray($field)
+	private function getOptions($field, $entityName)
+	{
+		$options = "";
+		$query = $this->db->query("SHOW COLUMNS FROM permis WHERE Field LIKE 'type_permis';");
+		$row = $query->getRow();
+		preg_match("/^enum\(\'(.*)\'\)$/", $row->Type, $matches);
+		$enum_values = $this->enum_values = explode("','", $matches[1]);
+
+		foreach ($enum_values as $value) {
+			$options .= "			<option value={$value}>$value</option>\n";
+		}
+		return $options;
+	}
+
+	private function messageArray($field, $entityName)
 	{
 		//$type = $this->arrayType($field);
 		return match($field->type)
 		{
 			'text' => "\n	<label>{$field->name}</label>\n	<textarea id='{$field->name}' name='{$field->name}'><?= isset(\$item) ? \$item->{$field->name} : '' ?></textarea>",
-			'enum' => "\n	<label>{$field->name}</label>\n	<select id='{$field->name}' name='{$field->name}'></select>",
+			'enum' => "\n	<label>{$field->name}</label>\n	<div>\n		<select id='{$field->name}' name='{$field->name}'>\n".$this->getOptions($field, $entityName)."		</select>\n	</div>\n",
 			'date' => "\n	<label>{$field->name}</label>\n	<input type='date' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
 			'int' => "\n	<label>{$field->name}</label>\n	<input type='number' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
 			'tinyint' => "\n	<label>{$field->name}</label>\n	<div>\n		<input type='checkbox' id='{$field->name}' name='{$field->name}' value='1' <?= (isset(\$item) && \$item->{$field->name}) ? 'checked' : '' ?>>\n	</div>\n",
@@ -288,7 +305,7 @@ EOD;
 			}
 
 			// Génération des inputs HTML
-			$inputs .= $this->messageArray($field);
+			$inputs .= $this->messageArray($field, $entityName);
 			if ($type != 'create')
 			{
 				$inputs .= "	<input type='hidden' id='old{$field->name}' name='old{$field->name}' value='<?= isset(\$item) ? \$item->$field->name : '' ?>'>\n";
