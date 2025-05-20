@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\PermisModel;
 use App\Entities\Permis;
 use CodeIgniter\Controller;
+use CodeIgniter\Database\Exceptions\DatabaseException;
 
 class PermisController extends Controller
 {
@@ -43,13 +44,27 @@ class PermisController extends Controller
 	// INSERTION DANS LA BASE
 	public function store()
 	{
-		$data = $this->request->getPost();
-		$entity = new Permis();
-		$entity->fill($data);
-		if (!$this->model->insert($entity)) {
-			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
+		try {
+			$data = $this->request->getPost();
+			$entity = new Permis();
+			$entity->fill($data);
+			
+			if (!$this->model->insert($entity)) {
+				return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
+			}
+			
+			return redirect()->to('/User/show/' .$data['id_user']);
 		}
-		return redirect()->to('/User/show/' .$data['id_user']);
+		
+		catch (DatabaseException $e) {
+			log_message('error', 'Erreur BDD : ' . $e->getMessage());
+			echo "Erreur d'insertion : " . $e->getMessage();
+		}
+		catch (\Throwable $e) {
+			log_message('error', 'Exception générale : ' . $e->getMessage());
+			echo "Exception inattendue : " . $e->getMessage();
+		}
+		return redirect()->to('/Permis/edit/' .$data['id_user']);
 	}
 
 	// FORMULAIRE DE MODIFICATION
@@ -63,15 +78,27 @@ class PermisController extends Controller
 	// MISE À JOUR DES DONNÉES
 	public function update($id)
 	{
-		$data = $this->request->getPost();
-		$entity = $this->model->find($id);
-		$entity->fill($data);
+		try {
+			$data = $this->request->getPost();
+			$entity = $this->model->find($id);
+			$entity->fill($data);
 
-		if (!$this->model->save($entity)) {
-			return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
+			if (!$this->model->save($entity)) {
+				return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
+			}
+
+			return redirect()->to('/User/show/' .$data['id_user']);
 		}
 
-		return redirect()->to('/Permis');
+		catch (DatabaseException $e) {
+			log_message('error', 'Erreur BDD : ' . $e->getMessage());
+			echo "Erreur d'insertion : " . $e->getMessage();
+		}
+		catch (\Throwable $e) {
+			log_message('error', 'Exception générale : ' . $e->getMessage());
+			echo "Exception inattendue : " . $e->getMessage();
+		}
+		dd($this->request->getPost('date_permis'));
 	}
 
 	// SUPPRESSION D'UN ÉLÉMENT
