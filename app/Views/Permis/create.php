@@ -8,7 +8,7 @@
 	<input type="hidden" name="id_user" id="id_user" value="<?= isset($id_user) ? $id_user : -1 ?>">
 
 	<label>num_permis</label>
-	<input type='text' onchange="setUpper(document.getElementById('num_permis'));" id='num_permis' name='num_permis' value='<?= isset($item) ? $item->num_permis : '' ?>' class='form-control' required>
+	<input type='text' pattern="^[0-9]{10}" id='num_permis' name='num_permis' value='<?= isset($item) ? $item->num_permis : '' ?>' class='form-control' required>
 
 	<label>date_permis</label>
 	<input type='date' id='date_permis' name='date_permis' value='<?= isset($item) ? $item->date_permis : '' ?>' class='form-control' required>
@@ -18,8 +18,8 @@
 
 	<label>type_permis</label>
 	<div>
-		<select id='type_permis' name='type_permis'>
-			<option>--Please choose an option--</option>
+		<select id='type_permis' name='type_permis' class="form-control" required>
+			<option value="" disabled selected hidden>--Please choose an option--</option>
 			<option value=B>B</option>
 			<option value=BE>BE</option>
 			<option value=C>C</option>
@@ -33,11 +33,6 @@
 </form>
 
 <script>
-	function setUpper(element)
-	{
-		element.value=element.value.toUpperCase();
-	}
-
 </script>
 
 <?= $this->endSection() ?>
