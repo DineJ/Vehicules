@@ -28,6 +28,24 @@ to your `app` folder. The affected files can be copied or merged from
 Copy `env` to `.env` and tailor for your app, specifically the baseURL
 and any database settings.
 
+## CLI Commands
+
+> - Start code igniter server
+```bash
+php spark serve
+```
+
+> - Make script executable
+```bash
+chmod +x create_crud.sh
+```
+
+> - Create all files for an entity (model, controller, views, routes...) or delete all files related to an entity 
+```bash 
+./create_crud.sh create EntityName field1 field2 field3 ...
+./create_crud.sh rm EntityName
+```
+
 ## Important Change with index.php
 
 `index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
