@@ -16,14 +16,7 @@ class LoginController extends Controller
 	}
 
 
-	// FORMULAIRE DE CRÉATION
-	public function create()
-	{
-		$data['title'] = "Créer User";
-		return view('User/create', $data);
-	}
-
-
+	// LOGIN PAGE
 	public function login()
 	{
 		$data['title'] = "Page de connexion";
@@ -31,7 +24,7 @@ class LoginController extends Controller
 	}
 
 
-	// Login test
+	// LOGIN REDIRECTION
 	public function log()
 	{
 		$password = $this->request->getPost('clef_connexion');
@@ -45,9 +38,10 @@ class LoginController extends Controller
 		}
 
 		$data['item'] = $user;
+		session()->set('user', ['id' => $user->id,'name' => $user->nom,'admin' => $user->admin]);
 		if ($data['item']->admin)
 		{
-			return redirect()->to('/User/create');
+			return redirect()->to('/Admin');
 		}
 
 		return redirect()->to('/User');

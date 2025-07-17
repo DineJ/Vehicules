@@ -14,7 +14,6 @@
 		<?= session()->getFlashdata('error') ?>
 	</div>
 	<?php endif; ?>
-
 </form>
 
 <?= $this->endSection() ?>

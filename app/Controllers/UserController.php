@@ -85,37 +85,41 @@ class UserController extends Controller
 
 
 	// UPDATE DATABASE
-	public function update($id)
-	{
-		$data = $this->request->getPost();
-		$entity = $this->model->find($id);
-
-		$Changed = false;
-
-		if (isset($data['clef_connexion']) && (!empty($data['clef_connexion'])))
+		public function update($id)
 		{
-			$data['clef_connexion'] = md5($data['clef_connexion']);
+			$data = $this->request->getPost();
+			$entity = $this->model->find($id);
 
-			if ($data['clef_connexion'] !== $entity->clef_connexion)
-			{
-				$entity->clef_connexion = $data['clef_connexion'];
-				$Changed = true;
+			$Changed = false;
+
+			$data['admin'] = isset($data['admin']) ? 1 : 0;
+
+			if (!empty($data['clef_connexion'])) {
+				$data['clef_connexion'] = md5($data['clef_connexion']);
+				if ($data['clef_connexion'] !== $entity->clef_connexion) {
+					$entity->clef_connexion = $data['clef_connexion'];
+					$Changed = true;
+				}
 			}
+			unset($data['clef_connexion']); 
+
+			array_walk($data, function($value, $key) use ($entity, &$Changed) {
+				if (isset($entity->$key) && $entity->$key != $value) {
+					$entity->$key = $value;
+					$Changed = true;
+				}
+			});
+
+			if (!$Changed) {
+				return redirect()->back()->with('error', 'Aucune donnée modifiée.');
+			}
+
+			if (!$this->model->save($entity)) {
+				return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
+			}
+
+			return redirect()->to('/User');
 		}
-
-		$entity->fill($data);
-
-		if (!$Changed) {
-			return redirect()->back()->with('error', 'Aucune donnée modifiée.');
-		}
-
-		if (!$this->model->save($entity))
-		{
-			return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
-		}
-
-		return redirect()->to('/User');
-	}
 
 
 	// DELETE AN ELEMENT
