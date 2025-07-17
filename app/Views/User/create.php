@@ -11,6 +11,9 @@
 	<label>prenom</label>
 	<input type='text' onchange="setUpper(document.getElementById('prenom'));" pattern="[a-zA-Z]+([\- ]?[a-zA-Z]+)*" id='prenom' name='prenom' value='<?= isset($item) ? $item->prenom : '' ?>' class='form-control' required>
 
+	<label>mot de passe</label>
+	<input type="password" pattern="[a-zA-Z0-9]{16,32}" id="clef_connexion" name="clef_connexion" class="form-control" minlength="16" maxlength="32" placeholder="Mot de passe entre 16 et 32 caracteres" required>
+
 	<label>admin</label>
 	<div>
 		<input type='checkbox' id='admin' name='admin' value='1' <?= (isset($item) && $item->admin) ? 'checked' : '' ?>>

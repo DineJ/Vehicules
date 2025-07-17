@@ -32,7 +32,7 @@
 		</tr>
 	</tbody>
 </table>
-
+<a href="<?= site_url('Permis/create/'.$item->id) ?>" class="btn btn-secondary">Permis</a>
 <div>
 	<form method="post" action="<?= site_url('User/update/'.$item->id) ?>">
 		<a href="<?= site_url('User') ?>" class="btn btn-secondary">Retour</a>

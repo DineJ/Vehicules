@@ -15,11 +15,11 @@ class UserController extends Controller
 		$this->model = new UserModel();
 	}
 
-	// LISTE AVEC PAGINATION
+	// SEARCH BAR
 	public function index()
 	{
-		// SEARCH BAR
 		$search = $this->request->getGet('q');
+
 		if ($search)
 		{
 			$query = '%'.$search.'%';
@@ -33,42 +33,49 @@ class UserController extends Controller
 		{
 			$this->model->orderBy('nom');
 		}
+
 		$data['search'] = $search;
-		$data['items'] = $this->model->paginate(5); // Affiche 5 résultats par page
-		$data['pager'] = $this->model->pager; // Ajoute le pager
+		$data['items'] = $this->model->paginate(5); // Display 5 results
+		$data['pager'] = $this->model->pager; // Add pager
 
 		return view('User/index', $data);
 	}
 
-	// AFFICHAGE D'UN SEUL ÉLÉMENT
+
+	// DISPLAY AN ELEMENT
 	public function show($id)
 	{
 		$data['item'] = $this->model->find($id);
 		return view('User/show', $data);
 	}
 
-	// FORMULAIRE DE CRÉATION
+
+	// CREATION FORM 
 	public function create()
 	{
 		$data['title'] = "Créer User";
 		return view('User/create', $data);
 	}
 
-	// INSERTION DANS LA BASE
+
+	// INSERT INTO DATABASE
 	public function store()
 	{
 		$data = $this->request->getPost();
+		$data['clef_connexion'] = md5($data['clef_connexion']);
 		$entity = new User();
 		$entity->fill($data);
 
-		if (!$this->model->insert($entity)) {
+		if (!$this->model->insert($entity))
+		{
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
 		}
 		
 		return redirect()->to('/User');
 	}
 
-	// FORMULAIRE DE MODIFICATION
+
+	// MODIFICATION FORM
 	public function edit($id)
 	{
 		$data['item'] = $this->model->find($id);
@@ -76,21 +83,42 @@ class UserController extends Controller
 		return view('User/edit', $data);
 	}
 
-	// MISE À JOUR DES DONNÉES
+
+	// UPDATE DATABASE
 	public function update($id)
 	{
 		$data = $this->request->getPost();
 		$entity = $this->model->find($id);
+
+		$Changed = false;
+
+		if (isset($data['clef_connexion']) && (!empty($data['clef_connexion'])))
+		{
+			$data['clef_connexion'] = md5($data['clef_connexion']);
+
+			if ($data['clef_connexion'] !== $entity->clef_connexion)
+			{
+				$entity->clef_connexion = $data['clef_connexion'];
+				$Changed = true;
+			}
+		}
+
 		$entity->fill($data);
 
-		if (!$this->model->save($entity)) {
+		if (!$Changed) {
+			return redirect()->back()->with('error', 'Aucune donnée modifiée.');
+		}
+
+		if (!$this->model->save($entity))
+		{
 			return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
 		}
 
 		return redirect()->to('/User');
 	}
 
-	// SUPPRESSION D'UN ÉLÉMENT
+
+	// DELETE AN ELEMENT
 	public function delete($id)
 	{
 		$this->model->delete($id);

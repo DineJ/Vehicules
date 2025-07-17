@@ -14,6 +14,9 @@
 	<input type='text' onchange="setUpper(document.getElementById('prenom'));" pattern="[a-zA-Z]+([\- ]?[a-zA-Z]+)*" id='prenom' name='prenom' value='<?= isset($item) ? $item->prenom : '' ?>' class='form-control' required>
 	<input type='hidden' id='oldprenom' name='oldprenom' value='<?= isset($item) ? $item->prenom : '' ?>'>
 
+	<label>mot de passe</label>
+	<input type="password" pattern="[a-zA-Z0-9]{16,32}" id="clef_connexion" name="clef_connexion" class="form-control" minlength="16" maxlength="32" placeholder="Mot de passe entre 16 et 32 caracteres">
+
 	<label>admin</label>
 	<div>
 		<input type='checkbox' id='admin' name='admin' value='1' <?= (isset($item) && $item->admin) ? 'checked' : '' ?>>
@@ -32,6 +35,14 @@
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 
+<?php if(session()->getFlashdata('error')): ?>
+	<div class="alert alert-danger">
+		<?= session()->getFlashdata('error') ?>
+	</div>
+<?php endif; ?>
+
+
+
 <script>
 	function setUpper(element)
 	{
@@ -41,9 +52,11 @@
 	{
 		let compare = 0;
 		let row = 0;
+
 		let nom = document.getElementById('nom').value;
 		let oldnom = document.getElementById('oldnom').value;
 		row++;
+
 		if (nom == oldnom)
 		{
 			compare++;
@@ -52,7 +65,16 @@
 		let prenom = document.getElementById('prenom').value;
 		let oldprenom = document.getElementById('oldprenom').value;
 		row++;
+
 		if (prenom == oldprenom)
+		{
+			compare++;
+		}
+
+		let password = document.getElementById('clef_connexion').value;
+		row++;
+
+		if (password.length === 0)
 		{
 			compare++;
 		}
@@ -60,6 +82,7 @@
 		let admin = (document.getElementById('admin').checked ? 1 : 0 );
 		let oldadmin = document.getElementById('oldadmin').value;
 		row++;
+
 		if (admin == oldadmin)
 		{
 			compare++;
@@ -68,6 +91,7 @@
 		let telephone = document.getElementById('telephone').value;
 		let oldtelephone = document.getElementById('oldtelephone').value;
 		row++;
+
 		if (telephone == oldtelephone)
 		{
 			compare++;
@@ -76,6 +100,7 @@
 		let mail = document.getElementById('mail').value;
 		let oldmail = document.getElementById('oldmail').value;
 		row++;
+
 		if (mail == oldmail)
 		{
 			compare++;
