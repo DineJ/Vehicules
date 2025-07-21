@@ -19,6 +19,18 @@ class LoginController extends Controller
 	// LOGIN PAGE
 	public function login()
 	{
+		if (null !== session()->get('user'))
+		{
+			if (session()->get('user')['admin'])
+			{
+				return redirect()->to('/Admin');
+			}
+			else
+			{
+				return redirect()->to('/User');
+			}
+		}
+
 		$data['title'] = "Page de connexion";
 		return view('Login/login', $data);
 	}
@@ -37,14 +49,41 @@ class LoginController extends Controller
 			return redirect()->to('/');
 		}
 
+		$now = date('Y-m-d H:i:s');
 		$data['item'] = $user;
-		session()->set('user', ['id' => $user->id,'name' => $user->nom,'admin' => $user->admin]);
+		session()->set('user', ['id' => $user->id,'name' => $user->nom,'admin' => $user->admin, 'date' => $now]);
+
+		db_connect()->table('historique')->insert(['id_user' => $user->id,'date_dbt' => $now,'date_fin' => $now]);
+
 		if ($data['item']->admin)
 		{
 			return redirect()->to('/Admin');
 		}
-
-		return redirect()->to('/User');
+		else
+		{
+			return redirect()->to('/User');
+		}
 	}
+
+
+	public function logout()
+	{
+		$userId = session()->get('user')['id'];
+		if ($userId)
+		{
+			$db = db_connect();
+			$date_session = session()->get('user')['date'];
+			$now = date('Y-m-d H:i:s');
+
+			$db->table('historique')
+				->where('id_user', $userId)
+				->where('date_dbt', $date_session)
+				->update(['date_fin' => $now]);
+		}
+
+		session()->destroy();
+		return redirect()->to('/');
+	}
+
 
 }

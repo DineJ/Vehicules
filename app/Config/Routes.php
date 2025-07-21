@@ -24,6 +24,10 @@ $routes->get('User/delete/(:num)', 'UserController::delete/$1');
 // Routes pour Login
 $routes->get('Login', 'LoginController::login');
 $routes->post('Login/log', 'LoginController::log');
+$routes->get('Login/logout', 'LoginController::logout');
+
+// Routes pour Admin
+$routes->get('Admin', 'AdminController::administrator');
 
 /**
  * @var RouteCollection $routes
