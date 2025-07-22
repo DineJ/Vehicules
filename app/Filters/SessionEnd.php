@@ -18,7 +18,7 @@ class SessionEnd implements FilterInterface
 		// Récupère le dernier timestamp d'activité
 		$lastActivity = $session->get('last_activity');
 
-		if ($lastActivity && (time() - $lastActivity > 60)) {
+		if ($lastActivity && (time() - $lastActivity > 300)) {
 			$session->destroy();
 			return redirect()->to('/Login');
 		}

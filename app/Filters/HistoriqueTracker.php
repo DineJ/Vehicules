@@ -56,7 +56,7 @@ class HistoriqueTracker implements FilterInterface
 
 		// Vérifie si la session précédente est trop ancienne
 		$lastSessionEnd = strtotime($lastSession->date_fin);
-		$timeout = 60; // secondes max d'inactivité
+		$timeout = 300; // secondes max d'inactivité
 
 		if (time() - $lastSessionEnd > $timeout) {
 			// Clôture de la session précédente
