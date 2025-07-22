@@ -52,6 +52,7 @@ class LoginController extends Controller
 		$now = date('Y-m-d H:i:s');
 		$data['item'] = $user;
 		session()->set('user', ['id' => $user->id,'name' => $user->nom,'admin' => $user->admin, 'date' => $now]);
+		session()->set('session_start', time());
 
 		db_connect()->table('historique')->insert(['id_user' => $user->id,'date_dbt' => $now,'date_fin' => $now]);
 
