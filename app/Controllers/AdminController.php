@@ -12,18 +12,20 @@ class AdminController extends Controller
 
 	public function __construct()
 	{
+		// Load the user model
 		$this->model = new UserModel();
 	}
 
-
-	// ADMIN PAGE
+	// Display the admin dashboard
 	public function administrator()
 	{
+		// Redirect to user page if not an admin
 		if (null == session()->get('user')['admin'])
 		{
 			return redirect()->to('/User');
 		}
 
+		// Load admin view with title
 		$data['title'] = "Page d'administration";
 		return view('Admin/admin', $data);
 	}
