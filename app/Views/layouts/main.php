@@ -43,6 +43,9 @@
 	</style>
 </head>
 <body>
+	<!-- Navigation bar partagée -->
+	<?= $this->include('Partials/navbar') ?>
+
 	<div class="container mt-5">
 		<?= $this->renderSection('content') ?>
 	</div>

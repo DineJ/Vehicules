@@ -107,6 +107,7 @@ class LoginController extends Controller
 			'id' => $user->id,
 			'name' => $user->nom,
 			'admin' => $user->admin,
+			'actif' => $user->actif,
 			'date' => $now
 		]);
 		session()->set('session_start', time());
