@@ -13,6 +13,7 @@ class HistoriqueTracker implements FilterInterface
 
 	public function __construct()
 	{
+		// Connect to the database and set the 'historique' table
 		$this->db = \Config\Database::connect();
 		$this->table = $this->db->table('historique');
 	}
@@ -21,7 +22,7 @@ class HistoriqueTracker implements FilterInterface
 	{
 		$session = session();
 
-		// Si utilisateur non connecté, on ne fait rien
+		// Skip if the user is not logged in
 		if (!$session->has('user'))
 		{
 			return;
@@ -32,10 +33,10 @@ class HistoriqueTracker implements FilterInterface
 		$now = date('Y-m-d H:i:s');
 		$ipAddress = $request->getIPAddress();
 
-		// Met à jour le timestamp d'activité de la session
+		// Update session activity timestamp
 		$session->set('last_activity', time());
 
-		// Récupère la dernière session historique de l'utilisateur
+		// Get the user's last session history
 		$lastSession = $this->table
 			->where('id_user', $userId)
 			->orderBy('date_dbt', 'DESC')
@@ -43,14 +44,13 @@ class HistoriqueTracker implements FilterInterface
 			->get()
 			->getRow();
 
-
-		// Vérifie si la session précédente est trop ancienne
+		// Convert previous session end time to timestamp
 		$lastSessionEnd = strtotime($lastSession->date_fin);
-		$timeout = 300; // secondes max d'inactivité
+		$timeout = 300; // max inactivity time in seconds (5 minutes)
 
 		if (time() - $lastSessionEnd > $timeout)
 		{
-			// Clôture de la session précédente
+			// Previous session expired → mark it as ended
 			$this->table
 				->where('id_user', $userId)
 				->where('date_dbt', $lastSession->date_dbt)
@@ -60,7 +60,7 @@ class HistoriqueTracker implements FilterInterface
 		}
 		else
 		{
-			// Session encore active → mise à jour de date_fin
+			// Session still active → extend end time
 			$this->table
 				->where('id_user', $userId)
 				->where('date_dbt', $lastSession->date_dbt)
@@ -70,5 +70,6 @@ class HistoriqueTracker implements FilterInterface
 
 	public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
 	{
+		// No action needed after response
 	}
 }

@@ -9,21 +9,26 @@ class SessionEnd implements FilterInterface
 {
 	public function before(RequestInterface $request, $arguments = null)
 	{
+		// Start session
 		$session = session();
 
-		if (!$session->has('user')) {
+		// Redirect if user is not logged in
+		if (!$session->has('user'))
+		{
 			return redirect()->to('/Login');
 		}
 
-		// Récupère le dernier timestamp d'activité
+		// Get timestamp of last activity
 		$lastActivity = $session->get('last_activity');
 
-		if ($lastActivity && (time() - $lastActivity > 300)) {
+		// If inactive for more than 5 minutes, destroy session and redirect
+		if ($lastActivity && (time() - $lastActivity > 300))
+		{
 			$session->destroy();
 			return redirect()->to('/Login');
 		}
 
-		// Sinon, met à jour l'activité
+		// Update activity timestamp
 		$session->set('last_activity', time());
 	}
 
@@ -31,5 +36,6 @@ class SessionEnd implements FilterInterface
 
 	public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
 	{
+		// No post-processing needed
 	}
 }
