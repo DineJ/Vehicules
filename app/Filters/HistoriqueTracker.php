@@ -22,7 +22,8 @@ class HistoriqueTracker implements FilterInterface
 		$session = session();
 
 		// Si utilisateur non connecté, on ne fait rien
-		if (!$session->has('user')) {
+		if (!$session->has('user'))
+		{
 			return;
 		}
 
@@ -42,41 +43,23 @@ class HistoriqueTracker implements FilterInterface
 			->get()
 			->getRow();
 
-		// Aucune session précédente → création
-		if (!$lastSession) {
-			$this->table->insert([
-				'id_user'    => $userId,
-				'date_dbt'   => $now,
-				'date_fin'   => $now,
-				'ip_adress'  => $ipAddress,
-				'connexion'  => 1,
-			]);
-			return;
-		}
 
 		// Vérifie si la session précédente est trop ancienne
 		$lastSessionEnd = strtotime($lastSession->date_fin);
 		$timeout = 300; // secondes max d'inactivité
 
-		if (time() - $lastSessionEnd > $timeout) {
+		if (time() - $lastSessionEnd > $timeout)
+		{
 			// Clôture de la session précédente
 			$this->table
 				->where('id_user', $userId)
 				->where('date_dbt', $lastSession->date_dbt)
 				->update([
 					'date_fin'  => date('Y-m-d H:i:s', $lastSessionEnd),
-					'connexion' => 0,
 				]);
-
-			// Nouvelle session
-			$this->table->insert([
-				'id_user'    => $userId,
-				'date_dbt'   => $now,
-				'date_fin'   => $now,
-				'ip_adress'  => $ipAddress,
-				'connexion'  => 1,
-			]);
-		} else {
+		}
+		else
+		{
 			// Session encore active → mise à jour de date_fin
 			$this->table
 				->where('id_user', $userId)
