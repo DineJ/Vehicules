@@ -39,22 +39,53 @@ class LoginController extends Controller
 	// LOGIN REDIRECTION
 	public function log()
 	{
+		$ip = $this->request->getIPAddress();
+		$db = db_connect();
+		$ipRow = $db->table('IP')->where('adresse_ip', $ip)->get()->getRow();
+
+		if ($ipRow)
+		{
+			if ($ipRow->nb_echec > 2)
+			{
+				session()->setFlashdata('error', 'Votre adresse IP est bloquee');
+				return redirect()->to('/');
+			}
+			$nbFails = $ipRow->nb_echec + 1;
+			$db->table('IP')
+				->where('adresse_ip', $ip)
+				->update(['nb_echec' => $nbFails]);
+		}
+		else
+		{
+			$db->table('IP')->insert([
+				'adresse_ip' => $ip,
+				'nb_echec' => 1
+			]);
+			$ipRow = $db->table('IP')->where('adresse_ip', $ip)->get()->getRow();
+		}
+
 		$password = $this->request->getPost('clef_connexion');
 		$md5 = md5($password);
 		$user = $this->model->where('clef_connexion', $md5)->first();
 
 		if (!isset($user))
 		{
-			session()->setFlashdata('error', 'Mot de passe éronné');
+			session()->setFlashdata('error', 'Mot de passe errone');
 			return redirect()->to('/');
 		}
 
+		$db->table('IP')
+			->where('adresse_ip', $ip)
+			->update(['nb_echec' => 0]);
+
+
 		$now = date('Y-m-d H:i:s');
 		$data['item'] = $user;
+
 		session()->set('user', ['id' => $user->id,'name' => $user->nom,'admin' => $user->admin, 'date' => $now]);
 		session()->set('session_start', time());
 
-		db_connect()->table('historique')->insert(['id_user' => $user->id,'date_dbt' => $now,'date_fin' => $now]);
+		db_connect()->table('historique')->insert(['id_user' => $user->id,'date_dbt' => $now,'date_fin' => $now, 'id_ip' => $ipRow->id]);
 
 		if ($data['item']->admin)
 		{
