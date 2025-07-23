@@ -48,7 +48,7 @@ class LoginController extends Controller
 			if ($ipRow->nb_echec > 2)
 			{
 				session()->setFlashdata('error', 'Votre adresse IP est bloquee');
-				return redirect()->to('/');
+				return redirect()->to('/Login');
 			}
 			$nbFails = $ipRow->nb_echec + 1;
 			$db->table('IP')
@@ -71,7 +71,7 @@ class LoginController extends Controller
 		if (!isset($user))
 		{
 			session()->setFlashdata('error', 'Mot de passe errone');
-			return redirect()->to('/');
+			return redirect()->to('/Login');
 		}
 
 		$db->table('IP')
