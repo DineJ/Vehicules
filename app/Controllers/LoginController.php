@@ -75,10 +75,10 @@ class LoginController extends Controller
 
 		// Get submitted password and hash it
 		$password = $this->request->getPost('clef_connexion');
-		$md5 = md5($password);
+		$sha = hash('sha3-256', $password);
 
 		// Attempt to find user with matching hashed password
-		$user = $this->model->where('clef_connexion', $md5)->first();
+		$user = $this->model->where('clef_connexion', $sha)->first();
 
 		// If no match, redirect with error
 		if (!isset($user))
