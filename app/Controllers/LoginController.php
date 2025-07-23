@@ -87,6 +87,13 @@ class LoginController extends Controller
 			return redirect()->to('/Login');
 		}
 
+		// If the user account is inactive, redirect with error
+		if (!$user->actif)
+		{
+			session()->setFlashdata('error', 'Votre compte est pas actif');
+			return redirect()->to('/Login');
+		}
+
 		// Reset failed attempts after successful login
 		$db->table('IP')
 			->where('adresse_ip', $ip)
