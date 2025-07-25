@@ -3,6 +3,16 @@
 use CodeIgniter\Router\RouteCollection;
 // Auto-generated routes
 
+// Routes pour Incident
+$routes->get('Incident', 'IncidentController::index');
+$routes->get('Incident/show/(:num)', 'IncidentController::show/$1');
+$routes->get('Incident/create', 'IncidentController::create');
+$routes->post('Incident/store', 'IncidentController::store');
+$routes->get('Incident/edit/(:num)', 'IncidentController::edit/$1');
+$routes->post('Incident/update/(:num)', 'IncidentController::update/$1');
+$routes->get('Incident/delete/(:num)', 'IncidentController::delete/$1');
+
+
 // Routes pour Permis
 $routes->get('Permis', 'PermisController::index');
 $routes->get('Permis/show/(:num)', 'PermisController::show/$1');
