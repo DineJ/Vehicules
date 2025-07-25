@@ -24,7 +24,7 @@ $currentUri = service('uri')->getPath();
 
 			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
 				<?php if (session()->get('user')['admin'] ?? false): ?>
-					<li><a class="dropdown-item" href="/User">Conducteur</a></li>
+					<li><a class="dropdown-item" href="/User">Utilisateur</a></li>
 					<li><a class="dropdown-item" href="/Permis">Permis</a></li>
 					<li><hr class="dropdown-divider"></li>
 				<?php endif; ?>
