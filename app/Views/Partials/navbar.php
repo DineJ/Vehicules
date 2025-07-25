@@ -26,6 +26,7 @@ $currentUri = service('uri')->getPath();
 				<?php if (session()->get('user')['admin'] ?? false): ?>
 					<li><a class="dropdown-item" href="/User">Utilisateur</a></li>
 					<li><a class="dropdown-item" href="/Permis">Permis</a></li>
+					<li><a class="dropdown-item" href="/Incident">Incident</a></li>
 					<li><hr class="dropdown-divider"></li>
 				<?php endif; ?>
 
