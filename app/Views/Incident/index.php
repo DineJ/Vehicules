@@ -21,11 +21,11 @@
 	<tbody>
 		<?php foreach ($items as $item): ?>
 			<tr>
-				<td><?= $item->id_vehicule ?></td>
-				<td><?= $item->date_incident ?></td>
-				<td><?= $item->explication_incident ?></td>
-				<td><?= $item->id_user ?></td>
-				<td><?= $item->id_type_incident ?></td>
+				<td><?= esc($vehiculeMap[$item->id_vehicule] ?? 'Inconnu') ?></td>
+				<td><?= esc($item->date_incident) ?></td>
+				<td><?= esc($item->explication_incident) ?></td>
+				<td><?= esc($userMap[$item->id_user] ?? 'Inconnu') ?></td>
+				<td><?= esc($typeIncidentMap[$item->id_type_incident] ?? 'Inconnu') ?></td>
 				<td>
 					<a href="<?= site_url('Incident/show/'.$item->id) ?>" class="btn btn-info">Voir</a>
 				</td>

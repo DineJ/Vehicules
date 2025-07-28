@@ -24,19 +24,54 @@ class IncidentController extends Controller
 		$this->typeIncidentModel = new Type_incidentModel();
 	}
 
-	// LISTE AVEC PAGINATION
+
+	// Display datas
 	public function index()
 	{
-		$data['items'] = $this->model->paginate(5); // Affiche 5 résultats par page
-		$data['pager'] = $this->model->pager; // Ajoute le pager
+		$data['items'] = $this->model->paginate(5);
+		$data['pager'] = $this->model->pager;
+
+		// user_id
+		$utilisateurs = $this->userModel->findAll();
+		$userMap = [];
+		foreach ($utilisateurs as $u) {
+			$userMap[$u->id] = $u->prenom . ' ' . $u->nom;
+		}
+
+		// vehicule_id
+		$vehicules = $this->vehiculeModel->findAll();
+		$vehiculeMap = [];
+		foreach ($vehicules as $v) {
+			$vehiculeMap[$v->id] = $v->plaque;
+		}
+
+		// type_incident_id
+		$types = $this->typeIncidentModel->findAll();
+		$typeIncidentMap = [];
+		foreach ($types as $t) {
+			$typeIncidentMap[$t->id] = $t->nom;
+		}
+
+		// Past datas to the view
+		$data['userMap'] = $userMap;
+		$data['vehiculeMap'] = $vehiculeMap;
+		$data['typeIncidentMap'] = $typeIncidentMap;
 
 		return view('Incident/index', $data);
 	}
 
+
 	// AFFICHAGE D'UN SEUL ÉLÉMENT
 	public function show($id)
 	{
+		// Get id
 		$data['item'] = $this->model->find($id);
+
+		// Get datas linked by user_id
+		$data['utilisateur'] = $this->userModel->find($data['item']->id_user);
+		$data['vehicule'] = $this->vehiculeModel->find($data['item']->id_vehicule);
+		$data['type_incident'] = $this->typeIncidentModel->find($data['item']->id_type_incident);
+
 		return view('Incident/show', $data);
 	}
 

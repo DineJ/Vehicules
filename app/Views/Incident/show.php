@@ -6,25 +6,25 @@
 
 <table class="table table-striped table-bordered">
 	<tbody>
-			<tr>
-			<td>id_vehicule</td>
-			<td><?= $item->id_vehicule ?></td>
+		<tr>
+			<td>Vehicule</td>
+			<td><?= $vehicule->plaque ?></td>
 		</tr>
 		<tr>
-			<td>date_incident</td>
+			<td>Date Incident</td>
 			<td><?= $item->date_incident ?></td>
 		</tr>
 		<tr>
-			<td>explication_incident</td>
+			<td>Explication Incident</td>
 			<td><?= $item->explication_incident ?></td>
 		</tr>
 		<tr>
-			<td>id_user</td>
-			<td><?= $item->id_user ?></td>
+			<td>Conducteur</td>
+			<td><?= $utilisateur->prenom . ' ' . $utilisateur->nom ?></td>
 		</tr>
 		<tr>
-			<td>id_type_incident</td>
-			<td><?= $item->id_type_incident ?></td>
+			<td>Type Incident</td>
+			<td><?= $type_incident->nom ?></td>
 		</tr>
 	</tbody>
 </table>
