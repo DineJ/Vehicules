@@ -3,6 +3,26 @@
 use CodeIgniter\Router\RouteCollection;
 // Auto-generated routes
 
+// Routes pour Type_incident
+$routes->get('Type_incident', 'Type_incidentController::index');
+$routes->get('Type_incident/show/(:num)', 'Type_incidentController::show/$1');
+$routes->get('Type_incident/create', 'Type_incidentController::create');
+$routes->post('Type_incident/store', 'Type_incidentController::store');
+$routes->get('Type_incident/edit/(:num)', 'Type_incidentController::edit/$1');
+$routes->post('Type_incident/update/(:num)', 'Type_incidentController::update/$1');
+$routes->get('Type_incident/delete/(:num)', 'Type_incidentController::delete/$1');
+
+
+// Routes pour Vehicule
+$routes->get('Vehicule', 'VehiculeController::index');
+$routes->get('Vehicule/show/(:num)', 'VehiculeController::show/$1');
+$routes->get('Vehicule/create', 'VehiculeController::create');
+$routes->post('Vehicule/store', 'VehiculeController::store');
+$routes->get('Vehicule/edit/(:num)', 'VehiculeController::edit/$1');
+$routes->post('Vehicule/update/(:num)', 'VehiculeController::update/$1');
+$routes->get('Vehicule/delete/(:num)', 'VehiculeController::delete/$1');
+
+
 // Routes pour Incident
 $routes->get('Incident', 'IncidentController::index');
 $routes->get('Incident/show/(:num)', 'IncidentController::show/$1');
