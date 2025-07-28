@@ -5,19 +5,43 @@
 
 <form method="post" action="<?= site_url('Incident/store/') ?>">
 
-	<label>id_vehicule</label>
-	<input type='number' id='id_vehicule' name='id_vehicule' value='<?= isset($item) ? $item->id_vehicule : '' ?>' class='form-control' required>
+	<label for="id_vehicule">Vehicule</label>
+	<select id="id_vehicule" name="id_vehicule" class="form-control" required>
+		<option value="">    Choisir un vehicule    </option>
+		<?php foreach ($vehicules as $v): ?>
+			<option value="<?= $v->id ?>" <?= (isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
+				<?= $v->plaque ?>
+			</option>
+		<?php endforeach; ?>
+	</select>
 
 	<label>date_incident</label>
 	<input type='date' id='date_incident' name='date_incident' value='<?= isset($item) ? $item->date_incident : '' ?>' class='form-control' required>
 
 	<label>explication_incident</label>
 	<textarea id='explication_incident' name='explication_incident'><?= isset($item) ? $item->explication_incident : '' ?></textarea>
-	<label>id_user</label>
-	<input type='number' id='id_user' name='id_user' value='<?= isset($item) ? $item->id_user : '' ?>' class='form-control' required>
 
-	<label>id_type_incident</label>
-	<input type='number' id='id_type_incident' name='id_type_incident' value='<?= isset($item) ? $item->id_type_incident : '' ?>' class='form-control' required>
+	</br>
+
+	<label for="id_user">Conducteur</label>
+	<select id="id_user" name="id_user" class="form-control" required>
+		<option value="">    Choisir un conducteur    </option>
+		<?php foreach ($utilisateurs as $u): ?>
+			<option value="<?= $u->id ?>" <?= (isset($item) && $item->id_user == $u->id) ? 'selected' : '' ?>>
+				<?= $u->prenom . ' ' . $u->nom ?>
+			</option>
+		<?php endforeach; ?>
+	</select>
+
+	<label for="id_type_incident">Vehicule</label>
+	<select id="id_type_incident" name="id_type_incident" class="form-control" required>
+		<option value="">    Choisir un type d'incident    </option>
+		<?php foreach ($types_incident as $ti): ?>
+			<option value="<?= $ti->id ?>" <?= (isset($item) && $item->id_type_incident == $ti->id) ? 'selected' : '' ?>>
+				<?= $ti->nom ?>
+			</option>
+		<?php endforeach; ?>
+	</select>
 
 	<a href="<?= site_url('Incident') ?>" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>

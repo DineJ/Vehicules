@@ -3,16 +3,25 @@
 namespace App\Controllers;
 
 use App\Models\IncidentModel;
+use App\Models\UserModel;
+use App\Models\VehiculeModel;
+use App\Models\Type_incidentModel;
 use App\Entities\Incident;
 use CodeIgniter\Controller;
 
 class IncidentController extends Controller
 {
 	protected $model;
+	protected $userModel;
+	protected $vehiculeModel;
+	protected $typeIncidentModel;
 
 	public function __construct()
 	{
 		$this->model = new IncidentModel();
+		$this->userModel = new UserModel();
+		$this->vehiculeModel = new VehiculeModel();
+		$this->typeIncidentModel = new Type_incidentModel();
 	}
 
 	// LISTE AVEC PAGINATION
@@ -34,6 +43,10 @@ class IncidentController extends Controller
 	// FORMULAIRE DE CRÉATION
 	public function create()
 	{
+
+		$data['utilisateurs'] = $this->userModel->findAll();
+		$data['vehicules'] = $this->vehiculeModel->findAll();
+		$data['types_incident'] = $this->typeIncidentModel->findAll();
 		$data['title'] = "Créer Incident";
 		return view('Incident/create', $data);
 	}
@@ -48,7 +61,7 @@ class IncidentController extends Controller
 		if (!$this->model->insert($entity)) {
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
 		}
-		
+
 		return redirect()->to('/Incident');
 	}
 
