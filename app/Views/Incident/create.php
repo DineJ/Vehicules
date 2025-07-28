@@ -19,7 +19,7 @@
 	<input type='date' id='date_incident' name='date_incident' value='<?= isset($item) ? $item->date_incident : '' ?>' class='form-control' required>
 
 	<label>explication_incident</label>
-	<textarea id='explication_incident' name='explication_incident'><?= isset($item) ? $item->explication_incident : '' ?></textarea>
+	<textarea id='explication_incident' name='explication_incident' class='form-control'><?= isset($item) ? $item->explication_incident : '' ?></textarea>
 
 	</br>
 
