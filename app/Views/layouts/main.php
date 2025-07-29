@@ -40,7 +40,21 @@
 	.pagination .active a {
 		border: 2px solid;
 	}
-	</style>
+
+	.long-text {
+		max-width: 250px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		word-break: break-all;
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+
+
+</style>
+
 </head>
 <body>
 	<!-- Navigation bar partagée -->

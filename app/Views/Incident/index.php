@@ -21,7 +21,7 @@
 			<tr>
 				<td><?= esc($vehiculeMap[$item->id_vehicule] ?? 'Inconnu') ?></td>
 				<td><?= esc(substr($item->date_incident, 0, 10)) ?></td>
-				<td><?= esc($item->explication_incident) ?></td>
+				<td class="long-text"><?= esc($item->explication_incident) ?></td>
 				<td><?= esc($userMap[$item->id_user] ?? 'Inconnu') ?></td>
 				<td><?= esc($typeIncidentMap[$item->id_type_incident] ?? 'Inconnu') ?></td>
 				<td>

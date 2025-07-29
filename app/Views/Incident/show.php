@@ -16,7 +16,7 @@
 		</tr>
 		<tr>
 			<td>Explication Incident</td>
-			<td><?= $item->explication_incident ?></td>
+			<td class="long-text"><?= $item->explication_incident ?></td>
 		</tr>
 		<tr>
 			<td>Conducteur</td>
