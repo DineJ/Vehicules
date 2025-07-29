@@ -4,16 +4,14 @@
 <h2>Liste des Incidents</h2>
 <a href="<?= site_url('Incident/create') ?>" class="btn btn-success">Ajouter</a>
 
-
-
 <table class="table table-striped table-bordered mt-3">
 	<thead>
 		<tr>
-			<th>id_vehicule</th>
-			<th>date_incident</th>
-			<th>explication_incident</th>
-			<th>id_user</th>
-			<th>id_type_incident</th>
+			<th>Véhicule</th>
+			<th>Date Incident</th>
+			<th>Explication Incident</th>
+			<th>Conducteur</th>
+			<th>Type Incident</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
@@ -34,7 +32,7 @@
 	</tbody>
 </table>
 
-<!-- Liens de pagination -->
+<!-- Pagination -->
 <?php if ($pager->getPageCount() > 1)
 	 { ?>
 	<nav aria-label="Page navigation example">
