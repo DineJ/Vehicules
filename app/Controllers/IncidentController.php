@@ -30,6 +30,7 @@ class IncidentController extends Controller
 	{
 		$data['items'] = $this->model->paginate(5);
 		$data['pager'] = $this->model->pager;
+		$data['page'] = 'index';
 
 		// User_id
 		$utilisateurs = $this->userModel->findAll();
@@ -64,6 +65,8 @@ class IncidentController extends Controller
 	// Show an element
 	public function show($id)
 	{
+		$data['page'] = 'show';
+
 		// Get id
 		$data['item'] = $this->model->find($id);
 

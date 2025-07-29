@@ -52,7 +52,7 @@
 	}
 
 	/* Truncate long text inside a table cell */
-	.long-text
+	.index .long-text
 	{
 		max-width: 250px;	 		/* Limit cell width */
 		white-space: nowrap; 		/* Prevent line breaks */
@@ -62,10 +62,21 @@
 		display: table-cell;		/* Align text vertically */
 		vertical-align: middle;
 	}
+
+	.show .long-text
+	{
+		white-space: pre-wrap;		/* Preserve whitespace and wrap text when needed */
+		overflow-wrap: break-word;	/* Break long words to prevent overflow */
+		word-break: break-word;		/* Allow breaking within words if necessary */
+		max-width: 100%;			/* Ensure the content doesn't exceed container width */
+		display: block;				/* Allows proper line breaks and spacing */
+		padding: 10px;				/* Add spacing inside the element for better readability */
+		background-color: #f9f9f9;	/* Optional: Light background to visually separate the text */
+	}
 </style>
 
 </head>
-<body>
+<body class="<?= $page ?? '' ?>">
 	<!-- Shared navigation bar -->
 	<?= $this->include('Partials/navbar') ?>
 
