@@ -6,6 +6,7 @@
 
 <table class="table table-striped table-bordered mt-3">
 	<thead>
+		<!-- Display label -->
 		<tr>
 			<th>Véhicule</th>
 			<th>Date Incident</th>
@@ -17,6 +18,7 @@
 	</thead>
 
 	<tbody>
+		<!-- Loop to get datas corresponding to the id -->
 		<?php foreach ($items as $item): ?>
 			<tr>
 				<td><?= esc($vehiculeMap[$item->id_vehicule] ?? 'Inconnu') ?></td>
@@ -37,8 +39,12 @@
 	 { ?>
 	<nav aria-label="Page navigation example">
 		<ul class="pagination">
+
+			<!-- Button for previous page -->
 			<li class="page-item <?= $pager->getCurrentPage() != 1 ? '' : 'disabled' ?>"><a class="page-link" href="<?= $pager->getPreviousPageURI() ?>">Précédent</a></li>
+
 			<?php
+				// $count = total number of pages, $cur = current page, $nb_page = pages shown around current, $v1 = before, $v2 = after
 				$count = $pager->getPageCount();
 				$cur = $pager->getCurrentPage();
 				$nb_page = 1;
@@ -55,12 +61,14 @@
 					$v2 = $count;
 				}
 
+				// Display the correct number of pages
 				for ($value = $v1 ; $value <= $v2; $value++ )
 				{
 					echo '<li '.($cur == $value ? 'class="active"' : 'class="page-item"' ).'><a class="page-link" href="'.$pager->getPageURI($value).'">'.$value.'</a></li>';
 				}
 				?>
 
+			<!-- Button for next page -->
 			<li class="page-item <?= $pager->hasMore() ? '' : 'disabled' ?>"><a class="page-link" href="<?= $pager->getNextPageURI() ?>">Suivant</a></li>
 		  </ul>
 	</nav>
