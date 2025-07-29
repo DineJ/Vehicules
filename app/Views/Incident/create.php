@@ -22,7 +22,7 @@
 
 	<!-- Type a short explication -->
 	<label>Explication Incident</label>
-	<textarea id='explication_incident' name='explication_incident' class='form-control'><?= isset($item) ? $item->explication_incident : '' ?></textarea>
+	<textarea onchange="setUpper(document.getElementById('explication_incident'));" id='explication_incident' name='explication_incident' class='form-control'><?= isset($item) ? $item->explication_incident : '' ?></textarea>
 
 	</br>
 
