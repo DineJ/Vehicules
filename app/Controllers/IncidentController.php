@@ -104,6 +104,13 @@ class IncidentController extends Controller
 	public function edit($id)
 	{
 		$data['item'] = $this->model->find($id);
+
+		// Get all datas
+		$data['utilisateurs'] = $this->userModel->findAll();
+		$data['vehicules'] = $this->vehiculeModel->findAll();
+		$data['types_incident'] = $this->typeIncidentModel->findAll();
+		$data['date_incident'] = substr($data['item']->date_incident, 0, 10);
+
 		$data['title'] = "Modifier Incident";
 		return view('Incident/edit', $data);
 	}
