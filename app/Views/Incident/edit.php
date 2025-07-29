@@ -16,8 +16,8 @@
 	<input type='hidden' id='oldid_vehicule' name='oldid_vehicule' value='<?= isset($item) ? $item->id_vehicule : '' ?>'>
 
 	<label>Date Incident</label>
-	<input type='date' id='date_incident' name='date_incident' value='<?= $date_incident ?>' class='form-control' required>
-	<input type='hidden' id='olddate_incident' name='olddate_incident' value='<?= $date_incident ?>'>
+	<input type='date' id='date_incident' name='date_incident' value='<?= isset($item) ? substr($item->date_incident, 0, 10) : '' ?>' class='form-control' required>
+	<input type='hidden' id='olddate_incident' name='olddate_incident' value='<?= isset($item) ? substr($item->date_incident, 0, 10) : '' ?>'>
 
 	<label>Explication Incident</label>
 	<textarea onchange="setUpper(document.getElementById('explication_incident'));" id='explication_incident' name='explication_incident' class='form-control'><?= esc($item->explication_incident) ?></textarea>
