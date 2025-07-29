@@ -31,21 +31,21 @@ class IncidentController extends Controller
 		$data['items'] = $this->model->paginate(5);
 		$data['pager'] = $this->model->pager;
 
-		// user_id
+		// User_id
 		$utilisateurs = $this->userModel->findAll();
 		$userMap = [];
 		foreach ($utilisateurs as $u) {
 			$userMap[$u->id] = $u->prenom . ' ' . $u->nom;
 		}
 
-		// vehicule_id
+		// Vehicule_id
 		$vehicules = $this->vehiculeModel->findAll();
 		$vehiculeMap = [];
 		foreach ($vehicules as $v) {
 			$vehiculeMap[$v->id] = $v->plaque;
 		}
 
-		// type_incident_id
+		// Type_incident_id
 		$types = $this->typeIncidentModel->findAll();
 		$typeIncidentMap = [];
 		foreach ($types as $t) {
@@ -61,7 +61,7 @@ class IncidentController extends Controller
 	}
 
 
-	// AFFICHAGE D'UN SEUL ÉLÉMENT
+	// Show an element
 	public function show($id)
 	{
 		// Get id
@@ -75,10 +75,12 @@ class IncidentController extends Controller
 		return view('Incident/show', $data);
 	}
 
-	// FORMULAIRE DE CRÉATION
+
+	// Creation form
 	public function create()
 	{
 
+		// Get all datas
 		$data['utilisateurs'] = $this->userModel->findAll();
 		$data['vehicules'] = $this->vehiculeModel->findAll();
 		$data['types_incident'] = $this->typeIncidentModel->findAll();
@@ -86,7 +88,8 @@ class IncidentController extends Controller
 		return view('Incident/create', $data);
 	}
 
-	// INSERTION DANS LA BASE
+
+	// Insert into DB
 	public function store()
 	{
 		$data = $this->request->getPost();
@@ -100,7 +103,8 @@ class IncidentController extends Controller
 		return redirect()->to('/Incident');
 	}
 
-	// FORMULAIRE DE MODIFICATION
+
+	// Edit form
 	public function edit($id)
 	{
 		$data['item'] = $this->model->find($id);
@@ -114,7 +118,8 @@ class IncidentController extends Controller
 		return view('Incident/edit', $data);
 	}
 
-	// MISE À JOUR DES DONNÉES
+
+	// Update datas
 	public function update($id)
 	{
 		$data = $this->request->getPost();
@@ -128,7 +133,8 @@ class IncidentController extends Controller
 		return redirect()->to('/Incident');
 	}
 
-	// SUPPRESSION D'UN ÉLÉMENT
+
+	// Delete an element (not used)
 	public function delete($id)
 	{
 		$this->model->delete($id);
