@@ -12,7 +12,7 @@
 		</tr>
 		<tr>
 			<td>Date Incident</td>
-			<td><?= $item->date_incident ?></td>
+			<td><?= substr($item->date_incident, 0, 10) ?></td>
 		</tr>
 		<tr>
 			<td>Explication Incident</td>
