@@ -3,8 +3,10 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\PermisModel;
 use App\Entities\User;
 use CodeIgniter\Controller;
+
 
 class UserController extends Controller
 {
@@ -13,6 +15,7 @@ class UserController extends Controller
 	public function __construct()
 	{
 		$this->model = new UserModel();
+		$this->permisModel = new PermisModel();
 	}
 
 	// SEARCH BAR
@@ -46,6 +49,7 @@ class UserController extends Controller
 	public function show($id)
 	{
 		$data['item'] = $this->model->find($id);
+		$data['permis'] = $this->permisModel->find($data['item']->id);
 		return view('User/show', $data);
 	}
 
