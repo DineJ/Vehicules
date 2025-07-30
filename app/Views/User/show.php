@@ -92,5 +92,5 @@
 
 </br>
 
-<a href="<?= previous_url() ?>" class="btn btn-secondary">Retour</a>
+<a href="<?= site_url('User') ?>" class="btn btn-secondary">Retour</a>
 <?= $this->endSection() ?>

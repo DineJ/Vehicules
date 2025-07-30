@@ -32,7 +32,7 @@
 	<input type='hidden' id='oldtype_permis' name='oldtype_permis' value='<?= isset($item) ? $item->type_permis : '' ?>'>
 
 
-	<a href="<?= previous_url() ?>" class="btn btn-secondary mt-3">Retour</a>
+	<a href="<?= site_url('User/show/'.$item->id_user) ?>" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 

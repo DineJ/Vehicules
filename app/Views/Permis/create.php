@@ -28,7 +28,7 @@
 		</select>
 	</div>
 
-	<a href="<?= previous_url() ?>" class="btn btn-secondary mt-3">Retour</a>
+	<a href="<?= site_url('User/show/'.$id_user) ?>" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 
