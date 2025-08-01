@@ -97,7 +97,7 @@
 			<!-- Display license number -->
 			<tr>
 				<td class="td-hidden">Numéro</td>
-				<td data-label="Nuémro"><?= $permis->num_permis ?></td>
+				<td data-label="Numéro"><?= $permis->num_permis ?></td>
 			</tr>
 
 			<!-- Display license issue date -->
