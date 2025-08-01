@@ -1,26 +1,22 @@
 /* Table header styling */
-	th
-	{
+	th {
 		background-color: grey !important;
 		border-color: grey !important;
 		color: white !important;
 	}
 
 	/* Pagination layout and appearance */
-	.pagination
-	{
+	.pagination {
 		display: flex;
 		justify-content: center;
 		margin-top: 30px;
 	}
 
-	.pagination li
-	{
+	.pagination li {
 		margin: 0 5px;
 	}
 
-	.pagination li a
-	{
+	.pagination li a {
 		border-radius: 5px;	/* Rounded edges */
 		color: #000;		/* Text color */
 		padding: 8px 16px;
@@ -30,19 +26,16 @@
 		border: none;			/* Remove border */
 	}
 
-	.pagination li a:hover
-	{
+	.pagination li a:hover {
 		background-color: #f1f1f1;  /* Light background on hover */
 	}
 
-	.pagination .active a
-	{
+	.pagination .active a {
 		border: 2px solid;	/* Highlight active page */
 	}
 
 	/* Truncate long text inside a table cell */
-	.index .long-text
-	{
+	.index .long-text {
 		max-width: 250px;	 		/* Limit cell width */
 		white-space: nowrap; 		/* Prevent line breaks */
 		overflow: hidden;			/* Hide overflow text */
@@ -52,8 +45,7 @@
 		vertical-align: middle;
 	}
 
-	.show .long-text
-	{
+	.show .long-text {
 		white-space: pre-wrap;		/* Preserve whitespace and wrap text when needed */
 		overflow-wrap: break-word;	/* Break long words to prevent overflow */
 		word-break: break-word;		/* Allow breaking within words if necessary */
@@ -63,70 +55,63 @@
 		background-color: #f9f9f9;	/* Optional: Light background to visually separate the text */
 	}
 
-/* ============================================================
-   Responsive table layout: display rows as cards on small screens
-   ============================================================ */
-@media only screen and (max-width: 700px)
-{
-	/* Transform all table elements into block layout to stack vertically */
-	.table-responsive table,
-	.table-responsive thead,
-	.table-responsive tbody,
-	.table-responsive tr,
-	.table-responsive th,
-	.table-responsive td 
-	{
-		display: block;
-		width: 100%;
-	}
+/* Responsive table layout: display rows as cards on small screens */
+	@media only screen and (max-width: 700px) {
 
-	/* Optional: reduce default spacing to make cards more compact */
-	.table-responsive tr
-	{
-		padding: 0;                      /* Less padding to keep it compact */
-	}
+		/* Transform all table elements into block layout to stack vertically */
+		.table-responsive table,
+		.table-responsive thead,
+		.table-responsive tbody,
+		.table-responsive tr,
+		.table-responsive th,
+		.table-responsive td {
+			display: block;
+			width: 100%;
+		}
 
-	/* Hide the table header (labels will be shown via ::before) */
-	.table-responsive thead
-	{
-		display: none;
-	}
+		/* Optional: reduce default spacing to make cards more compact */
+		.table-responsive tr {
+			padding: 0;                      /* Less padding to keep it compact */
+		}
 
-	/* Style individual table cells for card layout */
-	.table-responsive td
-	{
-		position: relative;                         /* Needed for positioning ::before */
-		padding: 0.75rem 0.75rem 0.25rem 140px;     /* Padding with space on the left for label */
-		border: none;
-		background: white;
-		line-height: 1.2;                           /* Reduce line spacing */
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;                        /* Optional: force text to stay on one line */
-	}
+		/* Hide the table header (labels will be shown via ::before) */
+		.table-responsive thead {
+			display: none;
+		}
 
-	/* Display the data-label as a label on the left side */
-	.table-responsive td::before
-	{
-		content: attr(data-label);             /* Use the data-label attribute for the label */
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100%;                         /* Match the height of the cell */
-		width: 120px;                         /* Label column width */
-		color: rgb(0, 0, 0);
-		padding: 0.75rem;
-		font-size: 0.9rem;
-		font-weight: bold;
-		display: flex;
-		align-items: center;                  /* Vertically center the text */
-		justify-content: flex-start;
-		border-top-left-radius: 0.25rem;
-		border-bottom-left-radius: 0.25rem;
-		line-height: 1.1;
-	}
+		/* Style individual table cells for card layout */
+		.table-responsive td {
+			position: relative;                         /* Needed for positioning ::before */
+			padding: 0.75rem 0.75rem 0.25rem 140px;     /* Padding with space on the left for label */
+			border: none;
+			background: white;
+			line-height: 1.2;                           /* Reduce line spacing */
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;                        /* Optional: force text to stay on one line */
+		}
 
-	.table-bordered > :not(caption) > * {
-		border-width: 0;
+		/* Display the data-label as a label on the left side */
+		.table-responsive td::before {
+			content: attr(data-label);             /* Use the data-label attribute for the label */
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;                         /* Match the height of the cell */
+			width: 120px;                         /* Label column width */
+			color: rgb(0, 0, 0);
+			padding: 0.75rem;
+			font-size: 0.9rem;
+			font-weight: bold;
+			display: flex;
+			align-items: center;                  /* Vertically center the text */
+			justify-content: flex-start;
+			border-top-left-radius: 0.25rem;
+			border-bottom-left-radius: 0.25rem;
+			line-height: 1.1;
+		}
+
+		.table-bordered > :not(caption) > * {
+			border-width: 0;
+		}
 	}
-}
