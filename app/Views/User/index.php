@@ -24,10 +24,10 @@
 	<!--Datas name -->
 	<thead>
 		<tr>
-			<th>nom</th>
-			<th>prenom</th>
-			<th>telephone</th>
-			<th>mail</th>
+			<th>Nom</th>
+			<th>Prénom</th>
+			<th>Téléphone</th>
+			<th>Mail</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
