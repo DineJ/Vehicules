@@ -4,45 +4,47 @@
 <div class="container mt-5">
 <h2>Détails de l'utilisateur</h2>
 
-<table class="table table-striped table-bordered">
-	<tbody>
-		<!-- Display name -->
-		<tr>
-			<td>Nom</td>
-			<td><?= $item->nom ?></td>
-		</tr>
+<div class="table-responsive">
+	<table class="table table-striped table-bordered mt-3">
+		<tbody>
+			<!-- Display name -->
+			<tr>
+				<td class="td-hidden">Nom</td>
+				<td data-label="Nom"><?= $item->nom ?></td>
+			</tr>
 
-		<!-- Display first name -->
-		<tr>
-			<td>Prénom</td>
-			<td><?= $item->prenom ?></td>
-		</tr>
+			<!-- Display first name -->
+			<tr>
+				<td class="td-hidden">Prénom</td>
+				<td data-label="Prénom"><?= $item->prenom ?></td>
+			</tr>
 
-		<!-- Display admin privilege -->
-		<tr>
-			<td>Admin</td>
-			<td><?= $item->admin ? 'Oui' : 'Non' ?></td>
-		</tr>
+			<!-- Display admin privilege -->
+			<tr>
+				<td class="td-hidden">Admin</td>
+				<td data-label="Admin"><?= $item->admin ? 'Oui' : 'Non' ?></td>
+			</tr>
 
-		<!-- Display phone number -->
-		<tr>
-			<td>Téléphone</td>
-			<td><?= $item->telephone ?></td>
-		</tr>
+			<!-- Display phone number -->
+			<tr>
+				<td class="td-hidden">Téléphone</td>
+				<td data-label="Téléphone"><?= $item->telephone ?></td>
+			</tr>
 
-		<!-- Display email -->
-		<tr>
-			<td>Mail</td>
-			<td><?= $item->mail ?></td>
-		</tr>
+			<!-- Display email -->
+			<tr>
+				<td class="td-hidden">Mail</td>
+				<td data-label="Mail"><?= $item->mail ?></td>
+			</tr>
 
-		<!-- Display if an account is disabled or not -->
-		<tr>
-			<td>Actif</td>
-			<td><?= $item->actif ? 'Oui' : 'Non' ?></td>
-		</tr>
-	</tbody>
-</table>
+			<!-- Display if an account is disabled or not -->
+			<tr>
+				<td class="td-hidden">Actif</td>
+				<td data-label="Actif"><?= $item->actif ? 'Oui' : 'Non' ?></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
 
 <div>
 	<form method="post" action="<?= site_url('User/update/'.$item->id) ?>">
@@ -67,7 +69,9 @@
 		<!-- Redirection button to create license form-->
 		<a href="<?= site_url('Permis/create/'.$item->id) ?>" class="btn btn-success">Ajouter</a>
 	</div>
-		<table class="table table-striped table-bordered">
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered mt-3">
+
 			<tbody>
 
 				<!-- User has no license yet -->
@@ -85,39 +89,41 @@
 </div>
 
 
+<div class="table-responsive">
 	<!-- Display license form -->
-	<table class="table table-striped table-bordered">
+	<table class="table table-striped table-bordered mt-3">
 		<tbody>
 
 			<!-- Display license number -->
 			<tr>
-				<td>Numéro</td>
-				<td><?= $permis->num_permis ?></td>
+				<td class="td-hidden">Numéro</td>
+				<td data-label="Nuémro"><?= $permis->num_permis ?></td>
 			</tr>
 
 			<!-- Display license issue date -->
 			<tr>
-				<td>Date d'obtention</td>
-				<td><?= substr($permis->date_permis, 0, 10) ?></td>
+				<td class="td-hidden">Date d'obtention</td>
+				<td data-label="Date obtention"><?= substr($permis->date_permis, 0, 10) ?></td>
 			</tr>
 
 			<!-- Display license expiration date -->
 			<tr>
-				<td>Date d'expiration</td>
-				<td><?= substr($permis->update_permis, 0, 10) ?></td>
+				<td class="td-hidden">Date d'expiration</td>
+				<td data-label="Date expiration"><?= substr($permis->update_permis, 0, 10) ?></td>
 			</tr>
 
 			<!-- Display license category -->
 			<tr>
-				<td>Catégorie</td>
-				<td><?= $permis->type_permis ?></td>
+				<td class="td-hidden">Catégorie</td>
+				<td data-label="Catégorie"><?= $permis->type_permis ?></td>
 			</tr>
 
 	<?php
 	}
 	?>
-		</tbody>
-	</table>
+			</tbody>
+		</table>
+	</div>
 </div>
 
 </br>

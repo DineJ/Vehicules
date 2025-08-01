@@ -114,4 +114,8 @@
 		.table-bordered > :not(caption) > * {
 			border-width: 0;
 		}
+
+		.td-hidden {
+			display: none !important;
+		}
 	}
