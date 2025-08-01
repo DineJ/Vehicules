@@ -34,8 +34,6 @@ $routes->get('Incident/delete/(:num)', 'IncidentController::delete/$1'); // Not 
 
 
 // Routes for Permis
-$routes->get('Permis', 'PermisController::index'); // Route that leads to the display of all data
-$routes->get('Permis/show/(:num)', 'PermisController::show/$1'); // Route that leads to the display of one specific data
 $routes->get('Permis/create/(:num)', 'PermisController::create/$1'); // Route that leads to the display of creating a specific data
 $routes->post('Permis/store/', 'PermisController::store'); // Route that leads to the insert fuction of the DB
 $routes->get('Permis/edit/(:num)', 'PermisController::edit/$1'); // Route that leads to the display of editing a specific data
