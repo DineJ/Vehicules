@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<h2>User - <?= $title ?></h2>
+<h2>Créer un utilisateur</h2>
 
 <form method="post" action="<?= site_url('User/store/') ?>">
 

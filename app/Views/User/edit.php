@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<h2>User - <?= $title ?></h2>
+<h2>Modifier l'utilisateur</h2>
 
 <form method="post" action="<?= site_url('User/update/'.$item->id) ?>" onsubmit="return validateForm()">
 
