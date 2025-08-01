@@ -16,10 +16,11 @@ $currentUri = service('uri')->getPath();
 		</div>
 
 		<?php if ($currentUri !== '/Login/log' && $currentUri !== '/Login'): ?>
-			<div class="dropdown">
-				<a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-					<?= session()->get('user')['name'] ?? 'Menu' ?>
-				</a>
+			<div class="ms-auto d-flex justify-content-end">
+				<div class="dropdown">
+					<a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+						<?= session()->get('user')['name'] ?? 'Menu' ?>
+					</a>
 		<?php endif; ?>
 
 			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
@@ -32,7 +33,8 @@ $currentUri = service('uri')->getPath();
 				<?php if ($currentUri !== '/Login/log' && $currentUri !== '/Login'): ?>
 					<li><a class="dropdown-item" href="/Login/logout">Déconnexion</a></li>
 				<?php endif; ?>
-			</ul>
+				</ul>
+			</div>
 		</div>
 	</div>
 </nav>
