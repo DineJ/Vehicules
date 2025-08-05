@@ -55,11 +55,11 @@ class GenerateEntity extends BaseCommand
 			$propertyName = lcfirst(str_replace('_', '', ucwords($field->name, '_')));
 			$properties[] = " * @property $" . $field->name;
 			$type = $this->mapType($field->type);
-			$casts[] = "        '{$field->name}' => '{$type}',";
+			$casts[] = "\t\t'{$field->name}' => '{$type}',";
 
 			// Définition des règles de validation
 			$validationRules = $this->getValidationRules($type, $field);
-			$rules[] = "        '{$field->name}' => '" . implode('|', $validationRules) . "',";
+			$rules[] = "\t\t'{$field->name}' => '" . implode('|', $validationRules) . "',";
 
 			// Génération du getter
 			$methods[] = <<<EOD
@@ -100,12 +100,12 @@ EOD;
 		$entityContent .= " */\n";
 		$entityContent .= "class $entityName extends Entity\n";
 		$entityContent .= "{\n";
-		$entityContent .= "    protected \$casts = [\n";
+		$entityContent .= "\tprotected \$casts = [\n";
 		$entityContent .= implode("\n", $casts) . "\n";
-		$entityContent .= "    ];\n\n";
-		$entityContent .= "    protected \$validationRules = [\n";
+		$entityContent .= "\t];\n\n";
+		$entityContent .= "\tprotected \$validationRules = [\n";
 		$entityContent .= implode("\n", $rules) . "\n";
-		$entityContent .= "    ];\n\n\n";
+		$entityContent .= "\t];\n\n\n";
 		$entityContent .= implode("\n\n", $methods) . "\n";
 		$entityContent .= "}\n";
 
