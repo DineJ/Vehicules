@@ -55,8 +55,7 @@ class GenerateController extends BaseCommand
 		if (count($searchs) == 0)
 			return "";
 
-		$searchBar = "\n		// SEARCH BAR\n".
-					 "		\$search = \$this->request->getGet('q');\n".
+		$searchBar = "		\$search = \$this->request->getGet('q');\n\n".
 					 "		if (\$search)\n".
 					 "		{\n".
 					 "			\$query = '%'.\$search.'%';\n".
@@ -97,30 +96,33 @@ class $controllerName extends Controller
 		\$this->model = new $modelName();
 	}
 
-	// LISTE AVEC PAGINATION
+	// SEARCH BAR
 	public function index()
 	{{$searchs}
-		\$data['items'] = \$this->model->paginate(5); // Affiche 5 résultats par page
-		\$data['pager'] = \$this->model->pager; // Ajoute le pager
+		\$data['items'] = \$this->model->paginate(5); // Display 5 resultats
+		\$data['pager'] = \$this->model->pager; // Add pager
 
-		return view('$entityName/index', \$data);
+		return view('$entityName', \$data);
 	}
 
-	// AFFICHAGE D'UN SEUL ÉLÉMENT
+
+	// DISPLAY AN ELEMENT
 	public function show(\$id)
 	{
 		\$data['item'] = \$this->model->find(\$id);
 		return view('$entityName/show', \$data);
 	}
 
-	// FORMULAIRE DE CRÉATION
+
+	// CREATION FORM
 	public function create()
 	{
 		\$data['title'] = "Créer $entityName";
 		return view('$entityName/create', \$data);
 	}
 
-	// INSERTION DANS LA BASE
+
+	// INSERT INTO DATABASE
 	public function store()
 	{
 		\$data = \$this->request->getPost();
@@ -134,7 +136,8 @@ class $controllerName extends Controller
 		return redirect()->to('/$entityName');
 	}
 
-	// FORMULAIRE DE MODIFICATION
+
+	// MODIFICATION FORM
 	public function edit(\$id)
 	{
 		\$data['item'] = \$this->model->find(\$id);
@@ -142,7 +145,8 @@ class $controllerName extends Controller
 		return view('$entityName/edit', \$data);
 	}
 
-	// MISE À JOUR DES DONNÉES
+
+	// UPDATE DATABASE
 	public function update(\$id)
 	{
 		\$data = \$this->request->getPost();
@@ -156,7 +160,8 @@ class $controllerName extends Controller
 		return redirect()->to('/$entityName');
 	}
 
-	// SUPPRESSION D'UN ÉLÉMENT
+
+	// DELETE AN ELEMENT
 	public function delete(\$id)
 	{
 		\$this->model->delete(\$id);
