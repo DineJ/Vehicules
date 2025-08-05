@@ -63,7 +63,6 @@ class GenerateEntity extends BaseCommand
 
 			// Génération du getter
 			$methods[] = <<<EOD
-
 	public function get{$propertyName}()
 	{
 		return \$this->attributes['{$field->name}'] ?? null;
@@ -106,7 +105,7 @@ EOD;
 		$entityContent .= "    ];\n\n";
 		$entityContent .= "    protected \$validationRules = [\n";
 		$entityContent .= implode("\n", $rules) . "\n";
-		$entityContent .= "    ];\n\n";
+		$entityContent .= "    ];\n\n\n";
 		$entityContent .= implode("\n\n", $methods) . "\n";
 		$entityContent .= "}\n";
 
