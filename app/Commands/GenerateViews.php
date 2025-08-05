@@ -99,11 +99,11 @@ class GenerateViews extends BaseCommand
 				break;
 
 			case 'columns':
-				$r = "<th>$f->name</th>\n			";
+				$r = "	<th>$f->name</th>\n			";
 				break;
 
 			case 'rows':
-				$r = "<td data-label=\"{$f->name}\"><?= esc(\$item->{$f->name}) ?></td>\n				";
+				$r = "					<td data-label=\"{$f->name}\"><?= esc(\$item->{$f->name}) ?></td>\n";
 				break;
 
 			case 'details':
@@ -126,13 +126,13 @@ class GenerateViews extends BaseCommand
 		else
 		{
 			$seachBar = '<!-- Search bar -->'."\n".
-						' <form method="get" action="<?= site_url("'.$entityName.'") ?>" class="mb-3">'."\n".
+						'<form method="get" action="<?= site_url("'.$entityName.'") ?>" class="mb-3">'."\n".
 						'	<div class="input-group">'."\n".
-						'		<input type="text" name="q" class="form-control" placeholder="Rechercher..." value="<?= isset($search) ?  esc($search) : "" ?>">'."\n".
+						'		<input type="text" name="q" class="form-control" placeholder="Rechercher..." value="<?= isset($search) ?  esc($search) : \'\' ?>">'."\n".
 						'		<button type="submit" class="btn btn-primary">Rechercher</button>'."\n\n".
-						'		<!-- Reset seach bar -->'."\n".
+						'		<!-- Reset search bar -->'."\n".
 						'		<?php if (!empty($search)) : ?>'."\n".
-						'			<a href="<?= site_url("'.$entityName.'") ?>" class="btn btn-outline-secondary">Réinitialiser</a>'."\n".
+						'			<a href="<?= site_url(\'' . $entityName . '\') ?>" class="btn btn-outline-secondary">Réinitialiser</a>'."\n".
 						'		<?php endif; ?>'."\n".
 						'	</div>'."\n".
 						'</form>'."\n";
@@ -161,7 +161,7 @@ $searchBar
 		<!-- Datas name -->
 		<thead>
 			<tr>
-				$columns<th>Actions</th>
+			$columns	<th>Actions</th>
 			</tr>
 		</thead>
 
@@ -169,8 +169,8 @@ $searchBar
 			<!-- Display datas -->
 			<?php foreach (\$items as \$item): ?>
 				<tr>
-					$rows<td>
-
+$rows
+					<td>
 						<!-- Redirection button -->
 						<a href="<?= site_url('$entityName/show/'.\$item->{$this->primaryKey}) ?>" class="btn btn-info btn-sm">Voir</a>
 					</td>
@@ -190,7 +190,7 @@ $searchBar
 			<li class="page-item <?= \$pager->getCurrentPage() != 1 ? '' : 'disabled' ?>"><a class="page-link" href="<?= \$pager->getPreviousPageURI() ?>">Précédent</a></li>
 
 			<?php
-			// $count = total number of pages, $cur = current page, $nb_page = pages shown around current, $v1 = before, $v2 = after
+				// \$count = total number of pages, \$cur = current page, \$nb_page = pages shown around current, \$v1 = before, \$v2 = after
 				\$count = \$pager->getPageCount();
 				\$cur = \$pager->getCurrentPage();
 				\$nb_page = 1;
