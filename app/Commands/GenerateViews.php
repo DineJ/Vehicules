@@ -109,9 +109,9 @@ class GenerateViews extends BaseCommand
 			case 'details':
 				{
 				if ($f->type == 'tinyint')
-					$r = "	<!-- Display $f->name -->\n	<tr>\n			<td class=\"td-hidden\">$f->name</td>\n			<td data-label=\"{$f->name}\"><?= \$item->{$f->name} ? 'Oui' : 'Non' ?></td>\n		</tr>\n	";
+					$r = "\n			<!-- Display $f->name -->\n			<tr>\n				<td class=\"td-hidden\">$f->name</td>\n				<td data-label=\"{$f->name}\"><?= \$item->{$f->name} ? 'Oui' : 'Non' ?></td>\n			</tr>\n";
 				else
-					$r = "	<!-- Display $f->name -->\n	<tr>\n			<td class=\"td-hidden\">$f->name</td>\n			<td data-label=\"{$f->name}\"><?= \$item->{$f->name} ?></td>\n		</tr>\n	";
+					$r = "\n			<!-- Display $f->name -->\n			<tr>\n				<td class=\"td-hidden\">$f->name</td>\n				<td data-label=\"{$f->name}\"><?= \$item->{$f->name} ?></td>\n			</tr>\n";
 				}
 				break;
 		}
@@ -249,7 +249,7 @@ EOD;
 <div class="table-responsive">
 	<table class="table table-striped table-bordered mt-3">
 		<tbody>
-			$details</tbody>
+$details		</tbody>
 	</table>
 </div>
 
@@ -268,7 +268,6 @@ EOD;
 
 <!-- Redirection button -->
 <a href="<?= site_url('$entityName') ?>" class="btn btn-secondary">Retour</a>
-
 <?= \$this->endSection() ?>
 EOD;
 	}
@@ -289,7 +288,6 @@ EOD;
 
 	private function messageArray($field, $entityName)
 	{
-		//$type = $this->arrayType($field);
 		return match($field->type)
 		{
 			'text' 		=> "\n	<-- Type a short explication -->\n	<label>{$field->name}</label>\n	<textarea onchange=\"setUpper(document.getElementById('{$field->name}'));\" id=\"{$field->name}\" name=\"{$field->name}\" class=\"form-control\"><?= isset($item) ? $item->{$field->name} : '' ?></textarea>",
@@ -297,7 +295,7 @@ EOD;
 			'date' 		=> "\n	<-- Type date -->\n	<label>{$field->name}</label>\n	<input type=\"date\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"<?= isset(\$item) ? \$item->{$field->name} : '' ?>\" class=\"form-control\" required>\n",
 			'datetime' 	=> "\n	<-- Type date -->\n	<label>{$field->name}</label>\n	<input type=\"date\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"<?= isset(\$item) ? \$item->{$field->name} : '' ?>\" class=\"form-control\" required>\n",
 			'int' 		=> "\n	<-- Type number -->	<label>{$field->name}</label>\n	<input type=\"number\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"<?= isset(\$item) ? \$item->{$field->name} : '' ?>\" class=\"form-control\" required>\n",
-			'tinyint' 	=> "\n	<!-- Check your $field->name -->	<label>{$field->name}</label>\n	<div>\n		<input type=\"checkbox\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"1\" <?= (isset(\$item) && \$item->{$field->name}) ? 'checked' : '' ?>>\n	</div>\n",
+			'tinyint' 	=> "\n	<!-- Check your $field->name -->\n	<label>{$field->name}</label>\n	<div>\n		<input type=\"checkbox\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"1\" <?= (isset(\$item) && \$item->{$field->name}) ? 'checked' : '' ?>>\n	</div>\n",
 			'password'	=> "\n	<!-- Type password -->\n	<label>{$field->name}</label>\n	<input type=\"password\" id=\"{field->name}\" name=\"{field->name}\" class=\"form-control\" minlength=\"16\" maxlength=\"32\" placeholder=\"Mot de passe requi entre 16 et 32 caractères\" required>\n",
 			default 	=> "\n	<!-- Type $field->name -->\n	<label>{$field->name}</label>\n	<input type=\"text\" onchange=\"setUpper(document.getElementById('{$field->name}'));\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"<?= isset(\$item) ? \$item->{$field->name} : '' ?>\" class=\"form-control\" required>\n",
 		};
@@ -325,7 +323,7 @@ EOD;
 			{
 				$inputs .= "	<input type=\"hidden\" id=\"old{$field->name}\" name=\"old{$field->name}\" value=\"<?= isset(\$item) ? \$item->$field->name : '' ?>\">\n";
 				if ($field->type == 'tinyint')
-					$validationJS .= 	"		let {$field->name} = (document.getElementById('{$field->name}').checked ? 1 : 0 );\n";
+					$validationJS .= 	"		// Get values\n		let {$field->name} = (document.getElementById('{$field->name}').checked ? 1 : 0 );\n";
 				else
 					$validationJS .=	"		// Get values\n		let {$field->name} = document.getElementById('{$field->name}').value;\n";
 
@@ -339,7 +337,8 @@ EOD;
 		}
 		if ($type != 'create') {
 			$onsubmit = ' onsubmit="return validateForm()"';
-			$startfunction = 	'	function validateForm()'."\n".
+			$startfunction =	''."\n\n".
+								'	function validateForm()'."\n".
 								'	{'."\n\n".
 								'		// Count'."\n".
 								'		let compare = 0;'."\n".
@@ -362,7 +361,6 @@ EOD;
 
 <form method="post" action="<?= site_url($action) ?>"{$onsubmit}>
 $inputs
-
 	<!-- Redirection button -->
 	<a href="<?= site_url('$entityName') ?>" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
@@ -370,13 +368,11 @@ $inputs
 
 
 <script>
-
 	// Caps text
 	function setUpper(element)
 	{
 		element.value=element.value.toUpperCase();
-	}
-$startfunction
+	}$startfunction
 </script>
 
 <?= \$this->endSection() ?>
