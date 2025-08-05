@@ -103,15 +103,15 @@ class GenerateViews extends BaseCommand
 				break;
 
 			case 'rows':
-				$r = "<td><?= \$item->{$f->name} ?></td>\n				";
+				$r = "<td data-label=\"{$f->name}\"><?= esc(\$item->{$f->name}) ?></td>\n				";
 				break;
 
 			case 'details':
 				{
 				if ($f->type == 'tinyint')
-					$r = "	<tr>\n			<td>$f->name</td>\n			<td><?= \$item->{$f->name} ? 'Oui' : 'Non' ?></td>\n		</tr>\n	";
+					$r = "	<tr>\n			<td class=\"td-hidden\">$f->name</td>\n			<td data-label=\"{$f->name}\"><?= \$item->{$f->name} ? 'Oui' : 'Non' ?></td>\n		</tr>\n	";
 				else
-					$r = "	<tr>\n			<td>$f->name</td>\n			<td><?= \$item->{$f->name} ?></td>\n		</tr>\n	";
+					$r = "	<tr>\n			<td class=\"td-hidden\">$f->name</td>\n			<td data-label=\"{$f->name}\"><?= \$item->{$f->name} ?></td>\n		</tr>\n	";
 				}
 				break;
 		}
@@ -128,7 +128,7 @@ class GenerateViews extends BaseCommand
 			$seachBar = '<form method="get" action="<?= site_url("'.$entityName.'") ?>" class="mb-3">'."\n".
 						'	<div class="input-group">'."\n".
 						'		<input type="text" name="q" class="form-control" placeholder="Rechercher..." value="<?= isset($search) ?  esc($search) : "" ?>">'."\n".
-						'		<button type="submit" class="btn btn-primary">Rechercher</button>'."\n".
+						'		<button type="submit" class="btn btn-primary">Rechercher</button>'."\n\n".
 						'		<?php if (!empty($search)) : ?>'."\n".
 						'			<a href="<?= site_url("'.$entityName.'") ?>" class="btn btn-outline-secondary">Réinitialiser</a>'."\n".
 						'		<?php endif; ?>'."\n".
@@ -153,29 +153,36 @@ class GenerateViews extends BaseCommand
 
 $searchBar
 
-<table class="table table-striped table-bordered mt-3">
-	<thead>
-		<tr>
-			$columns<th>Actions</th>
-		</tr>
-	</thead>
+<div class="table-responsive">
+	<table class="table table-striped table-bordered mt-3">
 
-	<tbody>
-		<?php foreach (\$items as \$item): ?>
+		<thead>
 			<tr>
-				$rows<td>
-					<a href="<?= site_url('$entityName/show/'.\$item->{$this->primaryKey}) ?>" class="btn btn-info">Voir</a>
-				</td>
+				$columns<th>Actions</th>
 			</tr>
-		<?php endforeach; ?>
-	</tbody>
-</table>
+		</thead>
+
+		<tbody>
+			<?php foreach (\$items as \$item): ?>
+				<tr>
+					$rows<td>
+
+						<a href="<?= site_url('$entityName/show/'.\$item->{$this->primaryKey}) ?>" class="btn btn-info btn-sm">Voir</a>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+</div>
+
 
 <!-- Liens de pagination -->
 <?php if (\$pager->getPageCount() > 1)\n	 { ?>
 	<nav aria-label="Page navigation example">
 		<ul class="pagination">
+
 			<li class="page-item <?= \$pager->getCurrentPage() != 1 ? '' : 'disabled' ?>"><a class="page-link" href="<?= \$pager->getPreviousPageURI() ?>">Précédent</a></li>
+
 			<?php
 				\$count = \$pager->getPageCount();
 				\$cur = \$pager->getCurrentPage();
@@ -230,35 +237,29 @@ EOD;
 <div class="container mt-5">
 <h2>Détails de {$entityName}</h2>
 
-<table class="table table-striped table-bordered">
-	<tbody>
-		$details</tbody>
-</table>
+<div class="table-responsive">
+	<table class="table table-striped table-bordered mt-3">
+		<tbody>
+			$details</tbody>
+	</table>
+</div>
+
 
 <div>
 	<form method="post" action="<?= site_url('$entityName/update/'.\$item->{$this->primaryKey}) ?>">
-		<a href="<?= site_url('$entityName') ?>" class="btn btn-secondary">Retour</a>
+
 		<a href="<?= site_url('$entityName/edit/'.\$item->{$this->primaryKey}) ?>" class="btn btn-warning">Modifier</a>
+
 		$bouton
 	</form>
 </div>
+</br>
+
+<a href="<?= site_url('$entityName') ?>" class="btn btn-secondary">Retour</a>
 
 <?= \$this->endSection() ?>
 EOD;
 	}
-
-	/* private function arrayType($field)
-	{
-		return match($field->type)
-		{
-			'tinyint' => 'checkbox',
-			'text' => 'textarea',
-			'enum' => 'select',
-			'date' => 'date',
-			'int' => 'number',
-			default => 'text'
-		};
-	} */
 
 	private function getOptions($field, $entityName)
 	{
@@ -279,13 +280,14 @@ EOD;
 		//$type = $this->arrayType($field);
 		return match($field->type)
 		{
-			'text' => "\n	<label>{$field->name}</label>\n	<textarea id='{$field->name}' name='{$field->name}'><?= isset(\$item) ? \$item->{$field->name} : '' ?></textarea>",
-			'enum' => "\n	<label>{$field->name}</label>\n	<div>\n		<select id='{$field->name}' name='{$field->name}'>\n			<option>--Please choose an option--</option>\n".$this->getOptions($field, $entityName)."		</select>\n	</div>\n",
-			'date' => "\n	<label>{$field->name}</label>\n	<input type='date' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
-			'datetime' => "\n	<label>{$field->name}</label>\n	<input type='date' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
-			'int' => "\n	<label>{$field->name}</label>\n	<input type='number' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
-			'tinyint' => "\n	<label>{$field->name}</label>\n	<div>\n		<input type='checkbox' id='{$field->name}' name='{$field->name}' value='1' <?= (isset(\$item) && \$item->{$field->name}) ? 'checked' : '' ?>>\n	</div>\n",
-			default => "\n	<label>{$field->name}</label>\n	<input type='text' onchange=\"setUpper(document.getElementById('{$field->name}'));\" id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
+			'text' 		=> "\n	<label>{$field->name}</label>\n	<textarea onchange=\"setUpper(document.getElementById('{$field->name}'));\" id=\"{$field->name}\" name=\"{$field->name}\" class=\"form-control\"><?= isset($item) ? $item->{$field->name} : '' ?></textarea>",
+			'enum' 		=> "\n	<label>{$field->name}</label>\n	<div>\n		<select id=\"{$field->name}\" name=\"{$field->name}\" class=\"form-control\" required>\n			<option value=\"\" disabled selected hidden> Choississez une option </option>\n".$this->getOptions($field, $entityName)."		</select>\n	</div>\n",
+			'date' 		=> "\n	<label>{$field->name}</label>\n	<input type=\"date\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"<?= isset(\$item) ? \$item->{$field->name} : '' ?>\" class=\"form-control\" required>\n",
+			'datetime' 	=> "\n	<label>{$field->name}</label>\n	<input type=\"date\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"<?= isset(\$item) ? \$item->{$field->name} : '' ?>\" class=\"form-control\" required>\n",
+			'int' 		=> "\n	<label>{$field->name}</label>\n	<input type=\"number\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"<?= isset(\$item) ? \$item->{$field->name} : '' ?>\" class=\"form-control\" required>\n",
+			'tinyint' 	=> "\n	<label>{$field->name}</label>\n	<div>\n		<input type=\"checkbox\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"1\" <?= (isset(\$item) && \$item->{$field->name}) ? 'checked' : '' ?>>\n	</div>\n",
+			'password'	=> "\n	<label>{$field->name}</label>\n	<input type=\"password\" id=\"{field->name}\" name=\"{field->name}\" class=\"form-control\" minlength=\"16\" maxlength=\"32\" placeholder=\"Mot de passe requi entre 16 et 32 caractères\" required>\n",
+			default 	=> "\n	<label>{$field->name}</label>\n	<input type=\"text\" onchange=\"setUpper(document.getElementById('{$field->name}'));\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"<?= isset(\$item) ? \$item->{$field->name} : '' ?>\" class=\"form-control\" required>\n",
 		};
 	}
 
@@ -309,14 +311,14 @@ EOD;
 			$inputs .= $this->messageArray($field, $entityName);
 			if ($type != 'create')
 			{
-				$inputs .= "	<input type='hidden' id='old{$field->name}' name='old{$field->name}' value='<?= isset(\$item) ? \$item->$field->name : '' ?>'>\n";
+				$inputs .= "	<input type=\"hidden\" id=\"old{$field->name}\" name=\"old{$field->name}\" value=\"<?= isset(\$item) ? \$item->$field->name : '' ?>\">\n";
 				if ($field->type == 'tinyint')
 					$validationJS .= 	"		let {$field->name} = (document.getElementById('{$field->name}').checked ? 1 : 0 );\n";
 				else
 					$validationJS .=	"		let {$field->name} = document.getElementById('{$field->name}').value;\n";
 
 				$validationJS .= 	"		let old{$field->name} = document.getElementById('old{$field->name}').value;\n".
-									"		row++;\n".
+									"		row++;\n\n".
 									"		if ({$field->name} == old{$field->name})\n		{\n".
 									"			compare++;\n".
 									"		}\n\n";
@@ -325,7 +327,7 @@ EOD;
 		if ($type != 'create') {
 			$onsubmit = ' onsubmit="return validateForm()"';
 			$startfunction = 	'	function validateForm()'."\n".
-								'	{'."\n".
+								'	{'."\n\n".
 								'		let compare = 0;'."\n".
 								'		let row = 0;'."\n\n".
 								$validationJS.
@@ -345,11 +347,14 @@ EOD;
 
 <form method="post" action="<?= site_url($action) ?>"{$onsubmit}>
 $inputs
+
 	<a href="<?= site_url('$entityName') ?>" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 
+
 <script>
+
 	function setUpper(element)
 	{
 		element.value=element.value.toUpperCase();
