@@ -41,10 +41,10 @@ class GenerateModels extends BaseCommand
 			$modelContent .= "use CodeIgniter\Model;\n\n";
 			$modelContent .= "class $modelName extends Model\n";
 			$modelContent .= "{\n";
-			$modelContent .= "    protected \$table = '$table';\n";
-			$modelContent .= "    protected \$primaryKey = '$primaryKey';\n";
-			$modelContent .= "    protected \$returnType = 'App\Entities\\$entityName';\n";
-			$modelContent .= "    protected \$allowedFields = ['" . implode("', '", $allowedFields) . "'];\n";
+			$modelContent .= "\tprotected \$table = '$table';\n";
+			$modelContent .= "\tprotected \$primaryKey = '$primaryKey';\n";
+			$modelContent .= "\tprotected \$returnType = 'App\Entities\\$entityName';\n";
+			$modelContent .= "\tprotected \$allowedFields = ['" . implode("', '", $allowedFields) . "'];\n";
 			$modelContent .= "}\n";
 
 			file_put_contents("../app/Models/$modelName.php", $modelContent);
