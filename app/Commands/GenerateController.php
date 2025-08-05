@@ -103,7 +103,7 @@ class $controllerName extends Controller
 		\$data['items'] = \$this->model->paginate(5); // Display 5 results
 		\$data['pager'] = \$this->model->pager; // Add pager
 
-		return view('$entityName', \$data);
+		return view('$entityName/index', \$data);
 	}
 
 
