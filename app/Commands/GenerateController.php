@@ -55,7 +55,7 @@ class GenerateController extends BaseCommand
 		if (count($searchs) == 0)
 			return "";
 
-		$searchBar = "		\$search = \$this->request->getGet('q');\n\n".
+		$searchBar = "\$search = \$this->request->getGet('q');\n\n".
 					 "		if (\$search)\n".
 					 "		{\n".
 					 "			\$query = '%'.\$search.'%';\n".
@@ -98,8 +98,9 @@ class $controllerName extends Controller
 
 	// SEARCH BAR
 	public function index()
-	{{$searchs}
-		\$data['items'] = \$this->model->paginate(5); // Display 5 resultats
+	{
+		{$searchs}
+		\$data['items'] = \$this->model->paginate(5); // Display 5 results
 		\$data['pager'] = \$this->model->pager; // Add pager
 
 		return view('$entityName', \$data);
@@ -129,7 +130,8 @@ class $controllerName extends Controller
 		\$entity = new $entityName();
 		\$entity->fill(\$data);
 
-		if (!\$this->model->insert(\$entity)) {
+		if (!\$this->model->insert(\$entity))
+		{
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
 		}
 		
@@ -153,7 +155,8 @@ class $controllerName extends Controller
 		\$entity = \$this->model->find(\$id);
 		\$entity->fill(\$data);
 
-		if (!\$this->model->save(\$entity)) {
+		if (!\$this->model->save(\$entity))
+		{
 			return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
 		}
 
