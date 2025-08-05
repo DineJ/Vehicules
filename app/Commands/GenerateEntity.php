@@ -63,10 +63,12 @@ class GenerateEntity extends BaseCommand
 
 			// Génération du getter
 			$methods[] = <<<EOD
+
 	public function get{$propertyName}()
 	{
 		return \$this->attributes['{$field->name}'] ?? null;
 	}
+
 EOD;
 
 			// Génération du setter avec validation
@@ -83,6 +85,7 @@ EOD;
 		\$this->attributes['{$field->name}'] = \${$propertyName};
 		return \$this;
 	}
+
 EOD;
 		}
 
@@ -121,7 +124,6 @@ EOD;
 			'tinyint' => 'boolean',
 			'varchar' => 'string',
 			'text'    => 'string',
-			// 'date'    => 'date',
 			'date'    => 'datetime',
 			'datetime'=> 'datetime',
 			'float'   => 'float',
@@ -161,7 +163,7 @@ EOD;
 				$rules[] = 'valid_date';
 				break;
 			case 'datetime':
-				$rules[] = 'valid_date[Y-m-d H:i:s]';
+				$rules[] = 'valid_date[Y-m-d]';
 				break;
 			case 'float':
 			case 'double':
