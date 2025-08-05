@@ -32,6 +32,8 @@ class GenerateViews extends BaseCommand
 
 		$modelName = "App\\Models\\" . $entityName . "Model";
 		$folderPath = "../app/Views/{$entityName}";
+        $layoutsPath = "../app/Views/layouts";
+	    $cssPath = "../public/css";
 
 		// Vérifier si l'entité existe
 		if (!file_exists("../app/Entities/$entityName.php"))
@@ -73,7 +75,25 @@ class GenerateViews extends BaseCommand
 			mkdir($folderPath, 0777, true);
 		}
 
+
 		// Générer les fichiers de vues
+		if (!file_exists($layoutsPath))
+		{
+
+			if (!is_dir($layoutsPath))
+			{
+				mkdir($layoutsPath, 0777, true);
+			}
+
+			if (!is_dir($cssPath))
+			{
+				mkdir($cssPath, 0777, true);
+			}
+
+			file_put_contents("$cssPath/main.css", $this->generateCss());
+			file_put_contents("$layoutsPath/main.php", $this->generateLayout());
+		}
+
 		file_put_contents("$folderPath/index.php", $this->generateIndexView($entityName, $fields));
 		file_put_contents("$folderPath/show.php", $this->generateShowView($entityName, $fields));
 		file_put_contents("$folderPath/create.php", $this->generateFormView($entityName, $fields, 'create'));
@@ -377,6 +397,107 @@ $inputs
 
 <?= \$this->endSection() ?>
 EOD;
+	}
+
+
+	private function generateLayout()
+	{
+		return <<<EOD
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><?= \$title ?? 'Mon Site' ?></title> <!-- Page title (fallback to "Mon Site" if \$title is not set) -->
+
+	<!-- Bootstrap CSS for styling -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?= base_url('css/main.css') ?>">
+
+</head>
+<body class="<?= \$page ?? '' ?>">
+
+	<!-- Main page content container -->
+	<div class="container mt-5">
+		<?= \$this->renderSection('content') ?> <!-- Content from each specific page -->
+	</div>
+
+	<!-- Bootstrap JS bundle for interactivity -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+EOD;
+	}
+
+	private function generateCss()
+	{
+		return <<<EOD
+	/* Responsive table layout: display rows as cards on small screens */
+	@media only screen and (max-width: 700px) {
+
+		/* Transform all table elements into block layout to stack vertically */
+		.table-responsive table,
+		.table-responsive thead,
+		.table-responsive tbody,
+		.table-responsive tr,
+		.table-responsive th,
+		.table-responsive td {
+			display: block;
+			width: 100%;
+		}
+
+		/* Optional: reduce default spacing to make cards more compact */
+		.table-responsive tr {
+			padding: 0;                      /* Less padding to keep it compact */
+		}
+
+		/* Hide the table header (labels will be shown via ::before) */
+		.table-responsive thead {
+			display: none;
+		}
+
+		/* Style individual table cells for card layout */
+		.table-responsive td {
+			position: relative;                         /* Needed for positioning ::before */
+			padding: 0.75rem 0.75rem 0.25rem 140px;     /* Padding with space on the left for label */
+			border: none;
+			background: white;
+			line-height: 1.2;                           /* Reduce line spacing */
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;                        /* Optional: force text to stay on one line */
+		}
+
+		/* Display the data-label as a label on the left side */
+		.table-responsive td::before {
+			content: attr(data-label);             /* Use the data-label attribute for the label */
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;                         /* Match the height of the cell */
+			width: 120px;                         /* Label column width */
+			color: rgb(0, 0, 0);
+			padding: 0.75rem;
+			font-size: 0.9rem;
+			font-weight: bold;
+			display: flex;
+			align-items: center;                  /* Vertically center the text */
+			justify-content: flex-start;
+			border-top-left-radius: 0.25rem;
+			border-bottom-left-radius: 0.25rem;
+			line-height: 1.1;
+		}
+
+		.table-bordered > :not(caption) > * {
+			border-width: 0;
+		}
+
+		.td-hidden {
+			display: none !important;
+		}
+	}
+EOD;
+
 	}
 }
 
