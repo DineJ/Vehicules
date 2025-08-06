@@ -27,7 +27,7 @@ class AdminController extends Controller
 
 		$db = db_connect();
 		$data['ip'] = $db->table('Ip')
-						 ->select(['adresse_ip'])
+						 ->select(['adresse_ip', 'nb_echec', 'id'])
 						 ->where('nb_echec >', 2)
 						 ->get()
 						 ->getResult();
@@ -36,4 +36,19 @@ class AdminController extends Controller
 		$data['title'] = "Page d'administration";
 		return view('Admin/admin', $data);
 	}
+
+	public function reactivateIp()
+	{
+		$ip = $this->request->getPost('adresse_ip');
+
+		if ($ip) {
+			$db = db_connect();
+			$db->table('Ip')
+			->where('adresse_ip', $ip)
+			->update(['nb_echec' => 0]);
+		}
+
+		return redirect()->to('/Admin/administrator');
+	}
+
 }
