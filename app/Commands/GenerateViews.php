@@ -32,6 +32,8 @@ class GenerateViews extends BaseCommand
 
 		$modelName = "App\\Models\\" . $entityName . "Model";
 		$folderPath = "../app/Views/{$entityName}";
+        $layoutsPath = "../app/Views/layouts";
+	    $cssPath = "../public/css";
 
 		// Vérifier si l'entité existe
 		if (!file_exists("../app/Entities/$entityName.php"))
@@ -73,7 +75,25 @@ class GenerateViews extends BaseCommand
 			mkdir($folderPath, 0777, true);
 		}
 
+
 		// Générer les fichiers de vues
+		if (!file_exists($layoutsPath))
+		{
+
+			if (!is_dir($layoutsPath))
+			{
+				mkdir($layoutsPath, 0777, true);
+			}
+
+			if (!is_dir($cssPath))
+			{
+				mkdir($cssPath, 0777, true);
+			}
+
+			file_put_contents("$cssPath/main.css", $this->generateCss());
+			file_put_contents("$layoutsPath/main.php", $this->generateLayout());
+		}
+
 		file_put_contents("$folderPath/index.php", $this->generateIndexView($entityName, $fields));
 		file_put_contents("$folderPath/show.php", $this->generateShowView($entityName, $fields));
 		file_put_contents("$folderPath/create.php", $this->generateFormView($entityName, $fields, 'create'));
@@ -99,19 +119,19 @@ class GenerateViews extends BaseCommand
 				break;
 
 			case 'columns':
-				$r = "<th>$f->name</th>\n			";
+				$r = "	<th>$f->name</th>\n			";
 				break;
 
 			case 'rows':
-				$r = "<td><?= \$item->{$f->name} ?></td>\n				";
+				$r = "					<td data-label=\"{$f->name}\"><?= esc(\$item->{$f->name}) ?></td>\n";
 				break;
 
 			case 'details':
 				{
 				if ($f->type == 'tinyint')
-					$r = "	<tr>\n			<td>$f->name</td>\n			<td><?= \$item->{$f->name} ? 'Oui' : 'Non' ?></td>\n		</tr>\n	";
+					$r = "\n			<!-- Display $f->name -->\n			<tr>\n				<td class=\"td-hidden\">$f->name</td>\n				<td data-label=\"{$f->name}\"><?= \$item->{$f->name} ? 'Oui' : 'Non' ?></td>\n			</tr>\n";
 				else
-					$r = "	<tr>\n			<td>$f->name</td>\n			<td><?= \$item->{$f->name} ?></td>\n		</tr>\n	";
+					$r = "\n			<!-- Display $f->name -->\n			<tr>\n				<td class=\"td-hidden\">$f->name</td>\n				<td data-label=\"{$f->name}\"><?= \$item->{$f->name} ?></td>\n			</tr>\n";
 				}
 				break;
 		}
@@ -125,12 +145,14 @@ class GenerateViews extends BaseCommand
 			return "";
 		else
 		{
-			$seachBar = '<form method="get" action="<?= site_url("'.$entityName.'") ?>" class="mb-3">'."\n".
+			$seachBar = '<!-- Search bar -->'."\n".
+						'<form method="get" action="<?= site_url("'.$entityName.'") ?>" class="mb-3">'."\n".
 						'	<div class="input-group">'."\n".
-						'		<input type="text" name="q" class="form-control" placeholder="Rechercher..." value="<?= isset($search) ?  esc($search) : "" ?>">'."\n".
-						'		<button type="submit" class="btn btn-primary">Rechercher</button>'."\n".
+						'		<input type="text" name="q" class="form-control" placeholder="Rechercher..." value="<?= isset($search) ?  esc($search) : \'\' ?>">'."\n".
+						'		<button type="submit" class="btn btn-primary">Rechercher</button>'."\n\n".
+						'		<!-- Reset search bar -->'."\n".
 						'		<?php if (!empty($search)) : ?>'."\n".
-						'			<a href="<?= site_url("'.$entityName.'") ?>" class="btn btn-outline-secondary">Réinitialiser</a>'."\n".
+						'			<a href="<?= site_url(\'' . $entityName . '\') ?>" class="btn btn-outline-secondary">Réinitialiser</a>'."\n".
 						'		<?php endif; ?>'."\n".
 						'	</div>'."\n".
 						'</form>'."\n";
@@ -153,30 +175,42 @@ class GenerateViews extends BaseCommand
 
 $searchBar
 
-<table class="table table-striped table-bordered mt-3">
-	<thead>
-		<tr>
-			$columns<th>Actions</th>
-		</tr>
-	</thead>
+<div class="table-responsive">
+	<table class="table table-striped table-bordered mt-3">
 
-	<tbody>
-		<?php foreach (\$items as \$item): ?>
+		<!-- Datas name -->
+		<thead>
 			<tr>
-				$rows<td>
-					<a href="<?= site_url('$entityName/show/'.\$item->{$this->primaryKey}) ?>" class="btn btn-info">Voir</a>
-				</td>
+			$columns	<th>Actions</th>
 			</tr>
-		<?php endforeach; ?>
-	</tbody>
-</table>
+		</thead>
 
-<!-- Liens de pagination -->
+		<tbody>
+			<!-- Display datas -->
+			<?php foreach (\$items as \$item): ?>
+				<tr>
+$rows
+					<td>
+						<!-- Redirection button -->
+						<a href="<?= site_url('$entityName/show/'.\$item->{$this->primaryKey}) ?>" class="btn btn-info btn-sm">Voir</a>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+</div>
+
+
+<!-- Pager -->
 <?php if (\$pager->getPageCount() > 1)\n	 { ?>
 	<nav aria-label="Page navigation example">
 		<ul class="pagination">
+
+			<!-- Button for previous page -->
 			<li class="page-item <?= \$pager->getCurrentPage() != 1 ? '' : 'disabled' ?>"><a class="page-link" href="<?= \$pager->getPreviousPageURI() ?>">Précédent</a></li>
+
 			<?php
+				// \$count = total number of pages, \$cur = current page, \$nb_page = pages shown around current, \$v1 = before, \$v2 = after
 				\$count = \$pager->getPageCount();
 				\$cur = \$pager->getCurrentPage();
 				\$nb_page = 1;
@@ -193,12 +227,14 @@ $searchBar
 					\$v2 = \$count;
 				}
 
+				// Display the correct number of pages
 				for (\$value = \$v1 ; \$value <= \$v2; \$value++ )
 				{
 					echo '<li '.(\$cur == \$value ? 'class="active"' : 'class="page-item"' ).'><a class="page-link" href="'.\$pager->getPageURI(\$value).'">'.\$value.'</a></li>';
 				}
 				?>
 
+			<!-- Button for next page -->
 			<li class="page-item <?= \$pager->hasMore() ? '' : 'disabled' ?>"><a class="page-link" href="<?= \$pager->getNextPageURI() ?>">Suivant</a></li>
 		  </ul>
 	</nav>
@@ -230,35 +266,31 @@ EOD;
 <div class="container mt-5">
 <h2>Détails de {$entityName}</h2>
 
-<table class="table table-striped table-bordered">
-	<tbody>
-		$details</tbody>
-</table>
+<div class="table-responsive">
+	<table class="table table-striped table-bordered mt-3">
+		<tbody>
+$details		</tbody>
+	</table>
+</div>
+
 
 <div>
 	<form method="post" action="<?= site_url('$entityName/update/'.\$item->{$this->primaryKey}) ?>">
-		<a href="<?= site_url('$entityName') ?>" class="btn btn-secondary">Retour</a>
+
+		<!-- Redirection button to edit user form -->
 		<a href="<?= site_url('$entityName/edit/'.\$item->{$this->primaryKey}) ?>" class="btn btn-warning">Modifier</a>
+
+		<!-- Disabled account button -->
 		$bouton
 	</form>
 </div>
+</br>
 
+<!-- Redirection button -->
+<a href="<?= site_url('$entityName') ?>" class="btn btn-secondary">Retour</a>
 <?= \$this->endSection() ?>
 EOD;
 	}
-
-	/* private function arrayType($field)
-	{
-		return match($field->type)
-		{
-			'tinyint' => 'checkbox',
-			'text' => 'textarea',
-			'enum' => 'select',
-			'date' => 'date',
-			'int' => 'number',
-			default => 'text'
-		};
-	} */
 
 	private function getOptions($field, $entityName)
 	{
@@ -276,16 +308,16 @@ EOD;
 
 	private function messageArray($field, $entityName)
 	{
-		//$type = $this->arrayType($field);
 		return match($field->type)
 		{
-			'text' => "\n	<label>{$field->name}</label>\n	<textarea id='{$field->name}' name='{$field->name}'><?= isset(\$item) ? \$item->{$field->name} : '' ?></textarea>",
-			'enum' => "\n	<label>{$field->name}</label>\n	<div>\n		<select id='{$field->name}' name='{$field->name}'>\n			<option>--Please choose an option--</option>\n".$this->getOptions($field, $entityName)."		</select>\n	</div>\n",
-			'date' => "\n	<label>{$field->name}</label>\n	<input type='date' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
-			'datetime' => "\n	<label>{$field->name}</label>\n	<input type='date' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
-			'int' => "\n	<label>{$field->name}</label>\n	<input type='number' id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
-			'tinyint' => "\n	<label>{$field->name}</label>\n	<div>\n		<input type='checkbox' id='{$field->name}' name='{$field->name}' value='1' <?= (isset(\$item) && \$item->{$field->name}) ? 'checked' : '' ?>>\n	</div>\n",
-			default => "\n	<label>{$field->name}</label>\n	<input type='text' onchange=\"setUpper(document.getElementById('{$field->name}'));\" id='{$field->name}' name='{$field->name}' value='<?= isset(\$item) ? \$item->{$field->name} : '' ?>' class='form-control' required>\n",
+			'text' 		=> "\n	<-- Type a short explication -->\n	<label>{$field->name}</label>\n	<textarea onchange=\"setUpper(document.getElementById('{$field->name}'));\" id=\"{$field->name}\" name=\"{$field->name}\" class=\"form-control\"><?= isset($item) ? $item->{$field->name} : '' ?></textarea>",
+			'enum' 		=> "\n	<-- Select value -->\n	<label>{$field->name}</label>\n	<div>\n		<select id=\"{$field->name}\" name=\"{$field->name}\" class=\"form-control\" required>\n			<option value=\"\" disabled selected hidden> Choississez une option </option>\n".$this->getOptions($field, $entityName)."		</select>\n	</div>\n",
+			'date' 		=> "\n	<-- Type date -->\n	<label>{$field->name}</label>\n	<input type=\"date\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"<?= isset(\$item) ? \$item->{$field->name} : '' ?>\" class=\"form-control\" required>\n",
+			'datetime' 	=> "\n	<-- Type date -->\n	<label>{$field->name}</label>\n	<input type=\"date\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"<?= isset(\$item) ? \$item->{$field->name} : '' ?>\" class=\"form-control\" required>\n",
+			'int' 		=> "\n	<-- Type number -->	<label>{$field->name}</label>\n	<input type=\"number\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"<?= isset(\$item) ? \$item->{$field->name} : '' ?>\" class=\"form-control\" required>\n",
+			'tinyint' 	=> "\n	<!-- Check your $field->name -->\n	<label>{$field->name}</label>\n	<div>\n		<input type=\"checkbox\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"1\" <?= (isset(\$item) && \$item->{$field->name}) ? 'checked' : '' ?>>\n	</div>\n",
+			'password'	=> "\n	<!-- Type password -->\n	<label>{$field->name}</label>\n	<input type=\"password\" id=\"{field->name}\" name=\"{field->name}\" class=\"form-control\" minlength=\"16\" maxlength=\"32\" placeholder=\"Mot de passe requi entre 16 et 32 caractères\" required>\n",
+			default 	=> "\n	<!-- Type $field->name -->\n	<label>{$field->name}</label>\n	<input type=\"text\" onchange=\"setUpper(document.getElementById('{$field->name}'));\" id=\"{$field->name}\" name=\"{$field->name}\" value=\"<?= isset(\$item) ? \$item->{$field->name} : '' ?>\" class=\"form-control\" required>\n",
 		};
 	}
 
@@ -309,14 +341,15 @@ EOD;
 			$inputs .= $this->messageArray($field, $entityName);
 			if ($type != 'create')
 			{
-				$inputs .= "	<input type='hidden' id='old{$field->name}' name='old{$field->name}' value='<?= isset(\$item) ? \$item->$field->name : '' ?>'>\n";
+				$inputs .= "	<input type=\"hidden\" id=\"old{$field->name}\" name=\"old{$field->name}\" value=\"<?= isset(\$item) ? \$item->$field->name : '' ?>\">\n";
 				if ($field->type == 'tinyint')
-					$validationJS .= 	"		let {$field->name} = (document.getElementById('{$field->name}').checked ? 1 : 0 );\n";
+					$validationJS .= 	"		// Get values\n		let {$field->name} = (document.getElementById('{$field->name}').checked ? 1 : 0 );\n";
 				else
-					$validationJS .=	"		let {$field->name} = document.getElementById('{$field->name}').value;\n";
+					$validationJS .=	"		// Get values\n		let {$field->name} = document.getElementById('{$field->name}').value;\n";
 
 				$validationJS .= 	"		let old{$field->name} = document.getElementById('old{$field->name}').value;\n".
-									"		row++;\n".
+									"		row++;\n\n".
+									"		// Check values \n".
 									"		if ({$field->name} == old{$field->name})\n		{\n".
 									"			compare++;\n".
 									"		}\n\n";
@@ -324,11 +357,14 @@ EOD;
 		}
 		if ($type != 'create') {
 			$onsubmit = ' onsubmit="return validateForm()"';
-			$startfunction = 	'	function validateForm()'."\n".
-								'	{'."\n".
+			$startfunction =	''."\n\n".
+								'	function validateForm()'."\n".
+								'	{'."\n\n".
+								'		// Count'."\n".
 								'		let compare = 0;'."\n".
 								'		let row = 0;'."\n\n".
 								$validationJS.
+								'		// Check counts'."\n".
 								'		if (compare == row)'."\n".
 								'		{'."\n".
 								'			alert("les valeurs sont identiques");'."\n".
@@ -345,20 +381,123 @@ EOD;
 
 <form method="post" action="<?= site_url($action) ?>"{$onsubmit}>
 $inputs
+	<!-- Redirection button -->
 	<a href="<?= site_url('$entityName') ?>" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 
+
 <script>
+	// Caps text
 	function setUpper(element)
 	{
 		element.value=element.value.toUpperCase();
-	}
-$startfunction
+	}$startfunction
 </script>
 
 <?= \$this->endSection() ?>
 EOD;
+	}
+
+
+	private function generateLayout()
+	{
+		return <<<EOD
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><?= \$title ?? 'Mon Site' ?></title> <!-- Page title (fallback to "Mon Site" if \$title is not set) -->
+
+	<!-- Bootstrap CSS for styling -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?= base_url('css/main.css') ?>">
+
+</head>
+<body class="<?= \$page ?? '' ?>">
+
+	<!-- Main page content container -->
+	<div class="container mt-5">
+		<?= \$this->renderSection('content') ?> <!-- Content from each specific page -->
+	</div>
+
+	<!-- Bootstrap JS bundle for interactivity -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+EOD;
+	}
+
+	private function generateCss()
+	{
+		return <<<EOD
+/* Responsive table layout: display rows as cards on small screens */
+@media only screen and (max-width: 700px) {
+
+	/* Transform all table elements into block layout to stack vertically */
+	.table-responsive table,
+	.table-responsive thead,
+	.table-responsive tbody,
+	.table-responsive tr,
+	.table-responsive th,
+	.table-responsive td {
+		display: block;
+		width: 100%;
+	}
+
+	/* Optional: reduce default spacing to make cards more compact */
+	.table-responsive tr {
+		padding: 0;                      /* Less padding to keep it compact */
+	}
+
+	/* Hide the table header (labels will be shown via ::before) */
+	.table-responsive thead {
+		display: none;
+	}
+
+	/* Style individual table cells for card layout */
+	.table-responsive td {
+		position: relative;                         /* Needed for positioning ::before */
+		padding: 0.75rem 0.75rem 0.25rem 140px;     /* Padding with space on the left for label */
+		border: none;
+		background: white;
+		line-height: 1.2;                           /* Reduce line spacing */
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;                        /* Optional: force text to stay on one line */
+	}
+
+	/* Display the data-label as a label on the left side */
+	.table-responsive td::before {
+		content: attr(data-label);             /* Use the data-label attribute for the label */
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;                         /* Match the height of the cell */
+		width: 120px;                         /* Label column width */
+		color: rgb(0, 0, 0);
+		padding: 0.75rem;
+		font-size: 0.9rem;
+		font-weight: bold;
+		display: flex;
+		align-items: center;                  /* Vertically center the text */
+		justify-content: flex-start;
+		border-top-left-radius: 0.25rem;
+		border-bottom-left-radius: 0.25rem;
+		line-height: 1.1;
+	}
+
+	.table-bordered > :not(caption) > * {
+		border-width: 0;
+	}
+
+	.td-hidden {
+		display: none !important;
+	}
+}
+EOD;
+
 	}
 }
 
