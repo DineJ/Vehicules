@@ -2,9 +2,6 @@
 <?= $this->section('content') ?>
 
 <h2>Liste des Ips</h2>
-<a href="<?= site_url('Ip/create') ?>" class="btn btn-success">Ajouter</a>
-
-
 
 <div class="table-responsive">
 	<table class="table table-striped table-bordered mt-3">
@@ -12,9 +9,8 @@
 		<!-- Datas name -->
 		<thead>
 			<tr>
-				<th>adresse_ip</th>
-				<th>nb_echec</th>
-				<th>Actions</th>
+				<th>Adresse IP</th>
+				<th>Nombre d'échec</th>
 			</tr>
 		</thead>
 
@@ -23,12 +19,7 @@
 			<?php foreach ($items as $item): ?>
 				<tr>
 					<td data-label="adresse_ip"><?= esc($item->adresse_ip) ?></td>
-					<td data-label="nb_echec"><?= esc($item->nb_echec) ?></td>
-
-					<td>
-						<!-- Redirection button -->
-						<a href="<?= site_url('Ip/show/'.$item->id) ?>" class="btn btn-info btn-sm">Voir</a>
-					</td>
+					<td data-label="nb_echec"><?= esc($item->nb_echec) ?></td>	
 				</tr>
 			<?php endforeach; ?>
 		</tbody>
