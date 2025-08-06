@@ -25,6 +25,13 @@ class AdminController extends Controller
 			return redirect()->to('/User');
 		}
 
+		$db = db_connect();
+		$data['ip'] = $db->table('Ip')
+						 ->select(['adresse_ip'])
+						 ->where('nb_echec >', 2)
+						 ->get()
+						 ->getResult();
+
 		// Load admin view with title
 		$data['title'] = "Page d'administration";
 		return view('Admin/admin', $data);
