@@ -41,7 +41,7 @@
 	<h4> Utilisateur Bannis </h4>
 
 	<!-- Display banned user -->
-	<table class="table table-striped table-bordered mt-3">
+	<table class="table table-striped table-bordered mt-3 noBorder">
 		<tbody>
 			<?php foreach ($user as $users): ?>
 				<!-- Display users -->
