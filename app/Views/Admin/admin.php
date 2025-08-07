@@ -50,7 +50,7 @@
 	</table>
 
 	<!-- Redirection button -->
-	<a href="<?= site_url('Ip') ?>" class="btn btn-secondary">Retour vers ip</a>
+	<a href="<?= site_url('Ip') ?>" class="btn btn-secondary">Retour vers IP</a>
 
 	<br><br>
 
