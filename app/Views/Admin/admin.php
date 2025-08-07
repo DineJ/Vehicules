@@ -19,14 +19,15 @@
 					<td data-label="Adresse_ip"><?= esc($ips->adresse_ip) ?></td>
 					<td data-label="Action">
 
-					<form method="post" action="<?= site_url('Ip/update/'.$ips->id) ?>">
-						<!-- Enabled ip button -->
-						<input type="hidden" name="nb_echec" id="nb_echec" value="0"?>
-						<button type="submit" class="btn btn-danger btn-sm"> <?= $ips->adresse_ip = 'Rétablir IP' ?></button>
-					</form>
+						<form method="post" action="<?= site_url('Ip/update/'.$ips->id) ?>">
+							<!-- Enabled ip button -->
+							<input type="hidden" name="nb_echec" id="nb_echec" value="0"?>
+							<button type="submit" class="btn btn-danger btn-sm"> <?= $ips->adresse_ip = 'Rétablir IP' ?></button>
+						</form>
 					</td>
 				</tr>
 			<?php endforeach; ?>
+		</tbody>
 	</table>
 
 	<h4> Utilisateur Bannis </h4>
