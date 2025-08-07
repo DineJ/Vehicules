@@ -139,4 +139,12 @@ th {
 	text-align:start;
 	}
 
+	.centerTitle {
+		text-align: center;
+	}
+
+	.labelAlign {
+		text-align:start;
+		padding:0.75rem !important;
+	}
 }
