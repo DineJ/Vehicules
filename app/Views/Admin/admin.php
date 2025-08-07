@@ -15,9 +15,9 @@
 			<?php foreach ($ip as $ips): ?>
 				<!-- Display ip adress -->
 				<tr>
-					<td class="td-hidden">Adresse IP</td>
-					<td data-label="Adresse_ip"><?= esc($ips->adresse_ip) ?></td>
-					<td data-label="Action">
+					<td class="td-hidden table15pourcent">Adresse IP</td>
+					<td data-label="Adresse Ip"><?= esc($ips->adresse_ip) ?></td>
+					<td data-label="Action" class="actionend">
 
 						<form method="post" action="<?= site_url('Ip/update/'.$ips->id) ?>">
 							<!-- Enabled ip button -->
@@ -38,9 +38,9 @@
 			<?php foreach ($user as $users): ?>
 				<!-- Display users -->
 				<tr>
-					<td data-label="Nom"><?= esc($users->nom) ?></td>
+					<td data-label="Nom" class="table15pourcent"><?= esc($users->nom) ?></td>
 					<td data-label="Prénom"><?= esc($users->prenom) ?></td>
-					<td data-label="Action">
+					<td data-label="Action" class="actionend">
 
 						<form method="post" action="<?= site_url('User/update/'.$users->id) ?>">
 							<!-- Enabled account button -->

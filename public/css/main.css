@@ -55,6 +55,14 @@ th {
 	background-color: #f9f9f9;	/* Optional: Light background to visually separate the text */
 }
 
+.table15pourcent {
+	width:15%;
+}
+
+.actionend {
+	text-align:end;
+}
+
 /* Responsive table layout: display rows as cards on small screens */
 @media only screen and (max-width: 700px) {
 	/* Transform all table elements into block layout to stack vertically */
@@ -117,4 +125,13 @@ th {
 	.td-hidden {
 		display: none !important;
 	}
+
+	.table15pourcent {
+	width:100%;
+	}
+
+	.actionend {
+	text-align:start;
+	}
+
 }
