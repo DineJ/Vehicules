@@ -5,7 +5,6 @@ use CodeIgniter\Router\RouteCollection;
 
 // Routes pour Ip
 $routes->get('Ip', 'IpController::index');  // Route that leads to the display of all data
-$routes->get('Ip/show/(:num)', 'IpController::show/$1'); // Route that leads to the display of one specific data
 $routes->post('Ip/update/(:num)', 'IpController::update/$1'); // Route that leads to the update fuction of the DB
 
 

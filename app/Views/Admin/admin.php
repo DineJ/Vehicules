@@ -33,6 +33,11 @@
 		</tbody>
 	</table>
 
+	<!-- Redirection button -->
+	<a href="<?= site_url('Ip') ?>" class="btn btn-secondary">Retour vers ip</a>
+
+	<br><br>
+
 	<h4> Utilisateur Bannis </h4>
 
 	<!-- Display banned user -->
