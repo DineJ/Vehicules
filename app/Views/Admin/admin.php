@@ -22,7 +22,10 @@
 						<form method="post" action="<?= site_url('Ip/update/'.$ips->id) ?>">
 							<!-- Enabled ip button -->
 							<input type="hidden" name="nb_echec" id="nb_echec" value="0"?>
-							<button type="submit" class="btn btn-danger btn-sm"> <?= $ips->adresse_ip = 'Rétablir IP' ?></button>
+
+							<!-- Redirection button -->
+							<input type="hidden" name="redirect_url" value="<?= current_url(); ?>">
+							<button type="submit" class="btn btn-danger btn-sm"> Rétablir IP </button>
 						</form>
 					</td>
 				</tr>

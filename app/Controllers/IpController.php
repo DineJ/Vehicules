@@ -32,10 +32,17 @@ class IpController extends Controller
 		$data = $this->request->getPost();
 		$entity = $this->model->find($id);
 		$entity->fill($data);
+		$redirect_url = $this->request->getPost('redirect_url');
 
 		if (!$this->model->save($entity))
 		{
 			return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
+		}
+
+		// Redirect to the page URL
+		if (!empty($redirect_url))
+		{
+			return redirect()->to($redirect_url);
 		}
 
 		return redirect()->to('/Ip');
