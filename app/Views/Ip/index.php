@@ -18,8 +18,8 @@
 			<!-- Display datas -->
 			<?php foreach ($items as $item): ?>
 				<tr>
-					<td data-label="adresse_ip"><?= esc($item->adresse_ip) ?></td>
-					<td data-label="nb_echec"><?= esc($item->nb_echec) ?></td>	
+					<td data-label="Adresse Ip"><?= esc($item->adresse_ip) ?></td>
+					<td data-label="Nombre d'échec"><?= esc($item->nb_echec) ?></td>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>
