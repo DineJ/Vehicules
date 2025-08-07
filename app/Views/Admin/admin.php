@@ -62,7 +62,7 @@
 				<tbody>
 					<!-- None banned user -->
 					<tr>
-						<td>Aucune utilisateur banni</td>
+						<td>Aucun utilisateur banni</td>
 					</tr>
 		<?php
 		}
