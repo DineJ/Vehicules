@@ -32,6 +32,12 @@ class AdminController extends Controller
 						 ->get()
 						 ->getResult();
 
+		$data['user'] = $db->table('user')
+						   ->select(['id', 'nom', 'prenom', 'actif'])
+						   ->where('actif =', 0)
+						   ->get()
+						   ->getResult();
+
 		// Load admin view with title
 		$data['title'] = "Page d'administration";
 		return view('Admin/admin', $data);

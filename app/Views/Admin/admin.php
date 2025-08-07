@@ -28,6 +28,36 @@
 				</tr>
 			<?php endforeach; ?>
 	</table>
+
+	<h4> Utilisateur Bannis </h4>
+
+	<!-- Display banned user -->
+	<table class="table table-striped table-bordered mt-3">
+		<tbody>
+			<?php foreach ($user as $users): ?>
+				<!-- Display users -->
+				<tr>
+					<td data-label="Nom"><?= esc($users->nom) ?></td>
+					<td data-label="Prénom"><?= esc($users->prenom) ?></td>
+					<td data-label="Action">
+
+						<form method="post" action="<?= site_url('User/update/'.$users->id) ?>">
+							<!-- Enabled account button -->
+							<input type="hidden" name="actif" id="actif" value="1">
+
+							<!-- Redirection button -->
+							<input type="hidden" name="redirect_url" value="<?= current_url(); ?>">
+							<button type="submit" class="btn btn-danger btn-sm"> Rétablir utilisateur </button>
+						</form>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+		<t/body>
+	</table>
+
+	<!-- Redirection button -->
+	<a href="<?= site_url('User') ?>" class="btn btn-secondary">Retour vers utilisateur</a>
+
 </div>
 
 <?= $this->endSection() ?> <!-- End the content section -->
