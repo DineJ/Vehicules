@@ -44,7 +44,7 @@ class LoginController extends Controller
 		$db = db_connect();
 
 		// Get IP record if it exists
-		$ipRow = $db->table('IP')->where('adresse_ip', $ip)->get()->getRow();
+		$ipRow = $db->table('Ip')->where('adresse_ip', $ip)->get()->getRow();
 
 		if ($ipRow)
 		{
@@ -57,20 +57,20 @@ class LoginController extends Controller
 
 			// Increment failed attempt counter
 			$nbFails = $ipRow->nb_echec + 1;
-			$db->table('IP')
+			$db->table('Ip')
 				->where('adresse_ip', $ip)
 				->update(['nb_echec' => $nbFails]);
 		}
 		else
 		{
 			// Create a new IP record
-			$db->table('IP')->insert([
+			$db->table('Ip')->insert([
 				'adresse_ip' => $ip,
 				'nb_echec' => 1
 			]);
 
 			// Retrieve inserted IP record
-			$ipRow = $db->table('IP')->where('adresse_ip', $ip)->get()->getRow();
+			$ipRow = $db->table('Ip')->where('adresse_ip', $ip)->get()->getRow();
 		}
 
 		// Get submitted password and hash it
@@ -95,7 +95,7 @@ class LoginController extends Controller
 		}
 
 		// Reset failed attempts after successful login
-		$db->table('IP')
+		$db->table('Ip')
 			->where('adresse_ip', $ip)
 			->update(['nb_echec' => 0]);
 

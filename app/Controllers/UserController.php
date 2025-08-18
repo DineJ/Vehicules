@@ -93,6 +93,8 @@ class UserController extends Controller
 		{
 			$data = $this->request->getPost();
 			$entity = $this->model->find($id);
+			$redirect_url = $this->request->getPost('redirect_url');
+
 
 			$Changed = false;
 
@@ -120,6 +122,12 @@ class UserController extends Controller
 
 			if (!$this->model->save($entity)) {
 				return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
+			}
+
+			// Redirection vers l'URL d'origine
+			if (!empty($redirect_url))
+			{
+				return redirect()->to($redirect_url);
 			}
 
 			return redirect()->to('/User');

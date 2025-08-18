@@ -3,6 +3,11 @@
 use CodeIgniter\Router\RouteCollection;
 // Auto-generated routes
 
+// Routes pour Ip
+$routes->get('Ip', 'IpController::index');  // Route that leads to the display of all data
+$routes->post('Ip/update/(:num)', 'IpController::update/$1'); // Route that leads to the update fuction of the DB
+
+
 // Routes for Type_incident
 $routes->get('Type_incident', 'Type_incidentController::index'); // Route that leads to the display of all data
 $routes->get('Type_incident/show/(:num)', 'Type_incidentController::show/$1'); // Route that leads to the display of one specific data

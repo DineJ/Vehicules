@@ -54,6 +54,9 @@
 
 		<!-- Disabled account button -->
 		<input type="hidden" name="actif" id="actif" value="<?= $item->actif ? 0 : 1 ?>">
+
+		<!-- Redirection button -->
+		<input type="hidden" name="redirect_url" value="<?= current_url(); ?>">
 		<button type="submit" class="btn <?= $item->actif ? 'btn-danger' : 'btn-success' ?>"> <?= $item->actif ? 'Rendre inactif' : 'Rendre actif' ?></button>
 	</form>
 </div>
