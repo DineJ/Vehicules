@@ -147,4 +147,9 @@ th {
 		text-align:start;
 		padding:0.75rem !important;
 	}
+
+	.index .long-text {
+		max-width: unset !important;
+		display: flow-root !important;
+	}
 }

@@ -4,6 +4,7 @@
 <h2>Liste des Incidents</h2>
 <a href="<?= site_url('Incident/create') ?>" class="btn btn-success">Ajouter</a>
 
+<div class="table-responsive">
 <table class="table table-striped table-bordered mt-3">
 	<thead>
 		<!-- Display label -->
@@ -21,11 +22,11 @@
 		<!-- Loop to get datas corresponding to the id -->
 		<?php foreach ($items as $item): ?>
 			<tr>
-				<td><?= esc($vehiculeMap[$item->id_vehicule] ?? 'Inconnu') ?></td>
-				<td><?= esc(substr($item->date_incident, 0, 10)) ?></td>
-				<td class="long-text"><?= esc($item->explication_incident) ?></td>
-				<td><?= esc($userMap[$item->id_user] ?? 'Inconnu') ?></td>
-				<td><?= esc($typeIncidentMap[$item->id_type_incident] ?? 'Inconnu') ?></td>
+				<td data-label="Vehicule"><?= esc($vehiculeMap[$item->id_vehicule] ?? 'Inconnu') ?></td>
+				<td data-label="Date Incident"><?= esc(substr($item->date_incident, 0, 10)) ?></td>
+				<td data-label="Explication" class="long-text"><?= esc($item->explication_incident) ?></td>
+				<td data-label="Conducteur"><?= esc($userMap[$item->id_user] ?? 'Inconnu') ?></td>
+				<td data-label="Type Incident"><?= esc($typeIncidentMap[$item->id_type_incident] ?? 'Inconnu') ?></td>
 				<td>
 					<a href="<?= site_url('Incident/show/'.$item->id) ?>" class="btn btn-info">Voir</a>
 				</td>
