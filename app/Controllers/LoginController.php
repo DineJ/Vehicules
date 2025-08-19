@@ -48,18 +48,20 @@ class LoginController extends Controller
 
 		if ($ipRow)
 		{
-			// Block login if more than 2 failed attempts
-			if ($ipRow->nb_echec > 2)
-			{
-				session()->setFlashdata('error', 'Votre adresse IP est bloquee');
-				return redirect()->to('/Login');
-			}
+
 
 			// Increment failed attempt counter
 			$nbFails = $ipRow->nb_echec + 1;
 			$db->table('Ip')
 				->where('adresse_ip', $ip)
 				->update(['nb_echec' => $nbFails]);
+
+			// Block login if more than 2 failed attempts
+			if ($nbFails > 3)
+			{
+				session()->setFlashdata('error', 'Votre adresse IP est bloquee');
+				return redirect()->to('/Login');
+			}
 		}
 		else
 		{
