@@ -129,6 +129,7 @@ th {
 
 	.td-hidden {
 		display: none !important;
+		padding: inherit;
 	}
 
 	.table15pourcent {
@@ -151,5 +152,9 @@ th {
 	.index .long-text {
 		max-width: unset !important;
 		display: flow-root !important;
+	}
+
+	.label-permis {
+		padding: inherit !important;
 	}
 }
