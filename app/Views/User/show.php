@@ -62,7 +62,7 @@
 </div>
 
 <!-- Creation of a section license -->
-<div style="margin-left: 3rem; margin-top: 1.5rem; width: 85%; padding: 1rem; border: 1px solid #ccc; border-left: 4px solid #6f42c1; border-radius: 8px;">
+<div style="margin-left: 3rem; margin-top: 1.5rem; width: 95%; padding: 1rem; border: 1px solid #ccc; border-left: 4px solid #6f42c1; border-radius: 8px;">
 	<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
 		<h6 style="margin: 0; color: #6f42c1;">↳ Permis</h6>
 
@@ -79,7 +79,7 @@
 
 				<!-- User has no license yet -->
 				<tr>
-					<td>Pas de permis enregistrer</td>
+					<td class="label-permis">Pas de permis enregistrer</td>
 				</tr>
 	<?php
 	}
