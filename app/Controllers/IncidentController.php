@@ -83,11 +83,15 @@ class IncidentController extends Controller
 	public function create()
 	{
 
+		$selectedUserId = $this->request->getGet('user');
+
 		// Get all datas
 		$data['utilisateurs'] = $this->userModel->findAll();
 		$data['vehicules'] = $this->vehiculeModel->findAll();
 		$data['types_incident'] = $this->typeIncidentModel->findAll();
 		$data['title'] = "Créer Incident";
+		$data['selectedUserId'] = $selectedUserId;
+
 		return view('Incident/create', $data);
 	}
 

@@ -31,7 +31,8 @@
 	<select id="id_user" name="id_user" class="form-control" required>
 		<option value="">    Choisir un conducteur    </option>
 		<?php foreach ($utilisateurs as $u): ?>
-			<option value="<?= $u->id ?>" <?= (isset($item) && $item->id_user == $u->id) ? 'selected' : '' ?>>
+			<option value="<?= $u->id ?>"
+			<?= ((isset($item) && $item->id_user == $u->id) || (!empty($selectedUserId) && $selectedUserId == $u->id)) ? 'selected' : '' ?>>
 				<?= $u->prenom . ' ' . $u->nom ?>
 			</option>
 		<?php endforeach; ?>
@@ -49,7 +50,7 @@
 	</select>
 
 		<!-- Redirection button -->
-	<a href="<?= site_url('Incident') ?>" class="btn btn-secondary mt-3">Retour</a>
+	<a href="<?= (!empty($selectedUserId)) ? site_url('User/show/'.$selectedUserId) : site_url('Incident') ?>" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 

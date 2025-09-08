@@ -52,6 +52,10 @@
 		<!-- Redirection button to edit user form-->
 		<a href="<?= site_url('User/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
 
+		<!-- Redirection button to create incident form -->
+		<a href="<?= site_url('Incident/create') ?>?user=<?= $item->id?>" class="btn btn-warning">Ajouter incident</a>
+
+
 		<!-- Disabled account button -->
 		<input type="hidden" name="actif" id="actif" value="<?= $item->actif ? 0 : 1 ?>">
 
