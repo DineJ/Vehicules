@@ -39,7 +39,9 @@
 	</select>
 
 	<!-- Display all incident types in a list -->
- 	<label for="id_type_incident">Vehicule</label>
+	<div class="mb-3">
+	<label for="id_type_incident">Vehicule</label>
+	<div class="input-group">
 	<select id="id_type_incident" name="id_type_incident" class="form-control" required>
 		<option value="">    Choisir un type d'incident    </option>
 		<?php foreach ($types_incident as $ti): ?>
@@ -48,6 +50,10 @@
 			</option>
 		<?php endforeach; ?>
 	</select>
+	<!-- Redirection button to create incident type form-->
+	<a href="<?= site_url('Type_incident/create/') ?>" class="btn btn-purple" title="Ajouter un type">+</a>
+	</div>
+	</div>
 
 		<!-- Redirection button -->
 	<a href="<?= (!empty($selectedUserId)) ? site_url('User/show/'.$selectedUserId) : site_url('Incident') ?>" class="btn btn-secondary mt-3">Retour</a>
