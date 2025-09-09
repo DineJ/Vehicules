@@ -51,7 +51,7 @@
 		<?php endforeach; ?>
 	</select>
 	<!-- Redirection button to create incident type form-->
-	<a href="<?= site_url('Type_incident/create/') ?>" class="btn btn-purple" title="Ajouter un type">+</a>
+	<a href="<?= site_url('Type_incident/create/?from=incident') ?>" class="btn btn-purple" title="Ajouter un type">+</a>
 	</div>
 	</div>
 

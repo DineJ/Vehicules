@@ -34,6 +34,7 @@ class Type_incidentController extends Controller
 	// FORMULAIRE DE CRÉATION
 	public function create()
 	{
+		$data['fromIncident'] = $this->request->getGet('from');
 		$data['title'] = "Créer Type_incident";
 		return view('Type_incident/create', $data);
 	}
