@@ -45,10 +45,6 @@
 		<!-- Redirection button -->
 		<a href="<?= site_url('Incident') ?>" class="btn btn-secondary">Retour</a>
 		<a href="<?= site_url('Incident/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
-
-		<!-- Redirection button to create type_incident form -->
-		<a href="<?= site_url('Type_incident/create') ?>?user=<?= $item->id?>" class="btn btn-warning">Ajouter type incident</a>
-
 	</form>
 </div>
 
