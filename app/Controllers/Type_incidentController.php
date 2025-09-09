@@ -49,7 +49,12 @@ class Type_incidentController extends Controller
 		if (!$this->model->insert($entity)) {
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
 		}
-		
+
+		if (isset($data['from']) && $data['from'] === 'incident')
+		{
+			return redirect()->to('/Incident/create');
+		}
+
 		return redirect()->to('/Type_incident');
 	}
 

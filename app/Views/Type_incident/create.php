@@ -2,7 +2,6 @@
 <?= $this->section('content') ?>
 
 <h2>Type_incident - <?= $title ?></h2>
-
 <form method="post" action="<?= site_url('Type_incident/store/') ?>">
 
 	<label>nom</label>
@@ -13,7 +12,11 @@
 		<input type='checkbox' id='critique' name='critique' value='1' <?= (isset($item) && $item->critique) ? 'checked' : '' ?>>
 	</div>
 
-	<a href="<?= ($fromIncident === 'incident') ? site_url('Incident/create') : site_url('Type_incident') ?>" class="btn btn-secondary mt-3">Retour</a>
+	 <?php if (!empty($fromIncident) && $fromIncident === 'incident'): ?>
+		<input type="hidden" name="from" value="incident">
+	<?php endif; ?>
+
+	<a href="<?= (isset($fromIncident) && $fromIncident === 'incident') ? site_url('Incident/create') : site_url('Type_incident') ?>" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 
