@@ -51,7 +51,7 @@
 			</select>
 
 			<!-- Redirection button to create incident type form-->
-			<a href="<?= site_url('Type_incident/create/?from=incident') ?>" class="btn btn-purple" title="Ajouter un type">+</a>
+			<a href="<?= site_url('Type_incident/create/?from=incident') ?>" id="btnAddTypeIncident" class="btn btn-purple" title="Ajouter un type">+</a>
 		</div>
 	</div>
 
@@ -61,17 +61,21 @@
 </form>
 
 <script>
-
 	// Caps text
 	function setUpper(element)
 	{
 		element.value=element.value.toUpperCase();
 	}
 
+	// Fields to save
+	const fields = ["id_vehicule", "date_incident", "explication_incident", "id_user", "id_type_incident" ];
 	window.addEventListener("DOMContentLoaded", () =>
 	{
-		// Fields to save
-		const fields = ["id_vehicule", "date_incident", "explication_incident", "id_user", "id_type_incident" ];
+		const data = "<?= isset($fromTypeIncident) ? $fromTypeIncident : '' ?>";
+		if(data !== 'type_incident')
+		{
+			localStorage.clear();
+		}
 
 		// Display saved datas
 		fields.forEach(id =>
@@ -96,13 +100,12 @@
 				localStorage.setItem(id, el.value);
 			});
 		});
+	});
 
-		// Delete datas after submit
-		const form = document.getElementById("incidentForm");
-		form.addEventListener("submit", () =>
-		{
-			fields.forEach(id => localStorage.removeItem(id));
-		});
+	// Delete datas after submit
+	document.getElementById("incidentForm").addEventListener("submit", () =>
+	{
+		fields.forEach(id => localStorage.removeItem(id));
 	});
 </script>
 

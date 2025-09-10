@@ -57,7 +57,7 @@ class Type_incidentController extends Controller
 
 		if (isset($data['from']) && $data['from'] === 'incident')
 		{
-			return redirect()->to('/Incident/create');
+			return redirect()->to('/Incident/create?from=type_incident');
 		}
 
 		return redirect()->to('/Type_incident');
