@@ -24,8 +24,6 @@
 	<label>Explication Incident</label>
 	<textarea onchange="setUpper(document.getElementById('explication_incident'));" id='explication_incident' name='explication_incident' class='form-control'><?= isset($item) ? $item->explication_incident : '' ?></textarea>
 
-	</br>
-
 	<!-- Display all drivers into a list -->
 	<label for="id_user">Conducteur</label>
 	<select id="id_user" name="id_user" class="form-control" required>
