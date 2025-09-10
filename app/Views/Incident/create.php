@@ -32,7 +32,7 @@
 		<option value="">    Choisir un conducteur    </option>
 		<?php foreach ($utilisateurs as $u): ?>
 			<option value="<?= $u->id ?>"
-			<?= ((isset($item) && $item->id_user == $u->id) || (!empty($selectedUserId) && $selectedUserId == $u->id)) ? 'selected' : '' ?>>
+				<?= ((isset($item) && $item->id_user == $u->id) || (!empty($selectedUserId) && $selectedUserId == $u->id)) ? 'selected' : '' ?>>
 				<?= $u->prenom . ' ' . $u->nom ?>
 			</option>
 		<?php endforeach; ?>
@@ -40,22 +40,24 @@
 
 	<!-- Display all incident types in a list -->
 	<div class="mb-3">
-	<label for="id_type_incident">Vehicule</label>
-	<div class="input-group">
-	<select id="id_type_incident" name="id_type_incident" class="form-control" required>
-		<option value="">    Choisir un type d'incident    </option>
-		<?php foreach ($types_incident as $ti): ?>
-			<option value="<?= $ti->id ?>" <?= ((isset($item) && $item->id_type_incident == $ti->id) || (!empty($selectedTypeIncident) && $selectedTypeIncident == $ti->id)) ? 'selected' : '' ?>>
-				<?= $ti->nom ?>
-			</option>
+		<label for="id_type_incident">Vehicule</label>
+		<div class="input-group">
+			<select id="id_type_incident" name="id_type_incident" class="form-control" required>
+				<option value="">    Choisir un type d'incident    </option>
+				<?php foreach ($types_incident as $ti): ?>
+				<option value="<?= $ti->id ?>"
+					<?= ((isset($item) && $item->id_type_incident == $ti->id) || (!empty($selectedTypeIncident) && $selectedTypeIncident == $ti->id)) ? 'selected' : '' ?>>
+					<?= $ti->nom ?>
+				</option>
 		<?php endforeach; ?>
-	</select>
-	<!-- Redirection button to create incident type form-->
-	<a href="<?= site_url('Type_incident/create/?from=incident') ?>" class="btn btn-purple" title="Ajouter un type">+</a>
-	</div>
+			</select>
+
+			<!-- Redirection button to create incident type form-->
+			<a href="<?= site_url('Type_incident/create/?from=incident') ?>" class="btn btn-purple" title="Ajouter un type">+</a>
+		</div>
 	</div>
 
-		<!-- Redirection button -->
+	<!-- Redirection button -->
 	<a href="<?= (!empty($selectedUserId)) ? site_url('User/show/'.$selectedUserId) : site_url('Incident') ?>" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>

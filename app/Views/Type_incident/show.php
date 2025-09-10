@@ -2,7 +2,7 @@
 <?= $this->section('content') ?>
 
 <div class="container mt-5">
-<h2>Détails de Type_incident</h2>
+<h2>Détails de type d'incident</h2>
 
 <div class="table-responsive">
 	<table class="table table-striped table-bordered mt-3">
@@ -10,13 +10,13 @@
 
 			<!-- Display nom -->
 			<tr>
-				<td class="td-hidden">nom</td>
+				<td class="td-hidden">Nom</td>
 				<td data-label="nom"><?= $item->nom ?></td>
 			</tr>
 
 			<!-- Display critique -->
 			<tr>
-				<td class="td-hidden">critique</td>
+				<td class="td-hidden">Critique</td>
 				<td data-label="critique"><?= $item->critique ? 'Oui' : 'Non' ?></td>
 			</tr>
 		</tbody>

@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<h2>Liste des Type_incidents</h2>
+<h2>Liste des types d'incidents</h2>
 <a href="<?= site_url('Type_incident/create') ?>" class="btn btn-success">Ajouter</a>
 
 
@@ -12,8 +12,8 @@
 		<!-- Datas name -->
 		<thead>
 			<tr>
-				<th>nom</th>
-				<th>critique</th>
+				<th>Nom</th>
+				<th>Critique</th>
 				<th>Actions</th>
 			</tr>
 		</thead>

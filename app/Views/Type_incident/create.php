@@ -1,13 +1,13 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<h2>Type_incident - <?= $title ?></h2>
+<h2> <?= $title ?></h2>
 <form method="post" action="<?= site_url('Type_incident/store/') ?>">
 
-	<label>nom</label>
+	<label>Nom</label>
 	<input type='text' onchange="setUpper(document.getElementById('nom'));" id='nom' name='nom' value='<?= isset($item) ? $item->nom : '' ?>' class='form-control' required>
 
-	<label>critique</label>
+	<label>Critique</label>
 	<div>
 		<input type='checkbox' id='critique' name='critique' value='1' <?= (isset($item) && $item->critique) ? 'checked' : '' ?>>
 	</div>

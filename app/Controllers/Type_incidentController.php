@@ -15,31 +15,33 @@ class Type_incidentController extends Controller
 		$this->model = new Type_incidentModel();
 	}
 
-	// LISTE AVEC PAGINATION
+	// Display datas
 	public function index()
 	{
-		$data['items'] = $this->model->paginate(5); // Affiche 5 résultats par page
-		$data['pager'] = $this->model->pager; // Ajoute le pager
+		$data['items'] = $this->model->paginate(5);
+		$data['pager'] = $this->model->pager;
 
 		return view('Type_incident/index', $data);
 	}
 
-	// AFFICHAGE D'UN SEUL ÉLÉMENT
+	// Show an element
 	public function show($id)
 	{
+		// Get id
 		$data['item'] = $this->model->find($id);
 		return view('Type_incident/show', $data);
 	}
 
-	// FORMULAIRE DE CRÉATION
+	// Creation form
 	public function create()
 	{
+		// Get all datas
 		$data['fromIncident'] = $this->request->getGet('from');
-		$data['title'] = "Créer Type_incident";
+		$data['title'] = "Créer un type d'incident";
 		return view('Type_incident/create', $data);
 	}
 
-	// INSERTION DANS LA BASE
+	// Insert into DB
 	public function store()
 	{
 		$data = $this->request->getPost();
@@ -61,15 +63,16 @@ class Type_incidentController extends Controller
 		return redirect()->to('/Type_incident');
 	}
 
-	// FORMULAIRE DE MODIFICATION
+	// Edit form
 	public function edit($id)
 	{
+		// Get all datas
 		$data['item'] = $this->model->find($id);
-		$data['title'] = "Modifier Type_incident";
+		$data['title'] = "Modifier Type d'incident";
 		return view('Type_incident/edit', $data);
 	}
 
-	// MISE À JOUR DES DONNÉES
+	// Update datas
 	public function update($id)
 	{
 		$data = $this->request->getPost();
@@ -83,7 +86,7 @@ class Type_incidentController extends Controller
 		return redirect()->to('/Type_incident');
 	}
 
-	// SUPPRESSION D'UN ÉLÉMENT
+	// Delete an element (not used)
 	public function delete($id)
 	{
 		$this->model->delete($id);
