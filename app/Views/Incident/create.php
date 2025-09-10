@@ -3,7 +3,7 @@
 
 <h2>Incident - <?= $title ?></h2>
 
-<form method="post" action="<?= site_url('Incident/store/') ?>">
+<form method="post" id="incidentForm" action="<?= site_url('Incident/store/') ?>">
 
 	<!-- Display all vehicles into a list -->
 	<label for="id_vehicule">Vehicule</label>
@@ -70,6 +70,42 @@
 		element.value=element.value.toUpperCase();
 	}
 
+	window.addEventListener("DOMContentLoaded", () =>
+	{
+		// Fields to save
+		const fields = ["id_vehicule", "date_incident", "explication_incident", "id_user", "id_type_incident" ];
+
+		// Display saved datas
+		fields.forEach(id =>
+		{
+			const value = localStorage.getItem(id);
+			if (value)
+			{
+				document.getElementById(id).value = value;
+			}
+		});
+
+		// Save automatically
+		fields.forEach(id =>
+		{
+			const el = document.getElementById(id);
+			el.addEventListener("input", () =>
+			{
+				localStorage.setItem(id, el.value);
+			});
+			el.addEventListener("change", () =>
+			{
+				localStorage.setItem(id, el.value);
+			});
+		});
+
+		// Delete datas after submit
+		const form = document.getElementById("incidentForm");
+		form.addEventListener("submit", () =>
+		{
+			fields.forEach(id => localStorage.removeItem(id));
+		});
+	});
 </script>
 
 <?= $this->endSection() ?>
