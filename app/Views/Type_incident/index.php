@@ -23,7 +23,7 @@
 			<?php foreach ($items as $item): ?>
 				<tr>
 					<td data-label="nom"><?= esc($item->nom) ?></td>
-					<td data-label="critique"><?= esc($item->critique) ?></td>
+					<td data-label="critique"><?= esc($item->critique) ? 'Oui' : 'Non' ?></td>
 
 					<td>
 						<!-- Redirection button -->
