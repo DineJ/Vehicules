@@ -50,6 +50,9 @@ class Type_incidentController extends Controller
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
 		}
 
+		$insertedId = $this->model->getInsertID();
+		session()->setFlashdata('type_incident', $insertedId);
+
 		if (isset($data['from']) && $data['from'] === 'incident')
 		{
 			return redirect()->to('/Incident/create');

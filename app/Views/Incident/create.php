@@ -45,7 +45,7 @@
 	<select id="id_type_incident" name="id_type_incident" class="form-control" required>
 		<option value="">    Choisir un type d'incident    </option>
 		<?php foreach ($types_incident as $ti): ?>
-			<option value="<?= $ti->id ?>" <?= (isset($item) && $item->id_type_incident == $ti->id) ? 'selected' : '' ?>>
+			<option value="<?= $ti->id ?>" <?= ((isset($item) && $item->id_type_incident == $ti->id) || (!empty($selectedTypeIncident) && $selectedTypeIncident == $ti->id)) ? 'selected' : '' ?>>
 				<?= $ti->nom ?>
 			</option>
 		<?php endforeach; ?>

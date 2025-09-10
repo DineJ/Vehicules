@@ -82,8 +82,8 @@ class IncidentController extends Controller
 	// Creation form
 	public function create()
 	{
-
 		$selectedUserId = $this->request->getGet('user');
+		$selectedTypeIncident = session()->getFlashdata('type_incident');
 
 		// Get all datas
 		$data['utilisateurs'] = $this->userModel->findAll();
@@ -91,6 +91,7 @@ class IncidentController extends Controller
 		$data['types_incident'] = $this->typeIncidentModel->findAll();
 		$data['title'] = "Créer Incident";
 		$data['selectedUserId'] = $selectedUserId;
+		$data['selectedTypeIncident'] = $selectedTypeIncident;
 
 		return view('Incident/create', $data);
 	}
