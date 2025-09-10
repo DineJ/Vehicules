@@ -40,7 +40,7 @@
 
 	<!-- Display all incident types in a list -->
 	<div class="mb-3">
-		<label for="id_type_incident">Vehicule</label>
+		<label for="id_type_incident">Type incident</label>
 		<div class="input-group">
 			<select id="id_type_incident" name="id_type_incident" class="form-control" required>
 				<option value="">    Choisir un type d'incident    </option>
