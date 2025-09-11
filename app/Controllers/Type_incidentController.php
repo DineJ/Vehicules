@@ -48,6 +48,15 @@ class Type_incidentController extends Controller
 		$entity = new Type_incident();
 		$entity->fill($data);
 
+		// Value exist or not
+		$exists = $this->model->where('nom', $data['nom'])->first();
+
+		// Check if name is unique
+		if ($exists)
+		{
+			return redirect()->back()->with('error', 'Le nom doit être unique')->withInput();
+		}
+
 		if (!$this->model->insert($entity))
 		{
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');

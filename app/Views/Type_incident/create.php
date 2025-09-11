@@ -14,9 +14,17 @@
 		<input type='checkbox' id='critique' name='critique' value='1' <?= (isset($item) && $item->critique) ? 'checked' : '' ?>>
 	</div>
 
+
 	<!-- Track pathing -->
 	 <?php if (!empty($fromIncident) && $fromIncident === 'incident'): ?>
 		<input type="hidden" name="from" value="incident">
+	<?php endif; ?>
+
+	<!-- Catch error -->
+	<?php if (session()->getFlashdata('error')): ?>
+		<div class="alert alert-danger">
+			<?= session()->getFlashdata('error') ?>
+		</div>
 	<?php endif; ?>
 
 	<!-- Redirection button -->
