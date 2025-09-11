@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<h2> <?= $title ?></h2>
+<h2><?= $title ?></h2>
 <form method="post" action="<?= site_url('Type_incident/store/') ?>">
 
 	<!-- Type name -->
@@ -13,7 +13,6 @@
 	<div>
 		<input type='checkbox' id='critique' name='critique' value='1' <?= (isset($item) && $item->critique) ? 'checked' : '' ?>>
 	</div>
-
 
 	<!-- Track pathing -->
 	 <?php if (!empty($fromIncident) && $fromIncident === 'incident'): ?>

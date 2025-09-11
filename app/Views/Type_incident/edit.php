@@ -1,8 +1,7 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<h2>Type_incident - <?= $title ?></h2>
-
+<h2><?= $title ?></h2>
 <form method="post" action="<?= site_url('Type_incident/update/'.$item->id) ?>" onsubmit="return validateForm()">
 
 	<!-- Type name -->
@@ -22,6 +21,7 @@
 
 	<!-- Sumbit button -->
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
+
 </form>
 
 <script>

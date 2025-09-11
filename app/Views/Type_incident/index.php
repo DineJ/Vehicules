@@ -22,14 +22,14 @@
 				<tr>
 					<td data-label="Nom"><?= esc($item->nom) ?></td>
 					<td data-label="Critique"><?= esc($item->critique) ? 'Oui' : 'Non' ?></td>
-
-					<td>
+					<td data-label="Actions">
 						<!-- Redirection button -->
 						<a href="<?= site_url('Type_incident/show/'.$item->id) ?>" class="btn btn-info btn-sm">Voir</a>
 					</td>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>
+
 	</table>
 </div>
 
@@ -70,7 +70,7 @@
 
 			<!-- Button for next page -->
 			<li class="page-item <?= $pager->hasMore() ? '' : 'disabled' ?>"><a class="page-link" href="<?= $pager->getNextPageURI() ?>">Suivant</a></li>
-		  </ul>
+		</ul>
 	</nav>
 <?php } ?>
 
