@@ -15,90 +15,66 @@ class Type_incidentController extends Controller
 		$this->model = new Type_incidentModel();
 	}
 
-	// Display datas
+	// LISTE AVEC PAGINATION
 	public function index()
 	{
-		$data['items'] = $this->model->paginate(5); // Display 5 resultats
-		$data['pager'] = $this->model->pager; // Add pager
+		$data['items'] = $this->model->paginate(5); // Affiche 5 résultats par page
+		$data['pager'] = $this->model->pager; // Ajoute le pager
 
 		return view('Type_incident/index', $data);
 	}
 
-	// Show an element
+	// AFFICHAGE D'UN SEUL ÉLÉMENT
 	public function show($id)
 	{
-		// Get id
 		$data['item'] = $this->model->find($id);
 		return view('Type_incident/show', $data);
 	}
 
-	// Creation form
+	// FORMULAIRE DE CRÉATION
 	public function create()
 	{
-		// Get all datas
-		$data['fromIncident'] = $this->request->getGet('from');
-		$data['title'] = "Créer un type d'incident";
+		$data['title'] = "Créer Type_incident";
 		return view('Type_incident/create', $data);
 	}
 
-	// Insert into DB
+	// INSERTION DANS LA BASE
 	public function store()
 	{
 		$data = $this->request->getPost();
 		$entity = new Type_incident();
 		$entity->fill($data);
 
-		// Value exist or not
-		$exists = $this->model->where('nom', $data['nom'])->first();
-
-		// Check if name is unique
-		if ($exists)
-		{
-			return redirect()->back()->with('error', 'Le nom doit être unique')->withInput();
-		}
-
-		if (!$this->model->insert($entity))
-		{
+		if (!$this->model->insert($entity)) {
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
 		}
-
-		$insertedId = $this->model->getInsertID();
-		session()->setFlashdata('type_incident', $insertedId);
-
-		if (isset($data['from']) && $data['from'] === 'incident')
-		{
-			return redirect()->to('/Incident/create?from=type_incident');
-		}
-
+		
 		return redirect()->to('/Type_incident');
 	}
 
-	// Edit form
+	// FORMULAIRE DE MODIFICATION
 	public function edit($id)
 	{
-		// Get all datas
 		$data['item'] = $this->model->find($id);
-		$data['title'] = "Modifier Type d'incident";
+		$data['title'] = "Modifier Type_incident";
 		return view('Type_incident/edit', $data);
 	}
 
-	// Update datas
+	// MISE À JOUR DES DONNÉES
 	public function update($id)
 	{
 		$data = $this->request->getPost();
-		$data['critique'] = isset($data['critique']) ? 1 : 0;
 		$entity = $this->model->find($id);
 		$entity->fill($data);
 
-		if (!$this->model->save($entity))
-		{
+		if (!$this->model->save($entity)) {
 			return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
 		}
 
 		return redirect()->to('/Type_incident');
 	}
 
-	// Delete an element (not used)
+	// SUPPRESSION D'UN ÉLÉMENT
 	public function delete($id)
 	{
 		$this->model->delete($id);
