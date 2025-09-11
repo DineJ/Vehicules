@@ -76,6 +76,7 @@ class Type_incidentController extends Controller
 	public function update($id)
 	{
 		$data = $this->request->getPost();
+		$data['critique'] = isset($data['critique']) ? 1 : 0;
 		$entity = $this->model->find($id);
 		$entity->fill($data);
 

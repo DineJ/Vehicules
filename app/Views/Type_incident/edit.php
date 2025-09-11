@@ -12,8 +12,8 @@
 	<label>critique</label>
 	<div>
 		<input type='checkbox' id='critique' name='critique' value='1' <?= (isset($item) && $item->critique) ? 'checked' : '' ?>>
+		<input type='hidden' id='oldcritique' name='oldcritique' value='<?= (isset($item) && $item->critique) ? 1 : 0 ?>'>
 	</div>
-	<input type='hidden' id='oldcritique' name='oldcritique' value='<?= isset($item) ? $item->critique : '' ?>'>
 
 	<a href="<?= site_url('Type_incident') ?>" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
