@@ -67,6 +67,16 @@ th {
   border: none !important;
 }
 
+.btn-purple {
+	background-color: #6f42c1; /* violet Bootstrap officiel */
+	color: #fff;
+	border-color: #6f42c1;
+}
+
+.btn-purple:hover {
+	background-color: #6f42c1; /* légèrement plus foncé au survol */
+	border-color: #6f42c1;
+}
 
 /* Responsive table layout: display rows as cards on small screens */
 @media only screen and (max-width: 700px) {
