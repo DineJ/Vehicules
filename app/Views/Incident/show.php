@@ -45,6 +45,7 @@
 		<!-- Redirection button -->
 		<a href="<?= site_url('Incident') ?>" class="btn btn-secondary">Retour</a>
 		<a href="<?= site_url('Incident/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
+		
 	</form>
 </div>
 
