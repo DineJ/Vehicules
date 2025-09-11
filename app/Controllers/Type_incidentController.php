@@ -18,8 +18,8 @@ class Type_incidentController extends Controller
 	// Display datas
 	public function index()
 	{
-		$data['items'] = $this->model->paginate(5);
-		$data['pager'] = $this->model->pager;
+		$data['items'] = $this->model->paginate(5); // Display 5 resultats
+		$data['pager'] = $this->model->pager; // Add pager
 
 		return view('Type_incident/index', $data);
 	}
@@ -48,7 +48,8 @@ class Type_incidentController extends Controller
 		$entity = new Type_incident();
 		$entity->fill($data);
 
-		if (!$this->model->insert($entity)) {
+		if (!$this->model->insert($entity))
+		{
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
 		}
 
@@ -80,7 +81,8 @@ class Type_incidentController extends Controller
 		$entity = $this->model->find($id);
 		$entity->fill($data);
 
-		if (!$this->model->save($entity)) {
+		if (!$this->model->save($entity))
+		{
 			return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
 		}
 

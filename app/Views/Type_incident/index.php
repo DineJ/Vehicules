@@ -4,8 +4,6 @@
 <h2>Liste des types d'incidents</h2>
 <a href="<?= site_url('Type_incident/create') ?>" class="btn btn-success">Ajouter</a>
 
-
-
 <div class="table-responsive">
 	<table class="table table-striped table-bordered mt-3">
 
@@ -22,8 +20,8 @@
 			<!-- Display datas -->
 			<?php foreach ($items as $item): ?>
 				<tr>
-					<td data-label="nom"><?= esc($item->nom) ?></td>
-					<td data-label="critique"><?= esc($item->critique) ? 'Oui' : 'Non' ?></td>
+					<td data-label="Nom"><?= esc($item->nom) ?></td>
+					<td data-label="Critique"><?= esc($item->critique) ? 'Oui' : 'Non' ?></td>
 
 					<td>
 						<!-- Redirection button -->
