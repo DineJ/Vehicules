@@ -3,7 +3,17 @@
 use CodeIgniter\Router\RouteCollection;
 // Auto-generated routes
 
-// Routes pour Ip
+// Routes for Suivi
+$routes->get('Suivi', 'SuiviController::index');
+$routes->get('Suivi/show/(:num)', 'SuiviController::show/$1');
+$routes->get('Suivi/create', 'SuiviController::create');
+$routes->post('Suivi/store', 'SuiviController::store');
+$routes->get('Suivi/edit/(:num)', 'SuiviController::edit/$1');
+$routes->post('Suivi/update/(:num)', 'SuiviController::update/$1');
+$routes->get('Suivi/delete/(:num)', 'SuiviController::delete/$1');
+
+
+// Routes for Ip
 $routes->get('Ip', 'IpController::index');  // Route that leads to the display of all data
 $routes->post('Ip/update/(:num)', 'IpController::update/$1'); // Route that leads to the update fuction of the DB
 
