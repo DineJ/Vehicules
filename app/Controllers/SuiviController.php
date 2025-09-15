@@ -23,6 +23,20 @@ class SuiviController extends Controller
 	{
 		$data['items'] = $this->model->paginate(5); // Display 5 results
 		$data['pager'] = $this->model->pager; // Add pager
+
+		// Incident_id
+		$incidents = $this->incidentModel
+		->select('incident.id as incident_id, vehicule.id as vehicule_id, vehicule.plaque, incident.date_incident')
+		->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
+		->findAll();
+		$incidentMap = [];
+		foreach ($incidents as $i) {
+			$incidentMap[$i->incident_id] = $i->plaque . ', ' . substr($i->date_incident, 0, 10);
+		}
+
+		// Past datas to the view
+		$data['incidentMap'] = $incidentMap;
+
 		return view('Suivi/index', $data);
 	}
 

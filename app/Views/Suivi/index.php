@@ -23,8 +23,8 @@
 			<!-- Display datas -->
 			<?php foreach ($items as $item): ?>
 				<tr>
-					<td data-label="id_incident"><?= esc($item->id_incident) ?></td>
-					<td data-label="date_intervention"><?= esc($item->date_intervention) ?></td>
+					<td data-label="id_incident"><?= esc($incidentMap[$item->id_incident] ?? 'Inconnu') ?></td>
+					<td data-label="date_intervention"><?= esc(substr($item->date_intervention, 0, 10)) ?></td>
 					<td data-label="description"><?= esc($item->description) ?></td>
 
 					<td>
