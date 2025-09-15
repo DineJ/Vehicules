@@ -71,7 +71,10 @@ class SuiviController extends Controller
 	{
 		$data['item'] = $this->model->find($id);
 		$data['title'] = "Modifier Suivi";
-		$data['incidents'] = $this->incidentModel->findAll();
+		$data['incidents'] = $this->incidentModel
+		->select('incident.id as incident_id, vehicule.id as vehicule_id, vehicule.plaque, incident.date_incident')
+		->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
+		->findAll();
 
 		return view('Suivi/edit', $data);
 	}
