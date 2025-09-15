@@ -11,13 +11,13 @@
 			<!-- Display id_incident -->
 			<tr>
 				<td class="td-hidden">id_incident</td>
-				<td data-label="id_incident"><?= $item->id_incident ?></td>
+				<td data-label="id_incident"><?= $incident->plaque . ', ' . substr($incident->date_incident, 0, 10)?></td>
 			</tr>
 
 			<!-- Display date_intervention -->
 			<tr>
 				<td class="td-hidden">date_intervention</td>
-				<td data-label="date_intervention"><?= $item->date_intervention ?></td>
+				<td data-label="date_intervention"><?= substr($item->date_intervention, 0, 10) ?></td>
 			</tr>
 
 			<!-- Display description -->

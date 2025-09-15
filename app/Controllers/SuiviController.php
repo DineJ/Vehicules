@@ -31,7 +31,12 @@ class SuiviController extends Controller
 	public function show($id)
 	{
 		$data['item'] = $this->model->find($id);
-		$data['incident'] = $this->incidentModel->find($data['item']->id_incident);
+
+		// Get datas linked by id
+		$data['incident'] = $this->incidentModel
+		->select('incident.id as incident_id, vehicule.id as vehicule_id, vehicule.plaque, incident.date_incident')
+		->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
+		->find($data['item']->id_incident);
 
 		return view('Suivi/show', $data);
 	}
