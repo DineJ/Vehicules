@@ -17,12 +17,12 @@
 	</select>
 
 	<!-- Type date -->
-	<label>date_intervention</label>
+	<label>Date Intervention</label>
 	<input type="date" id="date_intervention" name="date_intervention" value="<?= isset($item) ? substr($item->date_intervention, 0, 10) : '' ?>" class="form-control" required>
 	<input type="hidden" id="olddate_intervention" name="olddate_intervention" value="<?= isset($item) ? substr($item->date_intervention, 0, 10) : '' ?>">
 
 	<!-- Type a short explication -->
-	<label>description</label>
+	<label>Description</label>
 	<textarea onchange="setUpper(document.getElementById('description'));" id="description" name="description" class="form-control"><?= isset($item) ? $item->description : '' ?></textarea>
 	<input type="hidden" id="olddescription" name="olddescription" value="<?= isset($item) ? $item->description : '' ?>">
 

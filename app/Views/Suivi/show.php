@@ -10,19 +10,19 @@
 
 			<!-- Display id_incident -->
 			<tr>
-				<td class="td-hidden">id_incident</td>
+				<td class="td-hidden">Incident</td>
 				<td data-label="id_incident"><?= $incident->plaque . ', ' . substr($incident->date_incident, 0, 10)?></td>
 			</tr>
 
 			<!-- Display date_intervention -->
 			<tr>
-				<td class="td-hidden">date_intervention</td>
+				<td class="td-hidden">Date Intervention</td>
 				<td data-label="date_intervention"><?= substr($item->date_intervention, 0, 10) ?></td>
 			</tr>
 
 			<!-- Display description -->
 			<tr>
-				<td class="td-hidden">description</td>
+				<td class="td-hidden">Description</td>
 				<td data-label="description"><?= $item->description ?></td>
 			</tr>
 		</tbody>
@@ -33,15 +33,11 @@
 <div>
 	<form method="post" action="<?= site_url('Suivi/update/'.$item->id) ?>">
 
+		<!-- Redirection button -->
+		<a href="<?= site_url('Suivi') ?>" class="btn btn-secondary">Retour</a>
 		<!-- Redirection button to edit user form -->
 		<a href="<?= site_url('Suivi/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
 
-		<!-- Disabled account button -->
-		
 	</form>
 </div>
-</br>
-
-<!-- Redirection button -->
-<a href="<?= site_url('Suivi') ?>" class="btn btn-secondary">Retour</a>
 <?= $this->endSection() ?>

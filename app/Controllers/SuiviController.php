@@ -31,7 +31,7 @@ class SuiviController extends Controller
 		->findAll();
 		$incidentMap = [];
 		foreach ($incidents as $i) {
-			$incidentMap[$i->incident_id] = $i->plaque . ', ' . substr($i->date_incident, 0, 10);
+			$incidentMap[$i->incident_id] = 'Vehicule : ' . $i->plaque . ' | Date : ' . substr($i->date_incident, 0, 10);
 		}
 
 		// Past datas to the view

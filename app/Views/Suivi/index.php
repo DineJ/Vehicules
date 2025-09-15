@@ -12,9 +12,9 @@
 		<!-- Datas name -->
 		<thead>
 			<tr>
-				<th>id_incident</th>
-				<th>date_intervention</th>
-				<th>description</th>
+				<th>Incident</th>
+				<th>Date Intervention</th>
+				<th>Description</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -24,7 +24,7 @@
 			<?php foreach ($items as $item): ?>
 				<tr>
 					<td data-label="id_incident"><?= esc($incidentMap[$item->id_incident] ?? 'Inconnu') ?></td>
-					<td data-label="date_intervention"><?= esc(substr($item->date_intervention, 0, 10)) ?></td>
+					<td data-label="date_intervention" ><?= esc(substr($item->date_intervention, 0, 10)) ?></td>
 					<td data-label="description"><?= esc($item->description) ?></td>
 
 					<td>

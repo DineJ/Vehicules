@@ -17,18 +17,18 @@
 	</select>
 
 	<!-- Type date -->
-	<label>date_intervention</label>
+	<label>Date Intervention</label>
 	<input type="date" id="date_intervention" name="date_intervention" value="<?= isset($item) ? $item->date_intervention : '' ?>" class="form-control" required>
 
 	<!-- Type a short explication -->
-	<label>description</label>
+	<label>Description</label>
 	<textarea onchange="setUpper(document.getElementById('description'));" id="description" name="description" class="form-control"><?= isset($item) ? $item->description : '' ?></textarea>
 
 	<!-- Redirection button -->
 	<a href="<?= site_url('Suivi') ?>" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
-</form>
 
+</form>
 
 <script>
 	// Caps text
