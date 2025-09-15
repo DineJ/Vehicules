@@ -5,9 +5,16 @@
 
 <form method="post" action="<?= site_url('Suivi/store/') ?>">
 
-	<!-- Type number -->
-	<label>id_incident</label>
-	<input type="number" id="id_incident" name="id_incident" value="<?= isset($item) ? $item->id_incident : '' ?>" class="form-control" required>
+	<!-- Display all incident into a list -->
+	<label for="id_incident">Incident</label>
+	<select id="id_incident" name="id_incident" class="form-control" required>
+		<option value="">    Choisir un incident    </option>
+		<?php foreach ($incidents as $i): ?>
+			<option value="<?= $i->incident_id ?>"<?= (isset($item) && $item->id_incident == $i->incident_id) ? 'selected' : '' ?>>
+				<?= $i->plaque . ', ' . date('m/d/Y', strtotime($i->date_incident)) ?>
+			</option>
+		<?php endforeach; ?>
+	</select>
 
 	<!-- Type date -->
 	<label>date_intervention</label>
