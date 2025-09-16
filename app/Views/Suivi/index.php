@@ -23,9 +23,9 @@
 			<!-- Display datas -->
 			<?php foreach ($items as $item): ?>
 				<tr>
-					<td data-label="id_incident"><?= esc($incidentMap[$item->id_incident] ?? 'Inconnu') ?></td>
-					<td data-label="date_intervention" ><?= esc(substr($item->date_intervention, 0, 10)) ?></td>
-					<td data-label="description" class="long-text"><?= esc($item->description) ?></td>
+					<td data-label="Incident" class="long-text"><?= esc($incidentMap[$item->id_incident] ?? 'Inconnu') ?></td>
+					<td data-label="Date Intervention" ><?= esc(substr($item->date_intervention, 0, 10)) ?></td>
+					<td data-label="Description" class="long-text"><?= esc($item->description) ?></td>
 
 					<td>
 						<!-- Redirection button -->

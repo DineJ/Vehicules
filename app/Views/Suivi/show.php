@@ -4,26 +4,25 @@
 <div class="container mt-5">
 <h2>Détails de Suivi</h2>
 
-<div class="table-responsive">
 	<table class="table table-striped table-bordered mt-3">
 		<tbody>
 
 			<!-- Display id_incident -->
 			<tr>
-				<td class="td-hidden">Incident</td>
-				<td data-label="id_incident"><?= $incident->plaque . ', ' . substr($incident->date_incident, 0, 10)?></td>
+				<td>Incident</td>
+				<td data-label="Incident"><?= $incident->plaque . ', ' . substr($incident->date_incident, 0, 10)?></td>
 			</tr>
 
 			<!-- Display date_intervention -->
 			<tr>
-				<td class="td-hidden">Date Intervention</td>
-				<td class="long-text" data-label="date_intervention"><?= substr($item->date_intervention, 0, 10) ?></td>
+				<td>Date Intervention</td>
+				<td data-label="Date Intervention"><?= substr($item->date_intervention, 0, 10) ?></td>
 			</tr>
 
 			<!-- Display description -->
 			<tr>
-				<td class="td-hidden">Description</td>
-				<td data-label="description"><?= $item->description ?></td>
+				<td>Description</td>
+				<td class="long-text"><?= $item->description ?></td>
 			</tr>
 		</tbody>
 	</table>
