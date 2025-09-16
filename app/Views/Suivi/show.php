@@ -2,8 +2,7 @@
 <?= $this->section('content') ?>
 
 <div class="container mt-5">
-<h2>Détails de Suivi</h2>
-
+	<h2>Détails de Suivi</h2>
 	<table class="table table-striped table-bordered mt-3">
 		<tbody>
 
@@ -24,6 +23,7 @@
 				<td>Description</td>
 				<td class="long-text"><?= $item->description ?></td>
 			</tr>
+
 		</tbody>
 	</table>
 </div>
@@ -39,4 +39,5 @@
 
 	</form>
 </div>
+
 <?= $this->endSection() ?>

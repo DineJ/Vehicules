@@ -18,6 +18,7 @@ class SuiviController extends Controller
 		$this->incidentModel = new IncidentModel();
 	}
 
+
 	// SEARCH BAR
 	public function index()
 	{
@@ -25,11 +26,13 @@ class SuiviController extends Controller
 		$data['pager'] = $this->model->pager; // Add pager
 		$data['page'] = 'index'; // Page identifier for css style
 
-		// Incident_id
+		// Query to get datas
 		$incidents = $this->incidentModel
 		->select('incident.id as incident_id, vehicule.id as vehicule_id, vehicule.plaque, incident.date_incident')
 		->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
 		->findAll();
+
+		// Mapping id with value
 		$incidentMap = [];
 		foreach ($incidents as $i) {
 			$incidentMap[$i->incident_id] = 'Vehicule : ' . $i->plaque . ' | Date : ' . substr($i->date_incident, 0, 10);
@@ -48,7 +51,7 @@ class SuiviController extends Controller
 		$data['item'] = $this->model->find($id);
 		$data['page'] = 'show'; // Page identifier for css style
 
-		// Get datas linked by id
+		// Query to get datas
 		$data['incident'] = $this->incidentModel
 		->select('incident.id as incident_id, vehicule.id as vehicule_id, vehicule.plaque, incident.date_incident')
 		->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
@@ -61,12 +64,13 @@ class SuiviController extends Controller
 	// CREATION FORM
 	public function create()
 	{
-		$data['title'] = "Créer Suivi";
+		$data['title'] = "Créer Suivi"; 
+
+		// Query to get datas
 		$data['incidents'] = $this->incidentModel
 		->select('incident.id as incident_id, vehicule.id as vehicule_id, vehicule.plaque, incident.date_incident')
 		->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
 		->findAll();
-
 
 		return view('Suivi/create', $data);
 	}
@@ -92,6 +96,8 @@ class SuiviController extends Controller
 	{
 		$data['item'] = $this->model->find($id);
 		$data['title'] = "Modifier Suivi";
+
+		// Query to get datas
 		$data['incidents'] = $this->incidentModel
 		->select('incident.id as incident_id, vehicule.id as vehicule_id, vehicule.plaque, incident.date_incident')
 		->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')

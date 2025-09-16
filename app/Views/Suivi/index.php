@@ -4,13 +4,10 @@
 <h2>Liste des Suivis</h2>
 <a href="<?= site_url('Suivi/create') ?>" class="btn btn-success">Ajouter</a>
 
-
-
 <div class="table-responsive">
 	<table class="table table-striped table-bordered mt-3">
-
-		<!-- Datas name -->
 		<thead>
+			<!-- Display label -->
 			<tr>
 				<th>Incident</th>
 				<th>Date Intervention</th>
@@ -20,13 +17,12 @@
 		</thead>
 
 		<tbody>
-			<!-- Display datas -->
+			<!-- Loop to display datas -->
 			<?php foreach ($items as $item): ?>
 				<tr>
 					<td data-label="Incident" class="long-text"><?= esc($incidentMap[$item->id_incident] ?? 'Inconnu') ?></td>
 					<td data-label="Date Intervention" ><?= esc(substr($item->date_intervention, 0, 10)) ?></td>
 					<td data-label="Description" class="long-text"><?= esc($item->description) ?></td>
-
 					<td>
 						<!-- Redirection button -->
 						<a href="<?= site_url('Suivi/show/'.$item->id) ?>" class="btn btn-info btn-sm">Voir</a>

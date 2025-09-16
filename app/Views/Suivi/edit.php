@@ -9,9 +9,12 @@
 	<label for="id_incident">Incident</label>
 	<select id="id_incident" name="id_incident" class="form-control" required>
 		<?php foreach ($incidents as $i): ?>
+
+			<!-- Match id with a value -->
 			<option value="<?= $i->incident_id ?>"<?= (isset($item) && $item->id_incident == $i->incident_id) ? 'selected' : '' ?>>
 				<?= $i->plaque . ', ' . date('m/d/Y', strtotime($i->date_incident)) ?>
 			</option>
+
 		<?php endforeach; ?>
 		<input type="hidden" id="oldid_incident" name="oldid_incident" value="<?= isset($item) ? $item->id_incident : '' ?>">
 	</select>
@@ -33,11 +36,13 @@
 
 
 <script>
+
 	// Caps text
 	function setUpper(element)
 	{
 		element.value=element.value.toUpperCase();
 	}
+
 
 	function validateForm()
 	{
@@ -87,6 +92,7 @@
 		}
 		return true;
 	}
+
 </script>
 
 <?= $this->endSection() ?>

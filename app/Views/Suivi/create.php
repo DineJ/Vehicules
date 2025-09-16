@@ -10,13 +10,16 @@
 	<select id="id_incident" name="id_incident" class="form-control" required>
 		<option value="">    Choisir un incident    </option>
 		<?php foreach ($incidents as $i): ?>
+
+			<!-- Match id with a value -->
 			<option value="<?= $i->incident_id ?>"<?= (isset($item) && $item->id_incident == $i->incident_id) ? 'selected' : '' ?>>
 				<?= $i->plaque . ', ' . date('m/d/Y', strtotime($i->date_incident)) ?>
 			</option>
+
 		<?php endforeach; ?>
 	</select>
 
-	<!-- Type date -->
+	<!-- Select date -->
 	<label>Date Intervention</label>
 	<input type="date" id="date_intervention" name="date_intervention" value="<?= isset($item) ? $item->date_intervention : '' ?>" class="form-control" required>
 
