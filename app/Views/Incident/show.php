@@ -45,7 +45,72 @@
 		<!-- Redirection button -->
 		<a href="<?= site_url('Incident') ?>" class="btn btn-secondary">Retour</a>
 		<a href="<?= site_url('Incident/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
+
+		<!-- Modal -->
+		<button type="button" class="btn btn-purple" id="btnAddType">Ajouter un suivi</button>
+
 	</form>
+
+	<div class="modal fade" id="suiviModal" aria-hidden="true">
+		<!-- Size -->
+		<div class="modal-dialog modal-lg">
+			<!-- Content -->
+			<div class="modal-content">
+				<!-- Title -->
+				<div class="modal-header">
+					<h5 class="modal-title">Créer un Suivi</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<!-- Form body -->
+				<div class="modal-body" id="modalContent">
+					<!-- In case loading takes time -->
+					Chargement...
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>
 
+<script>
+
+	document.getElementById('btnAddType').addEventListener('click', function() {
+		const modalContent = document.getElementById('modalContent');
+
+		// Load form via fetch
+		fetch("<?= site_url('Suivi/create') ?>")
+			.then(res => res.text())
+			.then(html => {
+				modalContent.innerHTML = html;
+
+				// Display modal after loading
+				const myModal = new bootstrap.Modal(document.getElementById('suiviModal'));
+				myModal.show();
+
+				// Catch modal submit
+				const modalForm = modalContent.querySelector('form');
+				if(modalForm) {
+					modalForm.addEventListener('submit', function(e) {
+						e.preventDefault(); // Avoid submit conflit
+						const formData = new FormData(modalForm);
+
+						fetch(modalForm.action, {
+							method: 'POST',
+							body: formData
+						})
+						.then(resp => resp.text())
+						.then(result => {
+							myModal.hide(); // Close modal
+						})
+						.catch(err => console.error(err));
+					});
+				}
+			})
+			.catch(err => {
+				modalContent.innerHTML = "Erreur lors du chargement du formulaire.";
+				console.error(err);
+			});
+	});
+
+</script>
 <?= $this->endSection() ?>
