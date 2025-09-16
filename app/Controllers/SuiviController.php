@@ -23,6 +23,7 @@ class SuiviController extends Controller
 	{
 		$data['items'] = $this->model->paginate(5); // Display 5 results
 		$data['pager'] = $this->model->pager; // Add pager
+		$data['page'] = 'index'; // Page identifier for css style
 
 		// Incident_id
 		$incidents = $this->incidentModel
@@ -45,6 +46,7 @@ class SuiviController extends Controller
 	public function show($id)
 	{
 		$data['item'] = $this->model->find($id);
+		$data['page'] = 'show'; // Page identifier for css style
 
 		// Get datas linked by id
 		$data['incident'] = $this->incidentModel

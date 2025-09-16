@@ -17,7 +17,7 @@
 			<!-- Display date_intervention -->
 			<tr>
 				<td class="td-hidden">Date Intervention</td>
-				<td data-label="date_intervention"><?= substr($item->date_intervention, 0, 10) ?></td>
+				<td class="long-text" data-label="date_intervention"><?= substr($item->date_intervention, 0, 10) ?></td>
 			</tr>
 
 			<!-- Display description -->
