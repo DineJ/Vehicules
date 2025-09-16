@@ -12,7 +12,7 @@
 
 			<!-- Match id with a value -->
 			<option value="<?= $i->incident_id ?>"<?= (isset($item) && $item->id_incident == $i->incident_id) ? 'selected' : '' ?>>
-				<?= $i->plaque . ', ' . date('m/d/Y', strtotime($i->date_incident)) ?>
+				<?= 'Vehicule : ' . $i->plaque . ' — Date :  ' . date('d/m/Y', strtotime($i->date_incident)) ?>
 			</option>
 
 		<?php endforeach; ?>

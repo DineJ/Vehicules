@@ -35,7 +35,7 @@ class SuiviController extends Controller
 		// Mapping id with value
 		$incidentMap = [];
 		foreach ($incidents as $i) {
-			$incidentMap[$i->incident_id] = 'Vehicule : ' . $i->plaque . ' | Date : ' . substr($i->date_incident, 0, 10);
+			$incidentMap[$i->incident_id] = 'Vehicule : ' . $i->plaque . ' — Date : ' . date('d/m/Y', strtotime($i->date_incident));
 		}
 
 		// Past datas to the view

@@ -21,7 +21,7 @@
 			<?php foreach ($items as $item): ?>
 				<tr>
 					<td data-label="Incident" class="long-text"><?= esc($incidentMap[$item->id_incident] ?? 'Inconnu') ?></td>
-					<td data-label="Date Intervention" ><?= esc(substr($item->date_intervention, 0, 10)) ?></td>
+					<td data-label="Date Intervention" ><?= esc(date('d/m/Y', strtotime($item->date_intervention))) ?></td>
 					<td data-label="Description" class="long-text"><?= esc($item->description) ?></td>
 					<td>
 						<!-- Redirection button -->

@@ -9,13 +9,13 @@
 			<!-- Display id_incident -->
 			<tr>
 				<td>Incident</td>
-				<td data-label="Incident"><?= $incident->plaque . ', ' . substr($incident->date_incident, 0, 10)?></td>
+				<td data-label="Incident"><?= 'Vehicule : ' . $incident->plaque . ' — Date : ' . date('d/m/Y', strtotime($incident->date_incident))?></td>
 			</tr>
 
 			<!-- Display date_intervention -->
 			<tr>
 				<td>Date Intervention</td>
-				<td data-label="Date Intervention"><?= substr($item->date_intervention, 0, 10) ?></td>
+				<td data-label="Date Intervention"><?= date('d/m/Y', strtotime($item->date_intervention)) ?></td>
 			</tr>
 
 			<!-- Display description -->
