@@ -47,7 +47,7 @@
 		<a href="<?= site_url('Incident/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
 
 		<!-- Modal -->
-		<button type="button" class="btn btn-purple" id="btnAddType">Ajouter un suivi</button>
+		<button type="button" class="btn btn-purple" id="btnAddType" data-incident-id="">Ajouter un suivi</button>
 
 	</form>
 
@@ -74,14 +74,29 @@
 
 <script>
 
+	document.addEventListener("DOMContentLoaded", function() {
+		const btn = document.getElementById('btnAddType');
+
+		// Get ID from current URL (last segment)
+		const urlSegments = window.location.pathname.split('/');
+		const incidentId = urlSegments[urlSegments.length - 1];
+		btn.dataset.incidentId = incidentId;
+	});
+
 	document.getElementById('btnAddType').addEventListener('click', function() {
 		const modalContent = document.getElementById('modalContent');
+		const incidentId = this.dataset.incidentId;
+		const formData = new FormData();
+		formData.append('modal_id_incident', incidentId); // match with controller key
 
 		// Load form via fetch
-		fetch("<?= site_url('Suivi/create') ?>")
-			.then(res => res.text())
+		fetch("<?= site_url('Suivi/create') ?>", {
+				method:'POST', // POST is used to send the incident ID securely
+				body: formData // The FormData containing the incident ID
+			})
+			.then(res => res.text()) // Convert response to HTML
 			.then(html => {
-				modalContent.innerHTML = html;
+				modalContent.innerHTML = html; // Inject form HTML into modal
 
 				// Display modal after loading
 				const myModal = new bootstrap.Modal(document.getElementById('suiviModal'));
@@ -91,12 +106,14 @@
 				const modalForm = modalContent.querySelector('form');
 				if(modalForm) {
 					modalForm.addEventListener('submit', function(e) {
-						e.preventDefault(); // Avoid submit conflit
-						const formData = new FormData(modalForm);
+						e.preventDefault(); // Avoid submit conflit with main form
 
+						const formDataModal = new FormData(modalForm);
+
+						// Send modal form data via fetch to its action URL
 						fetch(modalForm.action, {
 							method: 'POST',
-							body: formData
+							body: formDataModal
 						})
 						.then(resp => resp.text())
 						.then(result => {

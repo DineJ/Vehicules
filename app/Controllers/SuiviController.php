@@ -66,6 +66,15 @@ class SuiviController extends Controller
 	{
 		$data['title'] = "Créer Suivi"; 
 
+		// Get ID from modal to pre-fill form
+		$modal_incident_id = $this->request->getPost('modal_id_incident');
+
+		// Check is function create is call by modal or classic way
+		if (!empty($modal_incident_id))
+		{
+			$data['modal_incident_id'] = $modal_incident_id;
+		}
+
 		// Query to get datas
 		$data['incidents'] = $this->incidentModel
 		->select('incident.id as incident_id, vehicule.id as vehicule_id, vehicule.plaque, incident.date_incident')

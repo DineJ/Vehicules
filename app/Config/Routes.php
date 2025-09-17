@@ -6,7 +6,7 @@ use CodeIgniter\Router\RouteCollection;
 // Routes for Suivi
 $routes->get('Suivi', 'SuiviController::index'); // Route that leads to the display of all data
 $routes->get('Suivi/show/(:num)', 'SuiviController::show/$1'); // Route that leads to the display of one specific data
-$routes->get('Suivi/create', 'SuiviController::create'); // Route that leads to the display of creating a specific data
+$routes->match(['post', 'get'], 'Suivi/create', 'SuiviController::create'); // Route that leads to the display of creating a specific data
 $routes->post('Suivi/store', 'SuiviController::store'); // Route that leads to the insert fuction of the DB
 $routes->get('Suivi/edit/(:num)', 'SuiviController::edit/$1'); // Route that leads to the display of editing a specific data
 $routes->post('Suivi/update/(:num)', 'SuiviController::update/$1'); // Route that leads to the update fuction of the DB

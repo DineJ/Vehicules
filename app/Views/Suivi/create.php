@@ -12,7 +12,7 @@
 		<?php foreach ($incidents as $i): ?>
 
 			<!-- Match id with a value -->
-			<option value="<?= $i->incident_id ?>"<?= (isset($item) && $item->id_incident == $i->incident_id) ? 'selected' : '' ?>>
+			<option value="<?= $i->incident_id ?>"<?= (isset($modal_incident_id) && $modal_incident_id == $i->incident_id) ? 'selected' : '' ?>>
 				<?= 'Vehicule : ' . $i->plaque . ' — Date : ' . date('d/m/Y', strtotime($i->date_incident)) ?>
 			</option>
 
