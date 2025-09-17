@@ -28,7 +28,7 @@
 	<textarea onchange="setUpper(document.getElementById('description'));" id="description" name="description" class="form-control"><?= isset($item) ? $item->description : '' ?></textarea>
 
 	<!-- Redirection button -->
-	<a href="<?= site_url('Suivi') ?>" class="btn btn-secondary mt-3">Retour</a>
+	<a href="<?= site_url('Suivi') ?>" id="btnRetour" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 
 </form>

@@ -121,6 +121,17 @@
 						})
 						.catch(err => console.error(err));
 					});
+
+				const btnRetour = modalContent.querySelector('#btnRetour');
+				if(btnRetour)
+					{
+						btnRetour.addEventListener('click', function(e) {
+							e.preventDefault(); // Avoid return
+							const myReturnModal = document.getElementById('suiviModal');
+							const modal = bootstrap.Modal.getInstance(myReturnModal);
+							modal.hide(); // Close modal
+						});
+					}
 				}
 			})
 			.catch(err => {
