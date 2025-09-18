@@ -63,6 +63,10 @@
 				</div>
 				<!-- Form body -->
 				<div class="modal-body" id="modalContent">
+					<?php
+						$no_navbar = 'no_navbar';
+						echo view('Partials/navbar', ['no_navbar' => $no_navbar]);
+					?>
 					<!-- In case loading takes time -->
 					Chargement...
 				</div>

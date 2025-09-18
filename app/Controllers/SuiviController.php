@@ -65,6 +65,7 @@ class SuiviController extends Controller
 	public function create()
 	{
 		$data['title'] = "Créer Suivi"; 
+		$data['no_navbar'] = 'no-navbar';
 
 		// Get ID from modal to pre-fill form
 		$modal_incident_id = $this->request->getPost('modal_id_incident');

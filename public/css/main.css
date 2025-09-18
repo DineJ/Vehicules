@@ -77,6 +77,10 @@ th {
 	border-color: #6f42c1;
 }
 
+/* Do not display navbar, used for modal pop-up */
+#modalContent #navbar.no_navbar {
+	display: none !important;
+}
 /* Responsive table layout: display rows as cards on small screens */
 @media only screen and (max-width: 700px) {
 	/* Transform all table elements into block layout to stack vertically */

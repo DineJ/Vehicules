@@ -3,7 +3,7 @@ use CodeIgniter\HTTP\URI;
 
 $currentUri = service('uri')->getPath();
 ?>
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-4 py-2">
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-4 py-2 <?= isset($no_navbar) ? 'no_navbar' : '' ?>">
 	<div class="container-fluid">
 
 		<div class="d-flex justify-content-start">
