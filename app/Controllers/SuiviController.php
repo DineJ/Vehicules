@@ -22,24 +22,27 @@ class SuiviController extends Controller
 	// SEARCH BAR
 	public function index()
 	{
-		$data['items'] = $this->model->paginate(5); // Display 5 results
-		$data['pager'] = $this->model->pager; // Add pager
-		$data['page'] = 'index'; // Page identifier for css style
+		// Query
+		$search = $this->request->getGet('q');
 
-		// Query to get datas
-		$incidents = $this->incidentModel
-		->select('incident.id as incident_id, vehicule.id as vehicule_id, vehicule.plaque, incident.date_incident')
-		->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
-		->findAll();
+		// Query display
+		$builder = $this->incidentModel->select('incident.id as incident_id, vehicule.plaque, incident.date_incident, suivi.date_intervention, suivi.description')
+										->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
+										->join('suivi', 'suivi.id_incident = incident.id', 'left')
+										->orderBy('vehicule.id');
 
-		// Mapping id with value
-		$incidentMap = [];
-		foreach ($incidents as $i) {
-			$incidentMap[$i->incident_id] = 'Vehicule : ' . $i->plaque . ' — Date : ' . date('d/m/Y', strtotime($i->date_incident));
+		// Search bar query
+		if ($search) {
+			$query = '%' . $search . '%';
+			$builder->like('vehicule.plaque', $query)
+					->orLike('suivi.date_intervention', $query);
 		}
 
-		// Past datas to the view
-		$data['incidentMap'] = $incidentMap;
+		// Paginate directement sur le builder
+		$data['items'] = $builder->paginate(5); // Display 5 results
+		$data['pager'] = $builder->pager; // Add pager
+		$data['search'] = $search;
+		$data['page'] = 'index'; // Page identifier for css style
 
 		return view('Suivi/index', $data);
 	}
