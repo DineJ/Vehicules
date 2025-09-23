@@ -43,7 +43,6 @@
 	<form method="post" action="<?= site_url('Incident/update/'.$item->id) ?>">
 
 		<!-- Redirection button -->
-		<a href="<?= site_url('Incident') ?>" class="btn btn-secondary">Retour</a>
 		<a href="<?= site_url('Incident/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
 
 		<!-- Modal -->
@@ -73,8 +72,73 @@
 			</div>
 		</div>
 	</div>
-
 </div>
+
+<!-- Creation of a section suivi -->
+<div style="margin-left: 3rem; margin-top: 1.5rem; width: 95%; padding: 1rem; border: 1px solid #ccc; border-left: 4px solid #6f42c1; border-radius: 8px;">
+	<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+		<h6 style="margin: 0; color: #6f42c1;">↳ Suivi</h6>
+
+		<!-- Test if an incident has a suivi or not -->
+		<?php if (!isset($suivi))
+		{
+		?>
+
+			<!-- Redirection button to create suivi form-->
+			<a href="<?= site_url('Suivi/create/'.$item->id) ?>" class="btn btn-success">Ajouter</a>
+			</div>
+
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered mt-3">
+					<tbody>
+						<!-- Incident has no suivi yet -->
+						<tr>
+							<td class="label-permis">Pas de suivi enregistré</td>
+						</tr>
+		<?php
+		}
+		else
+		{
+		?>
+
+			<!-- Redirection button to edit license form -->
+			</div>
+			<div id="table_suivi" class="table-responsive">
+
+						<?php foreach($suivi as $s) : ?>
+							<table class="table table-striped table-bordered mt-3">
+								<tbody>
+									<!-- Display date_intervention -->
+									<tr>
+										<td>Date Intervention</td>
+										<td data-label="Date Intervention"><?= date('d/m/Y', strtotime($s->date_intervention)) ?></td>
+									</tr>
+
+									<!-- Display description -->
+									<tr>
+										<td>Description</td>
+										<td class="long-text"><?= $s->description ?></td>
+									</tr>
+								</tbody>
+							</table>
+
+							<a href="<?= site_url('Suivi/edit/' . $s->id) ?>" class="btn btn-warning">Modifier</a>
+							</br>
+							</br>
+						<?php endforeach; ?>
+
+		<?php
+		}
+		?>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+</br>
+
+<!-- Redirection button -->
+<a href="<?= site_url('Incident') ?>" class="btn btn-secondary">Retour</a>
 
 <script>
 

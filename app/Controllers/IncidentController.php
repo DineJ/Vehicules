@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\IncidentModel;
 use App\Models\UserModel;
+use App\Models\SuiviModel;
 use App\Models\VehiculeModel;
 use App\Models\Type_incidentModel;
 use App\Entities\Incident;
@@ -13,6 +14,7 @@ class IncidentController extends Controller
 {
 	protected $model;
 	protected $userModel;
+	protected $suiviModel;
 	protected $vehiculeModel;
 	protected $typeIncidentModel;
 
@@ -20,6 +22,7 @@ class IncidentController extends Controller
 	{
 		$this->model = new IncidentModel();
 		$this->userModel = new UserModel();
+		$this->suiviModel = new  SuiviModel();
 		$this->vehiculeModel = new VehiculeModel();
 		$this->typeIncidentModel = new Type_incidentModel();
 	}
@@ -69,6 +72,7 @@ class IncidentController extends Controller
 
 		// Get id
 		$data['item'] = $this->model->find($id);
+		$data['suivi'] = $this->suiviModel->where('id_incident', $data['item']->id)->findAll();
 
 		// Get datas linked by user_id
 		$data['utilisateur'] = $this->userModel->find($data['item']->id_user);
