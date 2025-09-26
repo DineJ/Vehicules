@@ -99,55 +99,56 @@
 			<!-- Redirection button to edit license form -->
 			</div>
 			<div id="table_suivi" class="table-responsive">
-						<?php foreach($suivi as $s) : ?>
-							<table class="table table-striped table-bordered mt-3">
-								<tbody>
-									<!-- Display date_intervention -->
-									<tr>
-										<td>Date Intervention</td>
-										<td data-label="Date Intervention"><?= date('d/m/Y', strtotime($s->date_intervention)) ?></td>
-									</tr>
+				<?php foreach($suivi as $s) : ?>
+					<table class="table table-striped table-bordered mt-3">
+						<tbody>
+							<!-- Display date_intervention -->
+							<tr>
+								<td>Date Intervention</td>
+								<td data-label="Date Intervention"><?= date('d/m/Y', strtotime($s->date_intervention)) ?></td>
+							</tr>
 
-									<!-- Display description -->
-									<tr>
-										<td>Description</td>
-										<td class="long-text"><?= $s->description ?></td>
-									</tr>
-								</tbody>
-							</table>
+							<!-- Display description -->
+							<tr>
+								<td>Description</td>
+								<td class="long-text"><?= $s->description ?></td>
+							</tr>
+						</tbody>
+					</table>
 
-							<!-- Redirection button to edit suivi form -->
-							<button type="button" class="btn btn-orange btnEditType" data-incident-id="<?= $s->id ?>">Modifier</button>
-							</br>
-							</br>
+					<!-- Redirection button to edit suivi form -->
+					<button type="button" class="btn btn-orange btnEditType" data-incident-id="<?= $s->id ?>">Modifier</button>
+					</br>
+					</br>
+				<?php endforeach; ?>
+			</div>
 
-						<?php endforeach; ?>
-					<div>
-						<div class="modal fade" id="suiviModalEdit" aria-hidden="true">
-							<!-- Size -->
-							<div class="modal-dialog modal-lg">
-								<!-- Content -->
-								<div class="modal-content">
-									<!-- Title -->
-									<div class="modal-header">
-										<h5 class="modal-title">Modifier un Suivi</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-									</div>
-									<!-- Form body -->
-									<div class="modal-body" id="modalContentEdit">
-										<?php
-											$no_navbar = 'no_navbar';
-											echo view('Partials/navbar', ['no_navbar' => $no_navbar]);
-										?>
-										<!-- In case loading takes time -->
-										Chargement...
-									</div>
-								</div>
+			<div>
+				<div class="modal fade" id="suiviModalEdit" aria-hidden="true">
+					<!-- Size -->
+					<div class="modal-dialog modal-lg">
+						<!-- Content -->
+						<div class="modal-content">
+							<!-- Title -->
+							<div class="modal-header">
+								<h5 class="modal-title">Modifier un Suivi</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							</div>
+							<!-- Form body -->
+							<div class="modal-body" id="modalContentEdit">
+								<?php
+									$no_navbar = 'no_navbar';
+									echo view('Partials/navbar', ['no_navbar' => $no_navbar]);
+								?>
+								<!-- In case loading takes time -->
+								Chargement...
 							</div>
 						</div>
 					</div>
-					</br>
-					</br>
+				</div>
+			</div>
+			</br>
+			</br>
 
 		<?php
 		}
@@ -165,58 +166,63 @@
 <script>
 
 	document.addEventListener("DOMContentLoaded", function() {
-		const btn = document.getElementById('btnAddType');
+		const btn = document.getElementById('btnAddType'); // Select the "Add" button by its ID
 
-		// Get ID from current URL (last segment)
-		const urlSegments = window.location.pathname.split('/');
-		const incidentId = urlSegments[urlSegments.length - 1];
-		btn.dataset.incidentId = incidentId;
+ 
+		const urlSegments = window.location.pathname.split('/'); // Split the URL path by "/" to create an array of segments
+		const incidentId = urlSegments[urlSegments.length - 1]; // Take the last segment of the URL (supposed to be the incident ID)
+		btn.dataset.incidentId = incidentId; // Store the incidentId in the button's dataset (data-incident-id)
 
-
+		// Select all elements with class "btnEditType"
 		document.querySelectorAll('.btnEditType').forEach(editBtn => {
 			editBtn.addEventListener('click', function() {
-				const modalContentEdit = document.getElementById('modalContentEdit');
-				const suiviId = this.dataset.incidentId; // récupère l'ID du suivi cliqué
+				const modalContentEdit = document.getElementById('modalContentEdit'); // Select the modal body container for editing content
+				const suiviId = this.dataset.incidentId; // Get the "incidentId" stored in the clicked button's dataset
 
+				// Make a GET request to fetch the edit form for the given suivi ID
 				fetch("<?= site_url('Suivi/edit') ?>/" + suiviId)
-				.then(res => res.text())
+				.then(res => res.text()) // Convert the response into plain text (HTML)
 				.then(html => {
-					modalContentEdit.innerHTML = html;
+					modalContentEdit.innerHTML = html; // Inject the fetched HTML form into the edit modal body
 
-					const myModalEdit = new bootstrap.Modal(document.getElementById('suiviModalEdit'));
-					myModalEdit.show();
+					const myModalEdit = new bootstrap.Modal(document.getElementById('suiviModalEdit')); // Create a new Bootstrap Modal instance for the edit modal
+					myModalEdit.show(); // Display the edit modal
 
-					const modalFormEdit = modalContentEdit.querySelector('form');
+					const modalFormEdit = modalContentEdit.querySelector('form'); // Look for a <form> element inside the edit modal body
 
+					// If a form exists, attach a submit handler
 					if (modalFormEdit) {
+						// Add a submit event listener to the edit form
 						modalFormEdit.addEventListener('submit', function(e) {
-							e.preventDefault();
+							e.preventDefault(); // Prevent default form submission (page reload/redirect)
 
-							const formDataModalEdit = new FormData(modalFormEdit);
+							const formDataModalEdit = new FormData(modalFormEdit); // Create a FormData object with all form fields
 
+							// Send the form data to the action URL of the form
 							fetch(modalFormEdit.action, {
 								method: 'POST',
-								body: formDataModalEdit
+								body: formDataModalEdit // Attach the form data to the request body
 							})
-							.then(resp=> resp.text())
+							.then(resp=> resp.text()) // Convert the response to text
 							.then(result => {
+								// If the custom validation function returns true
 								if (validateForm())
 								{
-									myModalEdit.hide()
-									window.location.reload();
+									myModalEdit.hide() // Close the modal
+									window.location.reload(); // Reload the current page to reflect the updated data
 								}
 							})
-							.catch(err => console.error(err));
+							.catch(err => console.error(err)); // Log errors in case the request fails
 						});
 
-						const btnRetour = modalContentEdit.querySelector('#btnRetour');
+						const btnRetour = modalContentEdit.querySelector('#btnRetour'); // Look for a button or link with ID "btnRetour" inside the edit modal
 						if(btnRetour)
 						{
 							btnRetour.addEventListener('click', function(e) {
-								e.preventDefault(); // Avoid return
-								const myReturnModal = document.getElementById('suiviModalEdit');
-								const modal = bootstrap.Modal.getInstance(myReturnModal);
-								modal.hide(); // Close modal
+								e.preventDefault(); // Prevent the default behavior (navigation if <a>)
+								const myReturnModal = document.getElementById('suiviModalEdit'); // Get the edit modal element
+								const modal = bootstrap.Modal.getInstance(myReturnModal); // Get the Bootstrap modal instance for that element
+								modal.hide(); // Hide the modal when clicking "Retour"
 							});
 						}
 					}
@@ -228,10 +234,10 @@
 
 
 	document.getElementById('btnAddType').addEventListener('click', function() {
-		const modalContent = document.getElementById('modalContent');
-		const incidentId = this.dataset.incidentId;
-		const formData = new FormData();
-		formData.append('modal_id_incident', incidentId); // match with controller key
+		const modalContent = document.getElementById('modalContent'); // Select the modal body for the "Add" modal
+		const incidentId = this.dataset.incidentId; // Get the incident ID from the button dataset
+		const formData = new FormData(); // Create a new empty FormData object
+		formData.append('modal_id_incident', incidentId); // Add the incident ID into the FormData with key "modal_id_incident"
 
 		// Load form via fetch
 		fetch("<?= site_url('Suivi/create') ?>", {
@@ -240,7 +246,7 @@
 			})
 			.then(res => res.text()) // Convert response to HTML
 			.then(html => {
-				modalContent.innerHTML = html; // Inject form HTML into modal
+				modalContent.innerHTML = html; // Inject form HTML into modal body
 
 				// Display modal after loading
 				const myModal = new bootstrap.Modal(document.getElementById('suiviModal'));
@@ -252,14 +258,14 @@
 					modalForm.addEventListener('submit', function(e) {
 						e.preventDefault(); // Avoid submit conflit with main form
 
-						const formDataModal = new FormData(modalForm);
+						const formDataModal = new FormData(modalForm); // Collect all data from the Add form
 
 						// Send modal form data via fetch to its action URL
 						fetch(modalForm.action, {
 							method: 'POST',
-							body: formDataModal
+							body: formDataModal // The FormData containing the incident ID
 						})
-						.then(resp => resp.text())
+						.then(resp => resp.text()) // Convert response to HTML text
 						.then(result => {
 							myModal.hide(); // Close modal
 						})
@@ -271,8 +277,8 @@
 					{
 						btnRetour.addEventListener('click', function(e) {
 							e.preventDefault(); // Avoid return
-							const myReturnModal = document.getElementById('suiviModal');
-							const modal = bootstrap.Modal.getInstance(myReturnModal);
+							const myReturnModal = document.getElementById('suiviModal'); // Get Add modal element
+							const modal = bootstrap.Modal.getInstance(myReturnModal); // Get modal instance
 							modal.hide(); // Close modal
 						});
 					}
@@ -284,7 +290,7 @@
 			});
 	});
 
-f	unction validateForm()
+	function validateForm()
 	{
 
 		// Count
