@@ -3,7 +3,7 @@
 
 <h2>Suivi - <?= $title ?></h2>
 
-<form method="post" action="<?= site_url('Suivi/update/'.$item->id) ?>" onsubmit="return validateForm()">
+<form method="post" action="<?= site_url('Suivi/update/'.$item->id) ?>">
 
 	<!-- Display all incident into a list -->
 	<label for="id_incident">Incident</label>
