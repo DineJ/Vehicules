@@ -23,7 +23,7 @@
 			<?php foreach ($items as $item): ?>
 				<tr>
 					<td data-label="Vehicule"><?= esc($vehiculeMap[$item->id_vehicule] ?? 'Inconnu') ?></td>
-					<td data-label="Date Incident"><?= esc(substr($item->date_incident, 0, 10)) ?></td>
+					<td data-label="Date Incident"><?= esc(date('d/m/Y', strtotime($item->date_incident))) ?></td>
 					<td data-label="Explication" class="long-text"><?= esc($item->explication_incident) ?></td>
 					<td data-label="Conducteur"><?= esc($userMap[$item->id_user] ?? 'Inconnu') ?></td>
 					<td data-label="Type Incident"><?= esc($typeIncidentMap[$item->id_type_incident] ?? 'Inconnu') ?></td>

@@ -16,7 +16,7 @@
 		<!-- Display date of incident -->
 		<tr>
 			<td>Date Incident</td>
-			<td><?= substr($item->date_incident, 0, 10) ?></td>
+			<td><?= date('d/m/Y', strtotime($item->date_incident)) ?></td>
 		</tr>
 
 		<!-- Display short explication of incident -->
