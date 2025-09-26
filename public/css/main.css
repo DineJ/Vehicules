@@ -77,6 +77,17 @@ th {
 	border-color: #6f42c1;
 }
 
+.btn-orange {
+	background-color: #ff6f00; /* violet Bootstrap officiel */
+	color: #fff;
+	border-color: #ff6f00;
+}
+
+.btn-orange:hover {
+	background-color: #ff6f00; /* légèrement plus foncé au survol */
+	border-color: #ff6f00;
+}
+
 /* Do not display navbar, used for modal pop-up */
 #modalContent #navbar.no_navbar {
 	display: none !important;

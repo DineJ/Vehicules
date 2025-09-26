@@ -30,7 +30,7 @@
 	<input type="hidden" id="olddescription" name="olddescription" value="<?= isset($item) ? $item->description : '' ?>">
 
 	<!-- Redirection button -->
-	<a href="<?= site_url('Suivi') ?>" class="btn btn-secondary mt-3">Retour</a>
+	<a href="<?= site_url('Suivi') ?>" id="btnRetour" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 

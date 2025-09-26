@@ -47,7 +47,6 @@
 
 		<!-- Modal -->
 		<button type="button" class="btn btn-purple" id="btnAddType" data-incident-id="">Ajouter un suivi</button>
-
 	</form>
 
 	<div class="modal fade" id="suiviModal" aria-hidden="true">
@@ -74,20 +73,17 @@
 	</div>
 </div>
 
+
 <!-- Creation of a section suivi -->
 <div style="margin-left: 3rem; margin-top: 1.5rem; width: 95%; padding: 1rem; border: 1px solid #ccc; border-left: 4px solid #6f42c1; border-radius: 8px;">
 	<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
 		<h6 style="margin: 0; color: #6f42c1;">↳ Suivi</h6>
 
 		<!-- Test if an incident has a suivi or not -->
-		<?php if (!isset($suivi))
+		<?php if (!isset($suivi) || empty($suivi))
 		{
 		?>
-
-			<!-- Redirection button to create suivi form-->
-			<a href="<?= site_url('Suivi/create/'.$item->id) ?>" class="btn btn-success">Ajouter</a>
 			</div>
-
 			<div class="table-responsive">
 				<table class="table table-striped table-bordered mt-3">
 					<tbody>
@@ -100,11 +96,9 @@
 		else
 		{
 		?>
-
 			<!-- Redirection button to edit license form -->
 			</div>
 			<div id="table_suivi" class="table-responsive">
-
 						<?php foreach($suivi as $s) : ?>
 							<table class="table table-striped table-bordered mt-3">
 								<tbody>
@@ -122,10 +116,38 @@
 								</tbody>
 							</table>
 
-							<a href="<?= site_url('Suivi/edit/' . $s->id) ?>" class="btn btn-warning">Modifier</a>
+							<!-- Redirection button to edit suivi form -->
+							<button type="button" class="btn btn-orange btnEditType" data-incident-id="<?= $s->id ?>">Modifier</button>
 							</br>
 							</br>
+
 						<?php endforeach; ?>
+					<div>
+						<div class="modal fade" id="suiviModalEdit" aria-hidden="true">
+							<!-- Size -->
+							<div class="modal-dialog modal-lg">
+								<!-- Content -->
+								<div class="modal-content">
+									<!-- Title -->
+									<div class="modal-header">
+										<h5 class="modal-title">Modifier un Suivi</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+									</div>
+									<!-- Form body -->
+									<div class="modal-body" id="modalContentEdit">
+										<?php
+											$no_navbar = 'no_navbar';
+											echo view('Partials/navbar', ['no_navbar' => $no_navbar]);
+										?>
+										<!-- In case loading takes time -->
+										Chargement...
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</br>
+					</br>
 
 		<?php
 		}
@@ -149,7 +171,58 @@
 		const urlSegments = window.location.pathname.split('/');
 		const incidentId = urlSegments[urlSegments.length - 1];
 		btn.dataset.incidentId = incidentId;
+
+
+		document.querySelectorAll('.btnEditType').forEach(editBtn => {
+			editBtn.addEventListener('click', function() {
+				const modalContentEdit = document.getElementById('modalContentEdit');
+				const suiviId = this.dataset.incidentId; // récupère l'ID du suivi cliqué
+
+				fetch("<?= site_url('Suivi/edit') ?>/" + suiviId)
+				.then(res => res.text())
+				.then(html => {
+					modalContentEdit.innerHTML = html;
+
+					const myModalEdit = new bootstrap.Modal(document.getElementById('suiviModalEdit'));
+					myModalEdit.show();
+
+					const modalFormEdit = modalContentEdit.querySelector('form');
+
+					if (modalFormEdit) {
+						modalFormEdit.addEventListener('submit', function(e) {
+							e.preventDefault();
+
+							const formDataModalEdit = new FormData(modalFormEdit);
+
+							fetch(modalFormEdit.action, {
+								method: 'POST',
+								body: formDataModalEdit
+							})
+							.then(resp=> resp.text())
+							.then(result => {
+								myModalEdit.hide()
+								window.location.reload();
+							})
+							.catch(err => console.error(err));
+						});
+
+						const btnRetour = modalContentEdit.querySelector('#btnRetour');
+						if(btnRetour)
+						{
+							btnRetour.addEventListener('click', function(e) {
+								e.preventDefault(); // Avoid return
+								const myReturnModal = document.getElementById('suiviModalEdit');
+								const modal = bootstrap.Modal.getInstance(myReturnModal);
+								modal.hide(); // Close modal
+							});
+						}
+					}
+				});
+			});
+		});
 	});
+
+
 
 	document.getElementById('btnAddType').addEventListener('click', function() {
 		const modalContent = document.getElementById('modalContent');
