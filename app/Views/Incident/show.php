@@ -104,14 +104,14 @@
 						<tbody>
 							<!-- Display date_intervention -->
 							<tr>
-								<td>Date Intervention</td>
+								<td class="td-hidden">Date Intervention</td>
 								<td data-label="Date Intervention"><?= date('d/m/Y', strtotime($s->date_intervention)) ?></td>
 							</tr>
 
 							<!-- Display description -->
 							<tr>
-								<td>Description</td>
-								<td class="long-text"><?= $s->description ?></td>
+								<td class="td-hidden">Description</td>
+								<td data-label="Description" class="long-text"><?= $s->description ?></td>
 							</tr>
 						</tbody>
 					</table>
