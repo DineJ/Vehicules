@@ -109,6 +109,7 @@ class SuiviController extends Controller
 	{
 		$data['item'] = $this->model->find($id);
 		$data['title'] = "Modifier Suivi";
+		$data['no_navbar'] = 'no-navbar';
 
 		// Query to get datas
 		$data['incidents'] = $this->incidentModel

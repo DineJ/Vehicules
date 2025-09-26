@@ -89,7 +89,8 @@ th {
 }
 
 /* Do not display navbar, used for modal pop-up */
-#modalContent #navbar.no_navbar {
+#modalContent #navbar.no_navbar,
+#modalContentEdit #navbar.no_navbar {
 	display: none !important;
 }
 /* Responsive table layout: display rows as cards on small screens */
