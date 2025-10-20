@@ -36,6 +36,7 @@ class Type_incidentController extends Controller
 	public function create()
 	{
 		// Get all datas
+		$data['no_navbar'] = 'no-navbar';
 		$data['fromIncident'] = $this->request->getGet('from');
 		$data['title'] = "Créer un type d'incident";
 		return view('Type_incident/create', $data);

@@ -21,7 +21,7 @@ $routes->post('Ip/update/(:num)', 'IpController::update/$1'); // Route that lead
 // Routes for Type_incident
 $routes->get('Type_incident', 'Type_incidentController::index'); // Route that leads to the display of all data
 $routes->get('Type_incident/show/(:num)', 'Type_incidentController::show/$1'); // Route that leads to the display of one specific data
-$routes->get('Type_incident/create', 'Type_incidentController::create'); // Route that leads to the display of creating a specific data
+$routes->match(['post', 'get'], 'Type_incident/create', 'Type_incidentController::create'); // Route that leads to the display of creating a specific data
 $routes->post('Type_incident/store', 'Type_incidentController::store'); // Route that leads to the insert fuction of the DB
 $routes->get('Type_incident/edit/(:num)', 'Type_incidentController::edit/$1'); // Route that leads to the display of editing a specific data
 $routes->post('Type_incident/update/(:num)', 'Type_incidentController::update/$1'); // Route that leads to the update fuction of the DB

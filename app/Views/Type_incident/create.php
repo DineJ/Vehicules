@@ -27,7 +27,7 @@
 	<?php endif; ?>
 
 	<!-- Redirection button -->
-	<a href="<?= (isset($fromIncident) && $fromIncident === 'incident') ? site_url('Incident/create?from=type_incident') : site_url('Type_incident') ?>" class="btn btn-secondary mt-3">Retour</a>
+	<a href="<?= (isset($fromIncident) && $fromIncident === 'incident') ? site_url('Incident/create?from=type_incident') : site_url('Type_incident') ?>" id="btnRetour" class="btn btn-secondary mt-3">Retour</a>
 
 	<!-- Submit button -->
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
