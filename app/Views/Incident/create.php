@@ -163,42 +163,59 @@
 	const fields = ["id_vehicule", "date_incident", "explication_incident", "id_user", "id_type_incident" ];
 	window.addEventListener("DOMContentLoaded", () =>
 	{
-		const data = "<?= isset($fromTypeIncident) ? $fromTypeIncident : '' ?>";
-		if(data !== 'type_incident')
-		{
-			localStorage.clear();
-		}
+		// Retrieve the value of 'id_vehicule' from localStorage
+		const valueVehicule = localStorage.getItem('id_vehicule');
+		// If there is no saved value just exit
+		if (!valueVehicule)
+			return;
 
-		// Display saved datas
+		// Display saved datas from localStorage into form fields
 		fields.forEach(id =>
 		{
+			// Get the stored value for each field ID
 			const value = localStorage.getItem(id);
 			if (value)
 			{
+				// Set the corresponding input value
 				document.getElementById(id).value = value;
 			}
 		});
+		// Get the select element for 'type incident'
+		const typeIncident = document.getElementById('id_type_incident');
 
-		// Save automatically
+		// Loop through each option to find the one matching the stored name
+		for (let option of typeIncident.options) {
+			if (option.text === localStorage.getItem("nom"))
+			{
+				// Select the matching option
+				option.selected = true;
+				break;
+			}
+		}
+		// Clear all data from localStorage after restoring
+		localStorage.clear();
+	});
+
+	// Function triggered when submitting the form
+	function submitTypeIncident()
+	{
+		// Save all field values in localStorage
 		fields.forEach(id =>
 		{
-			const el = document.getElementById(id);
-			el.addEventListener("input", () =>
-			{
-				localStorage.setItem(id, el.value);
-			});
-			el.addEventListener("change", () =>
-			{
-				localStorage.setItem(id, el.value);
-			});
+			// Also save the 'nom' field (for the select)
+			const element = document.getElementById(id);
+			if (element)
+				localStorage.setItem(id, element.value);
 		});
-	});
 
-	// Delete datas after submit
-	document.getElementById("incidentForm").addEventListener("submit", () =>
-	{
-		fields.forEach(id => localStorage.removeItem(id));
-	});
+		const element = document.getElementById("nom");
+		if (element)
+			localStorage.setItem('nom', element.value);
+		// Return true to confirm successful execution
+		return true;
+	}
+
+
 </script>
 
 <?= $this->endSection() ?>
