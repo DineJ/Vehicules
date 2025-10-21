@@ -96,7 +96,6 @@ class IncidentController extends Controller
 		$data['title'] = "Créer Incident";
 		$data['selectedUserId'] = $selectedUserId;
 		$data['selectedTypeIncident'] = $selectedTypeIncident;
-		$data['fromTypeIncident'] = $this->request->getGet('from');
 
 		return view('Incident/create', $data);
 	}

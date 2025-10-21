@@ -37,7 +37,6 @@ class Type_incidentController extends Controller
 	{
 		// Get all datas
 		$data['no_navbar'] = 'no-navbar';
-		$data['fromIncident'] = $this->request->getGet('from');
 		$data['title'] = "Créer un type d'incident";
 		return view('Type_incident/create', $data);
 	}
@@ -65,11 +64,6 @@ class Type_incidentController extends Controller
 
 		$insertedId = $this->model->getInsertID();
 		session()->setFlashdata('type_incident', $insertedId);
-
-		if (isset($data['from']) && $data['from'] === 'incident')
-		{
-			return redirect()->to('/Incident/create?from=type_incident');
-		}
 
 		return redirect()->to('/Type_incident');
 	}
