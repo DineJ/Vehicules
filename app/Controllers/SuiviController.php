@@ -26,7 +26,7 @@ class SuiviController extends Controller
 		$search = $this->request->getGet('q');
 
 		// Query display
-		$builder = $this->incidentModel->select('incident.id as incident_id, vehicule.plaque, incident.date_incident, suivi.date_intervention, suivi.description, suivi.id as id')
+		$builder = $this->incidentModel->select('incident.id, vehicule.plaque, incident.date_incident, suivi.date_intervention, suivi.description, suivi.id as id')
 										->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
 										->join('suivi', 'suivi.id_incident = incident.id', 'left')
 										->orderBy('vehicule.id');
@@ -34,8 +34,7 @@ class SuiviController extends Controller
 		// Search bar query
 		if ($search) {
 			$query = '%' . $search . '%';
-			$builder->like('vehicule.plaque', $query)
-					->orLike('suivi.date_intervention', $query);
+			$builder->like('vehicule.plaque', $query);
 		}
 
 		// Paginate directement sur le builder
