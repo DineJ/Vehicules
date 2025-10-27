@@ -7,31 +7,31 @@
 <table class="table table-striped table-bordered">
 	<tbody>
 
-		<!-- Display car invovled into incident -->
+		<!-- Display car involved into the incident -->
 		<tr>
 			<td>Vehicule</td>
 			<td><?= $vehicule->plaque ?></td>
 		</tr>
 
-		<!-- Display date of incident -->
+		<!-- Display date of the incident -->
 		<tr>
 			<td>Date Incident</td>
 			<td><?= date('d/m/Y', strtotime($item->date_incident)) ?></td>
 		</tr>
 
-		<!-- Display short explication of incident -->
+		<!-- Display short explication of the incident -->
 		<tr>
 			<td>Explication Incident</td>
 			<td class="long-text"><?= $item->explication_incident ?></td>
 		</tr>
 
-		<!-- Display driver during incident -->
+		<!-- Display driver involved in the incident -->
 		<tr>
 			<td>Conducteur</td>
 			<td><?= $utilisateur->prenom . ' ' . $utilisateur->nom ?></td>
 		</tr>
 
-		<!-- Display kind of incident -->
+		<!-- Display incident type -->
 		<tr>
 			<td>Type Incident</td>
 			<td><?= $type_incident->nom ?></td>
@@ -147,8 +147,6 @@
 					</div>
 				</div>
 			</div>
-			</br>
-			</br>
 
 		<?php
 		}
