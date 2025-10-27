@@ -51,7 +51,6 @@ th {
 	word-break: break-word;		/* Allow breaking within words if necessary */
 	max-width: 100%;			/* Ensure the content doesn't exceed container width */
 	display: block;				/* Allows proper line breaks and spacing */
-	padding: 10px;				/* Add spacing inside the element for better readability */
 	background-color: #f9f9f9;	/* Optional: Light background to visually separate the text */
 }
 
@@ -78,6 +77,22 @@ th {
 	border-color: #6f42c1;
 }
 
+.btn-orange {
+	background-color: #ff6f00; /* violet Bootstrap officiel */
+	color: #fff;
+	border-color: #ff6f00;
+}
+
+.btn-orange:hover {
+	background-color: #ff6f00; /* légèrement plus foncé au survol */
+	border-color: #ff6f00;
+}
+
+/* Do not display navbar, used for modal pop-up */
+#modalContent #navbar.no_navbar,
+#modalContentEdit #navbar.no_navbar {
+	display: none !important;
+}
 /* Responsive table layout: display rows as cards on small screens */
 @media only screen and (max-width: 700px) {
 	/* Transform all table elements into block layout to stack vertically */
@@ -109,7 +124,6 @@ th {
 		background: white;
 		line-height: 1.2;                           /* Reduce line spacing */
 		overflow: hidden;
-		text-overflow: ellipsis;
 		white-space: nowrap;                        /* Optional: force text to stay on one line */
 	}
 

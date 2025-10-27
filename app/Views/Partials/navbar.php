@@ -3,7 +3,7 @@ use CodeIgniter\HTTP\URI;
 
 $currentUri = service('uri')->getPath();
 ?>
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-4 py-2">
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-4 py-2 <?= isset($no_navbar) ? 'no_navbar' : '' ?>">
 	<div class="container-fluid">
 
 		<div class="d-flex justify-content-start">
@@ -34,6 +34,7 @@ $currentUri = service('uri')->getPath();
 					<li><a class="dropdown-item" href="/User">Utilisateur</a></li>
 					<li><a class="dropdown-item" href="/Incident">Incident</a></li>
 					<li><a class="dropdown-item" href="/Type_incident">Type incident</a></li>
+					<li><a class="dropdown-item" href="/Suivi">Suivi</a></li>
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item" href="/Login/logout">Déconnexion</a></li>
 				<?php endif; ?>

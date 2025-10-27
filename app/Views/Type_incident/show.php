@@ -24,11 +24,12 @@
 
 	<div>
 		<form method="post" action="<?= site_url('Type_incident/update/'.$item->id) ?>">
+			<!-- Redirection button -->
+			<a href="<?= site_url('Type_incident') ?>" class="btn btn-secondary">Retour</a>
+
 			<!-- Redirection button to type_incident user form -->
 			<a href="<?= site_url('Type_incident/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
 
-			<!-- Redirection button -->
-			<a href="<?= site_url('Type_incident') ?>" class="btn btn-secondary">Retour</a>
 		</form>
 	</div>
 

@@ -61,14 +61,14 @@ class GenerateRoutes extends BaseCommand
 		// Trouver l'endroit où insérer les routes (après un commentaire spécifique)
 		$marker = "// Auto-generated routes";
 		if (strpos($routeFileContent, $marker) !== false) {
-			$newRoutes = "\n// Routes pour $entityName\n" . implode("\n", $routesToAdd) . "\n";
+			$newRoutes = "\n// Routes for $entityName\n" . implode("\n", $routesToAdd) . "\n";
 
 			// Insérer après le marqueur
 			$routeFileContent = str_replace($marker, $marker . "\n" . $newRoutes, $routeFileContent);
 		} else {
 			// Si le marqueur n'existe pas, ajouter les routes à la fin
 			CLI::error("⚠️  Le marqueur '$marker' n'a pas été trouvé dans `Routes.php`. Ajout en fin de fichier.");
-			$newRoutes = "\n// Routes pour $entityName\n" . implode("\n", $routesToAdd) . "\n";
+			$newRoutes = "\n// Routes for $entityName\n" . implode("\n", $routesToAdd) . "\n";
 			$routeFileContent .= $newRoutes;
 		}
 

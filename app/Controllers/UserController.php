@@ -28,8 +28,6 @@ class UserController extends Controller
 			$query = '%'.$search.'%';
 			$this->model->like('nom', $query)
 						->orLike('prenom', $query)
-						->orLike('mail', $query)
-						->orLike('telephone', $query)
 						->orderBy('nom');
 		}
 		else
