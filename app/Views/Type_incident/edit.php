@@ -17,7 +17,7 @@
 	</div>
 
 	<!-- Redirection button -->
-	<a href="<?= site_url('Type_incident') ?>" class="btn btn-secondary mt-3">Retour</a>
+	<a href="<?= site_url('Type_incident/show/'.$item->id) ?>" class="btn btn-secondary mt-3">Retour</a>
 
 	<!-- Sumbit button -->
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
