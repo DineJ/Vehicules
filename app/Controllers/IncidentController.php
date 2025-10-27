@@ -31,35 +31,30 @@ class IncidentController extends Controller
 	// Display datas
 	public function index()
 	{
-		$data['items'] = $this->model->paginate(5);
-		$data['pager'] = $this->model->pager;
+		// Query
+		$search = $this->request->getGet('q');
+
+		// Query builder
+		$builder = $this->model
+			->select('incident.id,vehicule.plaque AS vehicule,CONCAT(user.prenom, " ", user.nom) AS user, type_incident.nom AS type_incident, incident.date_incident, incident.explication_incident')
+			->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
+			->join('user', 'user.id = incident.id_user', 'left')
+			->join('type_incident', 'type_incident.id = incident.id_type_incident', 'left')
+			->orderBy('vehicule.id');
+
+		// Search bar query
+		if ($search) {
+			$query = '%' . $search . '%';
+			$builder->like('vehicule.plaque', $query)
+					->orlike('user.nom', $query)
+					->orlike('user.prenom', $query)
+					->orlike('type_incident.nom', $query);
+		}
+
+		$data['search'] = $search;
+		$data['items'] = $builder->paginate(5);
+		$data['pager'] = $builder->pager;
 		$data['page'] = 'index';
-
-		// User_id
-		$utilisateurs = $this->userModel->findAll();
-		$userMap = [];
-		foreach ($utilisateurs as $u) {
-			$userMap[$u->id] = $u->prenom . ' ' . $u->nom;
-		}
-
-		// Vehicule_id
-		$vehicules = $this->vehiculeModel->findAll();
-		$vehiculeMap = [];
-		foreach ($vehicules as $v) {
-			$vehiculeMap[$v->id] = $v->plaque;
-		}
-
-		// Type_incident_id
-		$types = $this->typeIncidentModel->findAll();
-		$typeIncidentMap = [];
-		foreach ($types as $t) {
-			$typeIncidentMap[$t->id] = $t->nom;
-		}
-
-		// Past datas to the view
-		$data['userMap'] = $userMap;
-		$data['vehiculeMap'] = $vehiculeMap;
-		$data['typeIncidentMap'] = $typeIncidentMap;
 
 		return view('Incident/index', $data);
 	}
