@@ -56,10 +56,10 @@
 	</div>
 
 	<!-- Redirection button -->
+	<a href="<?= (!empty($selectedUserId)) ? site_url('User/show/'.$selectedUserId) : site_url('Incident') ?>" class="btn btn-secondary mt-3">Retour</a>
+	<!-- Redirection button -->
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
-</form>
-
-
+	</form>
 
 <div>
 	<div class="modal fade" id="typeIncidentModal" aria-hidden="true">
@@ -85,12 +85,6 @@
 		</div>
 	</div>
 </div>
-
-</br>
-
-<!-- Redirection button -->
-<a href="<?= (!empty($selectedUserId)) ? site_url('User/show/'.$selectedUserId) : site_url('Incident') ?>" class="btn btn-secondary mt-3">Retour</a>
-
 
 <script>
 
