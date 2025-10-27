@@ -7,7 +7,7 @@
 
 	<!-- Display all vehicles into a list -->
 	<label for="id_vehicule">Vehicule</label>
-	<select id="id_vehicule" name="id_vehicule" class="form-control" required>
+	<select id="id_vehicule" name="id_vehicule" onchange="disabledDefault('id_vehicule')" class="form-control" required>
 		<option value="">    Choisir un vehicule    </option>
 		<?php foreach ($vehicules as $v): ?>
 			<option value="<?= $v->id ?>" <?= (isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
@@ -26,7 +26,7 @@
 
 	<!-- Display all drivers into a list -->
 	<label for="id_user">Conducteur</label>
-	<select id="id_user" name="id_user" class="form-control" required>
+	<select id="id_user" name="id_user" onchange="disabledDefault('id_user')" class="form-control" required>
 		<option value="">    Choisir un conducteur    </option>
 		<?php foreach ($utilisateurs as $u): ?>
 			<option value="<?= $u->id ?>"
@@ -40,7 +40,7 @@
 	<div class="mb-3">
 		<label for="id_type_incident">Type incident</label>
 		<div class="input-group">
-			<select id="id_type_incident" name="id_type_incident" class="form-control" required>
+			<select id="id_type_incident" name="id_type_incident" onchange="disabledDefault('id_type_incident')" class="form-control" required>
 				<option value="">    Choisir un type d'incident    </option>
 				<?php foreach ($types_incident as $ti): ?>
 				<option value="<?= $ti->id ?>"
@@ -157,6 +157,19 @@
 	function setUpper(element)
 	{
 		element.value=element.value.toUpperCase();
+	}
+
+	function disabledDefault(removeId)
+	{
+		const select = document.getElementById(removeId);
+
+		if (!select)
+			return;
+		else if (select.options[0])
+		{
+			// Delete first option
+			select.remove(0);
+		}
 	}
 
 	// Fields to save

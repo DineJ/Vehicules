@@ -8,7 +8,6 @@
 	<!-- Display all incident into a list -->
 	<label for="id_incident">Incident</label>
 	<select id="id_incident" name="id_incident" class="form-control" required>
-		<option value="">    Choisir un incident    </option>
 		<?php foreach ($incidents as $i): ?>
 
 			<!-- Match id with a value -->
