@@ -3,7 +3,7 @@
 
 <h2>Modifier l'utilisateur</h2>
 
-<form method="post" action="<?= site_url('User/update/'.$item->id) ?>" onsubmit="return validateForm()">
+<form method="post" action="<?= site_url('User/update/'.$item->id) ?>" onsubmit="return validateFormUser()">
 
 	<!-- Type name -->
 	<label>Nom</label>
@@ -50,7 +50,7 @@
 <?php endif; ?>
 
 
-
+<script src="<?= base_url('js/validateForm.js') ?>"></script>
 <script>
 
 	// Caps text
@@ -59,86 +59,6 @@
 		element.value=element.value.toUpperCase();
 	}
 
-	// Check if values are changed or not; returns an error if they are not
-	function validateForm()
-	{
-		// Count
-		let compare = 0;
-		let row = 0;
-
-		// Get values
-		let nom = document.getElementById('nom').value;
-		let oldnom = document.getElementById('oldnom').value;
-		row++;
-
-		// Check values
-		if (nom == oldnom)
-		{
-			compare++;
-		}
-
-		// Get values
-		let prenom = document.getElementById('prenom').value;
-		let oldprenom = document.getElementById('oldprenom').value;
-		row++;
-
-		// Check values
-		if (prenom == oldprenom)
-		{
-			compare++;
-		}
-
-		// Get values
-		let password = document.getElementById('clef_connexion').value;
-		row++;
-
-		// Check values
-		if (password.length === 0)
-		{
-			compare++;
-		}
-
-		// Get values
-		let admin = (document.getElementById('admin').checked ? 1 : 0 );
-		let oldadmin = document.getElementById('oldadmin').value;
-		row++;
-
-		// Check values
-		if (admin == oldadmin)
-		{
-			compare++;
-		}
-
-		// Get values
-		let telephone = document.getElementById('telephone').value;
-		let oldtelephone = document.getElementById('oldtelephone').value;
-		row++;
-
-		// Check values
-		if (telephone == oldtelephone)
-		{
-			compare++;
-		}
-
-		// Get values
-		let mail = document.getElementById('mail').value;
-		let oldmail = document.getElementById('oldmail').value;
-		row++;
-
-		// Check values
-		if (mail == oldmail)
-		{
-			compare++;
-		}
-
-		// Check counts
-		if (compare == row)
-		{
-			alert("les valeurs sont identiques");
-			return false;
-		}
-		return true;
-	}
 </script>
 
 <?= $this->endSection() ?>

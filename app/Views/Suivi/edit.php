@@ -3,7 +3,7 @@
 
 <h2>Suivi - <?= $title ?></h2>
 
-<form method="post" action="<?= site_url('Suivi/update/'.$item->id) ?>">
+<form method="post" action="<?= site_url('Suivi/update/'.$item->id) ?>" onsubmit="return validateFormSuivi()">
 
 	<!-- Display all incident into a list -->
 	<label for="id_incident">Incident</label>
@@ -35,62 +35,13 @@
 </form>
 
 
+<script src="<?= base_url('js/validateForm.js') ?>"></script>
 <script>
 
 	// Caps text
 	function setUpper(element)
 	{
 		element.value=element.value.toUpperCase();
-	}
-
-
-	function validateForm()
-	{
-
-		// Count
-		let compare = 0;
-		let row = 0;
-
-		// Get values
-		let id_incident = document.getElementById('id_incident').value;
-		let oldid_incident = document.getElementById('oldid_incident').value;
-		row++;
-
-		// Check values 
-		if (id_incident == oldid_incident)
-		{
-			compare++;
-		}
-
-		// Get values
-		let date_intervention = document.getElementById('date_intervention').value;
-		let olddate_intervention = document.getElementById('olddate_intervention').value;
-		row++;
-
-		// Check values 
-		if (date_intervention == olddate_intervention)
-		{
-			compare++;
-		}
-
-		// Get values
-		let description = document.getElementById('description').value;
-		let olddescription = document.getElementById('olddescription').value;
-		row++;
-
-		// Check values 
-		if (description == olddescription)
-		{
-			compare++;
-		}
-
-		// Check counts
-		if (compare == row)
-		{
-			alert("les valeurs sont identiques");
-			return false;
-		}
-		return true;
 	}
 
 </script>

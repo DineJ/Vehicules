@@ -161,6 +161,8 @@
 <!-- Redirection button -->
 <a href="<?= site_url('Incident') ?>" class="btn btn-secondary">Retour</a>
 
+
+<script src="<?= base_url('js/validateForm.js') ?>" ></script>
 <script>
 
 	document.addEventListener("DOMContentLoaded", function() {
@@ -204,7 +206,7 @@
 							.then(resp=> resp.text()) // Convert the response to text
 							.then(result => {
 								// If the custom validation function returns true
-								if (validateForm())
+								if (validateFormIncidentShow())
 								{
 									myModalEdit.hide() // Close the modal
 									window.location.reload(); // Reload the current page to reflect the updated data
@@ -287,44 +289,6 @@
 				console.error(err);
 			});
 	});
-
-	function validateForm()
-	{
-
-		// Count
-		let compare = 0;
-		let row = 0;
-
-		// Get values
-		let date_intervention = document.getElementById('date_intervention').value;
-		let olddate_intervention = document.getElementById('olddate_intervention').value;
-		row++;
-
-		// Check values
-		if (date_intervention == olddate_intervention)
-		{
-			compare++;
-		}
-
-		// Get values
-		let description = document.getElementById('description').value;
-		let olddescription = document.getElementById('olddescription').value;
-		row++;
-
-		// Check values
-		if (description == olddescription)
-		{
-			compare++;
-		}
-
-		// Check counts
-		if (compare == row)
-		{
-			alert("les valeurs sont identiques");
-			return false;
-		}
-		return true;
-	}
 
 </script>
 <?= $this->endSection() ?>

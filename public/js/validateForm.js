@@ -1,5 +1,5 @@
 // Check if values are changed or not; returns an error if they are not
-function validateFormIncidentCreate()
+function validateFormIncidentEdit()
 {
 
 	// Counter
