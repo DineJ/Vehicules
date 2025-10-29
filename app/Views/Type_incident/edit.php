@@ -6,7 +6,7 @@
 
 	<!-- Type name -->
 	<label>Nom</label>
-	<input type='text' onchange="setUpper(document.getElementById('nom'));" id='nom' name='nom' value='<?= isset($item) ? $item->nom : '' ?>' class='form-control' required>
+	<input type='text' oninput="setUpper(document.getElementById('nom'));" id='nom' name='nom' value='<?= isset($item) ? $item->nom : '' ?>' class='form-control' required>
 	<input type='hidden' id='oldnom' name='oldnom' value='<?= isset($item) ? $item->nom : '' ?>'>
 
 	<!-- Check critical -->
@@ -25,15 +25,7 @@
 </form>
 
 
+<script src="<?= base_url('js/main.js') ?>"></script>
 <script src="<?= base_url('js/validateForm.js') ?>"></script>
-<script>
-
-	// Caps text
-	function setUpper(element)
-	{
-		element.value=element.value.toUpperCase();
-	}
-
-</script>
 
 <?= $this->endSection() ?>

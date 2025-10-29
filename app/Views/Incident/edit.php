@@ -25,7 +25,7 @@
 
 	<!-- Type a short explication -->
 	<label>Explication Incident</label>
-	<textarea onchange="setUpper(document.getElementById('explication_incident'));" id='explication_incident' name='explication_incident' class='form-control'><?= esc($item->explication_incident) ?></textarea>
+	<textarea oninput="setUpper(document.getElementById('explication_incident'));" id='explication_incident' name='explication_incident' class='form-control'><?= esc($item->explication_incident) ?></textarea>
 	<input type='hidden' id='oldexplication_incident' name='oldexplication_incident' value='<?= isset($item) ? $item->explication_incident : '' ?>'>
 
 	</br>
@@ -59,14 +59,8 @@
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 
-<script src="<?= base_url('js/validateForm.js') ?>"></script>
-<script>
-	// Caps text
-	function setUpper(element)
-	{
-		element.value=element.value.toUpperCase();
-	}
 
-</script>
+<script src="<?= base_url('js/main.js') ?>"></script>
+<script src="<?= base_url('js/validateForm.js') ?>"></script>
 
 <?= $this->endSection() ?>

@@ -22,7 +22,7 @@
 
 	<!-- Type a short explication -->
 	<label>Explication Incident</label>
-	<textarea onchange="setUpper(document.getElementById('explication_incident'));" id='explication_incident' name='explication_incident' class='form-control'><?= isset($item) ? $item->explication_incident : '' ?></textarea>
+	<textarea oninput="setUpper(document.getElementById('explication_incident'));" id='explication_incident' name='explication_incident' class='form-control'><?= isset($item) ? $item->explication_incident : '' ?></textarea>
 
 	<!-- Display all drivers into a list -->
 	<label for="id_user">Conducteur</label>
@@ -89,6 +89,7 @@
 </div>
 
 
+<script src="<?= base_url('js/main.js') ?>"></script>
 <script>
 
 	document.getElementById('btnAddTypeIncident').addEventListener('click', function() {
@@ -149,25 +150,6 @@
 			console.error(err);
 		});
 	});
-
-	// Caps text
-	function setUpper(element)
-	{
-		element.value=element.value.toUpperCase();
-	}
-
-	function disabledDefault(removeId)
-	{
-		const select = document.getElementById(removeId);
-
-		if (!select)
-			return;
-		else if (select.options[0])
-		{
-			// Delete first option
-			select.remove(0);
-		}
-	}
 
 	// Fields to save
 	const fields = ["id_vehicule", "date_incident", "explication_incident", "id_user", "id_type_incident" ];
