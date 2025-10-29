@@ -37,19 +37,5 @@
 </form>
 
 <script src="<?= base_url('js/validateForm.js') ?>"></script>
-<script>
-	window.addEventListener('DOMContentLoaded', function ()
-	{
-		const oldValue = document.getElementById('oldtype_permis').value;
-		const select = document.getElementById('type_permis');
-
-		if (oldValue)
-		{
-		  select.value = oldValue;
-		}
-	}
-	);
-
-</script>
 
 <?= $this->endSection() ?>

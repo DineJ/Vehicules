@@ -1,5 +1,5 @@
 // Check if values are changed or not; returns an error if they are not
-function validateFormIncidentEdit()
+function validateFormIncidentCreate()
 {
 
 	// Counter
@@ -123,6 +123,25 @@ function validateFormPermis()
 	}
 	return true;
 }
+
+function selectedPermis()
+{
+	const oldSelect = document.getElementById('oldtype_permis');
+
+	if (oldSelect)
+	{
+		const oldValue = oldSelect.value;
+		const select = document.getElementById('type_permis');
+		if (select)
+		{
+			select.value = oldValue;
+		}
+	}
+
+}
+
+// function call
+selectedPermis();
 
 
 //////////////////////////////////////////////
