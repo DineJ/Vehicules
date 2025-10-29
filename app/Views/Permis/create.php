@@ -32,7 +32,4 @@
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 
-<script>
-</script>
-
 <?= $this->endSection() ?>

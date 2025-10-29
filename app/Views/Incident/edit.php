@@ -3,7 +3,7 @@
 
 <h2>Incident - <?= $title ?></h2>
 
-<form method="post" action="<?= site_url('Incident/update/'.$item->id) ?>" onsubmit="return validateForm()">
+<form method="post" action="<?= site_url('Incident/update/'.$item->id) ?>" onsubmit="return validateFormIncidentEdit()">
 
 	<!-- Display all vehicles into a list -->
 	<label for="id_vehicule">Vehicule</label>
@@ -25,7 +25,7 @@
 
 	<!-- Type a short explication -->
 	<label>Explication Incident</label>
-	<textarea onchange="setUpper(document.getElementById('explication_incident'));" id='explication_incident' name='explication_incident' class='form-control'><?= esc($item->explication_incident) ?></textarea>
+	<textarea oninput="setUpper(document.getElementById('explication_incident'));" id='explication_incident' name='explication_incident' class='form-control'><?= esc($item->explication_incident) ?></textarea>
 	<input type='hidden' id='oldexplication_incident' name='oldexplication_incident' value='<?= isset($item) ? $item->explication_incident : '' ?>'>
 
 	</br>
@@ -60,83 +60,7 @@
 </form>
 
 
-<script>
-	// Caps text
-	function setUpper(element)
-	{
-		element.value=element.value.toUpperCase();
-	}
-
-	// Check if values are changed or not; returns an error if they are not
-	function validateForm()
-	{
-		// Counter
-		let compare = 0;
-		let row = 0;
-
-		// Get values
-		let id_vehicule = document.getElementById('id_vehicule').value;
-		let oldid_vehicule = document.getElementById('oldid_vehicule').value;
-		row++;
-
-		// Check values
-		if (id_vehicule == oldid_vehicule)
-		{
-			compare++;
-		}
-
-		// Get values
-		let date_incident = document.getElementById('date_incident').value;
-		let olddate_incident = document.getElementById('olddate_incident').value;
-		row++;
-
-		// Check values
-		if (date_incident == olddate_incident)
-		{
-			compare++;
-		}
-
-		// Get values
-		let explication_incident = document.getElementById('explication_incident').value;
-		let oldexplication_incident = document.getElementById('oldexplication_incident').value;
-		row++;
-
-		// Check values
-		if (explication_incident == oldexplication_incident)
-		{
-			compare++;
-		}
-
-		// Get values
-		let id_user = document.getElementById('id_user').value;
-		let oldid_user = document.getElementById('oldid_user').value;
-		row++;
-
-		// Check values
-		if (id_user == oldid_user)
-		{
-			compare++;
-		}
-
-		// Get values
-		let id_type_incident = document.getElementById('id_type_incident').value;
-		let oldid_type_incident = document.getElementById('oldid_type_incident').value;
-		row++;
-
-		// Check values
-		if (id_type_incident == oldid_type_incident)
-		{
-			compare++;
-		}
-
-		// Check counts
-		if (compare == row)
-		{
-			alert("les valeurs sont identiques");
-			return false;
-		}
-		return true;
-	}
-</script>
+<script src="<?= base_url('js/main.js') ?>"></script>
+<script src="<?= base_url('js/validateForm.js') ?>"></script>
 
 <?= $this->endSection() ?>

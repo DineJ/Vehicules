@@ -24,7 +24,7 @@
 
 	<!-- Type a short explication -->
 	<label>Description</label>
-	<textarea onchange="setUpper(document.getElementById('description'));" id="description" name="description" class="form-control"><?= isset($item) ? $item->description : '' ?></textarea>
+	<textarea oninput="setUpper(document.getElementById('description'));" id="description" name="description" class="form-control"><?= isset($item) ? $item->description : '' ?></textarea>
 
 	<!-- Redirection button -->
 	<a href="<?= site_url('Suivi') ?>" id="btnRetour" class="btn btn-secondary mt-3">Retour</a>
@@ -32,12 +32,6 @@
 
 </form>
 
-<script>
-	// Caps text
-	function setUpper(element)
-	{
-		element.value=element.value.toUpperCase();
-	}
-</script>
+<script src="<?= base_url('js/main.js') ?>"></script>
 
 <?= $this->endSection() ?>

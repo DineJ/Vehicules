@@ -6,7 +6,7 @@
 
 	<!-- Type name -->
 	<label>Nom</label>
-	<input type='text' onchange="setUpper(document.getElementById('nom'));" id='nom' name='nom' value='<?= isset($item) ? $item->nom : '' ?>' class='form-control' required>
+	<input type='text' oninput="setUpper(document.getElementById('nom'));" id='nom' name='nom' value='<?= isset($item) ? $item->nom : '' ?>' class='form-control' required>
 
 	<!-- Check critical issue -->
 	<label>Critique</label>
@@ -28,13 +28,6 @@
 	<button type="submit" onclick="submitTypeIncident()" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 
-<script>
-
-	// Caps text
-	function setUpper(element)
-	{
-		element.value=element.value.toUpperCase();
-	}
-</script>
+<script src="<?= base_url('js/main.js') ?>"></script>
 
 <?= $this->endSection() ?>

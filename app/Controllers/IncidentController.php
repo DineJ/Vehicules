@@ -68,6 +68,7 @@ class IncidentController extends Controller
 		// Get id
 		$data['item'] = $this->model->find($id);
 		$data['suivi'] = $this->suiviModel->where('id_incident', $data['item']->id)->findAll();
+		$data['suiviId'] = $data['suivi'][0];
 
 		// Get datas linked by user_id
 		$data['utilisateur'] = $this->userModel->find($data['item']->id_user);

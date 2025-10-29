@@ -2,11 +2,11 @@
 <?= $this->section('content') ?>
 
 <h2><?= $title ?></h2>
-<form method="post" action="<?= site_url('Type_incident/update/'.$item->id) ?>" onsubmit="return validateForm()">
+<form method="post" action="<?= site_url('Type_incident/update/'.$item->id) ?>" onsubmit="return validateFormTypeIncident()">
 
 	<!-- Type name -->
 	<label>Nom</label>
-	<input type='text' onchange="setUpper(document.getElementById('nom'));" id='nom' name='nom' value='<?= isset($item) ? $item->nom : '' ?>' class='form-control' required>
+	<input type='text' oninput="setUpper(document.getElementById('nom'));" id='nom' name='nom' value='<?= isset($item) ? $item->nom : '' ?>' class='form-control' required>
 	<input type='hidden' id='oldnom' name='oldnom' value='<?= isset($item) ? $item->nom : '' ?>'>
 
 	<!-- Check critical -->
@@ -24,45 +24,8 @@
 
 </form>
 
-<script>
 
-	// Caps text
-	function setUpper(element)
-	{
-		element.value=element.value.toUpperCase();
-	}
-
-	function validateForm()
-	{
-		let compare = 0;
-		let row = 0;
-
-		let nom = document.getElementById('nom').value;
-		let oldnom = document.getElementById('oldnom').value;
-		row++;
-
-		if (nom == oldnom)
-		{
-			compare++;
-		}
-
-		let critique = (document.getElementById('critique').checked ? 1 : 0 );
-		let oldcritique = document.getElementById('oldcritique').value;
-		row++;
-
-		if (critique == oldcritique)
-		{
-			compare++;
-		}
-
-		if (compare == row)
-		{
-			alert("les valeurs sont identiques");
-			return false;
-		}
-		return true;
-	}
-
-</script>
+<script src="<?= base_url('js/main.js') ?>"></script>
+<script src="<?= base_url('js/validateForm.js') ?>"></script>
 
 <?= $this->endSection() ?>
