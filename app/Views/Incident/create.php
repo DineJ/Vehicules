@@ -88,6 +88,7 @@
 	</div>
 </div>
 
+
 <script>
 	const urlCreateIncident = "<?= site_url('Type_incident/create')?>"
 </script>
