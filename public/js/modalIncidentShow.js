@@ -102,6 +102,7 @@ function addModal() {
 						.then(resp => resp.text()) // Convert response to HTML text
 						.then(result => {
 							myModal.hide(); // Close modal
+							window.location.reload(); // Reload the current page to reflect the new datas
 						})
 						.catch(err => console.error(err));
 					});
