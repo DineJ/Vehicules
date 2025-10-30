@@ -11,43 +11,43 @@
 			<!-- Display plaque -->
 			<tr>
 				<td class="td-hidden">Plaque</td>
-				<td data-label="Plaque"><?= $item->plaque ?></td>
+				<td data-label="Plaque"><?= esc($item->plaque) ?></td>
 			</tr>
 
 			<!-- Display marque -->
 			<tr>
 				<td class="td-hidden">Marque</td>
-				<td data-label="Marque"><?= $item->marque ?></td>
+				<td data-label="Marque"><?= esc($item->marque) ?></td>
 			</tr>
 
 			<!-- Display modele -->
 			<tr>
 				<td class="td-hidden">Modèle</td>
-				<td data-label="Modele"><?= $item->modele ?></td>
+				<td data-label="Modele"><?= esc($item->modele) ?></td>
 			</tr>
 
 			<!-- Display date_achat -->
 			<tr>
 				<td class="td-hidden">Date achat</td>
-				<td data-label="Date achat"><?= date('d/m/Y', strtotime($item->date_achat)) ?></td>
+				<td data-label="Date achat"><?= esc(date('d/m/Y', strtotime($item->date_achat))) ?></td>
 			</tr>
 
 			<!-- Display date_immat -->
 			<tr>
 				<td class="td-hidden">Date immat</td>
-				<td data-label="Date immat"><?= date('d/m/Y', strtotime($item->date_immat)) ?></td>
+				<td data-label="Date immat"><?= esc(date('d/m/Y', strtotime($item->date_immat))) ?></td>
 			</tr>
 
 			<!-- Display ct -->
 			<tr>
 				<td class="td-hidden">CT</td>
-				<td data-label="CT"><?= date('d/m/Y', strtotime($item->ct)) ?></td>
+				<td data-label="CT"><?= esc(date('d/m/Y', strtotime($item->ct))) ?></td>
 			</tr>
 
 			<!-- Display actif -->
 			<tr>
 				<td class="td-hidden">Actif</td>
-				<td data-label="Actif"><?= $item->actif ? 'Oui' : 'Non' ?></td>
+				<td data-label="Actif"><?= esc($item->actif) ? 'Oui' : 'Non' ?></td>
 			</tr>
 
 		</tbody>
