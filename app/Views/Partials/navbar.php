@@ -32,6 +32,7 @@ $currentUri = service('uri')->getPath();
 
 				<?php if ($currentUri !== '/Login/log' && $currentUri !== '/Login'): ?>
 					<li><a class="dropdown-item" href="/User">Utilisateur</a></li>
+					<li><a class="dropdown-item" href="/Vehicule">Véhicule</a></li>
 					<li><a class="dropdown-item" href="/Incident">Incident</a></li>
 					<li><a class="dropdown-item" href="/Type_incident">Type incident</a></li>
 					<li><a class="dropdown-item" href="/Suivi">Suivi</a></li>
