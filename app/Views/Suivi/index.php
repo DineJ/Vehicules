@@ -38,7 +38,7 @@
 					</td>
 					<td data-label="Date Intervention" ><?= esc(date('d/m/Y', strtotime($item->date_intervention))) ?></td>
 					<td data-label="Description" class="long-text"><?= esc($item->description) ?></td>
-					<td>
+					<td data-label="Actions">
 						<!-- Redirection button -->
 						<a href="<?= site_url('Suivi/show/'.$item->id) ?>" class="btn btn-info btn-sm">Voir</a>
 					</td>

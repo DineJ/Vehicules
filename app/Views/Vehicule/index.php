@@ -20,17 +20,16 @@
 
 <div class="table-responsive">
 	<table class="table table-striped table-bordered mt-3">
-
-		<!-- Datas name -->
 		<thead>
+			<!-- Datas name -->
 			<tr>
-				<th>plaque</th>
-				<th>marque</th>
-				<th>modele</th>
-				<th>date_achat</th>
-				<th>date_immat</th>
-				<th>ct</th>
-				<th>actif</th>
+				<th>Plaque</th>
+				<th>Marque</th>
+				<th>Modèle</th>
+				<th>Date achat</th>
+				<th>Date immat</th>
+				<th>CT</th>
+				<th>Actif</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -39,15 +38,14 @@
 			<!-- Display datas -->
 			<?php foreach ($items as $item): ?>
 				<tr>
-					<td data-label="plaque"><?= esc($item->plaque) ?></td>
-					<td data-label="marque"><?= esc($item->marque) ?></td>
-					<td data-label="modele"><?= esc($item->modele) ?></td>
-					<td data-label="date_achat"><?= esc($item->date_achat) ?></td>
-					<td data-label="date_immat"><?= esc($item->date_immat) ?></td>
-					<td data-label="ct"><?= esc($item->ct) ?></td>
-					<td data-label="actif"><?= esc($item->actif) ?></td>
-
-					<td>
+					<td data-label="Plaque"><?= esc($item->plaque) ?></td>
+					<td data-label="Marque"><?= esc($item->marque) ?></td>
+					<td data-label="Modèle"><?= esc($item->modele) ?></td>
+					<td data-label="Date achat"><?= esc($item->date_achat) ?></td>
+					<td data-label="Date immat"><?= esc($item->date_immat) ?></td>
+					<td data-label="CT"><?= esc($item->ct) ?></td>
+					<td data-label="Actif"><?= esc($item->actif) ?></td>
+					<td data-label="Actions">
 						<!-- Redirection button -->
 						<a href="<?= site_url('Vehicule/show/'.$item->id) ?>" class="btn btn-info btn-sm">Voir</a>
 					</td>
