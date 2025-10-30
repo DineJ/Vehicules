@@ -7,15 +7,15 @@
 
 	<!-- Type plaque -->
 	<label>plaque</label>
-	<input type="text" onchange="setUpper(document.getElementById('plaque'));" id="plaque" name="plaque" value="<?= isset($item) ? $item->plaque : '' ?>" class="form-control" required>
+	<input type="text" oninput="setUpper(document.getElementById('plaque'));" id="plaque" name="plaque" value="<?= isset($item) ? $item->plaque : '' ?>" class="form-control" required>
 
 	<!-- Type marque -->
 	<label>marque</label>
-	<input type="text" onchange="setUpper(document.getElementById('marque'));" id="marque" name="marque" value="<?= isset($item) ? $item->marque : '' ?>" class="form-control" required>
+	<input type="text" oninput="setUpper(document.getElementById('marque'));" id="marque" name="marque" value="<?= isset($item) ? $item->marque : '' ?>" class="form-control" required>
 
 	<!-- Type modele -->
 	<label>modele</label>
-	<input type="text" onchange="setUpper(document.getElementById('modele'));" id="modele" name="modele" value="<?= isset($item) ? $item->modele : '' ?>" class="form-control" required>
+	<input type="text" oninput="setUpper(document.getElementById('modele'));" id="modele" name="modele" value="<?= isset($item) ? $item->modele : '' ?>" class="form-control" required>
 
 	<!-- Type date -->
 	<label>date_achat</label>
@@ -41,12 +41,6 @@
 </form>
 
 
-<script>
-	// Caps text
-	function setUpper(element)
-	{
-		element.value=element.value.toUpperCase();
-	}
-</script>
+<script src="<?= base_url('js/main.js') ?>"></script>
 
 <?= $this->endSection() ?>
