@@ -10,45 +10,46 @@
 
 			<!-- Display plaque -->
 			<tr>
-				<td class="td-hidden">plaque</td>
-				<td data-label="plaque"><?= $item->plaque ?></td>
+				<td class="td-hidden">Plaque</td>
+				<td data-label="Plaque"><?= $item->plaque ?></td>
 			</tr>
 
 			<!-- Display marque -->
 			<tr>
-				<td class="td-hidden">marque</td>
-				<td data-label="marque"><?= $item->marque ?></td>
+				<td class="td-hidden">Marque</td>
+				<td data-label="Marque"><?= $item->marque ?></td>
 			</tr>
 
 			<!-- Display modele -->
 			<tr>
-				<td class="td-hidden">modele</td>
-				<td data-label="modele"><?= $item->modele ?></td>
+				<td class="td-hidden">Modèle</td>
+				<td data-label="Modele"><?= $item->modele ?></td>
 			</tr>
 
 			<!-- Display date_achat -->
 			<tr>
-				<td class="td-hidden">date_achat</td>
-				<td data-label="date_achat"><?= $item->date_achat ?></td>
+				<td class="td-hidden">Date achat</td>
+				<td data-label="Date achat"><?= date('d/m/Y', strtotime($item->date_achat)) ?></td>
 			</tr>
 
 			<!-- Display date_immat -->
 			<tr>
-				<td class="td-hidden">date_immat</td>
-				<td data-label="date_immat"><?= $item->date_immat ?></td>
+				<td class="td-hidden">Date immat</td>
+				<td data-label="Date immat"><?= date('d/m/Y', strtotime($item->date_immat)) ?></td>
 			</tr>
 
 			<!-- Display ct -->
 			<tr>
-				<td class="td-hidden">ct</td>
-				<td data-label="ct"><?= $item->ct ?></td>
+				<td class="td-hidden">CT</td>
+				<td data-label="CT"><?= date('d/m/Y', strtotime($item->ct)) ?></td>
 			</tr>
 
 			<!-- Display actif -->
 			<tr>
-				<td class="td-hidden">actif</td>
-				<td data-label="actif"><?= $item->actif ? 'Oui' : 'Non' ?></td>
+				<td class="td-hidden">Actif</td>
+				<td data-label="Actif"><?= $item->actif ? 'Oui' : 'Non' ?></td>
 			</tr>
+
 		</tbody>
 	</table>
 </div>
@@ -57,15 +58,15 @@
 <div>
 	<form method="post" action="<?= site_url('Vehicule/update/'.$item->id) ?>">
 
-		<!-- Redirection button to edit user form -->
+		<!-- Redirection button to edit vehicule form -->
 		<a href="<?= site_url('Vehicule/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
 
-		<!-- Disabled account button -->
+		<!-- Disabled vehicule button -->
 		<input type="hidden" name="actif" id="actif" value="<?= $item->actif ? 0 : 1 ?>">
+
 		<button type="submit" class="btn <?= $item->actif ? 'btn-danger' : 'btn-success' ?>"> <?= $item->actif ? 'Rendre inactif' : 'Rendre actif' ?></button>
 	</form>
 </div>
-</br>
 
 <!-- Redirection button -->
 <a href="<?= site_url('Vehicule') ?>" class="btn btn-secondary">Retour</a>
