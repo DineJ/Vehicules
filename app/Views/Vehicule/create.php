@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<h2>Vehicule - <?= $title ?></h2>
+<h2><?= $title ?></h2>
 
 <form method="post" action="<?= site_url('Vehicule/store/') ?>">
 
