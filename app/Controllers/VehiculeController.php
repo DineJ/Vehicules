@@ -15,57 +15,50 @@ class VehiculeController extends Controller
 		$this->model = new VehiculeModel();
 	}
 
-	// LISTE AVEC PAGINATION
+	// SEARCH BAR
 	public function index()
 	{
-		// SEARCH BAR
-		$search = $this->request->getGet('q');
-		if ($search)
-		{
-			$query = '%'.$search.'%';
-			$this->model->like('type_incident', $query)
-						->orderBy('type_incident');
-		}
-		else
-		{
-			$this->model->orderBy('type_incident');
-		}
-		$data['search'] = $search;
-		$data['items'] = $this->model->paginate(5); // Affiche 5 résultats par page
-		$data['pager'] = $this->model->pager; // Ajoute le pager
+		
+		$data['items'] = $this->model->paginate(5); // Display 5 results
+		$data['pager'] = $this->model->pager; // Add pager
 
 		return view('Vehicule/index', $data);
 	}
 
-	// AFFICHAGE D'UN SEUL ÉLÉMENT
+
+	// DISPLAY AN ELEMENT
 	public function show($id)
 	{
 		$data['item'] = $this->model->find($id);
 		return view('Vehicule/show', $data);
 	}
 
-	// FORMULAIRE DE CRÉATION
+
+	// CREATION FORM
 	public function create()
 	{
 		$data['title'] = "Créer Vehicule";
 		return view('Vehicule/create', $data);
 	}
 
-	// INSERTION DANS LA BASE
+
+	// INSERT INTO DATABASE
 	public function store()
 	{
 		$data = $this->request->getPost();
 		$entity = new Vehicule();
 		$entity->fill($data);
 
-		if (!$this->model->insert($entity)) {
+		if (!$this->model->insert($entity))
+		{
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
 		}
 		
 		return redirect()->to('/Vehicule');
 	}
 
-	// FORMULAIRE DE MODIFICATION
+
+	// MODIFICATION FORM
 	public function edit($id)
 	{
 		$data['item'] = $this->model->find($id);
@@ -73,21 +66,24 @@ class VehiculeController extends Controller
 		return view('Vehicule/edit', $data);
 	}
 
-	// MISE À JOUR DES DONNÉES
+
+	// UPDATE DATABASE
 	public function update($id)
 	{
 		$data = $this->request->getPost();
 		$entity = $this->model->find($id);
 		$entity->fill($data);
 
-		if (!$this->model->save($entity)) {
+		if (!$this->model->save($entity))
+		{
 			return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
 		}
 
 		return redirect()->to('/Vehicule');
 	}
 
-	// SUPPRESSION D'UN ÉLÉMENT
+
+	// DELETE AN ELEMENT
 	public function delete($id)
 	{
 		$this->model->delete($id);

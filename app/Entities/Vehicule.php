@@ -19,32 +19,34 @@ use CodeIgniter\Validation\ValidationException;
  */
 class Vehicule extends Entity
 {
-    protected $casts = [
-        'id' => 'integer',
-        'plaque' => 'string',
-        'marque' => 'string',
-        'modele' => 'string',
-        'date_achat' => 'datetime',
-        'date_immat' => 'datetime',
-        'ct' => 'datetime',
-        'actif' => 'integer',
-    ];
+	protected $casts = [
+		'id' => 'integer',
+		'plaque' => 'string',
+		'marque' => 'string',
+		'modele' => 'string',
+		'date_achat' => 'datetime',
+		'date_immat' => 'datetime',
+		'ct' => 'datetime',
+		'actif' => 'integer',
+	];
 
-    protected $validationRules = [
-        'id' => 'integer|max_length[11]',
-        'plaque' => 'string|max_length[9]',
-        'marque' => 'string|max_length[50]',
-        'modele' => 'string|max_length[50]',
-        'date_achat' => 'valid_date[Y-m-d H:i:s]',
-        'date_immat' => 'valid_date[Y-m-d H:i:s]',
-        'ct' => 'valid_date[Y-m-d H:i:s]',
-        'actif' => 'integer|max_length[1]',
-    ];
+	protected $validationRules = [
+		'id' => 'integer|max_length[11]',
+		'plaque' => 'string|max_length[11]',
+		'marque' => 'string|max_length[50]',
+		'modele' => 'string|max_length[50]',
+		'date_achat' => 'valid_date[Y-m-d]',
+		'date_immat' => 'valid_date[Y-m-d]',
+		'ct' => 'valid_date[Y-m-d]',
+		'actif' => 'integer|max_length[1]',
+	];
+
 
 	public function getid()
 	{
 		return $this->attributes['id'] ?? null;
 	}
+
 
 	public function setid($id)
 	{
@@ -59,10 +61,12 @@ class Vehicule extends Entity
 		return $this;
 	}
 
+
 	public function getplaque()
 	{
 		return $this->attributes['plaque'] ?? null;
 	}
+
 
 	public function setplaque($plaque)
 	{
@@ -77,10 +81,12 @@ class Vehicule extends Entity
 		return $this;
 	}
 
+
 	public function getmarque()
 	{
 		return $this->attributes['marque'] ?? null;
 	}
+
 
 	public function setmarque($marque)
 	{
@@ -95,10 +101,12 @@ class Vehicule extends Entity
 		return $this;
 	}
 
+
 	public function getmodele()
 	{
 		return $this->attributes['modele'] ?? null;
 	}
+
 
 	public function setmodele($modele)
 	{
@@ -113,15 +121,17 @@ class Vehicule extends Entity
 		return $this;
 	}
 
+
 	public function getdateAchat()
 	{
 		return $this->attributes['date_achat'] ?? null;
 	}
 
+
 	public function setdateAchat($dateAchat)
 	{
 		$validation = \Config\Services::validation();
-		$validation->setRules(['date_achat' => 'valid_date[Y-m-d H:i:s]']);
+		$validation->setRules(['date_achat' => 'valid_date[Y-m-d]']);
 
 		if (!$validation->run(['date_achat' => $dateAchat])) {
 			throw new \InvalidArgumentException("❌ Valeur invalide pour 'date_achat': " . implode(', ', $validation->getErrors()));
@@ -131,15 +141,17 @@ class Vehicule extends Entity
 		return $this;
 	}
 
+
 	public function getdateImmat()
 	{
 		return $this->attributes['date_immat'] ?? null;
 	}
 
+
 	public function setdateImmat($dateImmat)
 	{
 		$validation = \Config\Services::validation();
-		$validation->setRules(['date_immat' => 'valid_date[Y-m-d H:i:s]']);
+		$validation->setRules(['date_immat' => 'valid_date[Y-m-d]']);
 
 		if (!$validation->run(['date_immat' => $dateImmat])) {
 			throw new \InvalidArgumentException("❌ Valeur invalide pour 'date_immat': " . implode(', ', $validation->getErrors()));
@@ -149,15 +161,17 @@ class Vehicule extends Entity
 		return $this;
 	}
 
+
 	public function getct()
 	{
 		return $this->attributes['ct'] ?? null;
 	}
 
+
 	public function setct($ct)
 	{
 		$validation = \Config\Services::validation();
-		$validation->setRules(['ct' => 'valid_date[Y-m-d H:i:s]']);
+		$validation->setRules(['ct' => 'valid_date[Y-m-d]']);
 
 		if (!$validation->run(['ct' => $ct])) {
 			throw new \InvalidArgumentException("❌ Valeur invalide pour 'ct': " . implode(', ', $validation->getErrors()));
@@ -167,10 +181,12 @@ class Vehicule extends Entity
 		return $this;
 	}
 
+
 	public function getactif()
 	{
 		return $this->attributes['actif'] ?? null;
 	}
+
 
 	public function setactif($actif)
 	{
@@ -184,4 +200,5 @@ class Vehicule extends Entity
 		$this->attributes['actif'] = $actif;
 		return $this;
 	}
+
 }
