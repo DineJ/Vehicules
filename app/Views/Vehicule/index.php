@@ -29,7 +29,6 @@
 				<th>Date achat</th>
 				<th>Date immat</th>
 				<th>CT</th>
-				<th>Actif</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -41,10 +40,9 @@
 					<td data-label="Plaque"><?= esc($item->plaque) ?></td>
 					<td data-label="Marque"><?= esc($item->marque) ?></td>
 					<td data-label="Modèle"><?= esc($item->modele) ?></td>
-					<td data-label="Date achat"><?= esc($item->date_achat) ?></td>
-					<td data-label="Date immat"><?= esc($item->date_immat) ?></td>
-					<td data-label="CT"><?= esc($item->ct) ?></td>
-					<td data-label="Actif"><?= esc($item->actif) ?></td>
+					<td data-label="Date achat"><?= esc(date('d/m/Y', strtotime($item->date_achat))) ?></td>
+					<td data-label="Date immat"><?= esc(date('d/m/Y', strtotime($item->date_immat))) ?></td>
+					<td data-label="CT"><?= esc(date('d/m/Y', strtotime($item->ct))) ?></td>
 					<td data-label="Actions">
 						<!-- Redirection button -->
 						<a href="<?= site_url('Vehicule/show/'.$item->id) ?>" class="btn btn-info btn-sm">Voir</a>
