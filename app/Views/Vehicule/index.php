@@ -4,6 +4,18 @@
 <h2>Liste des Vehicules</h2>
 <a href="<?= site_url('Vehicule/create') ?>" class="btn btn-success">Ajouter</a>
 
+<!-- Search bar -->
+<form method="get" action="<?= site_url('Vehicule') ?>" class="mb-3">
+	<div class="input-group">
+		<input type="text" name="q" class="form-control" placeholder="Rechercher : Plaque XX-XXX-XX" value="<?= isset($search) ?  esc($search) : '' ?>">
+		<button type="submit" class="btn btn-primary">Rechercher</button>
+
+		<!-- Reset search bar -->
+		<?php if (!empty($search)) : ?>
+			<a href="<?= site_url('Vehicule') ?>" class="btn btn-outline-secondary">Réinitialiser</a>
+		<?php endif; ?>
+	</div>
+</form>
 
 
 <div class="table-responsive">

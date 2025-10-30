@@ -18,7 +18,20 @@ class VehiculeController extends Controller
 	// SEARCH BAR
 	public function index()
 	{
-		
+		$search = $this->request->getGet('q');
+
+		if ($search)
+		{
+			$query = '%'.$search.'%';
+			$this->model->like('plaque', $query)
+						->orderBy('modele');
+		}
+		else
+		{
+			$this->model->orderBy('modele');
+		}
+
+		$data['search'] = $search;
 		$data['items'] = $this->model->paginate(5); // Display 5 results
 		$data['pager'] = $this->model->pager; // Add pager
 
