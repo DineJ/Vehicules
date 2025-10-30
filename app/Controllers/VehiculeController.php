@@ -85,6 +85,7 @@ class VehiculeController extends Controller
 	{
 		$data = $this->request->getPost();
 		$entity = $this->model->find($id);
+		$redirect_url = $this->request->getPost('redirect_url');
 		$entity->fill($data);
 
 		if (!$this->model->save($entity))
@@ -92,7 +93,13 @@ class VehiculeController extends Controller
 			return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
 		}
 
-		return redirect()->to('/Vehicule');
+		// Redirection vers l'URL d'origine
+		if (!empty($redirect_url))
+		{
+			return redirect()->to($redirect_url);
+		}
+
+			return redirect()->to('/Vehicule');
 	}
 
 

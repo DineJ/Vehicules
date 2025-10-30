@@ -62,8 +62,8 @@
 		<a href="<?= site_url('Vehicule/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
 
 		<!-- Disabled vehicule button -->
-		<input type="hidden" name="actif" id="actif" value="<?= $item->actif ? 0 : 1 ?>">
-
+		<input type="hidden" name="actif" id="actif" value="<?= esc($item->actif ? 0 : 1, 'attr') ?>">
+		<input type="hidden" name="redirect_url" value="<?= esc(current_url(), 'attr'); ?>">
 		<button type="submit" class="btn <?= $item->actif ? 'btn-danger' : 'btn-success' ?>"> <?= $item->actif ? 'Rendre inactif' : 'Rendre actif' ?></button>
 	</form>
 </div>
