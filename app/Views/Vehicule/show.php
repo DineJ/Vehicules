@@ -68,6 +68,80 @@
 	</form>
 </div>
 
+
+
+<!-- Creation of a section suivi -->
+<div style="margin-left: 3rem; margin-top: 1.5rem; width: 95%; padding: 1rem; border: 1px solid #ccc; border-left: 4px solid #6f42c1; border-radius: 8px;">
+	<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+		<h6 style="margin: 0; color: #6f42c1;">↳ Incident</h6>
+	</div>
+	<div id="table_incident" class="table-responsive">
+		<!-- Test if an incident has a suivi or not -->
+		<?php if (!isset($incident) || empty($incident))
+		{
+		?>
+			<table class="table table-striped table-bordered mt-3">
+				<tbody>
+					<!-- Vehicule has no Incident yet -->
+					<tr>
+						<td class="label-permis">Pas d'incident enregistré</td>
+					</tr>
+				</tbody>
+			</table>
+		<?php
+		}
+		else
+		{
+		?>
+			<?php foreach($incident as $i) : ?>
+				<table class="table table-striped table-bordered mt-3">
+					<tbody>
+
+						<!-- Display plaque -->
+						<tr>
+							<td class="td-hidden">Vehicule</td>
+							<td data-label="Plaque"><?= esc($i->vehicule) ?></td>
+						</tr>
+
+						<!-- Display description -->
+						<tr>
+							<td class="td-hidden">Date Incident</td>
+							<td data-label="Description"><?= date('d/m/Y', strtotime($i->date_incident)) ?></td>
+						</tr>
+
+						<!-- Display short explication of the incident -->
+						<tr>
+							<td>Explication Incident</td>
+							<td data-label="Explication Incident" class="long-text"><?= $i->explication_incident ?></td>
+						</tr>
+
+						<!-- Display driver involved in the incident -->
+						<tr>
+							<td>Conducteur</td>
+							<td data-label="Conducteur"><?= $i->user ?></td>
+						</tr>
+
+						<!-- Display incident type -->
+						<tr>
+							<td>Type Incident</td>
+							<td data-label="Type Incident"><?= $i->typeIncident ?></td>
+						</tr>
+
+					</tbody>
+				</table>
+
+				<!-- Redirection button to edit suivi form -->
+				<button type="button" class="btn btn-orange btnEditType" data-incident-id="<?= $i->id ?>">Modifier</button>
+				</br>
+				</br>
+			<?php endforeach; ?>
+		<?php
+		}
+		?>
+	</div>
+</div>
+
+
 <!-- Redirection button -->
 <a href="<?= site_url('Vehicule') ?>" class="btn btn-secondary">Retour</a>
 <?= $this->endSection() ?>

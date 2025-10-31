@@ -3,16 +3,19 @@
 namespace App\Controllers;
 
 use App\Models\VehiculeModel;
+use App\Models\IncidentModel;
 use App\Entities\Vehicule;
 use CodeIgniter\Controller;
 
 class VehiculeController extends Controller
 {
 	protected $model;
+	protected $incidentModel;
 
 	public function __construct()
 	{
 		$this->model = new VehiculeModel();
+		$this->incidentModel = new IncidentModel();
 	}
 
 	// SEARCH BAR
@@ -43,6 +46,15 @@ class VehiculeController extends Controller
 	public function show($id)
 	{
 		$data['item'] = $this->model->find($id);
+
+		// Query to get datas
+		$data['incident'] = $this->incidentModel
+		->select('vehicule.plaque as vehicule, CONCAT(user.prenom, " ", user.nom) as user, type_incident.nom as typeIncident, date_incident, explication_incident')
+		->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
+		->join('type_incident', 'type_incident.id = incident.id_type_incident', 'left')
+		->join('user', 'user.id = incident.id_user', 'left')
+		->find($data['item']->id_incident);
+
 		return view('Vehicule/show', $data);
 	}
 
