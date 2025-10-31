@@ -358,3 +358,89 @@ function validateFormIncidentShow()
 	}
 	return true;
 }
+
+
+//////////////////////////////////////////////
+
+
+function validateFormPermis()
+	{
+
+		// Count
+		let compare = 0;
+		let row = 0;
+
+		// Get values
+		let plaque = document.getElementById('plaque').value;
+		let oldplaque = document.getElementById('oldplaque').value;
+		row++;
+
+		// Check values 
+		if (plaque == oldplaque)
+		{
+			compare++;
+		}
+
+		// Get values
+		let marque = document.getElementById('marque').value;
+		let oldmarque = document.getElementById('oldmarque').value;
+		row++;
+
+		// Check values 
+		if (marque == oldmarque)
+		{
+			compare++;
+		}
+
+		// Get values
+		let modele = document.getElementById('modele').value;
+		let oldmodele = document.getElementById('oldmodele').value;
+		row++;
+
+		// Check values 
+		if (modele == oldmodele)
+		{
+			compare++;
+		}
+
+		// Get values
+		let date_achat = document.getElementById('date_achat').value;
+		let olddate_achat = document.getElementById('olddate_achat').value;
+		row++;
+
+		// Check values 
+		if (date_achat == olddate_achat)
+		{
+			compare++;
+		}
+
+		// Get values
+		let date_immat = document.getElementById('date_immat').value;
+		let olddate_immat = document.getElementById('olddate_immat').value;
+		row++;
+
+		// Check values 
+		if (date_immat == olddate_immat)
+		{
+			compare++;
+		}
+
+		// Get values
+		let ct = document.getElementById('ct').value;
+		let oldct = document.getElementById('oldct').value;
+		row++;
+
+		// Check values 
+		if (ct == oldct)
+		{
+			compare++;
+		}
+
+		// Check counts
+		if (compare == row)
+		{
+			alert("les valeurs sont identiques");
+			return false;
+		}
+		return true;
+	}
