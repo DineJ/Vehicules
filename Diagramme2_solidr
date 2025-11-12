@@ -92,6 +92,7 @@
   <dia:layer name="Arrière-plan" visible="true" connectable="false"/>
   <dia:layer name="Arrière-plan" visible="true" connectable="false"/>
   <dia:layer name="Arrière-plan" visible="true" connectable="false"/>
+  <dia:layer name="Arrière-plan" visible="true" connectable="false"/>
   <dia:layer name="Arrière-plan" visible="true" connectable="true" active="true">
     <dia:object type="Flowchart - Box" version="0" id="O0">
       <dia:attribute name="obj_pos">
@@ -2168,14 +2169,14 @@
     </dia:object>
     <dia:object type="Standard - Line" version="0" id="O65">
       <dia:attribute name="obj_pos">
-        <dia:point val="-5.13134,65.6473"/>
+        <dia:point val="-5.12671,65.6624"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-5.18208,65.3625;0.769318,66.086"/>
+        <dia:rectangle val="-5.17755,65.3895;0.868283,66.113"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="-5.13134,65.6473"/>
-        <dia:point val="0.718573,65.7351"/>
+        <dia:point val="-5.12671,65.6624"/>
+        <dia:point val="0.817439,65.7635"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -2495,10 +2496,10 @@
     </dia:object>
     <dia:object type="Standard - Text" version="1" id="O76">
       <dia:attribute name="obj_pos">
-        <dia:point val="-3.45336,63.5636"/>
+        <dia:point val="-3.24123,66.6749"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-3.45336,62.8786;-1.41836,63.7536"/>
+        <dia:rectangle val="-3.24123,65.9899;-1.20623,66.8649"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -2512,10 +2513,10 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-3.45336,63.5636"/>
+            <dia:point val="-3.24123,66.6749"/>
           </dia:attribute>
           <dia:attribute name="color">
-            <dia:color val="#a51d2dff"/>
+            <dia:color val="#1a5fb4ff"/>
           </dia:attribute>
           <dia:attribute name="alignment">
             <dia:enum val="0"/>
@@ -2999,10 +3000,10 @@
     </dia:object>
     <dia:object type="Standard - Text" version="1" id="O91">
       <dia:attribute name="obj_pos">
-        <dia:point val="-3.45336,66.766"/>
+        <dia:point val="-3.31194,63.7254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-3.45336,66.081;-1.02586,66.956"/>
+        <dia:rectangle val="-3.31194,63.0404;-0.884439,63.9154"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -3016,10 +3017,10 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-3.45336,66.766"/>
+            <dia:point val="-3.31194,63.7254"/>
           </dia:attribute>
           <dia:attribute name="color">
-            <dia:color val="#1a5fb4ff"/>
+            <dia:color val="#a51d2dff"/>
           </dia:attribute>
           <dia:attribute name="alignment">
             <dia:enum val="0"/>
