@@ -1,14 +1,16 @@
 FROM php:8.2-fpm
 
-# Installe les extensions PHP nécessaires
-RUN docker-php-ext-install pdo pdo_mysql
+# Installe les dépendances nécessaires
+RUN apt-get update && apt-get install -y \
+    libicu-dev \
+    && docker-php-ext-install intl pdo pdo_mysql mysqli \
+    && docker-php-ext-enable intl mysqli
 
 # Définit le répertoire de travail
 WORKDIR /var/www/html
 
-# Copie le code de l’application
+# Copie le code de l’application dans le conteneur
 COPY . .
 
-# Démarre PHP-FPM (et non php -a)
+# Démarre PHP-FPM
 CMD ["php-fpm", "-F"]
-
