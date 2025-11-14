@@ -19,8 +19,6 @@ services:
     - .:/var/www/html
    working_dir: /var/www/html
    command: bash -c "chown -R www-data:www-data /var/www/html/writable && php-fpm"
-   extra_hosts:
-     - "host.docker.internal:host-gateway"
    depends_on:
      - mariadb
    networks:
