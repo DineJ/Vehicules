@@ -173,7 +173,7 @@
 <a href="<?= site_url('Vehicule') ?>" class="btn btn-secondary">Retour</a>
 
 <script>
-	const urlEditIncident = "<?= site_url('Incident/edit').'/'. $incidentId->id ?>"
+	const urlEditIncident = "<?= site_url('Incident/edit').'/' ?>"
 </script>
 <script src="<?= base_url('js/validateForm.js') ?>" ></script>
 <script src="<?= base_url('js/modalVehiculeShow.js') ?>"></script>

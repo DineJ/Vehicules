@@ -1,19 +1,15 @@
 
 function editModal() {
 
-	const btn = document.getElementById('btnEditType'); // Select the "Add" button by its ID
-	const urlSegments = window.location.pathname.split('/'); // Split the URL path by "/" to create an array of segments
-	const vehiculeId = urlSegments[urlSegments.length - 1]; // Take the last segment of the URL (supposed to be the vehicule ID)
-	btn.dataset.vehiculeId = vehiculeId; // Store the vehiculeId in the button's dataset (data-vehicule-id)
-
 	// Select all elements with class "btnEditType"
 	document.querySelectorAll('.btnEditType').forEach(editBtn => {
+		 // Store the vehiculeId in the button's dataset (data-vehicule-id)
 		editBtn.addEventListener('click', function() {
 			const modalContentEdit = document.getElementById('modalContentEdit'); // Select the modal body container for editing content
-			const incidentId = this.dataset.vehiculeId; // Get the "vehiculeId" stored in the clicked button's dataset
+			const urlEditIncident2 = urlEditIncident + editBtn.dataset.vehiculeId; // Build an URL based on Incident ID
 
 			// Make a GET request to fetch the edit form for the given incident ID
-			fetch(urlEditIncident)
+			fetch(urlEditIncident2)
 			.then(res => res.text()) // Convert the response into plain text (HTML)
 			.then(html => {
 				modalContentEdit.innerHTML = html; // Inject the fetched HTML form into the edit modal body
