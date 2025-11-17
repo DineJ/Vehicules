@@ -116,6 +116,7 @@ class IncidentController extends Controller
 	public function edit($id)
 	{
 		$data['item'] = $this->model->find($id);
+		$data['no_navbar'] = 'no-navbar';
 
 		// Get all datas
 		$data['utilisateurs'] = $this->userModel->findAll();

@@ -65,18 +65,20 @@
 		<input type="hidden" name="actif" id="actif" value="<?= esc($item->actif ? 0 : 1, 'attr') ?>">
 		<input type="hidden" name="redirect_url" value="<?= esc(current_url(), 'attr'); ?>">
 		<button type="submit" class="btn <?= $item->actif ? 'btn-danger' : 'btn-success' ?>"> <?= $item->actif ? 'Rendre inactif' : 'Rendre actif' ?></button>
+
 	</form>
 </div>
 
 
 
-<!-- Creation of a section suivi -->
+<!-- Creation of a section incident -->
 <div style="margin-left: 3rem; margin-top: 1.5rem; width: 95%; padding: 1rem; border: 1px solid #ccc; border-left: 4px solid #6f42c1; border-radius: 8px;">
 	<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
 		<h6 style="margin: 0; color: #6f42c1;">↳ Incident</h6>
 	</div>
 	<div id="table_incident" class="table-responsive">
-		<!-- Test if an incident has a suivi or not -->
+
+		<!-- Test if a vehicule has an incident or not -->
 		<?php if (!isset($incident) || empty($incident))
 		{
 		?>
@@ -126,15 +128,40 @@
 							<td>Type Incident</td>
 							<td data-label="Type Incident"><?= $i->typeIncident ?></td>
 						</tr>
-
 					</tbody>
 				</table>
 
-				<!-- Redirection button to edit suivi form -->
-				<button type="button" class="btn btn-orange btnEditType" data-incident-id="<?= $i->id ?>">Modifier</button>
+				<!-- Redirection button to edit incident form -->
+				<button type="button" class="btn btn-orange btnEditType" id="btnEditType" data-vehicule-id="<?= $i->id ?>">Modifier</button>
 				</br>
 				</br>
 			<?php endforeach; ?>
+
+
+			<div>
+				<div class="modal fade" id="incidentModalEdit" aria-hidden="true">
+					<!-- Size -->
+					<div class="modal-dialog modal-lg">
+						<!-- Content -->
+						<div class="modal-content">
+							<!-- Title -->
+							<div class="modal-header">
+								<h5 class="modal-title">Modifier un Incident</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							</div>
+							<!-- Form body -->
+							<div class="modal-body" id="modalContentEdit">
+								<?php
+									$no_navbar = 'no_navbar';
+									echo view('Partials/navbar', ['no_navbar' => $no_navbar]);
+								?>
+								<!-- In case loading takes time -->
+								Chargement...
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		<?php
 		}
 		?>
@@ -144,4 +171,11 @@
 
 <!-- Redirection button -->
 <a href="<?= site_url('Vehicule') ?>" class="btn btn-secondary">Retour</a>
+
+<script>
+	const urlEditIncident = "<?= site_url('Incident/edit').'/'. $incidentId->id ?>"
+</script>
+<script src="<?= base_url('js/validateForm.js') ?>" ></script>
+<script src="<?= base_url('js/modalVehiculeShow.js') ?>"></script>
+
 <?= $this->endSection() ?>
