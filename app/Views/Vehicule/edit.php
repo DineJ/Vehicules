@@ -3,7 +3,7 @@
 
 <h2><?= $title ?></h2>
 
-<form method="post" action="<?= site_url('Vehicule/update/'.$item->id) ?>" onsubmit="return validateFormPermis()">
+<form method="post" action="<?= site_url('Vehicule/update/'.$item->id) ?>" onsubmit="return validateFormVehicule()">
 
 	<!-- Type plaque -->
 	<label>Plaque</label>

@@ -1,5 +1,5 @@
 // Check if values are changed or not; returns an error if they are not
-function validateFormIncidentCreate()
+function validateFormIncidentEdit()
 {
 
 	// Counter
@@ -321,49 +321,7 @@ function validateFormUser()
 //////////////////////////////////////////////
 
 
-function validateFormIncidentShow()
-{
-
-	// Count
-	let compare = 0;
-	let row = 0;
-
-	// Get values
-	let date_intervention = document.getElementById('date_intervention').value;
-	let olddate_intervention = document.getElementById('olddate_intervention').value;
-	row++;
-
-	// Check values
-	if (date_intervention == olddate_intervention)
-	{
-		compare++;
-	}
-
-	// Get values
-	let description = document.getElementById('description').value;
-	let olddescription = document.getElementById('olddescription').value;
-	row++;
-
-	// Check values
-	if (description == olddescription)
-	{
-		compare++;
-	}
-
-	// Check counts
-	if (compare == row)
-	{
-		alert("les valeurs sont identiques");
-		return false;
-	}
-	return true;
-}
-
-
-//////////////////////////////////////////////
-
-
-function validateFormPermis()
+function validateFormVehicule()
 	{
 
 		// Count

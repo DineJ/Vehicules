@@ -39,7 +39,7 @@ function editModal() {
 						.then(resp=> resp.text()) // Convert the response to text
 						.then(result => {
 							// If the custom validation function returns true
-							if (validateFormIncidentShow())
+							if (validateFormSuivi())
 							{
 								myModalEdit.hide() // Close the modal
 								window.location.reload(); // Reload the current page to reflect the updated data
