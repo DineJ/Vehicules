@@ -9,7 +9,7 @@
 	<label for="id_vehicule">Vehicule</label>
 		<select id="id_vehicule" name="id_vehicule" class="form-control" required>
 		<?php foreach ($vehicules as $v): ?>
-			<option value="<?= $v->id ?>" <?= (isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?> disabled>
+			<option value="<?= $v->id ?>" <?= (isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
 				<?= esc($v->plaque) ?>
 			</option>
 		<?php endforeach; ?>
