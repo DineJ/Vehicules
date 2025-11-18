@@ -175,6 +175,7 @@
 <script>
 	const urlEditIncident = "<?= site_url('Incident/edit').'/' ?>"
 </script>
+<script src="<?= base_url('js/main.js') ?>"></script>
 <script src="<?= base_url('js/validateForm.js') ?>" ></script>
 <script src="<?= base_url('js/modalVehiculeShow.js') ?>"></script>
 
