@@ -3,7 +3,7 @@
 
 <h2><?= $title ?></h2>
 
-<form method="post" action="<?= site_url('Vehicule/update/'.$item->id) ?>" onsubmit="return validateFormPermis()">
+<form method="post" action="<?= site_url('Vehicule/update/'.$item->id) ?>" onsubmit="return validateFormVehicule()">
 
 	<!-- Type plaque -->
 	<label>Plaque</label>
@@ -37,7 +37,7 @@
 
 
 	<!-- Redirection button -->
-	<a href="<?= site_url('Vehicule') ?>" class="btn btn-secondary mt-3">Retour</a>
+	<a href="<?= site_url('Vehicule/show/'.$item->id) ?>" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 

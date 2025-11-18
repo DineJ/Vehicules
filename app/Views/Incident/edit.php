@@ -55,7 +55,7 @@
 
 
 	<!-- Redirection button -->
-	<a href="<?= site_url('Incident/show/'.$item->id) ?>" class="btn btn-secondary mt-3">Retour</a>
+	<a href="<?= site_url('Incident/show/'.$item->id) ?>" id="btnRetour" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 

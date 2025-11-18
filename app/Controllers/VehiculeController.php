@@ -45,16 +45,19 @@ class VehiculeController extends Controller
 	// DISPLAY AN ELEMENT
 	public function show($id)
 	{
+		$data['page'] = 'show';
 		$data['item'] = $this->model->find($id);
 
 		// Query to get datas
 		$data['incident'] = $this->incidentModel
-		->select('vehicule.plaque as vehicule, CONCAT(user.prenom, " ", user.nom) as user, type_incident.nom as typeIncident, date_incident, explication_incident')
+		->select('incident.id as id, vehicule.plaque as vehicule, CONCAT(user.prenom, " ", user.nom) as user, type_incident.nom as typeIncident, date_incident, explication_incident')
 		->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
 		->join('type_incident', 'type_incident.id = incident.id_type_incident', 'left')
 		->join('user', 'user.id = incident.id_user', 'left')
-		->find($data['item']->id_incident);
+		->where('incident.id_vehicule', $id)
+		->findAll();
 
+		$data['incidentId'] = $data['incident'][0];
 		return view('Vehicule/show', $data);
 	}
 
