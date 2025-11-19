@@ -69,6 +69,57 @@
 	</form>
 </div>
 
+<!-- Creation of a section assurance -->
+<div style="margin-left: 3rem; margin-top: 1.5rem; width: 95%; padding: 1rem; border: 1px solid #ccc; border-left: 4px solid #6f42c1; border-radius: 8px;">
+	<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+		<h6 style="margin: 0; color: #6f42c1;">↳ Assurance</h6>
+	</div>
+	<div id="table_assurance" class="table-responsive">
+
+		<!-- Test if a vehicule has an incident or not -->
+		<?php if (!isset($assurance) || empty($assurance))
+		{
+		?>
+			<table class="table table-striped table-bordered mt-3">
+				<tbody>
+					<!-- Vehicule has no Assurance yet -->
+					<tr>
+						<td class="label-permis">Pas d'assurance enregistré</td>
+					</tr>
+				</tbody>
+			</table>
+		<?php
+		}
+		else
+		{
+		?>
+			<?php foreach($assurance as $a) : ?>
+				<table class="table table-striped table-bordered mt-3">
+					<tbody>
+						<tr>
+							<td class="td-hidden">Véhicule</td>
+							<td data-label="Véhicule"><?= esc(($a->plaque ?? 'Inconnu')) ?></td>
+						</tr>
+
+						<!-- Display date_contrat -->
+						<tr>
+							<td class="td-hidden">Date contrat</td>
+							<td data-label="Date contrat"><?= date('d/m/Y', strtotime($a->date_contrat)) ?></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<!-- Redirection button to edit assurance form -->
+				<button type="button" class="btn btn-orange btnEditType" id="btnEditType">Modifier</button>
+				</br>
+				</br>
+			<?php endforeach; ?>
+
+		<?php
+		}
+		?>
+	</div>
+</div>
 
 
 <!-- Creation of a section incident -->
