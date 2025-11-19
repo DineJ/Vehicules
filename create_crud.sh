@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo chown -Rf $USER:$USER .
 
 function help()
 {
