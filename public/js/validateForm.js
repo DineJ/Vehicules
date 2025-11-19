@@ -402,3 +402,34 @@ function validateFormVehicule()
 		}
 		return true;
 	}
+
+
+//////////////////////////////////////////////
+
+
+function validateFormAssurance()
+	{
+		// Count
+		let compare = 0;
+		let row = 0;
+
+		// Get values
+		let date_contrat = document.getElementById('date_contrat').value;
+		let olddate_contrat = document.getElementById('olddate_contrat').value;
+		row++;
+
+		// Check values
+		if (date_contrat == olddate_contrat)
+		{
+			compare++;
+		}
+
+		alert('date_contrat : ' + date_contrat + ' olddate_contrat : ' + olddate_contrat + ' compare : '+ compare + ' row : ' + row );
+		// Check counts
+		if (compare == row)
+		{
+			alert("les valeurs sont identiques");
+			return false;
+		}
+		return true;
+	}

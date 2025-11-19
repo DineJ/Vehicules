@@ -3,6 +3,16 @@
 use CodeIgniter\Router\RouteCollection;
 // Auto-generated routes
 
+// Routes for Assurance
+$routes->get('Assurance', 'AssuranceController::index');
+$routes->get('Assurance/show/(:num)', 'AssuranceController::show/$1');
+$routes->get('Assurance/create', 'AssuranceController::create');
+$routes->post('Assurance/store', 'AssuranceController::store');
+$routes->get('Assurance/edit/(:num)', 'AssuranceController::edit/$1');
+$routes->post('Assurance/update/(:num)', 'AssuranceController::update/$1');
+$routes->get('Assurance/delete/(:num)', 'AssuranceController::delete/$1');
+
+
 // Routes for Suivi
 $routes->get('Suivi', 'SuiviController::index'); // Route that leads to the display of all data
 $routes->get('Suivi/show/(:num)', 'SuiviController::show/$1'); // Route that leads to the display of one specific data
