@@ -164,19 +164,19 @@
 
 						<!-- Display short explication of the incident -->
 						<tr>
-							<td>Explication Incident</td>
+							<td class="td-hidden">Explication Incident</td>
 							<td data-label="Explication Incident" class="long-text"><?= $i->explication_incident ?></td>
 						</tr>
 
 						<!-- Display driver involved in the incident -->
 						<tr>
-							<td>Conducteur</td>
+							<td class="td-hidden">Conducteur</td>
 							<td data-label="Conducteur"><?= $i->user ?></td>
 						</tr>
 
 						<!-- Display incident type -->
 						<tr>
-							<td>Type Incident</td>
+							<td class="td-hidden">Type Incident</td>
 							<td data-label="Type Incident"><?= $i->typeIncident ?></td>
 						</tr>
 					</tbody>
