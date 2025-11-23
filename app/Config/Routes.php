@@ -3,10 +3,20 @@
 use CodeIgniter\Router\RouteCollection;
 // Auto-generated routes
 
+// Routes for Assurance_vehicule
+$routes->get('Assurance_vehicule', 'Assurance_vehiculeController::index');
+$routes->get('Assurance_vehicule/show/(:num)', 'Assurance_vehiculeController::show/$1');
+$routes->match(['post', 'get'], 'Assurance_vehicule/create', 'Assurance_vehiculeController::create');
+$routes->post('Assurance_vehicule/store', 'Assurance_vehiculeController::store');
+$routes->get('Assurance_vehicule/edit/(:num)', 'Assurance_vehiculeController::edit/$1');
+$routes->post('Assurance_vehicule/update/(:num)', 'Assurance_vehiculeController::update/$1');
+$routes->get('Assurance_vehicule/delete/(:num)', 'Assurance_vehiculeController::delete/$1');
+
+
 // Routes for Assurance
 $routes->get('Assurance', 'AssuranceController::index');
 $routes->get('Assurance/show/(:num)', 'AssuranceController::show/$1');
-$routes->get('Assurance/create', 'AssuranceController::create');
+$routes->match(['post', 'get'],'Assurance/create', 'AssuranceController::create');
 $routes->post('Assurance/store', 'AssuranceController::store');
 $routes->get('Assurance/edit/(:num)', 'AssuranceController::edit/$1');
 $routes->post('Assurance/update/(:num)', 'AssuranceController::update/$1');

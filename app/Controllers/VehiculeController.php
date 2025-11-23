@@ -60,12 +60,13 @@ class VehiculeController extends Controller
 		->findAll();
 
 		$data['assurance'] = $this->assuranceModel
-			->select('assurance.date_contrat, plaque')
+			->select('assurance.date_contrat, plaque, assurance.id, assurance.nom_assurance')
 			->join('assurance_vehicule', 'assurance_vehicule.id_assurance = assurance.id', 'left')
 			->join('vehicule', 'assurance_vehicule.id_vehicule = vehicule.id', 'left')
 			->where('assurance_vehicule.id_vehicule', $id)
 			->findAll();
 
+		$data['assuranceId'] = $data['assurance'][0];
 		$data['incidentId'] = $data['incident'][0];
 		return view('Vehicule/show', $data);
 	}

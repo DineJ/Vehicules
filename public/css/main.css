@@ -90,6 +90,7 @@ th {
 
 /* Do not display navbar, used for modal pop-up */
 #modalContent #navbar.no_navbar,
+#modalGenericContent #navbar.no_navbar,
 #modalContentEdit #navbar.no_navbar {
 	display: none !important;
 }

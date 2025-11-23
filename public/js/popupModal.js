@@ -46,7 +46,7 @@ function popupModalGet() {
 					{
 						btnRetour.addEventListener('click', function(e) {
 							e.preventDefault(); // Prevent the default behavior (navigation if <a>)
-							const myReturnModal = document.getElementById('incidentModalEdit'); // Get the edit modal element
+							const myReturnModal = document.getElementById('modalGeneric'); // Get the edit modal element
 							const modal = bootstrap.Modal.getInstance(myReturnModal); // Get the Bootstrap modal instance for that element
 							modal.hide(); // Hide the modal when clicking "Retour"
 						});
