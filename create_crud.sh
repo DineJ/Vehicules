@@ -1,5 +1,4 @@
 #!/bin/bash
-sudo chown -Rf $USER:$USER .
 
 function help()
 {
@@ -40,3 +39,4 @@ case $action in
     ;;
 esac
 
+sudo chown -Rf $USER:$USER .
