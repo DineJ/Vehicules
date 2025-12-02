@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\VehiculeModel;
 use App\Models\IncidentModel;
+use App\Models\AssuranceModel;
 use App\Entities\Vehicule;
 use CodeIgniter\Controller;
 
@@ -16,6 +17,7 @@ class VehiculeController extends Controller
 	{
 		$this->model = new VehiculeModel();
 		$this->incidentModel = new IncidentModel();
+		$this->assuranceModel = new AssuranceModel();
 	}
 
 	// SEARCH BAR
@@ -57,6 +59,14 @@ class VehiculeController extends Controller
 		->where('incident.id_vehicule', $id)
 		->findAll();
 
+		$data['assurance'] = $this->assuranceModel
+			->select('assurance.date_contrat, plaque, assurance.id, assurance.nom_assurance')
+			->join('assurance_vehicule', 'assurance_vehicule.id_assurance = assurance.id', 'left')
+			->join('vehicule', 'assurance_vehicule.id_vehicule = vehicule.id', 'left')
+			->where('assurance_vehicule.id_vehicule', $id)
+			->findAll();
+
+		$data['assuranceId'] = $data['assurance'][0];
 		$data['incidentId'] = $data['incident'][0];
 		return view('Vehicule/show', $data);
 	}

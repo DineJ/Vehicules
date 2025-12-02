@@ -20,11 +20,11 @@ case $action in
 	else
 		mkdir -p app/Entities
 
-		php spark generate:models $@
-		php spark generate:entity "${1}Model"
-		php spark generate:controller $@
-		php spark generate:views $@
-		php spark generate:routes $@
+		docker compose exec php-fpm php spark generate:models $@
+		docker compose exec php-fpm php spark generate:entity "${1}Model"
+		docker compose exec php-fpm php spark generate:controller $@
+		docker compose exec php-fpm php spark generate:views $@
+		docker compose exec php-fpm php spark generate:routes $@
 	fi
     ;;
 
@@ -39,3 +39,4 @@ case $action in
     ;;
 esac
 
+sudo chown -Rf $USER:$USER .

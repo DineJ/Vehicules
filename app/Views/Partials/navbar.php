@@ -29,13 +29,15 @@ $currentUri = service('uri')->getPath();
 					<li><a class="dropdown-item" href="/Admin">Home</a></li>
 					<li><a class="dropdown-item" href="/Ip">IP</a></li>
 				<?php endif; ?>
+				<li><hr class="dropdown-divider"></li>
 
 				<?php if ($currentUri !== '/Login/log' && $currentUri !== '/Login'): ?>
+					<li><a class="dropdown-item" href="/Assurance">Assurance</a></li>
+					<li><a class="dropdown-item" href="/Incident">Incident</a></li>
+					<li><a class="dropdown-item" href="/Suivi">Suivi</a></li>
+					<li><a class="dropdown-item" href="/Type_incident">Type incident</a></li>
 					<li><a class="dropdown-item" href="/User">Utilisateur</a></li>
 					<li><a class="dropdown-item" href="/Vehicule">Véhicule</a></li>
-					<li><a class="dropdown-item" href="/Incident">Incident</a></li>
-					<li><a class="dropdown-item" href="/Type_incident">Type incident</a></li>
-					<li><a class="dropdown-item" href="/Suivi">Suivi</a></li>
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item" href="/Login/logout">Déconnexion</a></li>
 				<?php endif; ?>
