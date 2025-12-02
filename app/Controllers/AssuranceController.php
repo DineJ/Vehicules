@@ -19,7 +19,7 @@ class AssuranceController extends Controller
 	public function index()
 	{
 		$builder = $this->model
-			->select('assurance.id as id, assurance_vehicule.id_vehicule as id_vehicule, vehicule.plaque as plaque, date_contrat')
+			->select('assurance.id as id, assurance_vehicule.id_vehicule as id_vehicule, vehicule.plaque as plaque, nom_assurance, date_contrat')
 			->join('assurance_vehicule', 'assurance_vehicule.id_assurance = id', 'left')
 			->join('vehicule', 'vehicule.id = assurance_vehicule.id_vehicule', 'left')
 			->orderBy('vehicule.id');
@@ -36,7 +36,7 @@ class AssuranceController extends Controller
 	public function show($id)
 	{
 		$builder = $this->model
-		->select('assurance.id as id, assurance_vehicule.id_vehicule as id_vehicule, vehicule.plaque as plaque, date_contrat')
+		->select('assurance.id as id, assurance_vehicule.id_vehicule as id_vehicule, vehicule.plaque as plaque, nom_assurance, date_contrat')
 		->join('assurance_vehicule', 'assurance_vehicule.id_assurance = id', 'left')
 		->join('vehicule', 'vehicule.id = assurance_vehicule.id_vehicule', 'left')
 		->orderBy('vehicule.id');
@@ -74,7 +74,7 @@ class AssuranceController extends Controller
 	public function edit($id)
 	{
 		$builder = $this->model
-		->select('assurance.id as id, assurance_vehicule.id_vehicule as id_vehicule, vehicule.plaque as plaque, date_contrat')
+		->select('assurance.id as id, assurance_vehicule.id_vehicule as id_vehicule, vehicule.plaque as plaque, nom_assurance, date_contrat')
 		->join('assurance_vehicule', 'assurance_vehicule.id_assurance = id', 'left')
 		->join('vehicule', 'vehicule.id = assurance_vehicule.id_vehicule', 'left')
 		->orderBy('vehicule.id');

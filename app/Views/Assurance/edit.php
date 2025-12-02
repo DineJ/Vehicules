@@ -5,9 +5,10 @@
 
 <form method="post" action="<?= site_url('Assurance/update/'.$item->id) ?>" onsubmit="return validateFormAssurance()">
 
-	<!-- Vehicule -->
-	<label>Véhicule</label>
-	<input type="text" id="vehicule" name="vehicule" value="<?= isset($item) ? esc(($item->plaque)) : '' ?>" class="form-control" readonly>
+	<!-- Assurance -->
+	<label>Assurance</label>
+	<input type="text" oninput="setUpper(document.getElementById('nom_assurance'));" id="nom_assurance" name="assurance" value="<?= isset($item) ? esc(($item->nom_assurance)) : '' ?>" class="form-control" required>
+	<input type="hidden" id="oldnom_assurance" name="oldnom_assurance" value="<?= isset($item) ? esc(($item->nom_assurance)) : '' ?>">
 
 	<!-- Type date -->
 	<label>Date  contrat</label>
@@ -21,5 +22,5 @@
 </form>
 
 <script src="<?= base_url('js/validateForm.js') ?>"></script>
-
+<script src="<?= base_url('js/main.js') ?>"></script>
 <?= $this->endSection() ?>

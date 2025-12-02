@@ -9,5 +9,5 @@ class AssuranceModel extends Model
 	protected $table = 'assurance';
 	protected $primaryKey = 'id';
 	protected $returnType = 'App\Entities\Assurance';
-	protected $allowedFields = ['date_contrat'];
+	protected $allowedFields = ['date_contrat', 'nom_assurance'];
 }

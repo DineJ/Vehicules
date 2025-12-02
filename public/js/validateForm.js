@@ -414,6 +414,17 @@ function validateFormAssurance()
 		let row = 0;
 
 		// Get values
+		let nom_assurance = document.getElementById('nom_assurance').value;
+		let oldnom_assurance = document.getElementById('oldnom_assurance').value;
+		row++;
+
+		// Check values
+		if (nom_assurance == oldnom_assurance)
+		{
+			compare++;
+		}
+
+		// Get values
 		let date_contrat = document.getElementById('date_contrat').value;
 		let olddate_contrat = document.getElementById('olddate_contrat').value;
 		row++;
@@ -424,7 +435,6 @@ function validateFormAssurance()
 			compare++;
 		}
 
-		alert('date_contrat : ' + date_contrat + ' olddate_contrat : ' + olddate_contrat + ' compare : '+ compare + ' row : ' + row );
 		// Check counts
 		if (compare == row)
 		{

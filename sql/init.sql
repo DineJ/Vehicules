@@ -85,7 +85,6 @@ BEGIN
 END//
 DELIMITER ;
 
-
 CREATE TABLE `type_incident` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nom` VARCHAR(255) NOT NULL,
@@ -188,20 +187,17 @@ UNLOCK TABLES;
 CREATE TABLE `assurance` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `date_contrat` DATE NOT NULL,
+  `nom_assurance` VARCHAR(255),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 LOCK TABLES `assurance` WRITE;
 INSERT INTO `assurance` VALUES
-(1,'2025-03-01'),
-(2,'2025-02-15'),
-(3,'2025-01-20'),
-(4,'2024-12-10'),
-(5,'2024-11-05'),
-(18,'0000-00-00'),
-(30,'0000-00-00'),
-(70,'0000-00-00'),
-(82,'0000-00-00');
+(1,'2025-03-01', 'AXA'),
+(2,'2025-02-15', 'EDF'),
+(3,'2025-01-20', 'VANDY'),
+(4,'2024-12-10', 'TOTO'),
+(5,'2024-11-05', 'OKI');
 UNLOCK TABLES;
 
 DELIMITER //

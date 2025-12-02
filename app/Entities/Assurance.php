@@ -16,11 +16,13 @@ class Assurance extends Entity
 	protected $casts = [
 		'id' => 'integer',
 		'date_contrat' => 'datetime',
+		'nom_assurance' => 'string',
 	];
 
 	protected $validationRules = [
 		'id' => 'integer|max_length[11]',
 		'date_contrat' => 'valid_date[Y-m-d]',
+		'nom_assurance' => 'string',
 	];
 
 
@@ -62,5 +64,24 @@ class Assurance extends Entity
 		$this->attributes['date_contrat'] = $dateContrat;
 		return $this;
 	}
+
+		public function getnomAssurance()
+	{
+		return $this->attributes['nom_assurance'] ?? null;
+	}
+
+	public function setnomAssurance($nomAssurance)
+	{
+		$validation = \Config\Services::validation();
+		$validation->setRules(['nom_assurance' => 'string']);
+
+		if (!$validation->run(['nom_assurance' => $nom_assurance])) {
+			throw new \InvalidArgumentException("❌ Valeur invalide pour 'nom_assurance': " . implode(', ', $validation->getErrors()));
+		}
+
+		$this->attributes['nom_assurance'] = $nom_assurance;
+		return $this;
+	}
+
 
 }

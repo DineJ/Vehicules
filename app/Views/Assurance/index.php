@@ -9,7 +9,7 @@
 		<!-- Datas name -->
 		<thead>
 			<tr>
-				<th>Véhicule</th>
+				<th>Assuré & Assureur</th>
 				<th>Date contrat</th>
 				<th>Actions</th>
 			</tr>
@@ -19,7 +19,7 @@
 			<!-- Display datas -->
 			<?php foreach ($items as $item): ?>
 				<tr>
-					<td data-label="Véhicule"><?= esc(($item->plaque ?? 'Inconnu')) ?></td>
+					<td data-label="Assuré & Assureur"><?= esc(($item->plaque .' — ' . $item->nom_assurance ?? 'Inconnu')) ?></td>
 					<td data-label="Date contrat"><?= esc(date('d/m/Y', strtotime($item->date_contrat))) ?></td>
 					<td>
 						<!-- Redirection button -->
