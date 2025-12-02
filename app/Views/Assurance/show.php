@@ -9,8 +9,8 @@
 		<tbody>
 
 			<tr>
-				<td class="td-hidden">Assuré & Assureur</td>
-				<td data-label="Assuré & Assureur"><?= esc(($item->plaque .' — ' . $item->nom_assurance ?? 'Inconnu')) ?></td>
+				<td class="td-hidden">Assurance</td>
+				<td data-label="Assurance"><?= esc(($item->nom_assurance ?? 'Inconnu')) ?></td>
 			</tr>
 
 			<!-- Display date_contrat -->

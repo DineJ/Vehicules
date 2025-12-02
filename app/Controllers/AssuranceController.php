@@ -15,18 +15,11 @@ class AssuranceController extends Controller
 		$this->model = new AssuranceModel();
 	}
 
-	// SEARCH BAR
+	// DISPLAY ALL ELEMENT
 	public function index()
 	{
-		$builder = $this->model
-			->select('assurance.id as id, assurance_vehicule.id_vehicule as id_vehicule, vehicule.plaque as plaque, nom_assurance, date_contrat')
-			->join('assurance_vehicule', 'assurance_vehicule.id_assurance = id', 'left')
-			->join('vehicule', 'vehicule.id = assurance_vehicule.id_vehicule', 'left')
-			->orderBy('vehicule.id');
-
-		
-		$data['items'] = $builder->paginate(5); // Display 5 results
-		$data['pager'] = $builder->pager; // Add pager
+		$data['items'] = $this->model->paginate(5); // Display 5 results
+		$data['pager'] = $this->model->pager; // Add pager
 
 		return view('Assurance/index', $data);
 	}
@@ -35,13 +28,7 @@ class AssuranceController extends Controller
 	// DISPLAY AN ELEMENT
 	public function show($id)
 	{
-		$builder = $this->model
-		->select('assurance.id as id, assurance_vehicule.id_vehicule as id_vehicule, vehicule.plaque as plaque, nom_assurance, date_contrat')
-		->join('assurance_vehicule', 'assurance_vehicule.id_assurance = id', 'left')
-		->join('vehicule', 'vehicule.id = assurance_vehicule.id_vehicule', 'left')
-		->orderBy('vehicule.id');
-
-		$data['item'] = $builder->find($id);
+		$data['item'] = $this->model->find($id);
 		return view('Assurance/show', $data);
 	}
 
@@ -73,13 +60,7 @@ class AssuranceController extends Controller
 	// MODIFICATION FORM
 	public function edit($id)
 	{
-		$builder = $this->model
-		->select('assurance.id as id, assurance_vehicule.id_vehicule as id_vehicule, vehicule.plaque as plaque, nom_assurance, date_contrat')
-		->join('assurance_vehicule', 'assurance_vehicule.id_assurance = id', 'left')
-		->join('vehicule', 'vehicule.id = assurance_vehicule.id_vehicule', 'left')
-		->orderBy('vehicule.id');
-
-		$data['item'] = $builder->find($id);
+		$data['item'] = $this->model->find($id);
 		$data['title'] = "Modifier Assurance";
 		return view('Assurance/edit', $data);
 	}

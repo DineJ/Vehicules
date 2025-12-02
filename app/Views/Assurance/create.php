@@ -6,7 +6,7 @@
 <form method="post" action="<?= site_url('Assurance/store/') ?>">
 
 	<!-- Type assurance's name -->
-	<label>Nom assurance</label>
+	<label>Assurance</label>
 	<input oninput="setUpper(document.getElementById('nom_assurance'));" id="nom_assurance" name="nom_assurance" class="form-control"><?= isset($item) ? esc($item->nom_assurance) : '' ?></textarea>
 
 	<!-- Type date -->
