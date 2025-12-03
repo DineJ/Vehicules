@@ -66,15 +66,6 @@
 		<input type="hidden" name="redirect_url" value="<?= esc(current_url(), 'attr'); ?>">
 		<button type="submit" class="btn <?= $item->actif ? 'btn-danger' : 'btn-success' ?>"> <?= $item->actif ? 'Rendre inactif' : 'Rendre actif' ?></button>
 
-		<!-- Modal -->
-		<?php if ($item->assuranceId == 0)
-		{
-		?>
-		<button type="button" class="btn btn-purple btn-popup-post" id="btnAddTypeAssurance" data-object-id="<?= $item->id ?>" data-url-id="<?= site_url('Assurance_vehicule/create').'/' ?>"
-			data-title-id="Ajouter une assurance">Ajouter une assurance</button>
-		<?php
-		}
-		?>
 	</form>
 </div>
 
@@ -85,7 +76,7 @@
 	</div>
 	<div id="table_assurance" class="table-responsive">
 
-		<!-- Test if a vehicule has an incident or not -->
+		<!-- Test if a vehicule has an assurance or not -->
 		<?php if (!isset($assurance) || empty($assurance))
 		{
 		?>
@@ -102,26 +93,21 @@
 		else
 		{
 		?>
-			<?php foreach($assurance as $a) : ?>
+				<!-- Assurance -->
 				<table class="table table-striped table-bordered mt-3">
 					<tbody>
-						<tr>
-							<td class="td-hidden">Nom assurance</td>
-							<td data-label="Nom assurance"><?= esc(($a->nom_assurance)) ?></td>
-						</tr>
+				<tr>
+					<td class="td-hidden">Assurance</td>
+					<td data-label="Assurance"><?= esc($assuranceId->nom_assurance) ?></td>
+				</tr>
 
-						<tr>
-							<td class="td-hidden">Date contrat</td>
-							<td data-label="Date contrat"><?= date('d/m/Y', strtotime($a->date_contrat)) ?></td>
-						</tr>
-					</tbody>
+				<tr>
+					<td class="td-hidden">Date Contrat</td>
+					<td data-label="Date Contrat"><?= date('d/m/Y', strtotime(esc($assuranceId->date_contrat))) ?></td>
+				</tr>
+				</tbody>
 				</table>
 
-				<!-- Redirection button to edit assurance form -->
-				<button type="button" class="btn btn-orange btn-popup-get" -<?= $a->id ?>" data-object-id="<?= $a->id ?>" data-url-id="<?= site_url('Assurance_vehicule/edit').'/' ?>">Modifier</button>
-				</br>
-				</br>
-			<?php endforeach; ?>
 		<?php
 		}
 		?>
