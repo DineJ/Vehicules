@@ -64,6 +64,7 @@ class VehiculeController extends Controller
 			->join('assurance_vehicule', 'assurance_vehicule.id_assurance = assurance.id', 'left')
 			->where('assurance_vehicule.id_vehicule', $id)
 			->groupBy('assurance.id')
+			->orderBy('assurance.id', 'DESC')
 			->findAll();
 
 		$data['incidentId'] = $data['incident'][0];
