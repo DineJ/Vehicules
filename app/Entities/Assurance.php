@@ -75,11 +75,11 @@ class Assurance extends Entity
 		$validation = \Config\Services::validation();
 		$validation->setRules(['nom_assurance' => 'string']);
 
-		if (!$validation->run(['nom_assurance' => $nom_assurance])) {
+		if (!$validation->run(['nom_assurance' => $nomAssurance])) {
 			throw new \InvalidArgumentException("❌ Valeur invalide pour 'nom_assurance': " . implode(', ', $validation->getErrors()));
 		}
 
-		$this->attributes['nom_assurance'] = $nom_assurance;
+		$this->attributes['nom_assurance'] = $nomAssurance;
 		return $this;
 	}
 
