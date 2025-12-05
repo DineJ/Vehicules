@@ -5,19 +5,24 @@ namespace App\Controllers;
 use App\Models\VehiculeModel;
 use App\Models\IncidentModel;
 use App\Models\AssuranceModel;
+use App\Models\Assurance_vehiculeModel;
 use App\Entities\Vehicule;
+use App\Entities\Assurance_vehicule;
 use CodeIgniter\Controller;
 
 class VehiculeController extends Controller
 {
 	protected $model;
 	protected $incidentModel;
+	protected $assurance_vehiculeModel;
+	protected $assuranceModel;
 
 	public function __construct()
 	{
 		$this->model = new VehiculeModel();
 		$this->incidentModel = new IncidentModel();
 		$this->assuranceModel = new AssuranceModel();
+		$this->assurance_vehiculeModel = new Assurance_vehiculeModel();
 	}
 
 	// SEARCH BAR
@@ -92,7 +97,16 @@ class VehiculeController extends Controller
 		{
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
 		}
-		
+
+		$entity2 = new Assurance_vehicule();
+		$entity2->id_vehicule = $this->model->getInsertID();
+		$entity2->id_assurance = $this->assuranceModel->selectMax('id')->first()->id;
+
+		if ($this->assurance_vehiculeModel->insert($entity2) === false)
+		{
+			return redirect()->back()->with('error', 'Erreur lors de l\'ajout2.');
+		}
+
 		return redirect()->to('/Vehicule');
 	}
 

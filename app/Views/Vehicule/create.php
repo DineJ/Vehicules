@@ -34,6 +34,11 @@
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 
+<?php if (session()->getFlashdata('error')): ?>
+    <div class="alert alert-danger">
+        <?= session()->getFlashdata('error') ?>
+    </div>
+<?php endif; ?>
 
 <script src="<?= base_url('js/main.js') ?>"></script>
 
