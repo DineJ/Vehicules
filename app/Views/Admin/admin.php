@@ -2,29 +2,20 @@
 <?= $this->section('content') ?> <!-- Start the main content section -->
 
 
-
- <!-- Display a number ofitems equal to paginate -->
 <?php $count = 0;
 
-function paginateNumber(&$count, $items) {
+# Display a number of items equal to paginate
+function paginateNumber(&$count, $items)
+{
     $count++;
-    if ($count == count($items)) {
+    if ($count == count($items))
+    {
         $count = 0;
         return true;
     }
     return false;
 }
 ?>
-
-
-
-
-<!-- Main content -->
-<div class="container mt-4">
-	<h2 style="text-align: center;">Bienvenue sur l’espace admin</h2>
-</div>
-
-</br>
 
 <div class="table-responsive">
 	<h4 class="centerTitle"> Adresse IP Bannies </h4>
@@ -41,6 +32,26 @@ function paginateNumber(&$count, $items) {
 			}
 			else
 			{
+				// Skeleton for code generation
+					array_map(function($item) {
+					$columns = ['ip'];
+						       echo '<tr>';
+						foreach ($item as $c => $v):
+						       if (in_array($c, $columns)) :	
+								echo '<td data-label="'.$c.'">'.esc($v).'</td>';
+						       endif;
+					endforeach;
+					echo '<td data-label="Action" class="actionend">'
+						.'<form method="post" action="'. site_url('User/update/'.$c) .'">'
+						.'<!-- Enabled account button -->'
+						.'<input type="hidden" name="actif" id="actif" value="1">'
+						.'<!-- Redirection button -->'
+						.'<input type="hidden" name="redirect_url" value="'. current_url() .'">'
+						.'<button type="submit" class="btn btn-danger btn-sm"> Rétablir utilisateur </button>'
+						.'</form>'
+						.'</td>';
+					echo '</tr>';
+					}, $ip);
 			?>
 				<!-- Display banned ip -->
 				<?php foreach ($ip as $ips): ?>
@@ -93,8 +104,35 @@ function paginateNumber(&$count, $items) {
 			}
 			else
 			{
-			?>
-				<!-- Display banned user -->
+				// Skeleton for code generation
+					array_map(function($item) {
+					$columns = ['nom', 'prenom'];
+						       echo '<tr>';
+						foreach ($item as $c => $v):
+						       if (in_array($c, $columns)) :	
+								echo '<td data-label="'.$c.'">'.esc($v).'</td>';
+						       endif;
+					endforeach;
+					echo '<td data-label="Action" class="actionend">'
+						.'<form method="post" action="'. site_url('User/update/'.$c) .'">'
+						.'<!-- Enabled account button -->'
+						.'<input type="hidden" name="actif" id="actif" value="1">'
+						.'<!-- Redirection button -->'
+						.'<input type="hidden" name="redirect_url" value="'. current_url() .'">'
+						.'<button type="submit" class="btn btn-danger btn-sm"> Rétablir utilisateur </button>'
+						.'</form>'
+						.'</td>';
+					echo '</tr>';
+					}, $user);
+					
+/*				foreach ($user[$u] as $c => $v): 
+        echo "ID : " . $c . " ";
+				echo "VALEUR : " . esc($v) . "<br>";
+				endforeach; */
+
+				
+					//				endforeach;
+								 ?>
 				<?php foreach ($user as $users): ?>
 					<tr>
 						<td data-label="Nom" class="table15pourcent"><?= esc($users->nom) ?></td>
@@ -124,6 +162,7 @@ function paginateNumber(&$count, $items) {
 			}
 			?>
 		<t/body>
+
 	</table>
 
 	<!-- Redirection button -->
