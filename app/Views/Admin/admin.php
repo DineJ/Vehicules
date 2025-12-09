@@ -3,10 +3,11 @@
 
 <?php
 
+const COUNT_ITEMS = 3;
 
-function paginateNumber (&$count, $items = 3)
+function paginateNumber (&$count)
 {
-	if ($count < $items)
+	if ($count < COUNT_ITEMS)
 	{
 		$count++;
 		return true;
