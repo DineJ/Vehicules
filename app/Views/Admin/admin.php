@@ -1,5 +1,6 @@
 <?= $this->extend('layouts/main') ?> <!-- Extend the base layout -->
 <?= $this->section('content') ?> <!-- Start the main content section -->
+
 <?php 
 # Display banned datas
 function bannedDatas ($entity,$entity_name, $columns_entity, $resetData, $valueResetData)
@@ -40,10 +41,12 @@ function entityColumns($entity, $entity_name, $columns_entity, $resetData, $valu
        	array_map(function($item) use ($columns_entity, $entity_name, $resetData, $valueResetData)
 	{
 		$columns_entity;
-		$html = '<tr>';
+		$html = '<tr>'
+			.'<td class="td-hidden table15pourcent">'.$entity_name.'</td>';
 		$id = 0;
 
 		foreach ($item as $c => $v) :
+
 			if ($c == 'id'):
 				$id = $v;
 			endif;
@@ -51,7 +54,9 @@ function entityColumns($entity, $entity_name, $columns_entity, $resetData, $valu
 			if (in_array($c, $columns_entity)): 	
 				$html .= '<td data-label="'.$c.'">'.esc($v).'</td>';
 			endif;
-		endforeach;
+
+			endforeach;
+
 		$html .= '<td data-label="Action" class="actionend">'
 		.'<form method="post" action="'. site_url(''.$entity_name.'/update/'.$id) .'">'
 		.'<!-- Enabled account button -->'
@@ -68,7 +73,7 @@ function entityColumns($entity, $entity_name, $columns_entity, $resetData, $valu
 
 
 bannedDatas($user, 'User', ['nom','prenom'], 'actif', '1');
-bannedDatas($ip, 'Ip', ['ip'], 'nb_echec', '0');
+bannedDatas($ip, 'Ip', ['adresse_ip'], 'nb_echec', '0');
 ?>
 
 <?= $this->endSection() ?> <!-- End the content section -->
