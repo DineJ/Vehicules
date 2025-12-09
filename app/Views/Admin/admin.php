@@ -1,7 +1,19 @@
 <?= $this->extend('layouts/main') ?> <!-- Extend the base layout -->
 <?= $this->section('content') ?> <!-- Start the main content section -->
 
-<?php 
+<?php
+
+
+function paginateNumber (&$count, $items = 3)
+{
+	if ($count < $items)
+	{
+		$count++;
+		return true;
+	}
+	return false;
+}
+
 # Display banned datas
 function bannedDatas ($entity,$entity_name, $columns_entity, $resetData, $valueResetData)
 { ?>
@@ -28,7 +40,6 @@ function bannedDatas ($entity,$entity_name, $columns_entity, $resetData, $valueR
 				?>
 			</tbody>
 		</table>
-
 		<a href="<?= site_url(''.$entity_name.'') ?>" class="btn btn-secondary">Retour vers <?= $entity_name ?></a>
 	</div>
 	</br></br>
@@ -37,9 +48,12 @@ function bannedDatas ($entity,$entity_name, $columns_entity, $resetData, $valueR
 # Display datas columns
 function entityColumns($entity, $entity_name, $columns_entity, $resetData, $valueResetData)
 {
-
-       	array_map(function($item) use ($columns_entity, $entity_name, $resetData, $valueResetData)
+		array_map(function($item) use ($columns_entity, $entity_name, $resetData, $valueResetData)
 	{
+		static $count = 0;
+		if (paginateNumber($count))
+		{
+
 		$columns_entity;
 		$html = '<tr>'
 			.'<td class="td-hidden table15pourcent">'.$entity_name.'</td>';
@@ -56,7 +70,6 @@ function entityColumns($entity, $entity_name, $columns_entity, $resetData, $valu
 			endif;
 
 			endforeach;
-
 		$html .= '<td data-label="Action" class="actionend">'
 		.'<form method="post" action="'. site_url(''.$entity_name.'/update/'.$id) .'">'
 		.'<!-- Enabled account button -->'
@@ -68,6 +81,7 @@ function entityColumns($entity, $entity_name, $columns_entity, $resetData, $valu
 		.'</td>'
 		.'</tr>';
 		echo $html;
+		}
 	}, $entity);
 }
 
