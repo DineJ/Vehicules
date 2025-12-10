@@ -70,7 +70,7 @@ class VehiculeController extends Controller
 			->where('assurance_vehicule.id_vehicule', $id)
 			->groupBy('assurance.id')
 			->orderBy('assurance.id', 'DESC')
-			->findAll();
+			->findAll(1);
 
 		$data['incidentId'] = $data['incident'][0];
 		$data['assuranceId'] = $data['assurance'][0];
