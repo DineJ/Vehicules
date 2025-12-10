@@ -151,7 +151,7 @@
 							<!-- Display description -->
 							<tr>
 								<td class="td-hidden">Date Incident</td>
-								<td data-label="Description"><?= date('d/m/Y', strtotime($i->date_incident)) ?></td>
+								<td data-label="Date incident"><?= date('d/m/Y', strtotime($i->date_incident)) ?></td>
 							</tr>
 
 							<!-- Display short explication of the incident -->
