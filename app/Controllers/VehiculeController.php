@@ -52,6 +52,9 @@ class VehiculeController extends Controller
 	// DISPLAY AN ELEMENT
 	public function show($id)
 	{
+		//load helper	
+		helper('section');
+
 		$data['page'] = 'show';
 		$data['item'] = $this->model->find($id);
 

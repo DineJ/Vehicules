@@ -48,7 +48,7 @@ function bannedDatas ($entity,$entity_name, $columns_entity, $resetData, $valueR
 }
 
 # Display datas columns
-function entityColumns($entity, $entity_name, $columns_entity, $resetData, $valueResetData)
+function entityColumns($entities, $entity_name, $columns_entity, $resetData, $valueResetData)
 {
 	array_map(function($item) use ($columns_entity, $entity_name, $resetData, $valueResetData)
 	{
@@ -56,7 +56,6 @@ function entityColumns($entity, $entity_name, $columns_entity, $resetData, $valu
 		if (paginateNumber($count))
 		{
 
-			$columns_entity;
 			$html = '<tr>'
 				.'<td class="td-hidden table15pourcent">'.$entity_name.'</td>';
 			$id = 0;
@@ -85,7 +84,7 @@ function entityColumns($entity, $entity_name, $columns_entity, $resetData, $valu
 			.'</tr>';
 			echo $html;
 		}
-	}, $entity);
+	}, $entities);
 }
 
 

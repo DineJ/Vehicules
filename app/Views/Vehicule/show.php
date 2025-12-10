@@ -69,50 +69,7 @@
 		</form>
 	</div>
 
-	<!-- Creation of a section assurance -->
-	<div style="margin-left: 3rem; margin-top: 1.5rem; width: 95%; padding: 1rem; border: 1px solid #ccc; border-left: 4px solid #6f42c1; border-radius: 8px;">
-		<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-			<h6 style="margin: 0; color: #6f42c1;">↳ Assurance</h6>
-		</div>
-		<div id="table_assurance" class="table-responsive">
-
-			<!-- Test if a vehicule has an assurance or not -->
-			<?php if (!isset($assurance) || empty($assurance))
-			{
-			?>
-				<table class="table table-striped table-bordered mt-3">
-					<tbody>
-						<!-- Vehicule has no Assurance yet -->
-						<tr>
-							<td class="label-permis">Pas d'assurance enregistré</td>
-						</tr>
-					</tbody>
-				</table>
-			<?php
-			}
-			else
-			{
-			?>
-				<!-- Assurance -->
-				<table class="table table-striped table-bordered mt-3">
-					<tbody>
-						<tr>
-							<td class="td-hidden">Assurance</td>
-							<td data-label="Assurance"><?= esc($assuranceId->nom_assurance) ?></td>
-						</tr>
-
-						<tr>
-							<td class="td-hidden">Date Contrat</td>
-							<td data-label="Date Contrat"><?= date('d/m/Y', strtotime(esc($assuranceId->date_contrat))) ?></td>
-						</tr>
-					</tbody>
-				</table>
-
-			<?php
-			}
-			?>
-		</div>
-	</div>
+<?= createSection($assurance, 'assurance', 'vehicule', ['nom_assurance' => 'Assurance', 'date_contrat' => 'Contrat']); ?>
 
 	<!-- Creation of a section incident -->
 	<div style="margin-left: 3rem; margin-top: 1.5rem; width: 95%; padding: 1rem; border: 1px solid #ccc; border-left: 4px solid #6f42c1; border-radius: 8px;">
