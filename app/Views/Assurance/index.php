@@ -23,7 +23,7 @@
 				<tr>
 					<td data-label="Assurance"><?= esc(($item->nom_assurance ?? 'Inconnu')) ?></td>
 					<td data-label="Date contrat"><?= esc(date('d/m/Y', strtotime($item->date_contrat))) ?></td>
-					<td>
+				<td data-label="Actions">
 						<!-- Redirection button -->
 						<a href="<?= site_url('Assurance/show/'.$item->id) ?>" class="btn btn-info btn-sm">Voir</a>
 					</td>
