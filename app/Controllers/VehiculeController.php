@@ -5,19 +5,24 @@ namespace App\Controllers;
 use App\Models\VehiculeModel;
 use App\Models\IncidentModel;
 use App\Models\AssuranceModel;
+use App\Models\Assurance_vehiculeModel;
 use App\Entities\Vehicule;
+use App\Entities\Assurance_vehicule;
 use CodeIgniter\Controller;
 
 class VehiculeController extends Controller
 {
 	protected $model;
 	protected $incidentModel;
+	protected $assurance_vehiculeModel;
+	protected $assuranceModel;
 
 	public function __construct()
 	{
 		$this->model = new VehiculeModel();
 		$this->incidentModel = new IncidentModel();
 		$this->assuranceModel = new AssuranceModel();
+		$this->assurance_vehiculeModel = new Assurance_vehiculeModel();
 	}
 
 	// SEARCH BAR
@@ -47,6 +52,9 @@ class VehiculeController extends Controller
 	// DISPLAY AN ELEMENT
 	public function show($id)
 	{
+		//load helper	
+		helper('section');
+
 		$data['page'] = 'show';
 		$data['item'] = $this->model->find($id);
 
@@ -60,14 +68,15 @@ class VehiculeController extends Controller
 		->findAll();
 
 		$data['assurance'] = $this->assuranceModel
-			->select('assurance.date_contrat, plaque, assurance.id, assurance.nom_assurance')
+			->select('MAX(assurance.id), assurance.date_contrat, assurance.nom_assurance')
 			->join('assurance_vehicule', 'assurance_vehicule.id_assurance = assurance.id', 'left')
-			->join('vehicule', 'assurance_vehicule.id_vehicule = vehicule.id', 'left')
 			->where('assurance_vehicule.id_vehicule', $id)
-			->findAll();
+			->groupBy('assurance.id')
+			->orderBy('assurance.id', 'DESC')
+			->findAll(1);
 
-		$data['assuranceId'] = $data['assurance'][0];
 		$data['incidentId'] = $data['incident'][0];
+		$data['assuranceId'] = $data['assurance'][0];
 		return view('Vehicule/show', $data);
 	}
 
@@ -91,7 +100,16 @@ class VehiculeController extends Controller
 		{
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
 		}
-		
+
+		$entity2 = new Assurance_vehicule();
+		$entity2->id_vehicule = $this->model->getInsertID();
+		$entity2->id_assurance = $this->assuranceModel->selectMax('id')->first()->id;
+
+		if ($this->assurance_vehiculeModel->insert($entity2) === false)
+		{
+			return redirect()->back()->with('error', 'Erreur lors de l\'ajout2.');
+		}
+
 		return redirect()->to('/Vehicule');
 	}
 

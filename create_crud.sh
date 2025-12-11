@@ -25,6 +25,8 @@ case $action in
 		docker compose exec php-fpm php spark generate:controller $@
 		docker compose exec php-fpm php spark generate:views $@
 		docker compose exec php-fpm php spark generate:routes $@
+		entity=${1^}
+		sudo chmod -f 0664 app/Views/$entity/*.php  app/Entities/${entity}.php app/Models/${entity}Model.php app/Controllers/${entity}Controller.php
 	fi
     ;;
 
@@ -34,9 +36,9 @@ case $action in
 		help
 	else
 		entity=${1^}
-		rm -riv app/Views/$entity/*.php  app/Entities/${entity}.php app/Models/${entity}Model.php app/Controllers/${entity}Controller.php
+		sudo rm -riv app/Views/$entity/*.php  app/Entities/${entity}.php app/Models/${entity}Model.php app/Controllers/${entity}Controller.php
 	fi
     ;;
 esac
 
-sudo chown -Rf $USER:$USER .
+sudo chown -Rf www-data:www-data .

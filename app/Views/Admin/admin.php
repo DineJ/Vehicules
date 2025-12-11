@@ -1,133 +1,96 @@
 <?= $this->extend('layouts/main') ?> <!-- Extend the base layout -->
 <?= $this->section('content') ?> <!-- Start the main content section -->
 
+<?php
 
+const COUNT_ITEMS = 3;
 
- <!-- Display a number ofitems equal to paginate -->
-<?php $count = 0;
-
-function paginateNumber(&$count, $items) {
-    $count++;
-    if ($count == count($items)) {
-        $count = 0;
-        return true;
-    }
-    return false;
+function paginateNumber (&$count)
+{
+	if ($count < COUNT_ITEMS)
+	{
+		$count++;
+		return true;
+	}
+	return false;
 }
+
+# Display banned datas
+function bannedDatas ($entity,$entity_name, $columns_entity, $resetData, $valueResetData)
+{ ?>
+	<div class="table-responsive">
+		<h4 class="centerTitle"><?= $entity_name ?> bannis</h4>
+		<table class="table table-striped table-bordered mt-3">
+			<tbody>
+				<!-- Test if atleast one <?= $entity_name ?> is banned -->
+				<?php if (empty($entity))
+				{ ?>
+
+					<!-- None banned <?= $entity_name ?> -->
+					<tr>
+						<td class="labelAlign"> Aucun <?= $entity_name ?> banni</td>
+					</tr>
+				<?php
+				}
+				else
+				{
+				?>
+					<!-- Display banned <?= $entity_name ?> -->
+					<?php entityColumns($entity,$entity_name, $columns_entity, $resetData, $valueResetData);
+				}
+				?>
+			</tbody>
+		</table>
+		<a href="<?= site_url(''.$entity_name.'') ?>" class="btn btn-secondary">Retour vers <?= $entity_name ?></a>
+	</div>
+	</br></br>
+<?php
+}
+
+# Display datas columns
+function entityColumns($entities, $entity_name, $columns_entity, $resetData, $valueResetData)
+{
+	array_map(function($item) use ($columns_entity, $entity_name, $resetData, $valueResetData)
+	{
+		static $count = 0;
+		if (paginateNumber($count))
+		{
+
+			$html = '<tr>'
+				.'<td class="td-hidden table15pourcent">'.$entity_name.'</td>';
+			$id = 0;
+
+			foreach ($item as $c => $v) :
+
+				if ($c == 'id'):
+					$id = $v;
+				endif;
+
+				if (in_array($c, $columns_entity)):
+					$html .= '<td data-label="'.$c.'">'.esc($v).'</td>';
+				endif;
+
+			endforeach;
+
+			$html .= '<td data-label="Action" class="actionend">'
+			.'<form method="post" action="'. site_url(''.$entity_name.'/update/'.$id) .'">'
+			.'<!-- Enabled account button -->'
+			.'<input type="hidden" name="'.$resetData.'" id="'.$resetData.'" value="'.$valueResetData.'">'
+			.'<!-- Redirection button -->'
+			.'<input type="hidden" name="redirect_url" value="'. current_url() .'">'
+			.'<button type="submit" class="btn btn-danger btn-sm"> Rétablir '.$entity_name.' </button>'
+			.'</form>'
+			.'</td>'
+			.'</tr>';
+			echo $html;
+		}
+	}, $entities);
+}
+
+
+bannedDatas($user, 'User', ['nom','prenom'], 'actif', '1');
+bannedDatas($ip, 'Ip', ['adresse_ip'], 'nb_echec', '0');
 ?>
 
-
-
-
-<!-- Main content -->
-<div class="container mt-4">
-	<h2 style="text-align: center;">Bienvenue sur l’espace admin</h2>
-</div>
-
-</br>
-
-<div class="table-responsive">
-	<h4 class="centerTitle"> Adresse IP Bannies </h4>
-	<table class="table table-striped table-bordered mt-3">
-		<tbody>
-			<!-- Test if atleast one ip is banned -->
-			<?php if (empty($ip)) { ?>
-
-				<!-- None banned IP -->
-				<tr>
-					<td class="labelAlign">Aucune adresse IP bannie</td>
-				</tr>
-			<?php
-			}
-			else
-			{
-			?>
-				<!-- Display banned ip -->
-				<?php foreach ($ip as $ips): ?>
-					<tr>
-						<td class="td-hidden table15pourcent">Adresse IP</td>
-						<td data-label="Adresse Ip"><?= esc($ips->adresse_ip) ?></td>
-						<td data-label="Action" class="actionend">
-
-							<form method="post" action="<?= site_url('Ip/update/'.$ips->id) ?>">
-								<!-- Enabled ip button -->
-								<input type="hidden" name="nb_echec" id="nb_echec" value="0"?>
-
-								<!-- Redirection button -->
-								<input type="hidden" name="redirect_url" value="<?= current_url(); ?>">
-								<button type="submit" class="btn btn-danger btn-sm"> Rétablir IP </button>
-							</form>
-						</td>
-					</tr>
-
-					<?php
-					if (paginateNumber($count, $items))
-					{
-						break;
-					}
-					?>
-
-				<?php endforeach; ?>
-			<?php
-			}
-			?>
-		</tbody>
-	</table>
-
-	<!-- Redirection button -->
-	<a href="<?= site_url('Ip') ?>" class="btn btn-secondary">Retour vers IP</a>
-
-	</br></br>
-
-	<h4 class="centerTitle"> Utilisateur Bannis </h4>
-	<table class="table table-striped table-bordered mt-3">
-		<tbody>
-			<!-- Test if atleast one user is banned -->
-			<?php if (empty($user)) { ?>
-
-				<!-- None banned user -->
-				<tr>
-					<td class="labelAlign">Aucun utilisateur banni</td>
-				</tr>
-			<?php
-			}
-			else
-			{
-			?>
-				<!-- Display banned user -->
-				<?php foreach ($user as $users): ?>
-					<tr>
-						<td data-label="Nom" class="table15pourcent"><?= esc($users->nom) ?></td>
-						<td data-label="Prénom"><?= esc($users->prenom) ?></td>
-						<td data-label="Action" class="actionend">
-
-							<form method="post" action="<?= site_url('User/update/'.$users->id) ?>">
-								<!-- Enabled account button -->
-								<input type="hidden" name="actif" id="actif" value="1">
-
-								<!-- Redirection button -->
-								<input type="hidden" name="redirect_url" value="<?= current_url(); ?>">
-								<button type="submit" class="btn btn-danger btn-sm"> Rétablir utilisateur </button>
-							</form>
-						</td>
-					</tr>
-
-					<?php
-					if (paginateNumber($count, $items))
-					{
-						break;
-					}
-					?>
-
-				<?php endforeach; ?>
-			<?php
-			}
-			?>
-		<t/body>
-	</table>
-
-	<!-- Redirection button -->
-	<a href="<?= site_url('User') ?>" class="btn btn-secondary">Retour vers utilisateur</a>
-</div>
-
 <?= $this->endSection() ?> <!-- End the content section -->
+

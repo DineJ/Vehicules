@@ -19,8 +19,6 @@ class AdminController extends Controller
 	// Display the admin dashboard
 	public function administrator()
 	{
-		$data['items'] = $this->model->paginate(3); // Display 3 results
-
 		// Redirect to user page if not an admin
 		if (null == session()->get('user')['admin'])
 		{

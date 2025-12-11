@@ -7,7 +7,7 @@
 
 	<!-- Assurance -->
 	<label>Assurance</label>
-	<input type="text" oninput="setUpper(document.getElementById('nom_assurance'));" id="nom_assurance" name="assurance" value="<?= isset($item) ? esc(($item->nom_assurance)) : '' ?>" class="form-control" required>
+	<input type="text" oninput="setUpper(document.getElementById('nom_assurance'));" id="nom_assurance" name="nom_assurance" value="<?= isset($item) ? esc(($item->nom_assurance)) : '' ?>" class="form-control" required>
 	<input type="hidden" id="oldnom_assurance" name="oldnom_assurance" value="<?= isset($item) ? esc(($item->nom_assurance)) : '' ?>">
 
 	<!-- Type date -->

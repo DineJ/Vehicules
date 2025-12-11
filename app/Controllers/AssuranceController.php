@@ -3,30 +3,31 @@
 namespace App\Controllers;
 
 use App\Models\AssuranceModel;
+use App\Models\Assurance_vehiculeModel;
+use App\Models\VehiculeModel;
 use App\Entities\Assurance;
+use App\Entities\Assurance_vehicule;
+use App\Entities\Vehicule;
 use CodeIgniter\Controller;
 
 class AssuranceController extends Controller
 {
 	protected $model;
+	protected $assurance_vehiculeModel;
+	protected $vehiculeModel;
 
 	public function __construct()
 	{
 		$this->model = new AssuranceModel();
+		$this->assurance_vehiculeModel = new Assurance_vehiculeModel();
+		$this->vehiculeModel = new VehiculeModel();
 	}
 
-	// SEARCH BAR
+	// DISPLAY ALL ELEMENT
 	public function index()
 	{
-		$builder = $this->model
-			->select('assurance.id as id, assurance_vehicule.id_vehicule as id_vehicule, vehicule.plaque as plaque, nom_assurance, date_contrat')
-			->join('assurance_vehicule', 'assurance_vehicule.id_assurance = id', 'left')
-			->join('vehicule', 'vehicule.id = assurance_vehicule.id_vehicule', 'left')
-			->orderBy('vehicule.id');
-
-		
-		$data['items'] = $builder->paginate(5); // Display 5 results
-		$data['pager'] = $builder->pager; // Add pager
+		$data['items'] = $this->model->paginate(5); // Display 5 results
+		$data['pager'] = $this->model->pager; // Add pager
 
 		return view('Assurance/index', $data);
 	}
@@ -35,13 +36,7 @@ class AssuranceController extends Controller
 	// DISPLAY AN ELEMENT
 	public function show($id)
 	{
-		$builder = $this->model
-		->select('assurance.id as id, assurance_vehicule.id_vehicule as id_vehicule, vehicule.plaque as plaque, nom_assurance, date_contrat')
-		->join('assurance_vehicule', 'assurance_vehicule.id_assurance = id', 'left')
-		->join('vehicule', 'vehicule.id = assurance_vehicule.id_vehicule', 'left')
-		->orderBy('vehicule.id');
-
-		$data['item'] = $builder->find($id);
+		$data['item'] = $this->model->find($id);
 		return view('Assurance/show', $data);
 	}
 
@@ -65,7 +60,24 @@ class AssuranceController extends Controller
 		{
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
 		}
-		
+
+		// Query to get ids from actif vehicules
+		$entity2Query = $this->vehiculeModel->select('id')->where('actif', 1)->findAll();
+
+		// Loop for each row from the previous query
+		foreach ($entity2Query as $e)
+		{
+			$entity2 = new Assurance_vehicule(); // Create an entity for each row
+			$entity2->id_assurance = $this->model->getInsertID(); // Fill id_assurance
+			$entity2->id_vehicule = $e->id; // Fill id_vehicule
+
+			// Insert in the DB
+			if (!$this->assurance_vehiculeModel->insert($entity2) === false)
+			{
+				return redirect()->back()->with('error', 'Erreur lors de l\'ajout2.');
+			}
+		}
+
 		return redirect()->to('/Assurance');
 	}
 
@@ -73,13 +85,7 @@ class AssuranceController extends Controller
 	// MODIFICATION FORM
 	public function edit($id)
 	{
-		$builder = $this->model
-		->select('assurance.id as id, assurance_vehicule.id_vehicule as id_vehicule, vehicule.plaque as plaque, nom_assurance, date_contrat')
-		->join('assurance_vehicule', 'assurance_vehicule.id_assurance = id', 'left')
-		->join('vehicule', 'vehicule.id = assurance_vehicule.id_vehicule', 'left')
-		->orderBy('vehicule.id');
-
-		$data['item'] = $builder->find($id);
+		$data['item'] = $this->model->find($id);
 		$data['title'] = "Modifier Assurance";
 		return view('Assurance/edit', $data);
 	}

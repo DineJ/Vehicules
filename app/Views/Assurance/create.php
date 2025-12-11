@@ -6,8 +6,8 @@
 <form method="post" action="<?= site_url('Assurance/store/') ?>">
 
 	<!-- Type assurance's name -->
-	<label>Nom assurance</label>
-	<input oninput="setUpper(document.getElementById('nom_assurance'));" id="nom_assurance" name="nom_assurance" class="form-control"><?= isset($item) ? esc($item->nom_assurance) : '' ?></textarea>
+	<label>Assurance</label>
+	<input oninput="setUpper(document.getElementById('nom_assurance'));" id="nom_assurance" name="nom_assurance" class="form-control" required><?= isset($item) ? esc($item->nom_assurance) : '' ?></input>
 
 	<!-- Type date -->
 	<label>Date contrat</label>
