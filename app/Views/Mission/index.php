@@ -24,15 +24,15 @@
 		<!-- Datas name -->
 		<thead>
 			<tr>
-				<th>id_vehicule</th>
-				<th>id_user</th>
-				<th>id_lieu_depart</th>
-				<th>id_lieu_arrive</th>
-				<th>motif</th>
-				<th>date_depart</th>
-				<th>date_arrivee</th>
-				<th>km_depart</th>
-				<th>km_arrive</th>
+				<th>Plaque</th>
+				<th>Conducteur</th>
+				<th>Depart</th>
+				<th>Arrive</th>
+				<th>Motif</th>
+				<th>Date départ</th>
+				<th>Date arrivée</th>
+				<th>Km départ</th>
+				<th>Km arrivé</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -41,15 +41,15 @@
 			<!-- Display datas -->
 			<?php foreach ($items as $item): ?>
 				<tr>
-					<td data-label="id_vehicule"><?= esc($item->plaque) ?></td>
-					<td data-label="id_user"><?= esc($item->conducteur) ?></td>
-					<td data-label="id_lieu_depart"><?= esc($item->nom_lieu_depart) ?></td>
-					<td data-label="id_lieu_arrive"><?= esc($item->nom_lieu_arrive) ?></td>
-					<td data-label="motif"><?= esc($item->motif) ?></td>
-					<td data-label="date_depart"><?= esc($item->date_depart) ?></td>
-					<td data-label="date_arrivee"><?= esc($item->date_arrivee) ?></td>
-					<td data-label="km_depart"><?= esc($item->km_depart) ?></td>
-					<td data-label="km_arrive"><?= esc($item->km_arrive) ?></td>
+					<td data-label="Plaque"><?= esc($item->plaque) ?></td>
+					<td data-label="Conducteur"><?= esc($item->conducteur) ?></td>
+					<td data-label="Lieu départ"><?= esc($item->nom_lieu_depart) ?></td>
+					<td data-label="Lieu arrivé"><?= esc($item->nom_lieu_arrive) ?></td>
+					<td data-label="Motif"><?= esc($item->motif) ?></td>
+					<td data-label="Date départ"><?= esc(date('d/m/Y', strtotime($item->date_depart))) ?></td>
+					<td data-label="Date arrivée"><?= esc(date('d/m/Y', strtotime($item->date_arrivee))) ?></td>
+					<td data-label="Km départ"><?= esc($item->km_depart) ?></td>
+					<td data-label="Km arrivé"><?= esc($item->km_arrive) ?></td>
 
 					<td>
 						<!-- Redirection button -->
