@@ -3,6 +3,16 @@
 use CodeIgniter\Router\RouteCollection;
 // Auto-generated routes
 
+// Routes for Mission
+$routes->get('Mission', 'MissionController::index');
+$routes->get('Mission/show/(:num)', 'MissionController::show/$1');
+$routes->get('Mission/create', 'MissionController::create');
+$routes->post('Mission/store', 'MissionController::store');
+$routes->get('Mission/edit/(:num)', 'MissionController::edit/$1');
+$routes->post('Mission/update/(:num)', 'MissionController::update/$1');
+$routes->get('Mission/delete/(:num)', 'MissionController::delete/$1');
+
+
 
 // Routes for Assurance
 $routes->get('Assurance', 'AssuranceController::index');
