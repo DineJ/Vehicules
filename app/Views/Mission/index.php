@@ -41,10 +41,10 @@
 			<!-- Display datas -->
 			<?php foreach ($items as $item): ?>
 				<tr>
-					<td data-label="id_vehicule"><?= esc($item->id_vehicule) ?></td>
-					<td data-label="id_user"><?= esc($item->id_user) ?></td>
-					<td data-label="id_lieu_depart"><?= esc($item->id_lieu_depart) ?></td>
-					<td data-label="id_lieu_arrive"><?= esc($item->id_lieu_arrive) ?></td>
+					<td data-label="id_vehicule"><?= esc($item->plaque) ?></td>
+					<td data-label="id_user"><?= esc($item->conducteur) ?></td>
+					<td data-label="id_lieu_depart"><?= esc($item->nom_lieu_depart) ?></td>
+					<td data-label="id_lieu_arrive"><?= esc($item->nom_lieu_arrive) ?></td>
 					<td data-label="motif"><?= esc($item->motif) ?></td>
 					<td data-label="date_depart"><?= esc($item->date_depart) ?></td>
 					<td data-label="date_arrivee"><?= esc($item->date_arrivee) ?></td>

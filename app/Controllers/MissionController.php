@@ -20,10 +20,19 @@ class MissionController extends Controller
 	{
 		$search = $this->request->getGet('q');
 
+		// Query to get datas from other table
+		$builder = $this->model->select('vehicule.plaque, CONCAT(user.nom, " ", user.prenom) AS conducteur, l1.nom_lieu AS nom_lieu_depart, l2.nom_lieu AS nom_lieu_arrive, motif, date_depart, date_arrivee, km_depart, km_arrive')
+			 ->join('vehicule', 'vehicule.id = mission.id_vehicule', 'left')
+			 ->join('user', 'user.id = mission.id_user', 'left')
+			 ->join('lieu l1', 'l1.id = mission.id_lieu_depart', 'left')
+			 ->join('lieu l2', 'l2.id = mission.id_lieu_arrive', 'left')
+			 ->orderBy('id_vehicule');
+
+
 		if ($search)
 		{
 			$query = '%'.$search.'%';
-			$this->model->like('id_vehicule', $query)
+			$builder->like('id_vehicule', $query)
 						->orLike('id_user', $query)
 						->orLike('id_lieu_depart', $query)
 						->orLike('id_lieu_arrive', $query)
@@ -35,8 +44,8 @@ class MissionController extends Controller
 			$this->model->orderBy('id_vehicule');
 		}
 		$data['search'] = $search;
-		$data['items'] = $this->model->paginate(5); // Display 5 results
-		$data['pager'] = $this->model->pager; // Add pager
+		$data['items'] = $builder->paginate(5); // Display 5 results
+		$data['pager'] = $builder->pager; // Add pager
 
 		return view('Mission/index', $data);
 	}
