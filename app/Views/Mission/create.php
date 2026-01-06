@@ -19,8 +19,19 @@
 	</select>
 
 
-	<!-- Type number -->
-	<label>id_user</label>
+	<!-- Display all drivers into a list -->
+	<label for="id_user">Conducteur</label>
+	<select id="id_user" name="id_user" onchange="disabledDefault('id_user')" class="form-control" required>
+		<option value=""> Choisir un conducteur </option>
+		<?php foreach ($utilisateurs as $u): ?>
+
+			<!-- Match id with a value -->
+			<option value="<? $u->id ?>" <?=(isset($item) && $item->id_user == $u->id) ? 'selected' : "" ?>>
+				<?= $u->prenom . ' ' . $u->nom ?>
+			</option>
+		<?php endforeach; ?>
+	</select>
+
 	<input type="number" id="id_user" name="id_user" value="<?= isset($item) ? $item->id_user : '' ?>" class="form-control" required>
 
 	<!-- Type number -->
