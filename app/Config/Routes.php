@@ -3,6 +3,16 @@
 use CodeIgniter\Router\RouteCollection;
 // Auto-generated routes
 
+// Routes for Lieu
+$routes->get('Lieu', 'LieuController::index');
+$routes->get('Lieu/show/(:num)', 'LieuController::show/$1');
+$routes->get('Lieu/create', 'LieuController::create');
+$routes->post('Lieu/store', 'LieuController::store');
+$routes->get('Lieu/edit/(:num)', 'LieuController::edit/$1');
+$routes->post('Lieu/update/(:num)', 'LieuController::update/$1');
+$routes->get('Lieu/delete/(:num)', 'LieuController::delete/$1');
+
+
 // Routes for Mission
 $routes->get('Mission', 'MissionController::index');
 $routes->get('Mission/show/(:num)', 'MissionController::show/$1');
