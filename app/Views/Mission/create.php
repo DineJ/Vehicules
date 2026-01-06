@@ -12,7 +12,7 @@
 		<?php foreach($vehicules as $v): ?>
 
 			<!-- Match id with a value -->
-			<option value="<? esc($v->id) ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
+			<option value="<?= esc($v->id) ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
 				<?= esc($v->plaque) ?>
 			</option>
 		<?php endforeach; ?>
@@ -26,7 +26,7 @@
 		<?php foreach($utilisateurs as $u): ?>
 
 			<!-- Match id with a value -->
-			<option value="<? esc($u->id) ?>" <?=(isset($item) && $item->id_user == $u->id) ? 'selected' : '' ?>>
+			<option value="<?= esc($u->id) ?>" <?=(isset($item) && $item->id_user == $u->id) ? 'selected' : '' ?>>
 				<?= esc($u->prenom) . ' ' . esc($u->nom) ?>
 			</option>
 		<?php endforeach; ?>
@@ -40,7 +40,7 @@
 		<?php foreach($lieux as $l): ?>
 
 			<!-- Match id with a value -->
-			<option value="<? esc($l->id) ?>" <?= (isset($item) && $item->id_lieu_depart == $l->id) ? 'selected' :  '' ?>>
+			<option value="<?= esc($l->id) ?>" <?= (isset($item) && $item->id_lieu_depart == $l->id) ? 'selected' :  '' ?>>
 				<?= esc($l->numero) . ' '  . esc($l->adresse) . ' ' . esc($l->nom_lieu) ?>
 			</option>
 		<?php endforeach; ?>
@@ -53,7 +53,7 @@
 		<?php foreach($lieux as $l): ?>
 
 			<!-- Match id with a value -->
-			<option value="<? esc($l->id) ?>" <?= (isset($item) && $item->id_lieu_arrive == $l->id) ? 'selected' : '' ?>>
+			<option value="<?= esc($l->id) ?>" <?= (isset($item) && $item->id_lieu_arrive == $l->id) ? 'selected' : '' ?>>
 				<?= esc($l->numero) . ' ' . esc($l->adresse) . ' ' . esc($l->nom_lieu) ?>
 			</option>
 		<?php endforeach; ?>
