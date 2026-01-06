@@ -12,8 +12,8 @@
 		<?php foreach($vehicules as $v): ?>
 
 			<!-- Match id with a value -->
-			<option value="<? $v->id ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
-				<?= $v->plaque ?>
+			<option value="<? esc($v->id) ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
+				<?= esc($v->plaque) ?>
 			</option>
 		<?php endforeach; ?>
 	</select>
@@ -26,8 +26,8 @@
 		<?php foreach($utilisateurs as $u): ?>
 
 			<!-- Match id with a value -->
-			<option value="<? $u->id ?>" <?=(isset($item) && $item->id_user == $u->id) ? 'selected' : '' ?>>
-				<?= $u->prenom . ' ' . $u->nom ?>
+			<option value="<? esc($u->id) ?>" <?=(isset($item) && $item->id_user == $u->id) ? 'selected' : '' ?>>
+				<?= esc($u->prenom) . ' ' . esc($u->nom) ?>
 			</option>
 		<?php endforeach; ?>
 	</select>
@@ -40,38 +40,34 @@
 		<?php foreach($lieux as $l): ?>
 
 			<!-- Match id with a value -->
-			<option value="<? $l->id ?>" <?= (isset($item) && $item->id_lieu_depart == $l->id) ? 'selected' :  '' ?>>
-				<?= $l->numero . ' '  . $l->adresse . ' ' . $l->nom_lieu ?>
+			<option value="<? esc($l->id) ?>" <?= (isset($item) && $item->id_lieu_depart == $l->id) ? 'selected' :  '' ?>>
+				<?= esc($l->numero) . ' '  . esc($l->adresse) . ' ' . esc($l->nom_lieu) ?>
 			</option>
 		<?php endforeach; ?>
 	</select>
 
 	<!-- Display all ending locations into a list -->
 	<label for="id_lieu_arrive">Lieu arrive</label>
-	<select id="id_lie_arrive" name="id_lieu_arrive" onchange="disabledDefualt('id_lieu_arrive')" class="form-control" required>
+	<select id="id_lie_arrive" name="id_lieu_arrive" onchange="disabledDefault('id_lieu_arrive')" class="form-control" required>
 		<option value=""> Choisir un lieu d'arrivé </option>
 		<?php foreach($lieux as $l): ?>
 
 			<!-- Match id with a value -->
-			<option value="<? $l->id ?>" <?= (isset($item) && $item->id_lieu_arrive == $l->id) ? 'selected' : '' ?>>
-				<?= $l->numero . ' ' . $l->adresse . ' ' . $l->nom_lieu ?>
+			<option value="<? esc($l->id) ?>" <?= (isset($item) && $item->id_lieu_arrive == $l->id) ? 'selected' : '' ?>>
+				<?= esc($l->numero) . ' ' . esc($l->adresse) . ' ' . esc($l->nom_lieu) ?>
 			</option>
 		<?php endforeach; ?>
 	</select>
 
 
-	<!-- Select value -->
-	<label>motif</label>
-	<div>
-		<select id="motif" name="motif" class="form-control" required>
-			<option value="" disabled selected hidden> Choississez une option </option>
-			<option value=B>B</option>
-			<option value=BE>BE</option>
-			<option value=C>C</option>
-			<option value=C1>C1</option>
-			<option value=C1E>C1E</option>
-		</select>
-	</div>
+	<!-- Display all reasons -->
+	<label for="motif">Motif</label>
+	<select id="motif" name="motif" onchange="disabledDefault('motif')" class="form-control" required>
+		<option value=""> Choisir un motif </option>
+		<?php foreach($motifs as $m): ?>
+			<option value="<?= esc($m) ?>"><?= esc($m) ?></option>
+		<?php endforeach; ?>
+	</select>
 
 	<!-- Type date -->
 	<label>date_depart</label>

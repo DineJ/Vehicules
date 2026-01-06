@@ -73,6 +73,7 @@ class MissionController extends Controller
 		$data['utilisateurs'] = $this->userModel->findAll();
 		$data['lieux'] = $this->lieuModel->findAll();
 		$data['vehicules'] = $this->vehiculeModel->findAll();
+		$data['motifs'] = $this->model->getMotifEnum();
 		$data['title'] = "Créer Mission";
 		return view('Mission/create', $data);
 	}
