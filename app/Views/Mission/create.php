@@ -47,7 +47,7 @@
 	</select>
 
 	<!-- Display all ending locations into a list -->
-	<label for="id_lieu_arrive">Lieu arrive</label>
+	<label for="id_lieu_arrive">Lieu arrivé</label>
 	<select id="id_lie_arrive" name="id_lieu_arrive" onchange="disabledDefault('id_lieu_arrive')" class="form-control" required>
 		<option value=""> Choisir un lieu d'arrivé </option>
 		<?php foreach($lieux as $l): ?>
@@ -69,20 +69,20 @@
 		<?php endforeach; ?>
 	</select>
 
-	<!-- Type date -->
-	<label>date_depart</label>
+	<!-- Select the start date -->
+	<label>Date départ</label>
 	<input type="date" id="date_depart" name="date_depart" value="<?= isset($item) ? $item->date_depart : '' ?>" class="form-control" required>
 
-	<!-- Type date -->
-	<label>date_arrivee</label>
+	<!-- Select the end date -->
+	<label>Date arrivée</label>
 	<input type="date" id="date_arrivee" name="date_arrivee" value="<?= isset($item) ? $item->date_arrivee : '' ?>" class="form-control" required>
 
-	<!-- Type number -->
-	<label>km_depart</label>
+	<!-- Select your start KM -->
+	<label>KM de départ</label>
 	<input type="number" id="km_depart" name="km_depart" value="<?= isset($item) ? $item->km_depart : '' ?>" class="form-control" required>
 
-	<!-- Type number -->
-	<label>km_arrive</label>
+	<!-- Select your end KM -->
+	<label>Km d'arrivé</label>
 	<input type="number" id="km_arrive" name="km_arrive" value="<?= isset($item) ? $item->km_arrive : '' ?>" class="form-control" required>
 
 	<!-- Redirection button -->
