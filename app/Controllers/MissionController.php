@@ -3,6 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\MissionModel;
+use App\Models\VehiculeModel;
+/*use App\Models\UserModel;
+use App\Models\LieuModel;*/
 use App\Entities\Mission;
 use CodeIgniter\Controller;
 
@@ -13,6 +16,10 @@ class MissionController extends Controller
 	public function __construct()
 	{
 		$this->model = new MissionModel();
+		$this->vehiculeModel = new VehiculeModel();
+		/*$this->userModel = new UserModel();
+		$this->lieuModel = new LieuModel(); */
+
 	}
 
 	// SEARCH BAR
@@ -62,6 +69,10 @@ class MissionController extends Controller
 	// CREATION FORM
 	public function create()
 	{
+		// Query to get datas from other table
+/*		$data['utilisateurs'] = $this->userModel->findAll();
+		$data['lieux'] = $this->lieuModel->findAll(); */
+		$data['vehicules'] = $this->vehiculeModel->findAll();
 		$data['title'] = "Créer Mission";
 		return view('Mission/create', $data);
 	}

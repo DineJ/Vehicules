@@ -5,9 +5,19 @@
 
 <form method="post" action="<?= site_url('Mission/store/') ?>">
 
-	<!-- Type number -->
-	<label>id_vehicule</label>
-	<input type="number" id="id_vehicule" name="id_vehicule" value="<?= isset($item) ? $item->id_vehicule : '' ?>" class="form-control" required>
+	<!-- Display all vehicules into a list -->
+	<label for="id_vehicule">Vehicule</label>
+	<select id="id_vehicule" name="id_vehicule" onchange="disabledDefault('id_vehicule')" class="form-control" required>
+		<option value=""> Choisir un vehicule </option>
+		<?php foreach ($vehicules as $v): ?>
+
+			<!-- Match id with a value -->
+			<option value="<? $v->id ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : "" ?>>
+				<?= $v->plaque ?>
+			</option>
+		<?php endforeach; ?>
+	</select>
+
 
 	<!-- Type number -->
 	<label>id_user</label>
@@ -56,12 +66,6 @@
 </form>
 
 
-<script>
-	// Caps text
-	function setUpper(element)
-	{
-		element.value=element.value.toUpperCase();
-	}
-</script>
+<script src="<?= base_url('js/main.js') ?>"></script>
 
 <?= $this->endSection() ?>
