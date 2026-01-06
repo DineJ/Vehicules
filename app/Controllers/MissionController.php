@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\MissionModel;
 use App\Models\VehiculeModel;
 use App\Models\UserModel;
-/*use App\Models\LieuModel;*/
+use App\Models\LieuModel;
 use App\Entities\Mission;
 use CodeIgniter\Controller;
 
@@ -18,7 +18,7 @@ class MissionController extends Controller
 		$this->model = new MissionModel();
 		$this->vehiculeModel = new VehiculeModel();
 		$this->userModel = new UserModel();
-		/*$this->lieuModel = new LieuModel(); */
+		$this->lieuModel = new LieuModel();
 
 	}
 
@@ -71,7 +71,7 @@ class MissionController extends Controller
 	{
 		// Query to get datas from other table
 		$data['utilisateurs'] = $this->userModel->findAll();
-/*$data['lieux'] = $this->lieuModel->findAll(); */
+		$data['lieux'] = $this->lieuModel->findAll();
 		$data['vehicules'] = $this->vehiculeModel->findAll();
 		$data['title'] = "Créer Mission";
 		return view('Mission/create', $data);
