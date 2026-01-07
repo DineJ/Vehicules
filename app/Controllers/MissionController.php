@@ -103,6 +103,7 @@ class MissionController extends Controller
 	public function edit($id)
 	{
 		$data['item'] = $this->model->find($id);
+		$data['utilisateurs'] = $this->userModel->findAll();
 		$data['title'] = "Modifier Mission";
 		return view('Mission/edit', $data);
 	}

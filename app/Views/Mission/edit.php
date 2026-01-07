@@ -10,9 +10,15 @@
 	<input type="number" id="id_vehicule" name="id_vehicule" value="<?= isset($item) ? $item->id_vehicule : '' ?>" class="form-control" required>
 	<input type="hidden" id="oldid_vehicule" name="oldid_vehicule" value="<?= isset($item) ? $item->id_vehicule : '' ?>">
 
-	<!-- Type number -->
-	<label>id_user</label>
-	<input type="number" id="id_user" name="id_user" value="<?= isset($item) ? $item->id_user : '' ?>" class="form-control" required>
+	<!-- Display all drivers -->
+	<label for="id_user">Conducteur</label>
+	<select id="id_user" name="id_user" class="form-control" required>
+		<?php foreach($utilisateurs as $u): ?>
+			<option value="<?= $u->id ?>" <?= (isset($item) && $item->id_user == $u->id) ? 'selected' : '' ?>>
+				<?= esc($u->prenom) . ' ' . esc($u->nom) ?>
+			</option>
+		<?php endforeach; ?>
+	</select>
 	<input type="hidden" id="oldid_user" name="oldid_user" value="<?= isset($item) ? $item->id_user : '' ?>">
 
 	<!-- Type number -->
