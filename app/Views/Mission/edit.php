@@ -61,15 +61,17 @@
 	</select>
 	<input type="hidden" id="oldmotif" name="oldmotif" value="<?= isset($item) ? $item->motif : '' ?>">
 
-	<!-- Type date -->
-	<label>date_depart</label>
-	<input type="date" id="date_depart" name="date_depart" value="<?= isset($item) ? $item->date_depart : '' ?>" class="form-control" required>
-	<input type="hidden" id="olddate_depart" name="olddate_depart" value="<?= isset($item) ? $item->date_depart : '' ?>">
 
-	<!-- Type date -->
-	<label>date_arrivee</label>
-	<input type="date" id="date_arrivee" name="date_arrivee" value="<?= isset($item) ? $item->date_arrivee : '' ?>" class="form-control" required>
-	<input type="hidden" id="olddate_arrivee" name="olddate_arrivee" value="<?= isset($item) ? $item->date_arrivee : '' ?>">
+	<!-- Select start date -->
+	<label>Date départ</label>
+	<input type="date" id="date_depart" name="date_depart" value="<?= isset($item) ? substr($item->date_depart, 0, 10) : '' ?>" class="form-control" required>
+	<input type="hidden" id="olddate_depart" name="olddate_depart" value="<?= isset($item) ? substr($item->date_depart, 0 , 10) : '' ?>">
+
+
+	<!-- Select end date -->
+	<label>Date arrivée</label>
+	<input type="date" id="date_arrivee" name="date_arrivee" value="<?= isset($item) ? substr($item->date_arrivee, 0 , 10) : '' ?>" class="form-control" required>
+	<input type="hidden" id="olddate_arrivee" name="olddate_arrivee" value="<?= isset($item) ? substr($item->date_arrivee, 0 , 10) : '' ?>">
 
 	<!-- Type number -->
 	<label>km_depart</label>
