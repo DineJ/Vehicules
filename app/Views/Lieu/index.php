@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<h2>Liste des Lieus</h2>
+<h2>Liste des Lieux</h2>
 <a href="<?= site_url('Lieu/create') ?>" class="btn btn-success">Ajouter</a>
 
 
@@ -12,10 +12,10 @@
 		<!-- Datas name -->
 		<thead>
 			<tr>
-				<th>nom_lieu</th>
-				<th>code_postal</th>
-				<th>numero</th>
-				<th>adresse</th>
+				<th>Ville</th>
+				<th>Code postal</th>
+				<th>Numéro</th>
+				<th>Adresse</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -24,10 +24,10 @@
 			<!-- Display datas -->
 			<?php foreach ($items as $item): ?>
 				<tr>
-					<td data-label="nom_lieu"><?= esc($item->nom_lieu) ?></td>
-					<td data-label="code_postal"><?= esc($item->code_postal) ?></td>
-					<td data-label="numero"><?= esc($item->numero) ?></td>
-					<td data-label="adresse"><?= esc($item->adresse) ?></td>
+					<td data-label="Ville"><?= esc($item->nom_lieu) ?></td>
+					<td data-label="Code postal"><?= esc($item->code_postal) ?></td>
+					<td data-label="Numéro"><?= esc($item->numero) ?></td>
+					<td data-label="Adresse"><?= esc($item->adresse) ?></td>
 					<td>
 						<!-- Redirection button -->
 						<a href="<?= site_url('Lieu/show/'.$item->id) ?>" class="btn btn-info btn-sm">Voir</a>
