@@ -7,11 +7,11 @@
 
 	<!-- Type city's name -->
 	<label>Ville</label>
-	<input type="text" onchange="setUpper(document.getElementById('nom_lieu'));" id="nom_lieu" name="nom_lieu" value="<?= isset($item) ? $item->nom_lieu : '' ?>" class="form-control" required>
+	<input type="text" oninput="setUpper(document.getElementById('nom_lieu'));" id="nom_lieu" name="nom_lieu" value="<?= isset($item) ? $item->nom_lieu : '' ?>" class="form-control" required>
 
 	<!-- Type postal code -->
 	<label>Code postal</label>
-	<input type="text" onchange="setUpper(document.getElementById('code_postal'));" id="code_postal" name="code_postal" value="<?= isset($item) ? $item->code_postal : '' ?>" class="form-control" required>
+	<input type="text" oninput="setUpper(document.getElementById('code_postal'));" id="code_postal" name="code_postal" value="<?= isset($item) ? $item->code_postal : '' ?>" class="form-control" required>
 
 	<!-- Type street number  -->
 	<label>Numéro</label>
@@ -19,7 +19,7 @@
 
 	<!-- Type address -->
 	<label>Adresse</label>
-	<input type="text" onchange="setUpper(document.getElementById('adresse'));" id="adresse" name="adresse" value="<?= isset($item) ? $item->adresse : '' ?>" class="form-control" required>
+	<input type="text" oninput="setUpper(document.getElementById('adresse'));" id="adresse" name="adresse" value="<?= isset($item) ? $item->adresse : '' ?>" class="form-control" required>
 
 	<!-- Site is active or not -->
 	<label>Actif</label>
@@ -33,12 +33,6 @@
 </form>
 
 
-<script>
-	// Caps text
-	function setUpper(element)
-	{
-		element.value=element.value.toUpperCase();
-	}
-</script>
+<script src="<?= base_url('js/main.js') ?>"></script>
 
 <?= $this->endSection() ?>
