@@ -28,7 +28,7 @@ class MissionController extends Controller
 		$search = $this->request->getGet('q');
 
 		// Query to get datas from other table
-		$builder = $this->model->select('mission.id, vehicule.plaque, CONCAT(user.nom, " ", user.prenom) AS conducteur, l1.nom_lieu AS nom_lieu_depart, l2.nom_lieu AS nom_lieu_arrive, motif, date_depart, date_arrivee, km_depart, km_arrive')
+		$builder = $this->model->select('mission.id, vehicule.plaque, CONCAT(user.nom, " ", user.prenom) AS conducteur, l1.nom_lieu AS nom_lieu_depart, l1.numero AS numero_depart, l1.adresse AS adresse_depart, l2.numero AS numero_arrive, l2.adresse AS adresse_arrivee, l2.nom_lieu AS nom_lieu_arrive, motif, date_depart, date_arrivee, km_depart, km_arrive')
 			 ->join('vehicule', 'vehicule.id = mission.id_vehicule', 'left')
 			 ->join('user', 'user.id = mission.id_user', 'left')
 			 ->join('lieu l1', 'l1.id = mission.id_lieu_depart', 'left')

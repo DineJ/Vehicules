@@ -43,8 +43,8 @@
 				<tr>
 					<td data-label="Plaque"><?= esc($item->plaque) ?></td>
 					<td data-label="Conducteur"><?= esc($item->conducteur) ?></td>
-					<td data-label="Lieu départ"><?= esc($item->nom_lieu_depart) ?></td>
-					<td data-label="Lieu arrivé"><?= esc($item->nom_lieu_arrive) ?></td>
+					<td class="concatenation" data-label="Lieu départ"><?= esc($item->numero_depart) . ' ' . esc($item->adresse_depart) . ' ' . esc($item->nom_lieu_depart) ?></td>
+					<td class="concatenation" data-label="Lieu arrivé"><?= esc($item->numero_arrive) . ' ' . esc($item->adresse_arrivee) . ' ' . esc($item->nom_lieu_arrive) ?></td>
 					<td data-label="Motif"><?= esc($item->motif) ?></td>
 					<td data-label="Date départ"><?= esc(date('d/m/Y', strtotime($item->date_depart))) ?></td>
 					<td data-label="Date arrivée"><?= esc(date('d/m/Y', strtotime($item->date_arrivee))) ?></td>
