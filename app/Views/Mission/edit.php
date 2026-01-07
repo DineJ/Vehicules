@@ -73,13 +73,13 @@
 	<input type="date" id="date_arrivee" name="date_arrivee" value="<?= isset($item) ? substr($item->date_arrivee, 0 , 10) : '' ?>" class="form-control" required>
 	<input type="hidden" id="olddate_arrivee" name="olddate_arrivee" value="<?= isset($item) ? substr($item->date_arrivee, 0 , 10) : '' ?>">
 
-	<!-- Type number -->
-	<label>km_depart</label>
+	<!-- Select start Km -->
+	<label>Km de départ</label>
 	<input type="number" id="km_depart" name="km_depart" value="<?= isset($item) ? $item->km_depart : '' ?>" class="form-control" required>
 	<input type="hidden" id="oldkm_depart" name="oldkm_depart" value="<?= isset($item) ? $item->km_depart : '' ?>">
 
-	<!-- Type number -->
-	<label>km_arrive</label>
+	<!-- Select end Km -->
+	<label>Km arrivé</label>
 	<input type="number" id="km_arrive" name="km_arrive" value="<?= isset($item) ? $item->km_arrive : '' ?>" class="form-control" required>
 	<input type="hidden" id="oldkm_arrive" name="oldkm_arrive" value="<?= isset($item) ? $item->km_arrive : '' ?>">
 
