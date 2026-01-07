@@ -562,3 +562,68 @@ function validateFormAssurance()
 		}
 		return true;
 	}
+
+
+//////////////////////////////////////////////
+
+
+
+function validateFormLieuEdit()
+{
+
+	// Count
+	let compare = 0;
+	let row = 0;
+
+	// Get values
+	let nom_lieu = document.getElementById('nom_lieu').value;
+	let oldnom_lieu = document.getElementById('oldnom_lieu').value;
+	row++;
+
+	// Check values 
+	if (nom_lieu == oldnom_lieu)
+	{
+		compare++;
+	}
+
+	// Get values
+	let code_postal = document.getElementById('code_postal').value;
+	let oldcode_postal = document.getElementById('oldcode_postal').value;
+	row++;
+
+	// Check values 
+	if (code_postal == oldcode_postal)
+	{
+		compare++;
+	}
+
+	// Get values
+	let numero = document.getElementById('numero').value;
+	let oldnumero = document.getElementById('oldnumero').value;
+	row++;
+
+	// Check values 
+	if (numero == oldnumero)
+	{
+		compare++;
+	}
+
+	// Get values
+	let adresse = document.getElementById('adresse').value;
+	let oldadresse = document.getElementById('oldadresse').value;
+	row++;
+
+	// Check values 
+	if (adresse == oldadresse)
+	{
+		compare++;
+	}
+
+	// Check counts
+	if (compare == row)
+	{
+		alert("les valeurs sont identiques");
+		return false;
+	}
+	return true;
+}

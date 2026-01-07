@@ -35,6 +35,7 @@ $currentUri = service('uri')->getPath();
 					<li><a class="dropdown-item" href="/Assurance">Assurance</a></li>
 					<li><a class="dropdown-item" href="/Incident">Incident</a></li>
 					<li><a class="dropdown-item" href="/Mission">Mission</a></li>
+					<li><a class="dropdown-item" href="/Lieu">Lieu</a></li>
 					<li><a class="dropdown-item" href="/Suivi">Suivi</a></li>
 					<li><a class="dropdown-item" href="/Type_incident">Type incident</a></li>
 					<li><a class="dropdown-item" href="/User">Utilisateur</a></li>
