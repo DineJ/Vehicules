@@ -69,15 +69,13 @@
 <div>
 	<form method="post" action="<?= site_url('Mission/update/'.$item->id) ?>">
 
-		<!-- Redirection button to edit user form -->
+		<!-- Redirection button -->
+		<a href="<?= site_url('Mission') ?>" class="btn btn-secondary">Retour</a>
+
+		<!-- Redirection button to edit Misson form -->
 		<a href="<?= site_url('Mission/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
 
-		<!-- Disabled account button -->
-		
 	</form>
 </div>
-</br>
 
-<!-- Redirection button -->
-<a href="<?= site_url('Mission') ?>" class="btn btn-secondary">Retour</a>
 <?= $this->endSection() ?>
