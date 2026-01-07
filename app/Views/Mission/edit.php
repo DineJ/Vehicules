@@ -3,7 +3,7 @@
 
 <h2>Mission - <?= $title ?></h2>
 
-<form method="post" action="<?= site_url('Mission/update/'.$item->id) ?>" onsubmit="return validateForm()">
+<form method="post" action="<?= site_url('Mission/update/'.$item->id) ?>" onsubmit="return validateFormMissionEdit()">
 
 	<!-- Display all vehicles -->
 	<label for="id_vehicule">Véhicule</label>
@@ -89,127 +89,6 @@
 </form>
 
 
-<script>
-	// Caps text
-	function setUpper(element)
-	{
-		element.value=element.value.toUpperCase();
-	}
-
-	function validateForm()
-	{
-
-		// Count
-		let compare = 0;
-		let row = 0;
-
-		// Get values
-		let id_vehicule = document.getElementById('id_vehicule').value;
-		let oldid_vehicule = document.getElementById('oldid_vehicule').value;
-		row++;
-
-		// Check values 
-		if (id_vehicule == oldid_vehicule)
-		{
-			compare++;
-		}
-
-		// Get values
-		let id_user = document.getElementById('id_user').value;
-		let oldid_user = document.getElementById('oldid_user').value;
-		row++;
-
-		// Check values 
-		if (id_user == oldid_user)
-		{
-			compare++;
-		}
-
-		// Get values
-		let id_lieu_depart = document.getElementById('id_lieu_depart').value;
-		let oldid_lieu_depart = document.getElementById('oldid_lieu_depart').value;
-		row++;
-
-		// Check values 
-		if (id_lieu_depart == oldid_lieu_depart)
-		{
-			compare++;
-		}
-
-		// Get values
-		let id_lieu_arrive = document.getElementById('id_lieu_arrive').value;
-		let oldid_lieu_arrive = document.getElementById('oldid_lieu_arrive').value;
-		row++;
-
-		// Check values 
-		if (id_lieu_arrive == oldid_lieu_arrive)
-		{
-			compare++;
-		}
-
-		// Get values
-		let motif = document.getElementById('motif').value;
-		let oldmotif = document.getElementById('oldmotif').value;
-		row++;
-
-		// Check values 
-		if (motif == oldmotif)
-		{
-			compare++;
-		}
-
-		// Get values
-		let date_depart = document.getElementById('date_depart').value;
-		let olddate_depart = document.getElementById('olddate_depart').value;
-		row++;
-
-		// Check values 
-		if (date_depart == olddate_depart)
-		{
-			compare++;
-		}
-
-		// Get values
-		let date_arrivee = document.getElementById('date_arrivee').value;
-		let olddate_arrivee = document.getElementById('olddate_arrivee').value;
-		row++;
-
-		// Check values 
-		if (date_arrivee == olddate_arrivee)
-		{
-			compare++;
-		}
-
-		// Get values
-		let km_depart = document.getElementById('km_depart').value;
-		let oldkm_depart = document.getElementById('oldkm_depart').value;
-		row++;
-
-		// Check values 
-		if (km_depart == oldkm_depart)
-		{
-			compare++;
-		}
-
-		// Get values
-		let km_arrive = document.getElementById('km_arrive').value;
-		let oldkm_arrive = document.getElementById('oldkm_arrive').value;
-		row++;
-
-		// Check values 
-		if (km_arrive == oldkm_arrive)
-		{
-			compare++;
-		}
-
-		// Check counts
-		if (compare == row)
-		{
-			alert("les valeurs sont identiques");
-			return false;
-		}
-		return true;
-	}
-</script>
+<script src="<?= base_url('js/validateForm.js') ?>"></script>
 
 <?= $this->endSection() ?>
