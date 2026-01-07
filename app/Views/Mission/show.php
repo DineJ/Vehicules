@@ -23,13 +23,13 @@
 			<!-- Display starting location -->
 			<tr>
 				<td class="td-hidden">Lieu départ</td>
-				<td data-label="Lieu départ"><?=esc($lieuDepart->numero) . ' ' .  esc($lieuDepart->adresse) . ' ' . esc($lieuDepart->nom_lieu) ?></td>
+				<td class="concatenation" data-label="Lieu départ"><?=esc($lieuDepart->numero) . ' ' .  esc($lieuDepart->adresse) . ' ' . esc($lieuDepart->nom_lieu) ?></td>
 			</tr>
 
 			<!-- Display ending location -->
 			<tr>
 				<td class="td-hidden">Lieu arrivé</td>
-				<td data-label="Lieu arrivé"><?= esc($lieuArrive->numero) . ' ' . esc($lieuArrive->adresse) . ' ' . esc($lieuArrive->nom_lieu) ?></td>
+				<td class="concatenation" data-label="Lieu arrivé"><?= esc($lieuArrive->numero) . ' ' . esc($lieuArrive->adresse) . ' ' . esc($lieuArrive->nom_lieu) ?></td>
 			</tr>
 
 			<!-- Display reasons of the travel -->

@@ -187,4 +187,9 @@ th {
 	.label-permis {
 		padding: inherit !important;
 	}
+
+	/* In case concatenation couldnt be displayed properly */
+	.concatenation {
+		text-overflow : ellipsis;
+	}
 }
