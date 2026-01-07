@@ -5,10 +5,17 @@
 
 <form method="post" action="<?= site_url('Mission/update/'.$item->id) ?>" onsubmit="return validateForm()">
 
-	<!-- Type number -->
-	<label>id_vehicule</label>
-	<input type="number" id="id_vehicule" name="id_vehicule" value="<?= isset($item) ? $item->id_vehicule : '' ?>" class="form-control" required>
+	<!-- Display all vehicles -->
+	<label for="id_vehicule">Véhicule</label>
+	<select id="id_vehicule" name="id_vehicule" class="form-control" required>
+		<?php foreach($vehicules as $v): ?>
+			<option value="<?= $v->id ?>" <?= (isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
+				<?= esc($v->plaque) ?>
+			</option>
+		<?php endforeach; ?>
+	</select>
 	<input type="hidden" id="oldid_vehicule" name="oldid_vehicule" value="<?= isset($item) ? $item->id_vehicule : '' ?>">
+
 
 	<!-- Display all drivers -->
 	<label for="id_user">Conducteur</label>

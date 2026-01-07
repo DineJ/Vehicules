@@ -104,6 +104,7 @@ class MissionController extends Controller
 	{
 		$data['item'] = $this->model->find($id);
 		$data['utilisateurs'] = $this->userModel->findAll();
+		$data['vehicules'] = $this->vehiculeModel->findAll();
 		$data['title'] = "Modifier Mission";
 		return view('Mission/edit', $data);
 	}
