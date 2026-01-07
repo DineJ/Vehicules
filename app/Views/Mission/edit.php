@@ -32,7 +32,7 @@
 	<label for="id_lieu_depart">Lieu de départ</label>
 	<select id="id_lieu_depart" name="id_lieu_depart" class="form-control" required>
 		<?php foreach($lieuxDepart as $l1): ?>
-			<option value="<? $l1->id ?>" <?= (isset($item) && $item->id_lieu_depart == $l1->id) ? 'selected' : '' ?>>
+			<option value="<?= $l1->id ?>" <?= (isset($item) && $item->id_lieu_depart == $l1->id) ? 'selected' : '' ?>>
 				<?= esc($l1->numero) . ' ' . esc($l1->adresse) . ' ' . esc($l1->nom_lieu) ?>
 			</option>
 		<?php endforeach; ?>
@@ -44,7 +44,7 @@
 	<label for="id_lieu_arrive">Lieu arrivé</label>
 	<select id="id_lieu_arrive" name="id_lieu_arrive" class="form-control" required>
 		<?php foreach($lieuxArrive as $l2): ?>
-			<option value="<? $l2->id ?>" <?= (isset($item) && $item->id_lieu_arrive == $l2->id) ? 'selected' : '' ?>>
+			<option value="<?= $l2->id ?>" <?= (isset($item) && $item->id_lieu_arrive == $l2->id) ? 'selected' : '' ?>>
 				<?= esc($l2->numero) . ' ' . esc($l2->adresse) . ' ' . esc($l2->nom_lieu) ?>
 			</option>
 		<?php endforeach; ?>
