@@ -16,7 +16,6 @@
 				<th>code_postal</th>
 				<th>numero</th>
 				<th>adresse</th>
-				<th>actif</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -29,8 +28,6 @@
 					<td data-label="code_postal"><?= esc($item->code_postal) ?></td>
 					<td data-label="numero"><?= esc($item->numero) ?></td>
 					<td data-label="adresse"><?= esc($item->adresse) ?></td>
-					<td data-label="actif"><?= esc($item->actif) ?></td>
-
 					<td>
 						<!-- Redirection button -->
 						<a href="<?= site_url('Lieu/show/'.$item->id) ?>" class="btn btn-info btn-sm">Voir</a>
