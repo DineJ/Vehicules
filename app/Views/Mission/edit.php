@@ -52,18 +52,13 @@
 	<input type="hidden" id="oldid_lieu_arrive" name="oldid_lieu_arrive" value="<?= isset($item) ? $item->id_lieu_arrive : '' ?>">
 
 
-	<!-- Select value -->
-	<label>motif</label>
-	<div>
-		<select id="motif" name="motif" class="form-control" required>
-			<option value="" disabled selected hidden> Choississez une option </option>
-			<option value=B>B</option>
-			<option value=BE>BE</option>
-			<option value=C>C</option>
-			<option value=C1>C1</option>
-			<option value=C1E>C1E</option>
-		</select>
-	</div>
+	<!-- Select reasons of the travel -->
+	<label for="motif">Motif</label>
+	<select id="motif" name="motif" class="form-control" required>
+		<?php foreach($motifs as $m): ?>
+			<option value="<?= esc($m) ?>"><?= esc($m) ?></option>
+		<?php endforeach; ?>
+	</select>
 	<input type="hidden" id="oldmotif" name="oldmotif" value="<?= isset($item) ? $item->motif : '' ?>">
 
 	<!-- Type date -->

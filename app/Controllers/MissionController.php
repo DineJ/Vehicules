@@ -107,6 +107,7 @@ class MissionController extends Controller
 		$data['vehicules'] = $this->vehiculeModel->findAll();
 		$data['lieuxDepart'] = $this->lieuModel->findAll();
 		$data['lieuxArrive'] = $this->lieuModel->findAll();
+		$data['motifs'] = $this->model->getMotifEnum();
 		$data['title'] = "Modifier Mission";
 		return view('Mission/edit', $data);
 	}
