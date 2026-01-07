@@ -8,58 +8,58 @@
 	<table class="table table-striped table-bordered mt-3">
 		<tbody>
 
-			<!-- Display id_vehicule -->
+			<!-- Display vehicle -->
 			<tr>
-				<td class="td-hidden">id_vehicule</td>
-				<td data-label="id_vehicule"><?= $item->id_vehicule ?></td>
+				<td class="td-hidden">Véhicule</td>
+				<td data-label="Véhicule"><?= esc($vehicule->plaque) ?></td>
 			</tr>
 
-			<!-- Display id_user -->
+			<!-- Display driver -->
 			<tr>
-				<td class="td-hidden">id_user</td>
-				<td data-label="id_user"><?= $item->id_user ?></td>
+				<td class="td-hidden">Conducteur</td>
+				<td data-label="Conducteur"><?= esc($utilisateur->prenom) . ' ' . esc($utilisateur->nom) ?></td>
 			</tr>
 
-			<!-- Display id_lieu_depart -->
+			<!-- Display starting location -->
 			<tr>
-				<td class="td-hidden">id_lieu_depart</td>
-				<td data-label="id_lieu_depart"><?= $item->id_lieu_depart ?></td>
+				<td class="td-hidden">Lieu départ</td>
+				<td data-label="Lieu départ"><?=esc($lieuDepart->numero) . ' ' .  esc($lieuDepart->adresse) . ' ' . esc($lieuDepart->nom_lieu) ?></td>
 			</tr>
 
-			<!-- Display id_lieu_arrive -->
+			<!-- Display ending location -->
 			<tr>
-				<td class="td-hidden">id_lieu_arrive</td>
-				<td data-label="id_lieu_arrive"><?= $item->id_lieu_arrive ?></td>
+				<td class="td-hidden">Lieu arrivé</td>
+				<td data-label="Lieu arrivé"><?= esc($lieuArrive->numero) . ' ' . esc($lieuArrive->adresse) . ' ' . esc($lieuArrive->nom_lieu) ?></td>
 			</tr>
 
-			<!-- Display motif -->
+			<!-- Display reasons of the travel -->
 			<tr>
-				<td class="td-hidden">motif</td>
-				<td data-label="motif"><?= $item->motif ?></td>
+				<td class="td-hidden">Motif</td>
+				<td data-label="Motif"><?= esc($item->motif) ?></td>
 			</tr>
 
-			<!-- Display date_depart -->
+			<!-- Display starting date -->
 			<tr>
-				<td class="td-hidden">date_depart</td>
-				<td data-label="date_depart"><?= $item->date_depart ?></td>
+				<td class="td-hidden">Date départ</td>
+				<td data-label="Date départ"><?= date('d/m/Y', strtotime($item->date_depart)) ?></td>
 			</tr>
 
-			<!-- Display date_arrivee -->
+			<!-- Display ending date -->
 			<tr>
-				<td class="td-hidden">date_arrivee</td>
-				<td data-label="date_arrivee"><?= $item->date_arrivee ?></td>
+				<td class="td-hidden">Date arrivée</td>
+				<td data-label="Date arrivée"><?= date('d/m/Y', strtotime($item->date_arrivee)) ?></td>
 			</tr>
 
-			<!-- Display km_depart -->
+			<!-- Display starting Km -->
 			<tr>
-				<td class="td-hidden">km_depart</td>
-				<td data-label="km_depart"><?= $item->km_depart ?></td>
+				<td class="td-hidden">Km de départ</td>
+				<td data-label="Km de départ"><?= $item->km_depart ?></td>
 			</tr>
 
-			<!-- Display km_arrive -->
+			<!-- Display ending Km-->
 			<tr>
-				<td class="td-hidden">km_arrive</td>
-				<td data-label="km_arrive"><?= $item->km_arrive ?></td>
+				<td class="td-hidden">Km arrivé</td>
+				<td data-label="Km arrivé"><?= $item->km_arrive ?></td>
 			</tr>
 		</tbody>
 	</table>
