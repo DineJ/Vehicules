@@ -7,12 +7,12 @@
 
 	<!-- Type city's name -->
 	<label>Ville</label>
-	<input type="text" onchange="setUpper(document.getElementById('nom_lieu'));" id="nom_lieu" name="nom_lieu" value="<?= isset($item) ? $item->nom_lieu : '' ?>" class="form-control" required>
+	<input type="text" oninput="setUpper(document.getElementById('nom_lieu'));" id="nom_lieu" name="nom_lieu" value="<?= isset($item) ? $item->nom_lieu : '' ?>" class="form-control" required>
 	<input type="hidden" id="oldnom_lieu" name="oldnom_lieu" value="<?= isset($item) ? $item->nom_lieu : '' ?>">
 
 	<!-- Type postal code -->
 	<label>Code postal</label>
-	<input type="text" onchange="setUpper(document.getElementById('code_postal'));" id="code_postal" name="code_postal" value="<?= isset($item) ? $item->code_postal : '' ?>" class="form-control" required>
+	<input type="text" oninput="setUpper(document.getElementById('code_postal'));" pattern="^[0-9]{5}$" id="code_postal" name="code_postal" value="<?= isset($item) ? $item->code_postal : '' ?>" class="form-control" required>
 	<input type="hidden" id="oldcode_postal" name="oldcode_postal" value="<?= isset($item) ? $item->code_postal : '' ?>">
 
 	<!-- Type street number -->
@@ -22,7 +22,7 @@
 
 	<!-- Type address -->
 	<label>Adresse</label>
-	<input type="text" onchange="setUpper(document.getElementById('adresse'));" id="adresse" name="adresse" value="<?= isset($item) ? $item->adresse : '' ?>" class="form-control" required>
+	<input type="text" oninput="setUpper(document.getElementById('adresse'));" id="adresse" name="adresse" value="<?= isset($item) ? $item->adresse : '' ?>" class="form-control" required>
 	<input type="hidden" id="oldadresse" name="oldadresse" value="<?= isset($item) ? $item->adresse : '' ?>">
 
 	<!-- Redirection button -->
@@ -30,7 +30,7 @@
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 
-
+<script src="<?= base_url('js/main.js') ?>"></script>
 <script src="<?= base_url('js/validateForm.js') ?>"></script>
 
 <?= $this->endSection() ?>
