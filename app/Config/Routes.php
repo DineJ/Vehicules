@@ -3,6 +3,16 @@
 use CodeIgniter\Router\RouteCollection;
 // Auto-generated routes
 
+// Routes for Infraction
+$routes->get('Infraction', 'InfractionController::index');
+$routes->get('Infraction/show/(:num)', 'InfractionController::show/$1');
+$routes->get('Infraction/create', 'InfractionController::create');
+$routes->post('Infraction/store', 'InfractionController::store');
+$routes->get('Infraction/edit/(:num)', 'InfractionController::edit/$1');
+$routes->post('Infraction/update/(:num)', 'InfractionController::update/$1');
+$routes->get('Infraction/delete/(:num)', 'InfractionController::delete/$1');
+
+
 // Routes for Lieu
 $routes->get('Lieu', 'LieuController::index');
 $routes->get('Lieu/show/(:num)', 'LieuController::show/$1');
