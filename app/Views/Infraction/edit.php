@@ -22,7 +22,7 @@
 
 	<!-- Type how many points did you lose-->
 	<label>Points</label>
-	<input type="number" id="points" name="points" min="0" max="6" step="1" value="<?= (isset($item) ? $item->points) : '' ?>" class="form-control" required>
+	<input type="number" id="points" name="points" min="0" max="6" step="1" value="<?= isset($item) ? $item->points : '' ?>" class="form-control" required>
 	<input type="hidden" id="oldpoints" name="oldpoints" value="<?= isset($item) ? $item->points : '' ?>">
 
 	<!-- Type how much it cost -->

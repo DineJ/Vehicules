@@ -19,7 +19,7 @@
 
 	<!-- How many points were lost on the license -->
 	<label>Points</label>
-	<input type="number" id="points" name="points" min="0" max="6" step="1" value="<?= (isset($item) ? $item->points) : '' ?>" class="form-control" required>
+	<input type="number" id="points" name="points" min="0" max="6" step="1" value="<?= isset($item) ? $item->points : '' ?>" class="form-control" required>
 
 	<!-- How much it cost -->
 	<label>Prix</label>
