@@ -41,4 +41,5 @@ case $action in
     ;;
 esac
 
-sudo chown -Rf www-data:www-data .
+sudo chown -Rf ubuntu:ubuntu .
+sudo chown -Rf www-data:www-data writable
