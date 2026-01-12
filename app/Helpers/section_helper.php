@@ -1,7 +1,7 @@
 <?php
 
 # Display section
-function createSection($entities, $entity_name1, $entity_name2, $columns_entity, $button_add = '0')
+function createSection($entities, $entity_name1, $entity_name2, $columns_entity, $button_add = '0', $button_update = '0')
 {
 ?>
 	<!-- Creation of a section assurance -->
@@ -36,7 +36,7 @@ function createSection($entities, $entity_name1, $entity_name2, $columns_entity,
 			{
 			?>
 				<!-- <?php $entity_name1 ?> -->
-				<?php entityColumnsSection($entities, $entity_name1, $columns_entity, $button_add); ?>
+				<?php entityColumnsSection($entities, $entity_name1, $columns_entity, $button_add, $button_update); ?>
 			<?php
 			}
 			?>
@@ -68,9 +68,9 @@ function createSection($entities, $entity_name1, $entity_name2, $columns_entity,
 }
 
 # Display datas columns
-function entityColumnsSection($entities, $entity_name1, $columns_entity, $button_add)
+function entityColumnsSection($entities, $entity_name1, $columns_entity, $button_add, $button_update)
 {
-	array_map(function($item) use ($columns_entity, $entity_name1, $button_add)
+	array_map(function($item) use ($columns_entity, $entity_name1, $button_add, $button_update)
 	{
 		$html  = '<table class="table table-striped table-bordered mt-3">';
 		$html .= '<tbody>';
@@ -90,8 +90,15 @@ function entityColumnsSection($entities, $entity_name1, $columns_entity, $button
 		endforeach;
 		$html .= '</tbody>';
 		$html .= '</table>';
+
+		if ($button_update)
+		{
+			$html .= '<button type="button" class="btn btn-orange btn-popup-get" data-object-id="'.$id.'" data-url-id="' .site_url($entity_name1.'/edit/'). '" data-title-id="Modal : Modifier '.$entity_name1.'">Modifier '.$entity_name1.' </button>';
+		}
+
 		$html .= '</br> </br>';
 		echo $html;
+
 	}, $entities);
 }
 
