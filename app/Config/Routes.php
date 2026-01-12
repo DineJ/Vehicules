@@ -6,7 +6,7 @@ use CodeIgniter\Router\RouteCollection;
 // Routes for Infraction
 $routes->get('Infraction', 'InfractionController::index');
 $routes->get('Infraction/show/(:num)', 'InfractionController::show/$1');
-$routes->get('Infraction/create', 'InfractionController::create');
+$routes->match(['post', 'get'], 'Infraction/create', 'InfractionController::create');
 $routes->post('Infraction/store', 'InfractionController::store');
 $routes->get('Infraction/edit/(:num)', 'InfractionController::edit/$1');
 $routes->post('Infraction/update/(:num)', 'InfractionController::update/$1');

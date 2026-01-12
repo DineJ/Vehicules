@@ -38,6 +38,7 @@ class InfractionController extends Controller
 	public function create()
 	{
 		$data['title'] = "Créer Infraction";
+		$data['no_navbar'] = 'no-navbar';
 		return view('Infraction/create', $data);
 	}
 
