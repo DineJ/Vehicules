@@ -12,6 +12,9 @@ function popupModalGet() {
 				modalContentEdit.innerHTML = html; // Inject the fetched HTML form into the edit modal body
 
 				const myModalEdit = new bootstrap.Modal(document.getElementById('modalGeneric')); // Create a new Bootstrap Modal instance for the edit modal
+				const modalTitleEdit = document.getElementById('modal-title');
+				modalTitleEdit.innerHTML = editBtn.dataset.titleId;
+
 				myModalEdit.show(); // Display the edit modal
 
 				const modalFormEdit = modalContentEdit.querySelector('form'); // Look for a <form> element inside the edit modal body
