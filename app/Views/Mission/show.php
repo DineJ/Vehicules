@@ -78,4 +78,6 @@
 	</form>
 </div>
 
+
+<?= createSection($infractions, 'Infraction', 'mission', ['date_infraction' => 'Date infraction', 'commentaire' => 'Commentaire', 'points' => 'Points', 'prix' => 'Prix', 'stationnement' => 'Stationnement']); ?>
 <?= $this->endSection() ?>

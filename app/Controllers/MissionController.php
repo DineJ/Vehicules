@@ -6,6 +6,7 @@ use App\Models\MissionModel;
 use App\Models\VehiculeModel;
 use App\Models\UserModel;
 use App\Models\LieuModel;
+use App\Models\InfractionModel;
 use App\Entities\Mission;
 use CodeIgniter\Controller;
 
@@ -19,6 +20,7 @@ class MissionController extends Controller
 		$this->vehiculeModel = new VehiculeModel();
 		$this->userModel = new UserModel();
 		$this->lieuModel = new LieuModel();
+		$this->infractionModel = new InfractionModel();
 
 	}
 
@@ -61,7 +63,11 @@ class MissionController extends Controller
 	// DISPLAY AN ELEMENT
 	public function show($id)
 	{
+		//load helper
+		helper('section');
+
 		$data['item'] = $this->model->find($id);
+		$data['infractions'] = $this->infractionModel->where('infraction.id_mission', $id)->find($data['item']->id_mission);
 		$data['vehicule'] = $this->vehiculeModel->find($data['item']->id_vehicule);
 		$data['utilisateur'] = $this->userModel->find($data['item']->id_user);
 		$data['lieuDepart'] = $this->lieuModel->find($data['item']->id_lieu_depart);
