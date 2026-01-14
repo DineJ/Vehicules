@@ -627,3 +627,87 @@ function validateFormLieuEdit()
 	}
 	return true;
 }
+
+
+//////////////////////////////////////////////
+
+
+function validateFormInfractionEdit()
+{
+
+	// Count
+	let compare = 0;
+	let row = 0;
+
+	// Get values
+	let id_mission = document.getElementById('id_mission').value;
+	let oldid_mission = document.getElementById('oldid_mission').value;
+	row++;
+
+	// Check values 
+	if (id_mission == oldid_mission)
+	{
+		compare++;
+	}
+
+	// Get values
+	let date_infraction = document.getElementById('date_infraction').value;
+	let olddate_infraction = document.getElementById('olddate_infraction').value;
+	row++;
+
+	// Check values 
+	if (date_infraction == olddate_infraction)
+	{
+		compare++;
+	}
+
+	// Get values
+	let commentaire = document.getElementById('commentaire').value;
+	let oldcommentaire = document.getElementById('oldcommentaire').value;
+	row++;
+
+	// Check values 
+	if (commentaire == oldcommentaire)
+	{
+		compare++;
+	}
+
+	// Get values
+	let points = document.getElementById('points').value;
+	let oldpoints = document.getElementById('oldpoints').value;
+	row++;
+
+	// Check values 
+	if (points == oldpoints)
+	{
+		compare++;
+	}
+	// Get values
+	let prix = document.getElementById('prix').value;
+	let oldprix = document.getElementById('oldprix').value;
+	row++;
+
+	// Check values 
+	if (prix == oldprix)
+	{
+		compare++;
+	}
+
+	// Get values
+	let stationnement = (document.getElementById('stationnement').checked ? 1 : 0 );
+	let oldstationnement = document.getElementById('oldstationnement').value;
+	row++;
+
+	// Check values 
+	if (stationnement == oldstationnement)
+	{
+		compare++;
+	}
+	// Check counts
+	if (compare == row)
+	{
+		alert("les valeurs sont identiques");
+		return false;
+	}
+	return true;
+}

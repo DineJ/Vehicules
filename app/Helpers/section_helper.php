@@ -1,7 +1,7 @@
 <?php
 
 # Display section
-function createSection($entities, $entity_name1, $entity_name2, $columns_entity)
+function createSection($entities, $entity_name1, $entity_name2, $columns_entity, $button_add = '0', $button_update = '0', $id = "0")
 {
 ?>
 	<!-- Creation of a section assurance -->
@@ -10,6 +10,13 @@ function createSection($entities, $entity_name1, $entity_name2, $columns_entity)
 			<h6 style="margin: 0; color: #6f42c1;">↳ <?= $entity_name1 ?></h6>
 		</div>
 		<div id="table_<?= $entity_name1 ?>" class="table-responsive">
+
+			<?php if ($button_add)
+			{ ?>
+			<button type="button" class="btn btn-purple btn-popup-post" data-url-id="<?= site_url($entity_name1 .'/create') ?>" data-object-id="<?= $id ?>" data-title-id="Modal : Ajouter <?= $entity_name1 ?>">Ajouter <?= $entity_name1 ?></button>
+			</br>
+			<?php
+			} ?>
 
 			<!-- Test if <?= $entity_name2 ?> has <?= $entity_name2 ?> or not -->
 			<?php if (!isset($entities) || empty($entities))
@@ -29,27 +36,47 @@ function createSection($entities, $entity_name1, $entity_name2, $columns_entity)
 			{
 			?>
 				<!-- <?php $entity_name1 ?> -->
-				<table class="table table-striped table-bordered mt-3">
-					<tbody>
-						<?php entityColumnsSection($entities, $entity_name1, $columns_entity); ?>
-					</tbody>
-				</table>
+				<?php entityColumnsSection($entities, $entity_name1, $columns_entity, $button_add, $button_update); ?>
 			<?php
 			}
 			?>
+		</div>
+	</div>
+
+	<div>
+		<div class="modal fade" id="modalGeneric" aria-hidden="true">
+			<!-- Size -->
+			<div class="modal-dialog modal-lg">
+				<!-- Content -->
+				<div class="modal-content">
+					<!-- Title -->
+					<div class="modal-header">
+						<h5 class="modal-title" id="modal-title">Modal <?= $entity_name1 ?></h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<!-- Form body -->
+					<div class="modal-body" id="modalGenericContent">
+						<?= view('Partials/navbar', ['no_navbar' => 'no_navbar']); ?>
+						<!-- In case loading takes time -->
+							Chargement...
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 <?php
 }
 
 # Display datas columns
-function entityColumnsSection($entities, $entity_name1, $columns_entity)
+function entityColumnsSection($entities, $entity_name1, $columns_entity, $button_add, $button_update)
 {
-	array_map(function($item) use ($columns_entity, $entity_name1)
+	array_map(function($item) use ($columns_entity, $entity_name1, $button_add, $button_update)
 	{
+		$html  = '<table class="table table-striped table-bordered mt-3">';
+		$html .= '<tbody>';
 		$col_name = array_keys($columns_entity);
 		foreach($item->toArray() as $c => $v):
-		$html = '<tr>';
+		$html .= '<tr>';
 			if ($c == 'id'):
 				$id = $v;
 			endif;
@@ -60,8 +87,17 @@ function entityColumnsSection($entities, $entity_name1, $columns_entity)
 			endif;
 
 			$html .= '</tr>';
-			echo $html;	
 		endforeach;
+		$html .= '</tbody>';
+		$html .= '</table>';
+
+		if ($button_update)
+		{
+			$html .= '<button type="button" class="btn btn-orange btn-popup-get" data-object-id="'.$id.'" data-url-id="' .site_url($entity_name1.'/edit/'). '" data-title-id="Modal : Modifier '.$entity_name1.'">Modifier '.$entity_name1.' </button>';
+		}
+
+		$html .= '</br> </br>';
+		echo $html;
 
 	}, $entities);
 }

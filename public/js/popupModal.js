@@ -12,6 +12,9 @@ function popupModalGet() {
 				modalContentEdit.innerHTML = html; // Inject the fetched HTML form into the edit modal body
 
 				const myModalEdit = new bootstrap.Modal(document.getElementById('modalGeneric')); // Create a new Bootstrap Modal instance for the edit modal
+				const modalTitleEdit = document.getElementById('modal-title');
+				modalTitleEdit.innerHTML = editBtn.dataset.titleId;
+
 				myModalEdit.show(); // Display the edit modal
 
 				const modalFormEdit = modalContentEdit.querySelector('form'); // Look for a <form> element inside the edit modal body
@@ -32,11 +35,11 @@ function popupModalGet() {
 						.then(resp=> resp.text()) // Convert the response to text
 						.then(result => {
 							// If the custom validation function returns true
-							if (validateFormIncidentEdit())
-							{
+						//	if (validateFormIncidentEdit())
+						//	{
 								myModalEdit.hide() // Close the modal
 								window.location.reload(); // Reload the current page to reflect the updated data
-							}
+						//	}
 						})
 						.catch(err => console.error(err)); // Log errors in case the request fails
 					});
