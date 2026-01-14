@@ -632,7 +632,7 @@ function validateFormLieuEdit()
 //////////////////////////////////////////////
 
 
-function validateForm()
+function validateFormInfractionEdit()
 {
 
 	// Count
@@ -673,7 +673,7 @@ function validateForm()
 	}
 
 	// Get values
-	let points = (document.getElementById('points').checked ? 1 : 0 );
+	let points = document.getElementById('points').value;
 	let oldpoints = document.getElementById('oldpoints').value;
 	row++;
 
@@ -682,7 +682,6 @@ function validateForm()
 	{
 		compare++;
 	}
-
 	// Get values
 	let prix = document.getElementById('prix').value;
 	let oldprix = document.getElementById('oldprix').value;
@@ -704,7 +703,6 @@ function validateForm()
 	{
 		compare++;
 	}
-
 	// Check counts
 	if (compare == row)
 	{

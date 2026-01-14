@@ -13,7 +13,7 @@
 	<!-- Choose your date -->
 	<label>Date infraction</label>
 	<input type="date" id="date_infraction" name="date_infraction" value="<?= isset($item) ? substr($item->date_infraction, 0, 10) : '' ?>" class="form-control" required>
-	<input type="hidden" id="olddate_infraction" name="olddate_infraction" value="<?= isset($item) ? $item->date_infraction : '' ?>">
+	<input type="hidden" id="olddate_infraction" name="olddate_infraction" value="<?= isset($item) ? substr($item->date_infraction, 0, 10) : '' ?>">
 
 	<!-- Type a short explication -->
 	<label>Commentaire</label>
