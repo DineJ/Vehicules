@@ -1,7 +1,7 @@
 <?php
 
 # Display section
-function createSection($entities, $entity_name1, $entity_name2, $columns_entity, $button_add = '0', $button_update = '0')
+function createSection($entities, $entity_name1, $entity_name2, $columns_entity, $button_add = '0', $button_update = '0', $id = "0")
 {
 ?>
 	<!-- Creation of a section assurance -->
@@ -13,7 +13,7 @@ function createSection($entities, $entity_name1, $entity_name2, $columns_entity,
 
 			<?php if ($button_add)
 			{ ?>
-			<button type="button" class="btn btn-purple btn-popup-post" data-url-id="<?= site_url($entity_name1 .'/create') ?>" data-title-id="Modal : Ajouter <?= $entity_name1 ?>">Ajouter <?= $entity_name1 ?></button>
+			<button type="button" class="btn btn-purple btn-popup-post" data-url-id="<?= site_url($entity_name1 .'/create') ?>" data-object-id="<?= $id ?>" data-title-id="Modal : Ajouter <?= $entity_name1 ?>">Ajouter <?= $entity_name1 ?></button>
 			</br>
 			<?php
 			} ?>

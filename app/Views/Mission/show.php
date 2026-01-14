@@ -79,7 +79,7 @@
 </div>
 
 
-<?= createSection($infractions, 'Infraction', 'mission', ['date_infraction' => 'Date infraction', 'commentaire' => 'Commentaire', 'points' => 'Points', 'prix' => 'Prix', 'stationnement' => 'Stationnement'], '1', '1');?>
+<?= createSection($infractions, 'Infraction', 'mission', ['date_infraction' => 'Date infraction', 'commentaire' => 'Commentaire', 'points' => 'Points', 'prix' => 'Prix', 'stationnement' => 'Stationnement'], '1', '1', $item->id);?>
 
 <script src="<?= base_url('js/main.js') ?>"></script>
 <script src="<?= base_url('js/validateForm.js') ?>"></script>

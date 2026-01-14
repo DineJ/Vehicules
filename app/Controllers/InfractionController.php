@@ -37,6 +37,8 @@ class InfractionController extends Controller
 	// CREATION FORM
 	public function create()
 	{
+		// Retrive the id of modal_id to prefill a form
+		$data['missionId'] = ($this->request->getPost('modal_id') ?? $this->request->getGet('modal_id'));
 		$data['title'] = "Créer Infraction";
 		$data['no_navbar'] = 'no-navbar';
 		return view('Infraction/create', $data);

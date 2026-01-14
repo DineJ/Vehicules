@@ -7,7 +7,7 @@
 
 	<!-- Select your mission -->
 	<label>Trajet</label>
-	<input type="number" id="id_mission" name="id_mission" value="<?= isset($item) ? $item->id_mission : '' ?>" class="form-control" required>
+	<input class="form-control" name="id_mission" value="<?= esc($missionId ?? '') ?>" readonly>
 
 	<!-- Select the date -->
 	<label>Date infraction</label>
