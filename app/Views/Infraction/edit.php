@@ -33,9 +33,9 @@
 	<!-- Your ticket was a parking ticket or not -->
 	<label>Stationnement</label>
 	<div>
-		<input type="checkbox" id="stationnement" name="stationnement" value="1" <?= (isset($item) && $item->stationnement) ? 'checked' : '' ?>>
+		<input type="checkbox" id="stationnement" name="stationnement" value="1" <?= (isset($item) && $item->stationnement) ? 'checked' : "" ?>>
+		<input type="hidden" id="oldstationnement" name="oldstationnement" value="<?= (isset($item) && $item->stationnement) ? 1 : 0 ?>">
 	</div>
-	<input type="hidden" id="oldstationnement" name="oldstationnement" value="<?= isset($item) ? $item->stationnement : '' ?>">
 
 	<!-- Redirection button -->
 	<a href="<?= site_url('Infraction') ?>" id="btnRetour" class="btn btn-secondary mt-3">Retour</a>

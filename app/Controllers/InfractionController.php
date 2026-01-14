@@ -75,6 +75,7 @@ class InfractionController extends Controller
 	public function update($id)
 	{
 		$data = $this->request->getPost();
+		$data['stationnement'] = isset($data['stationnement']) ? 1 : 0;
 		$entity = $this->model->find($id);
 		$entity->fill($data);
 
