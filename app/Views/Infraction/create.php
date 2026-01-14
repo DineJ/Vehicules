@@ -6,8 +6,7 @@
 <form method="post" action="<?= site_url('Infraction/store/') ?>">
 
 	<!-- Select your mission -->
-	<label>Trajet</label>
-	<input class="form-control" name="id_mission" value="<?= esc($missionId ?? '') ?>" readonly>
+	<input type="hidden"id="id_mission" name="id_mission" value="<?= esc($missionId ?? '') ?>">
 
 	<!-- Select the date -->
 	<label>Date infraction</label>
