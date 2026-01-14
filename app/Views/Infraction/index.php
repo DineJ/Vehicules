@@ -2,7 +2,6 @@
 <?= $this->section('content') ?>
 
 <h2>Liste des Infractions</h2>
-<a href="<?= site_url('Infraction/create') ?>" class="btn btn-success">Ajouter</a>
 
 <div class="table-responsive">
 	<table class="table table-striped table-bordered mt-3">
@@ -10,7 +9,6 @@
 		<!-- Datas name -->
 		<thead>
 			<tr>
-				<th>Trajet</th>
 				<th>Date infraction</th>
 				<th>Commentaire</th>
 				<th>Points</th>
@@ -24,16 +22,16 @@
 			<!-- Display datas -->
 			<?php foreach ($items as $item): ?>
 				<tr>
-					<td data-label="Trajet"><?= esc($item->id_mission) ?></td>
-					<td data-label="Date infraction"><?= esc($item->date_infraction) ?></td>
+					<td data-label="Date infraction"><?= esc(date('d/m/Y', strtotime($item->date_infraction))) ?></td>
 					<td data-label="Commentaire"><?= esc($item->commentaire) ?></td>
 					<td data-label="Points"><?= esc($item->points) ?></td>
 					<td data-label="Prix"><?= esc($item->prix) ?></td>
-					<td data-label="Stationnement"><?= esc($item->stationnement) ?></td>
+					<td data-label="Stationnement"><?= esc($item->stationnement) ? 'Oui' : 'Non' ?></td>
 
-					<td>
+					<td class="d-flex justify-content-between">
 						<!-- Redirection button -->
 						<a href="<?= site_url('Infraction/show/'.$item->id) ?>" class="btn btn-info btn-sm">Voir</a>
+						<a href="<?= site_url('Mission/show/'.$item->id_mission) ?>" class="btn btn-primary btn-sm">Voir mission</a>
 					</td>
 				</tr>
 			<?php endforeach; ?>

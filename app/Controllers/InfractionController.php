@@ -29,6 +29,15 @@ class InfractionController extends Controller
 	// DISPLAY AN ELEMENT
 	public function show($id)
 	{
+		// Query to get only the license plate
+		$data['vehicule'] = $this->model
+			->select('vehicule.plaque')
+			->join('mission', 'infraction.id_mission = mission.id', 'left')
+			->join('vehicule', 'mission.id_vehicule = vehicule.id', 'left')
+			->where('infraction.id', $id)
+			->get()
+			->getRow('plaque');
+
 		$data['item'] = $this->model->find($id);
 		return view('Infraction/show', $data);
 	}

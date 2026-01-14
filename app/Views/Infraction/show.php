@@ -10,14 +10,14 @@
 
 			<!-- Display your mission -->
 			<tr>
-				<td class="td-hidden">Trajet</td>
-				<td data-label="Trajet"><?= $item->id_mission ?></td>
+				<td class="td-hidden">Véhicule</td>
+				<td data-label="Véhicule"><?= $vehicule ?></td>
 			</tr>
 
 			<!-- Display the date -->
 			<tr>
 				<td class="td-hidden">Date infraction</td>
-				<td data-label="Date infraction"><?= $item->date_infraction ?></td>
+				<td data-label="Date infraction"><?= date('d/m/Y', strtotime(esc($item->date_infraction))) ?></td>
 			</tr>
 
 			<!-- Display the short explication -->
@@ -54,8 +54,8 @@
 		<!-- Redirection button -->
 		<a href="<?= site_url('Infraction') ?>" class="btn btn-secondary">Retour</a>
 
-		<!-- Redirection button to edit infraction form -->
-		<a href="<?= site_url('Infraction/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
+		<!-- Redirection button to show Mission form -->
+		<a href="<?= site_url('Mission/show/'.$item->id) ?>" class="btn btn-warning">Voir Mission</a>
 
 	</form>
 </div>
