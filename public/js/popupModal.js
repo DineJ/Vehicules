@@ -35,11 +35,11 @@ function popupModalGet() {
 						.then(resp=> resp.text()) // Convert the response to text
 						.then(result => {
 							// If the custom validation function returns true
-							if (validateFormIncidentEdit())
-							{
+						//	if (validateFormIncidentEdit())
+						//	{
 								myModalEdit.hide() // Close the modal
 								window.location.reload(); // Reload the current page to reflect the updated data
-							}
+						//	}
 						})
 						.catch(err => console.error(err)); // Log errors in case the request fails
 					});
