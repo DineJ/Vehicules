@@ -66,6 +66,7 @@ class InfractionController extends Controller
 	{
 		$data['item'] = $this->model->find($id);
 		$data['title'] = "Modifier Infraction";
+		$data['no_navbar'] = 'no-navbar';
 		return view('Infraction/edit', $data);
 	}
 
