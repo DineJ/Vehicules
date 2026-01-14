@@ -91,6 +91,7 @@ function entityColumns($entities, $entity_name, $columns_entity, $resetData, $va
 bannedDatas($user, 'User', ['nom','prenom'], 'actif', '1');
 bannedDatas($ip, 'Ip', ['adresse_ip'], 'nb_echec', '0');
 bannedDatas($vehicule, 'Vehicule', ['plaque', 'marque', 'modele'], 'actif', '1');
+bannedDatas($lieu, 'Lieu', ['numero', 'adresse', 'nom_lieu'], 'actif', '1');
 ?>
 
 <?= $this->endSection() ?> <!-- End the content section -->

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 use App\Models\VehiculeModel;
+use App\Models\LieuModel;
 use App\Entities\User;
 use CodeIgniter\Controller;
 
@@ -16,6 +17,7 @@ class AdminController extends Controller
 		// Load the user model
 		$this->model = new UserModel();
 		$this->vehiculeModel = new VehiculeModel();
+		$this->lieuModel = new LieuModel();
 	}
 
 	// Display the admin dashboard
@@ -42,6 +44,12 @@ class AdminController extends Controller
 
 		$data['vehicule'] = $this->vehiculeModel
 			->select('id, plaque, marque, modele')
+			->where('actif =', 0)
+			->get()
+			->getResult();
+
+		$data['lieu'] = $this->lieuModel
+			->select('id, numero, nom_lieu, adresse')
 			->where('actif =', 0)
 			->get()
 			->getResult();
