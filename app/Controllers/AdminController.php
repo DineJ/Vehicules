@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\VehiculeModel;
 use App\Entities\User;
 use CodeIgniter\Controller;
 
@@ -14,6 +15,7 @@ class AdminController extends Controller
 	{
 		// Load the user model
 		$this->model = new UserModel();
+		$this->vehiculeModel = new VehiculeModel();
 	}
 
 	// Display the admin dashboard
@@ -37,6 +39,12 @@ class AdminController extends Controller
 						   ->where('actif =', 0)
 						   ->get()
 						   ->getResult();
+
+		$data['vehicule'] = $this->vehiculeModel
+			->select('id, plaque, marque, modele')
+			->where('actif =', 0)
+			->get()
+			->getResult();
 
 		// Load admin view with title
 		$data['title'] = "Page d'administration";
