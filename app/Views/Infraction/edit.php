@@ -6,8 +6,7 @@
 <form method="post" action="<?= site_url('Infraction/update/'.$item->id) ?>" onsubmit="return validateFormInfractionEdit()">
 
 	<!-- Choose your mission -->
-	<label>Mission</label>
-	<input type="number" id="id_mission" name="id_mission" value="<?= isset($item) ? $item->id_mission : '' ?>" class="form-control" required>
+	<input type="hidden" id="id_mission" name="id_mission" value="<?= isset($item) ? $item->id_mission : '' ?>">
 	<input type="hidden" id="oldid_mission" name="oldid_mission" value="<?= isset($item) ? $item->id_mission : '' ?>">
 
 	<!-- Choose your date -->
