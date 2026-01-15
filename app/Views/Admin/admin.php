@@ -105,6 +105,7 @@ usefullDatas($ip, 'Ip', ['IP'], 'Désactivée', 'nb_echec', '0');
 usefullDatas($vehicule, 'Vehicule', ['Plaque', 'Marque', 'Modèle'], 'Désactivé', 'actif', '1');
 usefullDatas($lieu, 'Lieu', ['Adresse'], 'Désactivé', 'actif', '1');
 usefullDatas($infraction, 'Infraction', ['Plaque', 'Conducteur', 'Date', 'Points', 'Prix'], 'Récent');
+usefullDatas($mission, 'Mission', ['Plaque', 'Conducteur', 'Motif', 'Départ', 'Début', 'Arrivé', 'Fin'], 'Récent');
 ?>
 
 <?= $this->endSection() ?> <!-- End the content section -->

@@ -7,6 +7,7 @@ use App\Models\UserModel;
 use App\Models\VehiculeModel;
 use App\Models\LieuModel;
 use App\Models\InfractionModel;
+use App\Models\MissionModel;
 use App\Entities\User;
 use CodeIgniter\Controller;
 
@@ -22,6 +23,7 @@ class AdminController extends Controller
 		$this->vehiculeModel = new VehiculeModel();
 		$this->lieuModel = new LieuModel();
 		$this->infractionModel = new InfractionModel();
+		$this->missionModel = new MissionModel();
 	}
 
 	// Display the admin dashboard
@@ -64,6 +66,16 @@ class AdminController extends Controller
 			->join('vehicule', 'vehicule.id = mission.id_vehicule', 'left')
 			->join('user', 'user.id = mission.id_user', 'left')
 			->orderBy('date_infraction', 'DESC')
+			->get()
+			->getResult();
+
+		$data['mission'] = $this->missionModel
+			->select('CONCAT(user.nom, " ", user.prenom) AS Conducteur, vehicule.plaque AS Plaque, motif AS Motif, CONCAT(l1.numero, " ", l1.adresse, " ", l1.nom_lieu, " ", l1.code_postal) AS Départ, mission.date_depart AS Début, CONCAT(l2.numero, " ", l2.adresse, " ", l2.nom_lieu, " ", l2.code_postal) AS Arrivé, mission.date_arrivee AS Fin')
+			->join('user', 'user.id = mission.id_user', 'left')
+			->join('vehicule', 'vehicule.id = mission.id_vehicule', 'left')
+			->join('lieu l1', 'l1.id = mission.id_lieu_depart', 'left')
+			->join('lieu l2', 'l2.id = mission.id_lieu_arrive', 'left')
+			->orderBy('mission.date_depart', 'DESC')
 			->get()
 			->getResult();
 
