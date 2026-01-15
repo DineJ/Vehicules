@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\VehiculeModel;
 use App\Models\LieuModel;
+use App\Models\InfractionModel;
 use App\Entities\User;
 use CodeIgniter\Controller;
 
@@ -18,6 +19,7 @@ class AdminController extends Controller
 		$this->model = new UserModel();
 		$this->vehiculeModel = new VehiculeModel();
 		$this->lieuModel = new LieuModel();
+		$this->infractionModel = new InfractionModel();
 	}
 
 	// Display the admin dashboard
@@ -51,6 +53,16 @@ class AdminController extends Controller
 		$data['lieu'] = $this->lieuModel
 			->select('id, numero, nom_lieu, adresse')
 			->where('actif =', 0)
+			->get()
+			->getResult();
+
+		// Request to get datas
+		$data['infraction'] = $this->infractionModel
+			->select('infraction.id, vehicule.plaque AS Plaque, CONCAT(user.prenom,  " ", user.nom) AS Conducteur, date_infraction AS Date, points as Points, prix as Prix')
+			->join('mission', 'mission.id = infraction.id_mission', 'left')
+			->join('vehicule', 'vehicule.id = mission.id_vehicule', 'left')
+			->join('user', 'user.id = mission.id_user', 'left')
+			->orderBy('date_infraction', 'DESC')
 			->get()
 			->getResult();
 
