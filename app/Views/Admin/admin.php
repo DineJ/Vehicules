@@ -20,27 +20,26 @@ function bannedDatas ($entity,$entity_name, $columns_entity, $resetData, $valueR
 { ?>
 	<div class="table-responsive">
 		<h4 class="centerTitle"><?= $entity_name ?> bannis</h4>
-		<table class="table table-striped table-bordered mt-3">
-			<tbody>
-				<!-- Test if atleast one <?= $entity_name ?> is banned -->
-				<?php if (empty($entity))
-				{ ?>
-
+		<!-- Test if atleast one <?= $entity_name ?> is banned -->
+		<?php if (empty($entity))
+		{ ?>
+			<table class="table table-striped table-bordered mt-3">
+				<tbody>
 					<!-- None banned <?= $entity_name ?> -->
 					<tr>
 						<td class="labelAlign"> Aucun <?= $entity_name ?> banni</td>
 					</tr>
-				<?php
-				}
-				else
-				{
-				?>
-					<!-- Display banned <?= $entity_name ?> -->
-					<?php entityColumns($entity,$entity_name, $columns_entity, $resetData, $valueResetData);
-				}
-				?>
-			</tbody>
-		</table>
+				</tbody>
+			</table>
+		<?php
+		}
+		else
+		{
+		?>
+			<!-- Display banned <?= $entity_name ?> -->
+			<?php entityColumns($entity,$entity_name, $columns_entity, $resetData, $valueResetData);
+		}
+		?>
 		<a href="<?= site_url(''.$entity_name.'') ?>" class="btn btn-secondary">Retour vers <?= $entity_name ?></a>
 	</div>
 	</br></br>
@@ -56,23 +55,27 @@ function entityColumns($entities, $entity_name, $columns_entity, $resetData, $va
 		if (paginateNumber($count))
 		{
 
-			$html = '<tr>'
-				.'<td class="td-hidden table15pourcent">'.$entity_name.'</td>';
+			$html =  '<table class="table table-striped table-bordered mt-3"'
+				.'<tbody>';
 			$id = 0;
 
 			foreach ($item as $c => $v) :
+				$html .= '<tr>';
 
 				if ($c == 'id'):
 					$id = $v;
 				endif;
 
 				if (in_array($c, $columns_entity)):
-					$html .= '<td data-label="'.$c.'">'.esc($v).'</td>';
+					$html .= '<td class="td-hidden">'.$c.'</td>'
+						.'<td data-label="'.$c.'">'.esc($v).'</td>';
 				endif;
+				$html .='</tr>';
 
 			endforeach;
 
-			$html .= '<td data-label="Action" class="actionend">'
+			$html .= '<td class="td_hidden">Action </td>'
+			.'<td data-label="Action" class="actionend">'
 			.'<form method="post" action="'. site_url(''.$entity_name.'/update/'.$id) .'">'
 			.'<!-- Enabled account button -->'
 			.'<input type="hidden" name="'.$resetData.'" id="'.$resetData.'" value="'.$valueResetData.'">'
@@ -81,7 +84,9 @@ function entityColumns($entities, $entity_name, $columns_entity, $resetData, $va
 			.'<button type="submit" class="btn btn-danger btn-sm"> Rétablir '.$entity_name.' </button>'
 			.'</form>'
 			.'</td>'
-			.'</tr>';
+			.'</tr>'
+			.'</tbody>'
+			.'</table>';
 			echo $html;
 		}
 	}, $entities);
