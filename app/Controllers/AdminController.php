@@ -45,13 +45,13 @@ class AdminController extends Controller
 						   ->getResult();
 
 		$data['vehicule'] = $this->vehiculeModel
-			->select('id, plaque, marque, modele')
+			->select('id, plaque AS Plaque, marque AS Marque, modele AS Modèle')
 			->where('actif =', 0)
 			->get()
 			->getResult();
 
 		$data['lieu'] = $this->lieuModel
-			->select('id, numero, nom_lieu, adresse')
+			->select('id, CONCAT(numero, " ", adresse, " ", nom_lieu, " ", code_postal) AS Adresse')
 			->where('actif =', 0)
 			->get()
 			->getResult();
