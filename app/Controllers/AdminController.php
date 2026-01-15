@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\IpModel;
 use App\Models\UserModel;
 use App\Models\VehiculeModel;
 use App\Models\LieuModel;
@@ -15,7 +16,8 @@ class AdminController extends Controller
 
 	public function __construct()
 	{
-		// Load the user model
+		$this->ipModel = new IpModel();
+		// Load the umodel
 		$this->model = new UserModel();
 		$this->vehiculeModel = new VehiculeModel();
 		$this->lieuModel = new LieuModel();
@@ -31,18 +33,17 @@ class AdminController extends Controller
 			return redirect()->to('/User');
 		}
 
-		$db = db_connect();
-		$data['ip'] = $db->table('Ip')
-						 ->select(['adresse_ip', 'nb_echec', 'id'])
-						 ->where('nb_echec >', 2)
-						 ->get()
-						 ->getResult();
+		$data['ip'] = $this->ipModel
+			->select('adresse_ip AS IP, nb_echec, id')
+			->where('nb_echec >', 2)
+			->get()
+			->getResult();
 
-		$data['user'] = $db->table('user')
-						   ->select(['id', 'nom', 'prenom', 'actif'])
-						   ->where('actif =', 0)
-						   ->get()
-						   ->getResult();
+		$data['user'] = $this->model
+				->select('id, CONCAT(nom, " ", prenom) AS Conducteur, actif')
+				->where('actif =', 0)
+				->get()
+				->getResult();
 
 		$data['vehicule'] = $this->vehiculeModel
 			->select('id, plaque AS Plaque, marque AS Marque, modele AS Modèle')

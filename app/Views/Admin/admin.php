@@ -100,11 +100,11 @@ function entityColumns($entities, $entity_name, $columns_entity, $message, $rese
 }
 
 
-usefullDatas($user, 'User', ['nom','prenom'], 'Banni', 'actif', '1');
-usefullDatas($ip, 'Ip', ['adresse_ip'], 'Bannie', 'nb_echec', '0');
+usefullDatas($user, 'User', ['Conducteur'], 'Banni', 'actif', '1');
+usefullDatas($ip, 'Ip', ['IP'], 'Bannie', 'nb_echec', '0');
 usefullDatas($vehicule, 'Vehicule', ['Plaque', 'Marque', 'Modèle'], 'Banni', 'actif', '1');
 usefullDatas($lieu, 'Lieu', ['Adresse'], 'Banni', 'actif', '1');
-usefullDatas($infraction, 'Infraction', ['Plaque', 'Conducteur', 'Date', 'Points', 'Prix'], 'Existe');
+usefullDatas($infraction, 'Infraction', ['Plaque', 'Conducteur', 'Date', 'Points', 'Prix'], 'Récent');
 ?>
 
 <?= $this->endSection() ?> <!-- End the content section -->
