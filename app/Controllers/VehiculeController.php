@@ -75,8 +75,12 @@ class VehiculeController extends Controller
 			->orderBy('assurance.id', 'DESC')
 			->findAll(1);
 
-		$data['incidentId'] = $data['incident'][0];
-		$data['assuranceId'] = $data['assurance'][0];
+		if (isset($data['assurance'][0]) && isset($data['incident'][0]))
+		{
+			$data['incidentId'] = $data['incident'][0];
+			$data['assuranceId'] = $data['assurance'][0];
+		}
+
 		return view('Vehicule/show', $data);
 	}
 
