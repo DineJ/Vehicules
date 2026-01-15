@@ -8,6 +8,7 @@ use App\Models\VehiculeModel;
 use App\Models\LieuModel;
 use App\Models\InfractionModel;
 use App\Models\MissionModel;
+use App\Models\IncidentModel;
 use App\Entities\User;
 use CodeIgniter\Controller;
 
@@ -24,6 +25,7 @@ class AdminController extends Controller
 		$this->lieuModel = new LieuModel();
 		$this->infractionModel = new InfractionModel();
 		$this->missionModel = new MissionModel();
+		$this->incidentModel = new IncidentModel();
 	}
 
 	// Display the admin dashboard
@@ -76,6 +78,15 @@ class AdminController extends Controller
 			->join('lieu l1', 'l1.id = mission.id_lieu_depart', 'left')
 			->join('lieu l2', 'l2.id = mission.id_lieu_arrive', 'left')
 			->orderBy('mission.date_depart', 'DESC')
+			->get()
+			->getResult();
+
+		$data['incident'] = $this->incidentModel
+			->select('incident.id, vehicule.plaque AS Plaque, CONCAT(user.prenom, " ", user.nom) AS Conducteur, type_incident.nom AS Type,incident.date_incident AS Date')
+			->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
+			->join('user', 'user.id = incident.id_user', 'left')
+			->join('type_incident', 'type_incident.id = incident.id_type_incident', 'left')
+			->orderBy('date_incident', 'DESC')
 			->get()
 			->getResult();
 

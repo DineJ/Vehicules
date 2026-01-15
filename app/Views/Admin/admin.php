@@ -106,6 +106,7 @@ usefullDatas($vehicule, 'Vehicule', ['Plaque', 'Marque', 'Modèle'], 'Désactiv�
 usefullDatas($lieu, 'Lieu', ['Adresse'], 'Désactivé', 'actif', '1');
 usefullDatas($infraction, 'Infraction', ['Plaque', 'Conducteur', 'Date', 'Points', 'Prix'], 'Récent');
 usefullDatas($mission, 'Mission', ['Plaque', 'Conducteur', 'Motif', 'Départ', 'Début', 'Arrivé', 'Fin'], 'Récent');
+usefullDatas($incident, 'Incident', ['Plaque', 'Conducteur', 'Type', 'Date'], 'Récent');
 ?>
 
 <?= $this->endSection() ?> <!-- End the content section -->
