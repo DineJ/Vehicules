@@ -37,8 +37,10 @@ function usefullDatas ($entity,$entity_name, $columns_entity, $message, $resetDa
 		{
 		?>
 			<!-- Display <?= $entity_name . ' ' . $message ?> -->
-			<?php entityColumns($entity,$entity_name, $columns_entity, $message,  $resetData, $valueResetData);
-		}
+			<table class="table table-striped table-bordered mt-3">
+				<?php entityColumns($entity,$entity_name, $columns_entity, $message,  $resetData, $valueResetData); ?>
+			</table>
+		<?php }
 		?>
 		<a href="<?= site_url(''.$entity_name.'') ?>" class="btn btn-secondary">Retour vers <?= $entity_name ?></a>
 	</div>
@@ -49,35 +51,51 @@ function usefullDatas ($entity,$entity_name, $columns_entity, $message, $resetDa
 # Display datas columns
 function entityColumns($entities, $entity_name, $columns_entity, $message, $resetData=null, $valueResetData=null)
 {
+
 	array_map(function($item) use ($columns_entity, $entity_name, $message, $resetData, $valueResetData)
 	{
 		static $count = 0;
+		$html = '';
 		if (paginateNumber($count))
 		{
 
-			$html =  '<table class="table table-striped table-bordered mt-3"'
-				.'<tbody>';
 			$id = 0;
 
-			foreach ($item as $c => $v) :
-				$html .= '<tr>';
+			if ($count == 1)
+			{
+				$html .= '<thead>'
+					.'<tr>';
 
+				foreach ($item as $c => $v) :
+					if (in_array($c, $columns_entity)):
+						$html .= '<th>'.$c.'</th>';
+					endif;
+				endforeach;
+
+				if ($resetData)
+				{
+					$html .= '<th> Action </th>';
+				}
+
+				$html .= '</tr>'
+					.'</thead>'
+					.'<tbody>';
+			}
+
+			$html .= '<tr>';
+
+			foreach ($item as $c => $v) :
 				if ($c == 'id'):
 					$id = $v;
 				endif;
-
 				if (in_array($c, $columns_entity)):
-					$html .= '<td class="td-hidden">'.$c.'</td>'
-						.'<td data-label="'.$c.'">'.esc($v).'</td>';
+					$html .='<td data-label="'.$c.'">'.esc($v).'</td>';
 				endif;
-				$html .='</tr>';
-
 			endforeach;
 
 			if ($resetData)
 			{
-				$html .= '<td class="td_hidden">Action </td>'
-				.'<td data-label="Action" class="actionend">'
+				$html .= '<td class="admin-button">'
 				.'<form method="post" action="'. site_url(''.$entity_name.'/update/'.$id) .'">'
 				.'<!-- Enabled account button -->'
 				.'<input type="hidden" name="'.$resetData.'" id="'.$resetData.'" value="'.$valueResetData.'">'
@@ -85,15 +103,16 @@ function entityColumns($entities, $entity_name, $columns_entity, $message, $rese
 				.'<input type="hidden" name="redirect_url" value="'. current_url() .'">'
 				.'<button type="submit" class="btn btn-danger btn-sm"> Rétablir '.$entity_name.' </button>'
 				.'</form>'
-				.'</td>'
-				.'</tbody>'
-				.'</table>';
+				.'</td>';
 			}
-			else
+
+			$html .='</tr>';
+
+			if (COUNT_ITEMS == $count)
 			{
-				$html .= '</tbody>'
-					.'</table>';
+				$html .= '</tbody>';
 			}
+
 			echo $html;
 		}
 	}, $entities);
