@@ -1,6 +1,7 @@
 <?php
 use CodeIgniter\HTTP\URI;
 
+// Get the current URi
 $currentUri = service('uri')->getPath();
 ?>
 <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-4 py-2 <?= isset($no_navbar) ? 'no_navbar' : '' ?>">
@@ -13,9 +14,11 @@ $currentUri = service('uri')->getPath();
 		</div>
 
 		<div class="d-flex justify-content-center h5 mb-0" style="width: inherit;">
+				<!-- Display a different message if you are admin or not -->
 				<?= (session()->get('user')['admin'] ?? false) ? 'Tableau de bord administrateur' : 'Espace utilisateur' ?>
 		</div>
 
+		<!-- Display a navigation menu except in the log page -->
 		<?php if ($currentUri !== '/Login/log' && $currentUri !== '/Login'): ?>
 			<div class="ms-auto d-flex justify-content-end">
 				<div class="dropdown">
@@ -24,14 +27,11 @@ $currentUri = service('uri')->getPath();
 					</a>
 		<?php endif; ?>
 
+			<!-- Display the menu only for admin -->
 			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
 				<?php if (session()->get('user')['admin'] ?? false): ?>
 					<li><a class="dropdown-item" href="/Admin">Home</a></li>
 					<li><a class="dropdown-item" href="/Ip">IP</a></li>
-				<?php endif; ?>
-				<li><hr class="dropdown-divider"></li>
-
-				<?php if ($currentUri !== '/Login/log' && $currentUri !== '/Login'): ?>
 					<li><a class="dropdown-item" href="/Assurance">Assurance</a></li>
 					<li><a class="dropdown-item" href="/Incident">Incident</a></li>
 					<li><a class="dropdown-item" href="/Infraction">Infraction</a></li>
