@@ -16,8 +16,8 @@ $name = session()->get('user')['name'] ?? null;
 		</div>
 
 		<div class="d-flex justify-content-center h5 mb-0" style="width: inherit;">
-				<!-- Display a different message if you are admin or not -->
-				<?= ($admin) ? 'Tableau de bord administrateur' : 'Espace de ' . ($name ? $name : 'INCONNU') ?>
+			<!-- Display a different message if you are admin or not -->
+			<?= ($admin) ? 'Tableau de bord administrateur' : 'Espace de ' . ($name ? $name : 'INCONNU') ?>
 		</div>
 
 		<!-- Display a navigation menu except in the log page -->
@@ -27,27 +27,27 @@ $name = session()->get('user')['name'] ?? null;
 					<a class="btn btn-outline-secondary <?= $admin ? 'dropdown-toggle' : '' ?>" href="<?= $admin ? '#' : '/Login/logout' ?>" role="button" id="userDropdown" data-bs-toggle="<?= $admin ? 'dropdown' : '' ?>" aria-expanded="false">
 						<?= $admin ?  $name : 'Déconnexion' ?>
 					</a>
+				</div>
+			</div>
 		<?php endif; ?>
 
-			<!-- Display the menu only for admin -->
-			<?php if ($admin ?? false): ?>
-				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-					<li><a class="dropdown-item" href="/Admin">Home</a></li>
-					<li><a class="dropdown-item" href="/Ip">IP</a></li>
-					<li><a class="dropdown-item" href="/Assurance">Assurance</a></li>
-					<li><a class="dropdown-item" href="/Incident">Incident</a></li>
-					<li><a class="dropdown-item" href="/Infraction">Infraction</a></li>
-					<li><a class="dropdown-item" href="/Mission">Mission</a></li>
-					<li><a class="dropdown-item" href="/Lieu">Lieu</a></li>
-					<li><a class="dropdown-item" href="/Suivi">Suivi</a></li>
-					<li><a class="dropdown-item" href="/Type_incident">Type incident</a></li>
-					<li><a class="dropdown-item" href="/User">Utilisateur</a></li>
-					<li><a class="dropdown-item" href="/Vehicule">Véhicule</a></li>
-					<li><hr class="dropdown-divider"></li>
-					<li><a class="dropdown-item" href="/Login/logout">Déconnexion</a></li>
-				</ul>
-			<?php endif; ?>
-			</div>
-		</div>
+		<!-- Display the menu only for admin -->
+		<?php if ($admin ?? false): ?>
+			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+				<li><a class="dropdown-item" href="/Admin">Home</a></li>
+				<li><a class="dropdown-item" href="/Ip">IP</a></li>
+				<li><a class="dropdown-item" href="/Assurance">Assurance</a></li>
+				<li><a class="dropdown-item" href="/Incident">Incident</a></li>
+				<li><a class="dropdown-item" href="/Infraction">Infraction</a></li>
+				<li><a class="dropdown-item" href="/Mission">Mission</a></li>
+				<li><a class="dropdown-item" href="/Lieu">Lieu</a></li>
+				<li><a class="dropdown-item" href="/Suivi">Suivi</a></li>
+				<li><a class="dropdown-item" href="/Type_incident">Type incident</a></li>
+				<li><a class="dropdown-item" href="/User">Utilisateur</a></li>
+				<li><a class="dropdown-item" href="/Vehicule">Véhicule</a></li>
+				<li><hr class="dropdown-divider"></li>
+				<li><a class="dropdown-item" href="/Login/logout">Déconnexion</a></li>
+			</ul>
+		<?php endif; ?>
 	</div>
 </nav>
