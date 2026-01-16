@@ -136,6 +136,8 @@ class LoginController extends Controller
 	// Handle logout
 	public function logout()
 	{
+		if (!session()->get('user')) return redirect()->to('/');
+
 		$userId = session()->get('user')['id'];
 
 		if ($userId)
