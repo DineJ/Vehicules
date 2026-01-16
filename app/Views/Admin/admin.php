@@ -119,7 +119,7 @@ function entityColumns($entities, $entity_name, $columns_entity, $message, $rese
 }
 
 
-usefullDatas($user, 'Utilisateur', ['Conducteur'], 'Désactivé', 'actif', '1');
+usefullDatas($user, 'User', ['Conducteur'], 'Désactivé', 'actif', '1');
 usefullDatas($ip, 'Ip', ['IP'], 'Désactivée', 'nb_echec', '0');
 usefullDatas($vehicule, 'Vehicule', ['Plaque', 'Marque', 'Modèle'], 'Désactivé', 'actif', '1');
 usefullDatas($lieu, 'Lieu', ['Adresse'], 'Désactivé', 'actif', '1');
