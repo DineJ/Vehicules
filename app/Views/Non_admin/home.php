@@ -31,11 +31,11 @@
 				<tr>
 					<td data-label="Conducteur"><?= esc($user->conducteur) ?></td>
 					<td data-label="Plaque"><?= esc($vehicule->plaque) ?></td>
-					<td data-label="Lieu de départ"><?= esc($lieu->lieu_d) ?></td>
-					<td data-label="Lieu d'arrivé"><?= esc($lieu->lieu_a) ?></td>
+					<td class="concatenation" data-label="Lieu de départ"><?= esc($lieu->lieu_d) ?></td>
+					<td class="concatenation" data-label="Lieu d'arrivé"><?= esc($lieu->lieu_a) ?></td>
 					<td data-label="Motif"><?= esc($mission->motif) ?></td>
-					<td data-label="Date départ"><?= esc($mission->date_depart) ?></td>
-					<td data-label="Kilométrage de départ"><?= esc($mission->km_depart) ?></td>
+					<td data-label="Date départ"><?= esc(date('d/m/Y H:i', strtotime($mission->date_depart))) ?></td>
+					<td data-label="Km départ"><?= esc($mission->km_depart) ?></td>
 				</tr>
 			</tbody>
 		</table>
