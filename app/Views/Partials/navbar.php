@@ -24,12 +24,9 @@ $name = session()->get('user')['name'] ?? null;
 		<?php if ($currentUri !== '/Login/log' && $currentUri !== '/Login'): ?>
 			<div class="ms-auto d-flex justify-content-end">
 				<div class="dropdown">
-					<a class="btn btn-outline-secondary <?= $admin ? 'dropdown-toggle' : '' ?>" href="<?= $admin ? '#' : '/Login/logout' ?>" role="button" id="userDropdown" data-bs-toggle="<?= $admin ? 'dropdown' : '' ?>" aria-expanded="false">
+					<a class="btn btn-outline-secondary <?= $admin ? 'dropdown-toggle' : '' ?>" href="<?= $admin ? '#' : '/Login/logout' ?>" role="button" id="userDropdown" <?= $admin ? 'data-bs-toggle="dropdown"' : '' ?> aria-expanded="false">
 						<?= $admin ?  $name : 'Déconnexion' ?>
 					</a>
-				</div>
-			</div>
-		<?php endif; ?>
 
 		<!-- Display the menu only for admin -->
 		<?php if ($admin ?? false): ?>
@@ -48,6 +45,9 @@ $name = session()->get('user')['name'] ?? null;
 				<li><hr class="dropdown-divider"></li>
 				<li><a class="dropdown-item" href="/Login/logout">Déconnexion</a></li>
 			</ul>
+		<?php endif; ?>
+				</div>
+			</div>
 		<?php endif; ?>
 	</div>
 </nav>
