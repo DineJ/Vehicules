@@ -28,7 +28,7 @@ class LoginController extends Controller
 			}
 			else
 			{
-				return redirect()->to('/User');
+				return redirect()->to('/Non_admin');
 			}
 		}
 
@@ -129,7 +129,7 @@ class LoginController extends Controller
 		}
 		else
 		{
-			return redirect()->to('/User');
+			return redirect()->to('/Non_admin');
 		}
 	}
 

@@ -34,7 +34,7 @@ class AdminController extends Controller
 		// Redirect to user page if not an admin
 		if (null == session()->get('user')['admin'])
 		{
-			return redirect()->to('/User');
+			return redirect()->to('/Non_admin');
 		}
 
 		$data['ip'] = $this->ipModel
@@ -94,6 +94,14 @@ class AdminController extends Controller
 		$data['title'] = "Page d'administration";
 		return view('Admin/admin', $data);
 	}
+
+
+	// Redirect to nonAdmin home
+	public function nonAdmin()
+	{
+		return view('Non_admin/home');
+	}
+
 
 	public function reactivateIp()
 	{

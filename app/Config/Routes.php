@@ -24,6 +24,7 @@ $routes->get('Lieu/delete/(:num)', 'LieuController::delete/$1');
 
 
 // Routes for Mission
+
 $routes->get('Mission', 'MissionController::index');
 $routes->get('Mission/show/(:num)', 'MissionController::show/$1');
 $routes->get('Mission/create', 'MissionController::create');
@@ -116,6 +117,8 @@ $routes->get('Login/logout', 'LoginController::logout'); // Route that leads you
 // Routes for Admin
 $routes->get('Admin', 'AdminController::administrator'); // Route that leads to admin view
 
+//Routes for Non Admin
+$routes->get('Non_admin', 'AdminController::nonAdmin'); // Route that lead to non admin view
 
 /**
  * @var RouteCollection $routes
