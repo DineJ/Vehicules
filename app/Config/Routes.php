@@ -3,6 +3,9 @@
 use CodeIgniter\Router\RouteCollection;
 // Auto-generated routes
 
+$routes->group('', ['filter' => 'Redirection:admin'], function($routes)
+{
+
 // Routes for Infraction
 $routes->get('Infraction', 'InfractionController::index');
 $routes->get('Infraction/show/(:num)', 'InfractionController::show/$1');
@@ -107,18 +110,25 @@ $routes->get('User/edit/(:num)', 'UserController::edit/$1'); // Route that leads
 $routes->post('User/update/(:num)', 'UserController::update/$1'); // Route that leads to the update fuction of the DB
 $routes->get('User/delete/(:num)', 'UserController::delete/$1'); // Not used
 
+// Routes for Admin
+$routes->get('Admin', 'AdminController::administrator'); // Route that leads to admin view
+
+});
+
+
+$routes->group('', ['filter' => 'Redirection:nonadmin'], function($routes)
+{
+
+//Routes for Non Admin
+$routes->get('Non_admin', 'AdminController::nonAdmin'); // Route that lead to non admin view
+
+});
+
 
 // Routes for Login
 $routes->get('Login', 'LoginController::login'); // Route that leads to the display of login view
 $routes->post('Login/log', 'LoginController::log'); // Route that leads you to connect
 $routes->get('Login/logout', 'LoginController::logout'); // Route that leads you to disconnect
-
-
-// Routes for Admin
-$routes->get('Admin', 'AdminController::administrator'); // Route that leads to admin view
-
-//Routes for Non Admin
-$routes->get('Non_admin', 'AdminController::nonAdmin'); // Route that lead to non admin view
 
 /**
  * @var RouteCollection $routes
