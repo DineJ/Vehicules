@@ -99,7 +99,31 @@ class AdminController extends Controller
 	// Redirect to nonAdmin home
 	public function nonAdmin()
 	{
-		return view('Non_admin/home');
+		$data['user'] = $this->model
+				     ->select('CONCAT(user.prenom, " ", user.nom) AS conducteur')
+				     ->join('mission', 'mission.id_user = user.id', 'left')
+				     ->where('user.id', session()->get('user')['id'])
+				     ->first();
+
+		$data['vehicule'] = $this->vehiculeModel
+					 ->select('vehicule.id, plaque')
+					 ->join('mission', 'mission.id_vehicule = vehicule.id', 'left')
+					 ->where('mission.id_user', session()->get('user')['id'])
+					 ->first();
+
+		$data['lieu'] = $this->missionModel
+				     ->select('l1.id, l2.id, CONCAT(l1.numero, " ", l1.adresse, " ", l1.nom_lieu) AS lieu_d, CONCAT(l2.numero, " ", l2.adresse, " ", l2.nom_lieu) AS lieu_a ')
+				     ->join('lieu l1', 'mission.id_lieu_depart = l1.id', 'left')
+				     ->join('lieu l2', 'mission.id_lieu_arrive = l2.id', 'left')
+				     ->where('mission.id_user', session()->get('user')['id'])
+				     ->first();
+
+		$data['mission'] = $this->missionModel
+					->where('id_user', session()->get('user')['id'])
+					->orderBy('id', 'DESC')
+					->first();
+
+		return view('Non_admin/home', $data);
 	}
 
 
