@@ -145,7 +145,12 @@ class MissionController extends Controller
 	// START A MISSION AS USER
 	public function debut()
 	{
-		$data['vehicules'] = $this->vehiculeModel->findAll();
+		$data['vehicules'] = $this->vehiculeModel
+					  ->select('vehicule.plaque, vehicule.id, COALESCE(MAX(mission.km_arrive), 0) AS km_depart')
+					  ->join('mission', 'mission.id_vehicule = vehicule.id', 'left')
+					  ->groupBy('vehicule.id, vehicule.plaque')
+					  ->findAll();
+
 		$data['lieux'] = $this->lieuModel->findAll();
 		$data['motifs'] = $this->model->getMotifEnum();
 

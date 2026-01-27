@@ -26,4 +26,44 @@ function displayDiv()
 	});
 }
 
+// Prefill an input from a select
+function prefill(fillId, idFilled)
+{
+	// Get the select element
+	const select = document.getElementById(fillId);
+	// Get the input field
+	const field  = document.getElementById(idFilled);
+
+	// Stop execution if one of the elements does not exist
+	if (!select || !field) return;
+
+	// Function that applies the prefill logic
+	function apply()
+	{
+
+		// Get the currently selected option
+		const option = select.options[select.selectedIndex];
+		// Read the value from the data-fill attribute
+		const fillValue = option ? option.dataset.fill : undefined;
+
+		// If a value exists, fill the input and lock it
+		if (fillValue !== undefined && fillValue !== '')
+		{
+			field.value = fillValue;
+			field.setAttribute('readonly', 'readonly');
+		}
+		// Otherwise, clear the input and make it editable
+		else
+		{
+			field.value = '';
+			field.removeAttribute('readonly');
+		}
+	}
+
+	// Apply prefill on change
+	select.addEventListener('change', apply);
+	// Apply the prefill once on page load
+	apply();
+}
+
 displayDiv();

@@ -13,7 +13,7 @@
 			<?php foreach($vehicules as $v): ?>
 				
 				<!-- Match id with value -->
-				<option value="<?= esc($v->id) ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
+				<option value="<?= esc($v->id) ?>" data-fill="<?= $v->km_depart ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
 					<?= esc($v->plaque) ?>
 				</option>
 
@@ -72,12 +72,13 @@
 	<!-- Display KM of the vehicle -->
 	<div class="bloc" id="bloc5">
 		<label>KM véhicule</label>
-		<input type="number" id="km_arrive" name="km_arrive" value="<?= isset($item) && $item->km_arrive > 0 ? 'readonly' : '' ?>" class="form-control" required> 
+		<input type="number" id="km_depart" name="km_depart" value="<?= isset($item) && $item->km_depart > 0 ? $item->km_depart : '' ?>" <?= isset($item) && $item->km_depart > 0 ? 'readonly' : ''?> class="form-control" required> 
 	</div>
 </form>
 
 
 <script src="<?= base_url('js/main.js') ?>"></script>
 <script src="<?= base_url('js/displayBloc.js') ?>"></script>
+<script> prefill('id_vehicule', 'km_depart') </script>
 
 <?= $this->endSection() ?>
