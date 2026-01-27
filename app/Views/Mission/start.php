@@ -78,5 +78,6 @@
 
 
 <script src="<?= base_url('js/main.js') ?>"></script>
+<script src="<?= base_url('js/displayBloc.js') ?>"></script>
 
 <?= $this->endSection() ?>
