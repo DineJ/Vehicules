@@ -146,6 +146,8 @@ class MissionController extends Controller
 	public function debut()
 	{
 		$data['vehicules'] = $this->vehiculeModel->findAll();
+		$data['lieux'] = $this->lieuModel->findAll();
+		$data['motifs'] = $this->model->getMotifEnum();
 
 		return view('Mission/start', $data);
 	}

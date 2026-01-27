@@ -26,11 +26,11 @@
 		<label for="id_lieu_depart">Lieu départ</label>
 		<select id="id_lieu_depart" name="id_lieu_depart" onchange="disabledDefault('id_lieu_depart')" class="form-control trigger" data-target="bloc3" required>
 			<option value=""> Choisir un lieu de départ </option>
-			<?php foreach($vehicules as $v): ?>
+			<?php foreach($lieux as $ld): ?>
 
 				<!-- Match id with value -->
-				<option value="<?= esc($v->id) ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
-					<?= esc($v->plaque) ?>
+				<option value="<?= esc($ld->id) ?>" <?=(isset($item) && $item->id_lieu_depart == $ld->id) ? 'selected' : '' ?>>
+					<?= esc($ld->numero) . ' ' . esc($ld->adresse) . ' ' . esc($ld->nom_lieu) ?>
 				</option>
 
 			<?php endforeach; ?>
@@ -42,11 +42,11 @@
 		<label for="id_lieu_arrive">Lieu arrivé</label>
 		<select id="id_lieu_arrive" name="id_lieu_arrive" onchange="disabledDefault('id_lieu_arrive')" class="form-control trigger" data-target="bloc4" required>
 			<option value=""> Choisir un lieu d'arrivé </option>
-			<?php foreach($vehicules as $v): ?>
+			<?php foreach($lieux as $la): ?>
 
 				<!-- Match id with value -->
-				<option value="<?= esc($v->id) ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
-					<?= esc($v->plaque) ?>
+				<option value="<?= esc($la->id) ?>" <?=(isset($item) && $item->id_lieu_arrive == $la->id) ? 'selected' : '' ?>>
+					<?= esc($la->numero) . ' ' . esc($la->adresse) . ' ' . esc($la->nom_lieu) ?>
 				</option>
 
 			<?php endforeach; ?>
@@ -58,11 +58,11 @@
 		<label for="motif">Motif</label>
 		<select id="motif" name="motif" onchange="disabledDefault('motif')" class="form-control trigger" data-target="bloc5" required>
 			<option value=""> Choisir un motif </option>
-			<?php foreach($vehicules as $v): ?>
+			<?php foreach($motifs as $m): ?>
 
 				<!-- Match id with value -->
-				<option value="<?= esc($v->id) ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
-					<?= esc($v->plaque) ?>
+				<option value="<?= esc($m) ?>">
+					 <?= esc($m) ?>
 				</option>
 
 			<?php endforeach; ?>
