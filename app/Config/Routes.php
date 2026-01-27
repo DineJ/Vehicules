@@ -121,6 +121,7 @@ $routes->group('', ['filter' => 'Redirection:nonadmin'], function($routes)
 
 	//Routes for Non Admin
 	$routes->get('Non_admin', 'AdminController::nonAdmin'); // Route that lead to non admin view
+	$routes->get('Mission/debut', 'MissionController::debut'); // Route that lead to a new mission
 
 });
 

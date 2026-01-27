@@ -141,4 +141,12 @@ class MissionController extends Controller
 		$this->model->delete($id);
 		return redirect()->to('/Mission');
 	}
+
+	// START A MISSION AS USER
+	public function debut()
+	{
+		$data['vehicules'] = $this->vehiculeModel->findAll();
+
+		return view('Mission/start', $data);
+	}
 }

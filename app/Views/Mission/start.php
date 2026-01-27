@@ -1,0 +1,82 @@
+<? $this->extend('layouts/main') ?>
+<?= $this->section('content') ?>
+
+<h2> Début de la mission </h2>
+
+<form method="post" action="<?= site_url('Mission/store/') ?>">
+
+	<div>
+		<!-- Display all vehicles -->
+		<label for="id_vehicule">Véhicule</label>
+		<select id="id_vehicule" name="id_vehicule" onchange="disabledDefault('id_vehicule')" class="form-control trigger" data-target="bloc2" required>
+			<option value=""> Choisir votre véhicule </option>
+			<?php foreach($vehicules as $v): ?>
+				
+				<!-- Match id with value -->
+				<option value="<?= esc($v->id) ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
+					<?= esc($v->plaque) ?>
+				</option>
+
+			<?php endforeach; ?>
+		</select>
+	</div>
+
+	<!-- Disply all starting locations -->
+	<div class="bloc" id="bloc2">
+		<label for="id_lieu_depart">Lieu départ</label>
+		<select id="id_lieu_depart" name="id_lieu_depart" onchange="disabledDefault('id_lieu_depart')" class="form-control trigger" data-target="bloc3" required>
+			<option value=""> Choisir un lieu de départ </option>
+			<?php foreach($vehicules as $v): ?>
+
+				<!-- Match id with value -->
+				<option value="<?= esc($v->id) ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
+					<?= esc($v->plaque) ?>
+				</option>
+
+			<?php endforeach; ?>
+		</select>
+	</div>
+
+	<!-- Display all ending locations -->
+	<div class="bloc" id="bloc3">
+		<label for="id_lieu_arrive">Lieu arrivé</label>
+		<select id="id_lieu_arrive" name="id_lieu_arrive" onchange="disabledDefault('id_lieu_arrive')" class="form-control trigger" data-target="bloc4" required>
+			<option value=""> Choisir un lieu d'arrivé </option>
+			<?php foreach($vehicules as $v): ?>
+
+				<!-- Match id with value -->
+				<option value="<?= esc($v->id) ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
+					<?= esc($v->plaque) ?>
+				</option>
+
+			<?php endforeach; ?>
+		</select>
+	</div>
+
+	<!-- Display all reasons of your mission -->
+	<div class="bloc" id="bloc4">
+		<label for="motif">Motif</label>
+		<select id="motif" name="motif" onchange="disabledDefault('motif')" class="form-control trigger" data-target="bloc5" required>
+			<option value=""> Choisir un motif </option>
+			<?php foreach($vehicules as $v): ?>
+
+				<!-- Match id with value -->
+				<option value="<?= esc($v->id) ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
+					<?= esc($v->plaque) ?>
+				</option>
+
+			<?php endforeach; ?>
+		</select>
+	</div>
+
+	<!-- Display KM of the vehicle -->
+	<div class="bloc" id="bloc5">
+		<label>KM véhicule</label>
+		<input type="number" id="km_arrive" name="km_arrive" value="<?= isset($item) && $item->km_arrive > 0 ? 'readonly' : '' ?>" class="form-control" required> 
+	</div>
+</form>
+
+
+<script src="<?= base_url('js/main.js') ?>"></script>
+
+<?= $this->endSection() ?>
