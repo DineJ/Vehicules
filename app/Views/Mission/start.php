@@ -3,7 +3,7 @@
 
 <h2> Début de la mission </h2>
 
-<form method="post" action="<?= site_url('Mission/new') ?>" onsubmit="return fill()">
+<form method="post" action="<?= site_url('Mission/new') ?>" onsubmit="return fill('km_arrive', 'km_depart')">
 
 	<div>
 		<!-- Display all vehicles -->
@@ -94,7 +94,6 @@
 <script src="<?= base_url('js/displayBloc.js') ?>"></script>
 <script>
 	prefill('id_vehicule', 'km_depart');
-	fill('km_arrive', 'km_depart');
 </script>
 
 <?= $this->endSection() ?>
