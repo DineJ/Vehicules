@@ -1,6 +1,8 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
-<?php $missionCommence = $mission->date_depart == $mission->date_arrivee ?>
+
+
+<?php $missionCommence = $missions['0']->date_depart == $missions['0']->date_arrivee ?>
 
 <h2> Espace des conducteurs</h2>
 

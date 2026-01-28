@@ -102,34 +102,8 @@ class AdminController extends Controller
 		//load helper
 		helper('section');
 
-		$data['user'] = $this->model
-				     ->select('CONCAT(user.prenom, " ", user.nom) AS conducteur')
-				     ->join('mission', 'mission.id_user = user.id', 'left')
-				     ->where('user.id', session()->get('user')['id'])
-				     ->first();
-
-		$data['vehicule'] = $this->vehiculeModel
-					 ->select('vehicule.id, plaque')
-					 ->join('mission', 'mission.id_vehicule = vehicule.id', 'left')
-					 ->where('mission.id_user', session()->get('user')['id'])
-					 ->orderBy('mission.date_depart', 'DESC')
-					 ->first();
-
-		$data['lieu'] = $this->missionModel
-				     ->select('l1.id, l2.id, CONCAT(l1.numero, " ", l1.adresse, " ", l1.nom_lieu) AS lieu_d, CONCAT(l2.numero, " ", l2.adresse, " ", l2.nom_lieu) AS lieu_a ')
-				     ->join('lieu l1', 'mission.id_lieu_depart = l1.id', 'left')
-				     ->join('lieu l2', 'mission.id_lieu_arrive = l2.id', 'left')
-				     ->where('mission.id_user', session()->get('user')['id'])
-				     ->orderBy('date_depart', 'DESC')
-				     ->first();
-
-		$data['mission'] = $this->missionModel
-					->where('id_user', session()->get('user')['id'])
-					->orderBy('date_depart', 'DESC')
-					->first();
-
 		$data['missions'] = $this->missionModel
-					 ->select('mission.id, CONCAT(user.nom, " ", user.prenom) AS nom_complet, vehicule.plaque, CONCAT(l1.numero, " ", l1.adresse, " ", l1.nom_lieu) AS lieu_depart, CONCAT(l2.numero, " ", l2.adresse, " ", l2.nom_lieu) AS lieu_arrive, mission.motif, mission.date_depart, mission.km_depart')
+					 ->select('mission.id, CONCAT(user.nom, " ", user.prenom) AS nom_complet, vehicule.plaque, CONCAT(l1.numero, " ", l1.adresse, " ", l1.nom_lieu) AS lieu_depart, CONCAT(l2.numero, " ", l2.adresse, " ", l2.nom_lieu) AS lieu_arrive, mission.motif, mission.date_depart, mission.date_arrivee, mission.km_depart')
 					 ->join('user', 'user.id = mission.id_user', 'left')
 					 ->join('vehicule', 'vehicule.id = mission.id_vehicule', 'left')
 					 ->join('lieu l1', 'l1.id = mission.id_lieu_depart', 'left')
