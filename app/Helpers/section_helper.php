@@ -104,9 +104,12 @@ function entityColumnsSection($entities, $entity_name1, $columns_entity, $button
 
 function columnType(string $column_name, $column_value, $columns_entity)
 {
-	if ($column_value instanceof Time || $column_value instanceof \DateTimeInterface):
-		return '<td data-label="'.$columns_entity[$column_name].'">'.date('d/m/Y', strtotime($column_value)).'</td>';
-	endif;
+	if ($column_value instanceof \DateTimeInterface)
+	{
+		$isDataTime = $column_value->format('H:i:s') !== '00:00:00';
+		$format = $isDataTime ? 'd/m/Y H:i' : 'd/m/Y';
+		return '<td data-label="'.$columns_entity[$column_name].'">'.esc($column_value->format($format)).'</td>';
+	}
 
 	return '<td data-label="'.$columns_entity[$column_name].'">'.esc($column_value).'</td>';
 }
