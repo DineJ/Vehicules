@@ -1,6 +1,6 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
-<?= $missionCommence = $mission->km_debut == $mission->km_arrive ?>
+<?php $missionCommence = $mission->km_debut == $mission->km_arrive ?>
 <h2> Espace des conducteurs</h2>
 
 <div>
@@ -8,7 +8,7 @@
 	<a href="'Incident/declarer" class="btn btn-danger">Déclarer un incident</a>
 </div>
 
-<?php if (!$missionCommence)
+<?php if ($missionCommence)
 { ?>
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered mt-3">
