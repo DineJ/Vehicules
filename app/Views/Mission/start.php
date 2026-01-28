@@ -3,7 +3,7 @@
 
 <h2> Début de la mission </h2>
 
-<form method="post" action="<?= site_url('Mission/store/') ?>" onsubmit="return fill()">
+<form method="post" action="<?= site_url('Mission/new') ?>" onsubmit="return fill()">
 
 	<div>
 		<!-- Display all vehicles -->
