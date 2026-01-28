@@ -1,6 +1,7 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
-<?php $missionCommence = $mission->km_debut == $mission->km_arrive ?>
+<?php $missionCommence = $mission->date_depart == $mission->date_arrivee ?>
+
 <h2> Espace des conducteurs</h2>
 
 <div>
@@ -9,37 +10,10 @@
 </div>
 
 <?php if ($missionCommence)
-{ ?>
-	<div class="table-responsive">
-		<table class="table table-striped table-bordered mt-3">
-
-			<!-- Datas name -->
-			<thead>
-				<tr>
-					<th>Conducteur</th>
-					<th>Plaque</th>
-					<th>Lieu de départ</th>
-					<th>Lieu d'arrivé</th>
-					<th>Motif</th>
-					<th>Date départ</th>
-					<th>Kilométrage de départ</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<!-- Display datas -->
-				<tr>
-					<td data-label="Conducteur"><?= esc($user->conducteur) ?></td>
-					<td data-label="Plaque"><?= esc($vehicule->plaque) ?></td>
-					<td class="concatenation" data-label="Lieu de départ"><?= esc($lieu->lieu_d) ?></td>
-					<td class="concatenation" data-label="Lieu d'arrivé"><?= esc($lieu->lieu_a) ?></td>
-					<td data-label="Motif"><?= esc($mission->motif) ?></td>
-					<td data-label="Date départ"><?= esc(date('d/m/Y H:i', strtotime($mission->date_depart))) ?></td>
-					<td data-label="Km départ"><?= esc($mission->km_depart) ?></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-<? }
+{
+	createSection($missions, 'Mission', 'Non_admin', ['nom_complet' => 'Conducteur', 'plaque' => 'Plaque', 'lieu_depart' => 'Lieu de départ', 'lieu_arrive' => 'Lieu arrivé', 'motif' => 'Motif', 'date_depart' => 'Date départ', 'km_depart' => 'Km départ'], '0', '1');
+}
 ?>
+
+<script src="<?= base_url('js/popupModal.js') ?>"></script>
 <?= $this->endSection() ?>
