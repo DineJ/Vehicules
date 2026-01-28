@@ -109,6 +109,7 @@ class AdminController extends Controller
 					 ->select('vehicule.id, plaque')
 					 ->join('mission', 'mission.id_vehicule = vehicule.id', 'left')
 					 ->where('mission.id_user', session()->get('user')['id'])
+					 ->orderBy('mission.date_depart', 'DESC')
 					 ->first();
 
 		$data['lieu'] = $this->missionModel
@@ -116,11 +117,12 @@ class AdminController extends Controller
 				     ->join('lieu l1', 'mission.id_lieu_depart = l1.id', 'left')
 				     ->join('lieu l2', 'mission.id_lieu_arrive = l2.id', 'left')
 				     ->where('mission.id_user', session()->get('user')['id'])
+				     ->orderBy('date_depart', 'DESC')
 				     ->first();
 
 		$data['mission'] = $this->missionModel
 					->where('id_user', session()->get('user')['id'])
-					->orderBy('id', 'DESC')
+					->orderBy('date_depart', 'DESC')
 					->first();
 
 		return view('Non_admin/home', $data);
