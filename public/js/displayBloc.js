@@ -66,4 +66,11 @@ function prefill(fillId, idFilled)
 	apply();
 }
 
+// Fill a hidden field
+function fill(fillId, idFilled)
+{
+	document.getElementById(fillId).value = document.getElementById(idFilled).value
+	return true;
+}
+
 displayDiv();

@@ -3,7 +3,7 @@
 
 <h2> Début de la mission </h2>
 
-<form method="post" action="<?= site_url('Mission/store/') ?>">
+<form method="post" action="<?= site_url('Mission/store/') ?>" onsubmit="return fill()">
 
 	<div>
 		<!-- Display all vehicles -->
@@ -16,6 +16,7 @@
 				<option value="<?= esc($v->id) ?>" data-fill="<?= $v->km_depart ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
 					<?= esc($v->plaque) ?>
 				</option>
+
 
 			<?php endforeach; ?>
 		</select>
@@ -32,6 +33,7 @@
 				<option value="<?= esc($ld->id) ?>" <?=(isset($item) && $item->id_lieu_depart == $ld->id) ? 'selected' : '' ?>>
 					<?= esc($ld->numero) . ' ' . esc($ld->adresse) . ' ' . esc($ld->nom_lieu) ?>
 				</option>
+
 
 			<?php endforeach; ?>
 		</select>
@@ -74,11 +76,25 @@
 		<label>KM véhicule</label>
 		<input type="number" id="km_depart" name="km_depart" value="<?= isset($item) && $item->km_depart > 0 ? $item->km_depart : '' ?>" <?= isset($item) && $item->km_depart > 0 ? 'readonly' : ''?> class="form-control" required> 
 	</div>
+
+	<input type="hidden" id="km_arrive" name="km_arrive">
+
+	<!-- Redirection button -->
+	<a href="<?= site_url('Non_admin') ?>" class="btn btn-secondary mt-3">Annuler</a>
+	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
+
+	<input type="hidden" id="id_user" name="id_user" value="<?= session()->get('user')['id'] ?>">
+	<input type="hidden" id="date_depart" name="date_depart" value="<?= date('Y-m-d H:i:s') ?>">
+	<input type="hidden" id="date_arrivee" name="date_arrivee" value="<?= date('Y-m-d H:i:s') ?>">
+
 </form>
 
 
 <script src="<?= base_url('js/main.js') ?>"></script>
 <script src="<?= base_url('js/displayBloc.js') ?>"></script>
-<script> prefill('id_vehicule', 'km_depart') </script>
+<script>
+	prefill('id_vehicule', 'km_depart');
+	fill('km_arrive', 'km_depart');
+</script>
 
 <?= $this->endSection() ?>
