@@ -123,6 +123,7 @@ $routes->group('', ['filter' => 'Redirection:nonadmin'], function($routes)
 	$routes->get('Non_admin', 'AdminController::nonAdmin'); // Route that lead to non admin view
 	$routes->get('Mission/debut', 'MissionController::debut'); // Route that lead to a new mission
 	$routes->post('Mission/new', 'MissionController::store'); // Route that leads to the insert function of the DB
+	$routes->post('Mission/end/(:num)', 'MissionController::update/$1'); // Route that leads to the update function of the DB
 
 });
 
