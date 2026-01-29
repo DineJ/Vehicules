@@ -1,4 +1,4 @@
-<? $this->extend('layouts/main') ?>
+<?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
 <h2> Début de la mission </h2>

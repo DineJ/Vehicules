@@ -27,9 +27,6 @@
 		</div>
 			<button type="button" id="hideButton" class="btn btn-primary mt-3" onclick="hideDiv(['hideForm', 'hideModal', 'hideButton'])">Finir la mission</button>
 
-		<!-- Submit button -->
-
-
 	</form>
 <?php
 }
@@ -41,7 +38,7 @@ else
 }
 ?>
 
-<a href="Incident/declarer" class="btn btn-danger">Déclarer un incident</a>
+	<a href="<?= site_url('Incident/declarer') ?>" class="btn btn-danger">Déclarer un incident</a>
 
 <script src="<?= base_url('js/popupModal.js') ?>"></script>
 <script src="<?= base_url('js/hideLayout.js') ?>"></script>
