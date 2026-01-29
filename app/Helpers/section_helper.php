@@ -5,7 +5,7 @@ function createSection($entities, $entity_name1, $entity_name2, $columns_entity,
 {
 ?>
 	<!-- Creation of a section assurance -->
-	<div style="margin-left: 3rem; margin-top: 1.5rem; width: 95%; padding: 1rem; border: 1px solid #ccc; border-left: 4px solid #6f42c1; border-radius: 8px;">
+	<div style="margin-left: 1rem; margin-top: 1.5rem; width: 95%; padding: 1rem; border: 1px solid #ccc; border-left: 4px solid #6f42c1; border-radius: 8px;">
 		<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
 			<h6 style="margin: 0; color: #6f42c1;">↳ <?= $entity_name1 ?></h6>
 		</div>
@@ -111,6 +111,6 @@ function columnType(string $column_name, $column_value, $columns_entity)
 		return '<td data-label="'.$columns_entity[$column_name].'">'.esc($column_value->format($format)).'</td>';
 	}
 
-	return '<td data-label="'.$columns_entity[$column_name].'">'.esc($column_value).'</td>';
+	return '<td class="concatenation" data-label="'.$columns_entity[$column_name].'">'.esc($column_value).'</td>';
 }
 ?>
