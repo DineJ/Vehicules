@@ -103,7 +103,7 @@ class AdminController extends Controller
 		helper('section');
 
 		$data['missions'] = $this->missionModel
-					 ->select('mission.id, CONCAT(user.nom, " ", user.prenom) AS nom_complet, vehicule.plaque, CONCAT(l1.numero, " ", l1.adresse, " ", l1.nom_lieu) AS lieu_depart, CONCAT(l2.numero, " ", l2.adresse, " ", l2.nom_lieu) AS lieu_arrive, mission.motif, mission.date_depart, mission.date_arrivee, mission.km_depart')
+					 ->select('mission.id, CONCAT(user.nom, " ", user.prenom) AS nom_complet, mission.id_vehicule, vehicule.plaque, CONCAT(l1.numero, " ", l1.adresse, " ", l1.nom_lieu) AS lieu_depart, CONCAT(l2.numero, " ", l2.adresse, " ", l2.nom_lieu) AS lieu_arrive, mission.motif, mission.date_depart, mission.date_arrivee, mission.km_depart')
 					 ->join('user', 'user.id = mission.id_user', 'left')
 					 ->join('vehicule', 'vehicule.id = mission.id_vehicule', 'left')
 					 ->join('lieu l1', 'l1.id = mission.id_lieu_depart', 'left')

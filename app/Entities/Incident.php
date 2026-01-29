@@ -29,7 +29,7 @@ class Incident extends Entity
     protected $validationRules = [
         'id' => 'integer|max_length[11]',
         'id_vehicule' => 'integer|max_length[11]',
-        'date_incident' => 'valid_date[Y-m-d]',
+        'date_incident' => 'valid_date[Y-m-d H:i:s]',
         'explication_incident' => 'string',
         'id_user' => 'integer|max_length[11]',
         'id_type_incident' => 'integer|max_length[11]',
@@ -79,7 +79,7 @@ class Incident extends Entity
 	public function setdateIncident($dateIncident)
 	{
 		$validation = \Config\Services::validation();
-		$validation->setRules(['date_incident' => 'valid_date[Y-m-d]']);
+		$validation->setRules(['date_incident' => 'valid_date[Y-m-d H:i:s]']);
 
 		if (!$validation->run(['date_incident' => $dateIncident])) {
 			throw new \InvalidArgumentException("❌ Valeur invalide pour 'date_incident': " . implode(', ', $validation->getErrors()));
