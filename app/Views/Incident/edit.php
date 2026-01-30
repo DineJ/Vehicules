@@ -19,8 +19,8 @@
 
 	<!-- Select a date -->
 	<label>Date Incident</label>
-	<input type='date' id='date_incident' name='date_incident' value='<?= isset($item) ? substr($item->date_incident, 0, 10) : '' ?>' class='form-control' required>
-	<input type='hidden' id='olddate_incident' name='olddate_incident' value='<?= isset($item) ? substr($item->date_incident, 0, 10) : '' ?>'>
+	<input type='datetime' id='date_incident' name='date_incident' value='<?= isset($item) ? esc($item->date_incident) : '' ?>' class='form-control' required>
+	<input type='hidden' id='olddate_incident' name='olddate_incident' value='<?= isset($item) ? esc($item->date_incident) : '' ?>'>
 
 
 	<!-- Type a short explication -->
