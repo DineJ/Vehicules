@@ -1,7 +1,7 @@
 <?php
 
 # Display section
-function createSection($entities, $entity_name1, $entity_name2, $columns_entity, $button_add = '0', $button_update = '0', $id = "0")
+function createSection($entities, $entity_name1, $entity_name2, $columns_entity, $button_add=0, $button_update=0, $id=0, $modal=1)
 {
 ?>
 	<!-- Creation of a section assurance -->
@@ -42,29 +42,31 @@ function createSection($entities, $entity_name1, $entity_name2, $columns_entity,
 			?>
 		</div>
 	</div>
-
-	<div>
-		<div class="modal fade" id="modalGeneric" aria-hidden="true">
-			<!-- Size -->
-			<div class="modal-dialog modal-lg">
-				<!-- Content -->
-				<div class="modal-content">
-					<!-- Title -->
-					<div class="modal-header">
-						<h5 class="modal-title" id="modal-title">Modal <?= $entity_name1 ?></h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-					</div>
-					<!-- Form body -->
-					<div class="modal-body" id="modalGenericContent">
-						<?= view('Partials/navbar', ['no_navbar' => 'no_navbar']); ?>
-						<!-- In case loading takes time -->
-							Chargement...
+	<?php if($modal)
+	{ ?>
+		<div>
+			<div class="modal fade" id="modalGeneric" aria-hidden="true">
+				<!-- Size -->
+				<div class="modal-dialog modal-lg">
+					<!-- Content -->
+					<div class="modal-content">
+						<!-- Title -->
+						<div class="modal-header">
+							<h5 class="modal-title" id="modal-title">Modal <?= $entity_name1 ?></h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+						</div>
+						<!-- Form body -->
+						<div class="modal-body" id="modalGenericContent">
+							<?= view('Partials/navbar', ['no_navbar' => 'no_navbar']); ?>
+							<!-- In case loading takes time -->
+								Chargement...
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 <?php
+	}
 }
 
 # Display datas columns
