@@ -7,6 +7,7 @@ use App\Models\UserModel;
 use App\Models\SuiviModel;
 use App\Models\VehiculeModel;
 use App\Models\Type_incidentModel;
+use App\Models\MissionModel;
 use App\Entities\Incident;
 use CodeIgniter\Controller;
 
@@ -17,6 +18,7 @@ class IncidentController extends Controller
 	protected $suiviModel;
 	protected $vehiculeModel;
 	protected $typeIncidentModel;
+	protected $missionModel;
 
 	public function __construct()
 	{
@@ -25,6 +27,7 @@ class IncidentController extends Controller
 		$this->suiviModel = new  SuiviModel();
 		$this->vehiculeModel = new VehiculeModel();
 		$this->typeIncidentModel = new Type_incidentModel();
+		$this->missionModel = new MissionModel();
 	}
 
 
@@ -108,7 +111,14 @@ class IncidentController extends Controller
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
 		}
 
-		return redirect()->to('/Incident');
+		if (session()->get('user')['admin'])
+		{
+			return redirect()->to('/Incident');
+		}
+		else
+		{
+			return redirect()->to('Non_admin');
+		}
 	}
 
 
@@ -148,5 +158,21 @@ class IncidentController extends Controller
 	{
 		$this->model->delete($id);
 		return redirect()->to('/Incident');
+	}
+
+
+	// START AN INCIDENT AS USER
+	public function debut()
+	{
+		$data['typeIncident'] = $this->typeIncidentModel->findAll();
+		$data['vehicule'] = $this->vehiculeModel->findAll();
+		$data['mission'] = $this->missionModel
+					->where('id_user', session()->get('user')['id'])
+					->where('date_depart = date_arrivee', null, false)
+					->orderBy('date_depart', 'DESC')
+					->limit(1)
+					->findAll();
+
+		return view('Incident/declarer', $data);
 	}
 }

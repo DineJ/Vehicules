@@ -10,7 +10,7 @@ function webcam()
 	.then(cameras => {
 		if (cameras.length > 0)
 		{
-			html5QrCode.start(cameras[0].id, config, (decodedText) => {
+			html5QrCode.start({facingMode: "environment"}, config, (decodedText) => {
 				console.log("QR Code détecté :", decodedText);
 
 				qrResult.value = decodedText.replace(/[\r\n]/g, '');

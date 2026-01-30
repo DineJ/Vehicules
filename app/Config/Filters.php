@@ -36,6 +36,7 @@ class Filters extends BaseFilters
 		'performance'    => PerformanceMetrics::class,
 		'HistoriqueTracker' => \App\Filters\HistoriqueTracker::class,
 		'SessionEnd'        => \App\Filters\SessionEnd::class,
+		'Redirection'    => \App\Filters\Redirection::class,
 	];
 
 

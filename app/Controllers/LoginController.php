@@ -28,7 +28,7 @@ class LoginController extends Controller
 			}
 			else
 			{
-				return redirect()->to('/User');
+				return redirect()->to('/Non_admin');
 			}
 		}
 
@@ -129,13 +129,15 @@ class LoginController extends Controller
 		}
 		else
 		{
-			return redirect()->to('/User');
+			return redirect()->to('/Non_admin');
 		}
 	}
 
 	// Handle logout
 	public function logout()
 	{
+		if (!session()->get('user')) return redirect()->to('/');
+
 		$userId = session()->get('user')['id'];
 
 		if ($userId)

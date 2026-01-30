@@ -41,8 +41,8 @@ class Mission extends Entity
 		'id_lieu_depart' => 'integer|max_length[11]',
 		'id_lieu_arrive' => 'integer|max_length[11]',
 		'motif' => 'string',
-		'date_depart' => 'valid_date[Y-m-d]',
-		'date_arrivee' => 'valid_date[Y-m-d]',
+		'date_depart' => 'valid_date[Y-m-d H:i:s]',
+		'date_arrivee' => 'valid_date[Y-m-d H:i:s]',
 		'km_depart' => 'integer|max_length[11]',
 		'km_arrive' => 'integer|max_length[11]',
 	];
@@ -177,7 +177,7 @@ class Mission extends Entity
 	public function setdateDepart($dateDepart)
 	{
 		$validation = \Config\Services::validation();
-		$validation->setRules(['date_depart' => 'valid_date[Y-m-d]']);
+		$validation->setRules(['date_depart' => 'valid_date[Y-m-d H:i:s]']);
 
 		if (!$validation->run(['date_depart' => $dateDepart])) {
 			throw new \InvalidArgumentException("❌ Valeur invalide pour 'date_depart': " . implode(', ', $validation->getErrors()));
@@ -197,7 +197,7 @@ class Mission extends Entity
 	public function setdateArrivee($dateArrivee)
 	{
 		$validation = \Config\Services::validation();
-		$validation->setRules(['date_arrivee' => 'valid_date[Y-m-d]']);
+		$validation->setRules(['date_arrivee' => 'valid_date[Y-m-d H:i:s]']);
 
 		if (!$validation->run(['date_arrivee' => $dateArrivee])) {
 			throw new \InvalidArgumentException("❌ Valeur invalide pour 'date_arrivee': " . implode(', ', $validation->getErrors()));

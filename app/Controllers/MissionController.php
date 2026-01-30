@@ -101,7 +101,14 @@ class MissionController extends Controller
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
 		}
 		
-		return redirect()->to('/Mission');
+		if (session()->get('user')['admin'])
+		{
+			return redirect()->to('/Mission');
+		}
+		else
+		{
+			return redirect()->to('/Non_admin');
+		}
 	}
 
 
@@ -140,5 +147,21 @@ class MissionController extends Controller
 	{
 		$this->model->delete($id);
 		return redirect()->to('/Mission');
+	}
+
+	// START A MISSION AS USER
+	public function debut()
+	{
+		$data['vehicules'] = $this->vehiculeModel
+					  ->select('vehicule.plaque, vehicule.id, COALESCE(MAX(mission.km_arrive), 0) AS km_depart')
+					  ->join('mission', 'mission.id_vehicule = vehicule.id', 'left')
+					  ->groupBy('vehicule.id, vehicule.plaque')
+					  ->findAll();
+
+		$data['lieux'] = $this->lieuModel->findAll();
+		$data['motifs'] = $this->model->getMotifEnum();
+		$data['item'] = $this->model;
+
+		return view('Mission/start', $data);
 	}
 }

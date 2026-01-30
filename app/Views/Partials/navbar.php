@@ -1,7 +1,10 @@
 <?php
 use CodeIgniter\HTTP\URI;
 
+// Get the current URi
 $currentUri = service('uri')->getPath();
+$admin = session()->get('user')['admin'] ?? false;
+$name = session()->get('user')['name'] ?? null;
 ?>
 <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-4 py-2 <?= isset($no_navbar) ? 'no_navbar' : '' ?>">
 	<div class="container-fluid">
@@ -13,39 +16,39 @@ $currentUri = service('uri')->getPath();
 		</div>
 
 		<div class="d-flex justify-content-center h5 mb-0" style="width: inherit;">
-				<?= (session()->get('user')['admin'] ?? false) ? 'Tableau de bord administrateur' : 'Espace utilisateur' ?>
+			<!-- Display a different message if you are admin or not -->
+			<?= ($admin) ? 'Tableau de bord administrateur' : 'Espace de ' . ($name ? $name : 'INCONNU') ?>
 		</div>
 
+		<!-- Display a navigation menu except in the log page -->
 		<?php if ($currentUri !== '/Login/log' && $currentUri !== '/Login'): ?>
 			<div class="ms-auto d-flex justify-content-end">
 				<div class="dropdown">
-					<a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-						<?= session()->get('user')['name'] ?? 'Menu' ?>
+					<a class="btn btn-outline-secondary <?= $admin ? 'dropdown-toggle' : '' ?>" href="<?= $admin ? '#' : '/Login/logout' ?>" role="button" id="userDropdown" <?= $admin ? 'data-bs-toggle="dropdown"' : '' ?> aria-expanded="false">
+						<?= $admin ?  $name : 'Déconnexion' ?>
 					</a>
-		<?php endif; ?>
 
-			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-				<?php if (session()->get('user')['admin'] ?? false): ?>
-					<li><a class="dropdown-item" href="/Admin">Home</a></li>
-					<li><a class="dropdown-item" href="/Ip">IP</a></li>
-				<?php endif; ?>
-				<li><hr class="dropdown-divider"></li>
+					<!-- Display the menu only for admin -->
+					<?php if ($admin ?? false): ?>
+						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+							<li><a class="dropdown-item" href="/Admin">Home</a></li>
+							<li><a class="dropdown-item" href="/Ip">IP</a></li>
+							<li><a class="dropdown-item" href="/Assurance">Assurance</a></li>
+							<li><a class="dropdown-item" href="/Incident">Incident</a></li>
+							<li><a class="dropdown-item" href="/Infraction">Infraction</a></li>
+							<li><a class="dropdown-item" href="/Mission">Mission</a></li>
+							<li><a class="dropdown-item" href="/Lieu">Lieu</a></li>
+							<li><a class="dropdown-item" href="/Suivi">Suivi</a></li>
+							<li><a class="dropdown-item" href="/Type_incident">Type incident</a></li>
+							<li><a class="dropdown-item" href="/User">Utilisateur</a></li>
+							<li><a class="dropdown-item" href="/Vehicule">Véhicule</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="/Login/logout">Déconnexion</a></li>
+						</ul>
+					<?php endif; ?>
 
-				<?php if ($currentUri !== '/Login/log' && $currentUri !== '/Login'): ?>
-					<li><a class="dropdown-item" href="/Assurance">Assurance</a></li>
-					<li><a class="dropdown-item" href="/Incident">Incident</a></li>
-					<li><a class="dropdown-item" href="/Infraction">Infraction</a></li>
-					<li><a class="dropdown-item" href="/Mission">Mission</a></li>
-					<li><a class="dropdown-item" href="/Lieu">Lieu</a></li>
-					<li><a class="dropdown-item" href="/Suivi">Suivi</a></li>
-					<li><a class="dropdown-item" href="/Type_incident">Type incident</a></li>
-					<li><a class="dropdown-item" href="/User">Utilisateur</a></li>
-					<li><a class="dropdown-item" href="/Vehicule">Véhicule</a></li>
-					<li><hr class="dropdown-divider"></li>
-					<li><a class="dropdown-item" href="/Login/logout">Déconnexion</a></li>
-				<?php endif; ?>
-				</ul>
+				</div>
 			</div>
-		</div>
+		<?php endif; ?>
 	</div>
 </nav>

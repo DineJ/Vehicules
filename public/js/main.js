@@ -14,10 +14,11 @@ function disabledDefault(removeId)
 	const select = document.getElementById(removeId);
 
 	if (!select)
-		return;
-	else if (select.options[0])
+		return true;
+	else if (select.options[0].value == "")
 	{
 		// Delete first option
 		select.remove(0);
 	}
+	return true
 }
