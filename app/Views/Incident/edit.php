@@ -25,7 +25,7 @@
 
 	<!-- Type a short explication -->
 	<label>Explication Incident</label>
-	<textarea oninput="setUpper(document.getElementById('explication_incident'));" id='explication_incident' name='explication_incident' class='form-control'><?= esc($item->explication_incident) ?></textarea>
+	<textarea oninput="setUpper(document.getElementById('explication_incident'));" id='explication_incident' name='explication_incident' class='form-control' required><?= esc($item->explication_incident) ?></textarea>
 	<input type='hidden' id='oldexplication_incident' name='oldexplication_incident' value='<?= isset($item) ? $item->explication_incident : '' ?>'>
 
 	</br>

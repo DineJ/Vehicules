@@ -14,7 +14,7 @@
 
 	<!-- Type a short explication -->
 	<label>Commentaire</label>
-	<textarea oninput="setUpper(document.getElementById('commentaire'));" id="commentaire" name="commentaire" class="form-control"><?= isset($item) ? $item->commentaire : '' ?></textarea>
+	<textarea oninput="setUpper(document.getElementById('commentaire'));" id="commentaire" name="commentaire" class="form-control" required><?= isset($item) ? $item->commentaire : '' ?></textarea>
 
 	<!-- How many points were lost on the license -->
 	<label>Points</label>

@@ -26,7 +26,7 @@
 
 	<!-- Type a short explication -->
 	<label>Description</label>
-	<textarea oninput="setUpper(document.getElementById('description'));" id="description" name="description" class="form-control"><?= isset($item) ? $item->description : '' ?></textarea>
+	<textarea oninput="setUpper(document.getElementById('description'));" id="description" name="description" class="form-control" required><?= isset($item) ? $item->description : '' ?></textarea>
 	<input type="hidden" id="olddescription" name="olddescription" value="<?= isset($item) ? $item->description : '' ?>">
 
 	<!-- Redirection button -->

@@ -24,7 +24,7 @@
 
 	<!-- Type a short explication -->
 	<label>Description</label>
-	<textarea oninput="setUpper(document.getElementById('description'));" id="description" name="description" class="form-control"><?= isset($item) ? $item->description : '' ?></textarea>
+	<textarea oninput="setUpper(document.getElementById('description'));" id="description" name="description" class="form-control" required><?= isset($item) ? $item->description : '' ?></textarea>
 
 	<!-- Redirection button -->
 	<a href="<?= site_url('Suivi') ?>" id="btnRetour" class="btn btn-secondary mt-3">Retour</a>
