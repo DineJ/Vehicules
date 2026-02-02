@@ -72,7 +72,12 @@ class AdminController extends Controller
 			->getResult();
 
 		$data['mission'] = $this->missionModel
-			->select('CONCAT(user.nom, " ", user.prenom) AS Conducteur, vehicule.plaque AS Plaque, motif AS Motif, CONCAT(l1.numero, " ", l1.adresse, " ", l1.nom_lieu, " ", l1.code_postal) AS Départ, mission.date_depart AS Début, CONCAT(l2.numero, " ", l2.adresse, " ", l2.nom_lieu, " ", l2.code_postal) AS Arrivé, mission.date_arrivee AS Fin')
+			  ->select('CONCAT(user.nom, " ", user.prenom) AS Conducteur, vehicule.plaque AS Plaque, motif AS Motif, CONCAT(l1.numero, " ", l1.adresse, " ", l1.nom_lieu, " ", l1.code_postal) AS Départ, mission.date_depart AS Début, CONCAT(l2.numero, " ", l2.adresse, " ", l2.nom_lieu, " ", l2.code_postal) AS Arrivé,
+			CASE
+				WHEN mission.date_arrivee = mission.date_depart
+				THEN "En cours"
+			ELSE mission.date_arrivee
+			END Fin', false)
 			->join('user', 'user.id = mission.id_user', 'left')
 			->join('vehicule', 'vehicule.id = mission.id_vehicule', 'left')
 			->join('lieu l1', 'l1.id = mission.id_lieu_depart', 'left')
