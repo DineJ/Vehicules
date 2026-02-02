@@ -1,3 +1,4 @@
+
 <?= $this->extend('layouts/main') ?> <!-- Extend the base layout -->
 <?= $this->section('content') ?> <!-- Start the main content section -->
 
@@ -129,6 +130,7 @@ usefullDatas($mission, 'Mission', ['Plaque', 'Conducteur', 'Motif', 'Départ', '
 usefullDatas($incident, 'Incident', ['Plaque', 'Conducteur', 'Type', 'Date'], 'Récent');
 ?>
 
-<script src="<?= base_url('js/hideLayout.js') ?>"</script>
+
+<script src="<?php echo base_url('js/hideLayout.js'); ?>"></script>
 <?= $this->endSection() ?> <!-- End the content section -->
 
