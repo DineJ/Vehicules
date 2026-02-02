@@ -47,7 +47,7 @@ function prefill(fillId, idFilled)
 		const fillValue = option ? option.dataset.fill : undefined;
 
 		// If a value exists, fill the input and lock it
-		if (fillValue !== undefined && fillValue !== '')
+		if (fillValue !== undefined && fillValue !== '' && fillValue > 0)
 		{
 			field.value = fillValue;
 			field.setAttribute('readonly', 'readonly');
