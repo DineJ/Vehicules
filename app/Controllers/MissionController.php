@@ -162,6 +162,17 @@ class MissionController extends Controller
 		$data['motifs'] = $this->model->getMotifEnum();
 		$data['item'] = $this->model;
 
+		$redirection = $this->model
+			->select('mission.date_depart, mission.date_arrivee')
+			->where('mission.id_user', session()->get('user')['id'])
+			->where('mission.date_depart = mission.date_arrivee', null, false)
+			->findAll();
+
+		if($redirection)
+		{
+			return redirect()->to('/Non_admin');
+		}
+
 		return view('Mission/start', $data);
 	}
 }
