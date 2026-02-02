@@ -19,9 +19,9 @@ function paginateNumber (&$count)
 # Display usefull datas
 function usefullDatas ($entity,$entity_name, $columns_entity, $message, $resetData=null, $valueResetData=null)
 { ?>
-	<h4 id="<?= $entity_name ?>hideTitle" class="centerTitle" title="Cliquez pour afficher" onclick="hideDiv(['<?= $entity_name ?>hideTitle', '<?= $entity_name ?>hideDiv'])">▶ <?= $entity_name . ' : ' . $message ?></h4>
+	<h4 id="<?= $entity_name ?>hideTitle" class="leftTitle" title="Cliquez pour afficher" onclick="hideDiv(['<?= $entity_name ?>hideTitle', '<?= $entity_name ?>hideDiv'])">▶ <?= $entity_name . ' : ' . $message ?></h4>
 	<div id="<?= $entity_name ?>hideDiv" class="table-responsive" style="display:none;">
-		<h4 class="centerTitle" title="Cliquez pour fermer" onclick="hideDiv(['<?= $entity_name ?>hideTitle', '<?= $entity_name ?>hideDiv'])">▼ <?= $entity_name . ' : ' . $message ?></h4>
+		<h4 class="leftTitle" title="Cliquez pour fermer" onclick="hideDiv(['<?= $entity_name ?>hideTitle', '<?= $entity_name ?>hideDiv'])">▼ <?= $entity_name . ' : ' . $message ?></h4>
 		<!-- Test if atleast one <?= $entity_name ?> exist -->
 		<?php if (empty($entity))
 		{ ?>
@@ -46,7 +46,7 @@ function usefullDatas ($entity,$entity_name, $columns_entity, $message, $resetDa
 		?>
 		<a href="<?= site_url(''.$entity_name.'') ?>" class="btn btn-secondary">Retour vers <?= $entity_name ?></a>
 	</div>
-	</br></br>
+	</br>
 <?php
 }
 
