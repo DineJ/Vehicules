@@ -38,7 +38,7 @@ class AdminController extends Controller
 		}
 
 		$data['ip'] = $this->ipModel
-			->select('adresse_ip AS IP, nb_echec, id')
+			->select('adresse_ip AS IP, nb_echec AS Nombre échecs, id')
 			->where('nb_echec >', 2)
 			->get()
 			->getResult();
