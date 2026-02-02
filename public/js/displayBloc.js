@@ -23,7 +23,7 @@ function displayDiv()
 			if (this.value !== '') {
 				target.style.display = 'block';
 
-				const focusField = target.querySelector('input');
+				const focusField = target.querySelector('input, select');
 				if (focusField)
 				{
 					focusField.focus();

@@ -17,7 +17,7 @@
 		<div id="hideForm" style="display:none;">
 			<!-- Select end KM -->
 			<label>Km d'arrivé</label>
-			<input type="number" id="km_arrive" name="km_arrive" value="<?= ($missions) ? esc($missions['0']->km_arrive) : '' ?>" class="form-control" required>
+			<input type="number" id="km_arrive" name="km_arrive" value="" class="form-control" required>
 
 			<!-- Auto select end date -->
 			<input type="hidden" id="date_arrivee" name="date_arrivee" value="<?= date('Y-m-d H:i:s')?>">
@@ -25,7 +25,7 @@
 			<button type="button" class="btn btn-warning mt-3" onclick="hideDiv(['hideForm', 'hideModal', 'hideButton'])">Retour</button>
 			<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 		</div>
-			<button type="button" id="hideButton" class="btn btn-primary mt-3" onclick="hideDiv(['hideForm', 'hideModal', 'hideButton'])">Finir la mission</button>
+			<button type="button" id="hideButton" class="btn btn-primary mt-3" onclick="hideDiv(['hideForm', 'hideModal', 'hideButton']); document.getElementById('km_arrive').focus()">Finir la mission</button>
 
 	</form>
 <?php
@@ -53,5 +53,6 @@ else
 			return false;
 		}
 	}
+
 </script>
 <?= $this->endSection() ?>
