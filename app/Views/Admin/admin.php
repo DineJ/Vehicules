@@ -18,8 +18,9 @@ function paginateNumber (&$count)
 # Display usefull datas
 function usefullDatas ($entity,$entity_name, $columns_entity, $message, $resetData=null, $valueResetData=null)
 { ?>
-	<div class="table-responsive">
-		<h4 class="centerTitle"><?= $entity_name . ' : ' . $message ?></h4>
+	<h4 id="<?= $entity_name ?>hideTitle" class="centerTitle" title="Cliquez pour afficher" onclick="hideDiv(['<?= $entity_name ?>hideTitle', '<?= $entity_name ?>hideDiv'])">▶ <?= $entity_name . ' : ' . $message ?></h4>
+	<div id="<?= $entity_name ?>hideDiv" class="table-responsive" style="display:none;">
+		<h4 class="centerTitle" title="Cliquez pour fermer" onclick="hideDiv(['<?= $entity_name ?>hideTitle', '<?= $entity_name ?>hideDiv'])">▼ <?= $entity_name . ' : ' . $message ?></h4>
 		<!-- Test if atleast one <?= $entity_name ?> exist -->
 		<?php if (empty($entity))
 		{ ?>
@@ -128,5 +129,6 @@ usefullDatas($mission, 'Mission', ['Plaque', 'Conducteur', 'Motif', 'Départ', '
 usefullDatas($incident, 'Incident', ['Plaque', 'Conducteur', 'Type', 'Date'], 'Récent');
 ?>
 
+<script src="<?= base_url('js/hideLayout.js') ?>"</script>
 <?= $this->endSection() ?> <!-- End the content section -->
 
