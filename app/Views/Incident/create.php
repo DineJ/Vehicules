@@ -18,7 +18,7 @@
 
 	<!-- Select a date -->
 	<label>Date Incident</label>
-	<input type='date' id='date_incident' name='date_incident' max="<?= date('Y-m-d') ?>" value='<?= isset($item) ? $item->date_incident : '' ?>' class='form-control' required>
+	<input type='datetime-local' id='date_incident' name='date_incident' step="1" max="<?= date('Y-m-d\TH:i:s') ?>" value='<?= isset($item) ? date('Y-m-d\TH:i:s', strtotime($item->date_incident)) : '' ?>' class='form-control' required>
 
 	<!-- Type a short explication -->
 	<label>Explication Incident</label>

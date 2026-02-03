@@ -19,7 +19,7 @@
 
 	<!-- Select a date -->
 	<label>Date Incident</label>
-	<input type='datetime' id='date_incident' name='date_incident' value='<?= isset($item) ? esc($item->date_incident) : '' ?>' class='form-control' required>
+	<input type='datetime-local' id='date_incident' name='date_incident' step="1" max="<?= date('Y-m-d\TH:i:s')?>" value='<?= isset($item) ? esc(date('Y-m-d\TH:i:s', strtotime($item->date_incident))) : '' ?>' class='form-control' required>
 	<input type='hidden' id='olddate_incident' name='olddate_incident' value='<?= isset($item) ? esc($item->date_incident) : '' ?>'>
 
 

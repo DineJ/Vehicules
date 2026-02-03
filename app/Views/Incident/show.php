@@ -16,7 +16,7 @@
 		<!-- Display date of the incident -->
 		<tr>
 			<td>Date Incident</td>
-			<td><?= date('d/m/Y', strtotime($item->date_incident)) ?></td>
+			<td><?= date('d/m/Y H:i:s', strtotime($item->date_incident)) ?></td>
 		</tr>
 
 		<!-- Display short explication of the incident -->

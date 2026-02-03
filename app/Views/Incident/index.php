@@ -36,7 +36,7 @@
 			<?php foreach ($items as $item): ?>
 				<tr>
 					<td data-label="Incident"><?= esc(($item->vehicule ?? 'Inconnu') . ' — ' . ($item->user ?? 'Inconnu') . ' — ' . ($item->type_incident ?? 'Inconnu')) ?></td>
-					<td data-label="Date Incident"><?= esc(date('d/m/Y', strtotime($item->date_incident))) ?></td>
+					<td data-label="Date Incident"><?= esc(date('d/m/Y H:i:s', strtotime($item->date_incident))) ?></td>
 					<td data-label="Explication" class="long-text"><?= esc($item->explication_incident) ?></td>
 					<td data-label="Actions">
 						<a href="<?= site_url('Incident/show/'.$item->id) ?>" class="btn btn-info">Voir</a>
