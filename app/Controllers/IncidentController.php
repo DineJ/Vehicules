@@ -66,12 +66,14 @@ class IncidentController extends Controller
 	// Show an element
 	public function show($id)
 	{
+		// load helper
+		helper('section');
+
 		$data['page'] = 'show';
 
 		// Get id
 		$data['item'] = $this->model->find($id);
-		$data['suivi'] = $this->suiviModel->where('id_incident', $data['item']->id)->findAll();
-		$data['suiviId'] = $data['suivi'][0];
+		$data['suivi'] = $this->suiviModel->where('suivi.id_incident', $id)->find($data['item']->id_incident);
 
 		// Get datas linked by user_id
 		$data['utilisateur'] = $this->userModel->find($data['item']->id_user);
