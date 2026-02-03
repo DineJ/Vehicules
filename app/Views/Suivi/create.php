@@ -7,20 +7,23 @@
 
 	<!-- Display all incident into a list -->
 	<label for="id_incident">Incident</label>
-	<select id="id_incident" name="id_incident" class="form-control" required>
+	<select id="id_incident" name="id_incident" onchange="disabledDefault('id_incident')" class="form-control" required>
+		<option value=""> Choisir un vehicule </option>
+
 		<?php foreach ($incidents as $i): ?>
 
-			<!-- Match id with a value -->
-			<option value="<?= $i->incident_id ?>"<?= (isset($modal_incident_id) && $modal_incident_id == $i->incident_id) ? 'selected' : '' ?>>
-				<?= 'Vehicule : ' . $i->plaque . ' — Date : ' . date('d/m/Y', strtotime($i->date_incident)) ?>
+		<option value="<?= esc($i->incident_id) ?>" <?= $i->incident_id == $incidentId ? 'selected' : '' ?>>
+				<?= 'Vehicule : ' . esc($i->plaque) . ' — Date : ' . esc(date('d/m/Y H:i:s', strtotime($i->date_incident))) ?>
 			</option>
 
 		<?php endforeach; ?>
+
 	</select>
+
 
 	<!-- Select date -->
 	<label>Date Intervention</label>
-	<input type="date" id="date_intervention" name="date_intervention" value="<?= isset($item) ? $item->date_intervention : '' ?>" class="form-control" required>
+	<input type="date" id="date_intervention" name="date_intervention" value="<?= isset($item) ? esc(date('Y-m-d', strtotime($item->date_intervention))) : '' ?>" class="form-control" required>
 
 	<!-- Type a short explication -->
 	<label>Description</label>
