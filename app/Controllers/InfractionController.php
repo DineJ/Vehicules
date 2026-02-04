@@ -34,9 +34,19 @@ class InfractionController extends Controller
 			->select('vehicule.plaque')
 			->join('mission', 'infraction.id_mission = mission.id', 'left')
 			->join('vehicule', 'mission.id_vehicule = vehicule.id', 'left')
-			->where('infraction.id', $id)
 			->get()
 			->getRow('plaque');
+
+		$data['mission'] = $this->model
+			->select('id_mission')
+			->join('mission', 'mission.id = infraction.id_mission', 'left')
+			->where('infraction.id', $id)
+			->findAll(1);
+
+		if (isset($data['mission'][0]))
+		{
+			$data['missionId'] = $data['mission'][0];
+		}
 
 		$data['item'] = $this->model->find($id);
 		return view('Infraction/show', $data);
