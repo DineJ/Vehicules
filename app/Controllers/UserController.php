@@ -46,8 +46,17 @@ class UserController extends Controller
 	// DISPLAY AN ELEMENT
 	public function show($id)
 	{
+		// load helper
+		helper('section');
+
 		$data['item'] = $this->model->find($id);
-		$data['permis'] = $this->permisModel->find($data['item']->id);
+		$data['permis'] = $this->permisModel
+			->select('user.id, permis.id_user, update_permis, num_permis, date_permis, type_permis')
+			->join('user', 'user.id = permis.id_user', 'left')
+			->where('user.id', $id)
+			->orderBy('permis.id_user', 'DESC')
+			->findAll(1);
+
 		return view('User/show', $data);
 	}
 
