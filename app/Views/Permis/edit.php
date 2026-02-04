@@ -22,17 +22,17 @@
 	<label>Catégorie</label>
 	<div>
 		<select id="type_permis" name="type_permis" required>
-			<option value="B">B</option>
-			<option value="BE">BE</option>
-			<option value="C">C</option>
-			<option value="C1">C1</option>
-			<option value="C1E">C1E</option>
+			<option value="B" <?= ($item->type_permis === 'B')   ? 'selected' : '' ?>>B</option>
+			<option value="BE" <?= ($item->type_permis === 'BE')   ? 'selected' : '' ?>>BE</option>
+			<option value="C" <?= ($item->type_permis === 'C')   ? 'selected' : '' ?>>C</option>
+			<option value="C1" <?= ($item->type_permis === 'C1')   ? 'selected' : '' ?>>C1</option>
+			<option value="C1E" <?= ($item->type_permis === 'C1E')   ? 'selected' : '' ?>>C1E</option>
 		</select>
 	</div>
 	<input type='hidden' id='oldtype_permis' name='oldtype_permis' value='<?= isset($item) ? $item->type_permis : '' ?>'>
 
 
-	<a href="<?= site_url('User/show/'.$item->id_user) ?>" class="btn btn-secondary mt-3">Retour</a>
+	<a href="<?= site_url('User/show/'.$item->id_user) ?>" id="btnRetour" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 

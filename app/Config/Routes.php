@@ -94,7 +94,7 @@ $routes->group('', ['filter' => 'Redirection:admin'], function($routes)
 
 
 	// Routes for Permis
-	$routes->get('Permis/create/(:num)', 'PermisController::create/$1'); // Route that leads to the display of creating a specific data
+	$routes->match(['post', 'get'], 'Permis/create/', 'PermisController::create/'); // Route that leads to the display of creating a specific data
 	$routes->post('Permis/store/', 'PermisController::store'); // Route that leads to the insert fuction of the DB
 	$routes->get('Permis/edit/(:num)', 'PermisController::edit/$1'); // Route that leads to the display of editing a specific data
 	$routes->post('Permis/update/(:num)', 'PermisController::update/$1'); // Route that leads to the update fuction of the DB

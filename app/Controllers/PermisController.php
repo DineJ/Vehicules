@@ -33,10 +33,11 @@ class PermisController extends Controller
 	}
 
 	// FORMULAIRE DE CRÉATION
-	public function create($id)
+	public function create()
 	{
-		//$data = $this->request->getPost();
-		$data['id_user'] = $id;
+                // Retrive the id of modal_id to prefill a form
+		$data['userId'] = ($this->request->getPost('modal_id') ?? $this->request->getGet('modal_id'));
+		$data['no_navbar'] = 'no-navbar';
 		$data['title'] = "Créer Permis";
 		return view('Permis/create', $data);
 	}
@@ -70,6 +71,7 @@ class PermisController extends Controller
 	// FORMULAIRE DE MODIFICATION
 	public function edit($id)
 	{
+                $data['no_navbar'] = 'no-navbar';
 		$data['item'] = $this->model->find($id);
 		$data['title'] = "Modifier Permis";
 		return view('Permis/edit', $data);
