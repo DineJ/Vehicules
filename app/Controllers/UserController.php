@@ -54,7 +54,7 @@ class UserController extends Controller
 			->select('user.id, permis.id_user, update_permis, num_permis, date_permis, type_permis')
 			->join('user', 'user.id = permis.id_user', 'left')
 			->where('user.id', $id)
-			->orderBy('permis.id_user', 'DESC')
+			->orderBy('permis.update_permis', 'DESC')
 			->findAll(1);
 
 		return view('User/show', $data);

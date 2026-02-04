@@ -55,10 +55,6 @@
 		<!-- Redirection button to edit user form-->
 		<a href="<?= site_url('User/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
 
-		<!-- Redirection button to create incident form -->
-		<a href="<?= site_url('Incident/create') ?>?user=<?= $item->id?>" class="btn btn-warning">Ajouter incident</a>
-
-
 		<!-- Disabled account button -->
 		<input type="hidden" name="actif" id="actif" value="<?= $item->actif ? 0 : 1 ?>">
 
@@ -68,9 +64,11 @@
 	</form>
 </div>
 
-<?= createSection($permis, 'Permis', 'user', ['num_permis' => 'Numéro', 'date_permis' => 'Date obtention', 'update_permis' => 'Date expiration', 'type_permis' => 'Catégorie']); ?> 
+<?= createSection($permis, 'Permis', 'user', ['num_permis' => 'Numéro', 'date_permis' => 'Date obtention', 'update_permis' => 'Date expiration', 'type_permis' => 'Catégorie'], 1, 1, $item->id); ?>
 
 
-<script src="<?= base_url('public/js/popupModal.js') ?>"></script>
+<script src="<?= base_url('js/popupModal.js') ?>"></script>
+<script src="<?= base_url('js/main.js') ?>"></script>
+<script src="<?= base_url('js/validateForm.js') ?>"></script>
 
 <?= $this->endSection() ?>
