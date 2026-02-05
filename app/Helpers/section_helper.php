@@ -78,18 +78,22 @@ function entityColumnsSection($entities, $entity_name1, $columns_entity, $button
 		$html .= '<tbody>';
 		$col_name = array_keys($columns_entity);
 		foreach($item->toArray() as $c => $v):
-			if (in_array($c, $col_name)):
-		$html .= '<tr>';
+
 			if ($c == 'id'):
 				$id = $v;
 			endif;
 
+			if (in_array($c, $col_name)):
+
+				$html .= '<tr>';
 			        $html .='<td class="td-hidden">'.$columns_entity[$c].'</td>';
 				$html .= columnType($c, $v, $columns_entity);
 
-			$html .= '</tr>';
+				$html .= '</tr>';
 			endif;
-		endforeach;
+
+			endforeach;
+
 		$html .= '</tbody>';
 		$html .= '</table>';
 
