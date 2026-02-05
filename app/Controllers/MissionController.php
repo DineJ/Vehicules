@@ -75,20 +75,6 @@ class MissionController extends Controller
 		return view('Mission/show', $data);
 	}
 
-
-	// CREATION FORM
-	public function create()
-	{
-		// Query to get datas from other table
-		$data['utilisateurs'] = $this->userModel->findAll();
-		$data['lieux'] = $this->lieuModel->findAll();
-		$data['vehicules'] = $this->vehiculeModel->findAll();
-		$data['motifs'] = $this->model->getMotifEnum();
-		$data['title'] = "Créer Mission";
-		return view('Mission/create', $data);
-	}
-
-
 	// INSERT INTO DATABASE
 	public function store()
 	{

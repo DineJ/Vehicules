@@ -30,8 +30,6 @@ $routes->group('', ['filter' => 'Redirection:admin'], function($routes)
 
 	$routes->get('Mission', 'MissionController::index');
 	$routes->get('Mission/show/(:num)', 'MissionController::show/$1');
-	$routes->get('Mission/create', 'MissionController::create');
-	$routes->post('Mission/store', 'MissionController::store');
 	$routes->get('Mission/edit/(:num)', 'MissionController::edit/$1');
 	$routes->post('Mission/update/(:num)', 'MissionController::update/$1');
 	$routes->get('Mission/delete/(:num)', 'MissionController::delete/$1');
