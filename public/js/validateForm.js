@@ -502,28 +502,6 @@ function validateFormAssurance()
 		}
 
 		// Get values
-		let date_depart = document.getElementById('date_depart').value;
-		let olddate_depart = document.getElementById('olddate_depart').value;
-		row++;
-
-		// Check values
-		if (date_depart == olddate_depart)
-		{
-			compare++;
-		}
-
-		// Get values
-		let date_arrivee = document.getElementById('date_arrivee').value;
-		let olddate_arrivee = document.getElementById('olddate_arrivee').value;
-		row++;
-
-		// Check values
-		if (date_arrivee == olddate_arrivee)
-		{
-			compare++;
-		}
-
-		// Get values
 		let km_depart = document.getElementById('km_depart').value;
 		let oldkm_depart = document.getElementById('oldkm_depart').value;
 		row++;

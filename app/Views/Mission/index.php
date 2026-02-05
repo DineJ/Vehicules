@@ -2,7 +2,6 @@
 <?= $this->section('content') ?>
 
 <h2>Liste des Missions</h2>
-<a href="<?= site_url('Mission/create') ?>" class="btn btn-success">Ajouter</a>
 
 <!-- Search bar -->
 <form method="get" action="<?= site_url("Mission") ?>" class="mb-3">
@@ -46,8 +45,8 @@
 					<td class="concatenation" data-label="Lieu départ"><?= esc($item->numero_depart) . ' ' . esc($item->adresse_depart) . ' ' . esc($item->nom_lieu_depart) ?></td>
 					<td class="concatenation" data-label="Lieu arrivé"><?= esc($item->numero_arrive) . ' ' . esc($item->adresse_arrivee) . ' ' . esc($item->nom_lieu_arrive) ?></td>
 					<td data-label="Motif"><?= esc($item->motif) ?></td>
-					<td data-label="Date départ"><?= esc(date('d/m/Y', strtotime($item->date_depart))) ?></td>
-					<td data-label="Date arrivée"><?= esc(date('d/m/Y', strtotime($item->date_arrivee))) ?></td>
+					<td data-label="Date départ"><?= esc(date('d/m/Y H:i', strtotime($item->date_depart))) ?></td>
+					<td data-label="Date arrivée"><?= esc(date('d/m/Y H:i', strtotime($item->date_arrivee))) ?></td>
 					<td data-label="Km départ"><?= esc($item->km_depart) ?></td>
 					<td data-label="Km arrivé"><?= esc($item->km_arrive) ?></td>
 
