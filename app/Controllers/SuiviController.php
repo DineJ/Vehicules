@@ -29,6 +29,7 @@ class SuiviController extends Controller
 		$builder = $this->incidentModel->select('incident.id, vehicule.plaque, incident.date_incident, suivi.date_intervention, suivi.description, suivi.id as id')
 										->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
 										->join('suivi', 'suivi.id_incident = incident.id', 'left')
+										->where('suivi.id_incident = incident.id')
 										->orderBy('vehicule.id');
 
 		// Search bar query
