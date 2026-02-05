@@ -3,13 +3,12 @@
 
 <h2><?= $title ?></h2>
 
-<form method="post" action="<?= site_url('Permis/update/'.$item->id_user) ?>" onsubmit="return validateFormPermis()">
+<form method="post" action="<?= site_url('Permis/update/'.$item->num_permis) ?>" onsubmit="return validateFormPermis()">
 
 	<input type="hidden" name="id_user" id="id_user" value="<?= isset($item) ? $item->id_user : -1 ?>">
 
 	<label>Numéro</label>
-	<input type='text' pattern="^[0-9]{10}" id='num_permis' name='num_permis' value='<?= isset($item) ? $item->num_permis : '' ?>' class='form-control' required>
-	<input type='hidden' id='oldnum_permis' name='oldnum_permis' value='<?= isset($item) ? $item->num_permis : '' ?>'>
+	<input type='text' pattern="^[0-9]{10}" id='num_permis' name='num_permis' value='<?= isset($item) ? $item->num_permis : '' ?>' class='form-control' readonly required>
 
 	<label>Date d'obtention</label>
 	<input type='date' id='date_permis' name='date_permis' value='<?= isset($item) ? substr($item->date_permis, 0, 10) : '' ?>' class='form-control' required>
@@ -21,7 +20,7 @@
 
 	<label>Catégorie</label>
 	<div>
-		<select id="type_permis" name="type_permis" required>
+		<select id="type_permis" name="type_permis" class="form-control" required>
 			<option value="B" <?= ($item->type_permis === 'B')   ? 'selected' : '' ?>>B</option>
 			<option value="BE" <?= ($item->type_permis === 'BE')   ? 'selected' : '' ?>>BE</option>
 			<option value="C" <?= ($item->type_permis === 'C')   ? 'selected' : '' ?>>C</option>

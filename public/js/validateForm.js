@@ -80,15 +80,6 @@ function validateFormPermis()
 	let compare = 0;
 	let row = 0;
 
-	let num_permis = document.getElementById('num_permis').value;
-	let oldnum_permis = document.getElementById('oldnum_permis').value;
-	row++;
-
-	if (num_permis == oldnum_permis)
-	{
-		compare++;
-	}
-
 	let date_permis = document.getElementById('date_permis').value;
 	let olddate_permis = document.getElementById('olddate_permis').value;
 	row++;
