@@ -15,16 +15,45 @@ function displayDiv()
 				// Compare block ids and hide blocks that come after
 				if (bloc.id >= targetId) {
 					bloc.style.display = 'none';
+					resetDiv(bloc);
 				}
 			});
 
 			// If a value is selected display the next block
 			if (this.value !== '') {
 				target.style.display = 'block';
+
+				const focusField = target.querySelector('input, select');
+				if (focusField)
+				{
+					focusField.focus();
+				}
 			}
 		});
 	});
 }
+
+// Reset div
+function resetDiv(bloc)
+{
+	bloc.querySelectorAll('select').forEach(doc => {
+		// Reset value
+		if (doc.tagName === 'SELECT')
+		{
+			// Reset on the first option
+			doc.selectedIndex = 0;
+		}
+		else
+		{
+			doc.value = '';
+		}
+		if (doc.value != '')
+		{
+			doc.value = '';
+		}
+	});
+}
+
 
 // Prefill an input from a select
 function prefill(fillId, idFilled)
@@ -47,7 +76,7 @@ function prefill(fillId, idFilled)
 		const fillValue = option ? option.dataset.fill : undefined;
 
 		// If a value exists, fill the input and lock it
-		if (fillValue !== undefined && fillValue !== '')
+		if (fillValue !== undefined && fillValue !== '' && fillValue > 0)
 		{
 			field.value = fillValue;
 			field.setAttribute('readonly', 'readonly');

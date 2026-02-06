@@ -19,13 +19,13 @@
 
 	<!-- Select a date -->
 	<label>Date Incident</label>
-	<input type='date' id='date_incident' name='date_incident' value='<?= isset($item) ? substr($item->date_incident, 0, 10) : '' ?>' class='form-control' required>
-	<input type='hidden' id='olddate_incident' name='olddate_incident' value='<?= isset($item) ? substr($item->date_incident, 0, 10) : '' ?>'>
+	<input type='datetime-local' id='date_incident' name='date_incident' step="1" max="<?= date('Y-m-d\TH:i:s')?>" value='<?= isset($item) ? esc(date('Y-m-d\TH:i:s', strtotime($item->date_incident))) : '' ?>' class='form-control' required>
+	<input type='hidden' id='olddate_incident' name='olddate_incident' value='<?= isset($item) ? esc(date('Y-m-d\TH:i:s', strtotime($item->date_incident))) : '' ?>'>
 
 
 	<!-- Type a short explication -->
 	<label>Explication Incident</label>
-	<textarea oninput="setUpper(document.getElementById('explication_incident'));" id='explication_incident' name='explication_incident' class='form-control'><?= esc($item->explication_incident) ?></textarea>
+	<textarea oninput="setUpper(document.getElementById('explication_incident'));" id='explication_incident' name='explication_incident' class='form-control' required><?= esc($item->explication_incident) ?></textarea>
 	<input type='hidden' id='oldexplication_incident' name='oldexplication_incident' value='<?= isset($item) ? $item->explication_incident : '' ?>'>
 
 	</br>

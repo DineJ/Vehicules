@@ -18,11 +18,11 @@
 
 	<!-- Select a date -->
 	<label>Date Incident</label>
-	<input type='date' id='date_incident' name='date_incident' max="<?= date('Y-m-d') ?>" value='<?= isset($item) ? $item->date_incident : '' ?>' class='form-control' required>
+	<input type='datetime-local' id='date_incident' name='date_incident' step="1" max="<?= date('Y-m-d\TH:i:s') ?>" value='<?= isset($item) ? date('Y-m-d\TH:i:s', strtotime($item->date_incident)) : '' ?>' class='form-control' required>
 
 	<!-- Type a short explication -->
 	<label>Explication Incident</label>
-	<textarea oninput="setUpper(document.getElementById('explication_incident'));" id='explication_incident' name='explication_incident' class='form-control'><?= isset($item) ? $item->explication_incident : '' ?></textarea>
+	<textarea oninput="setUpper(document.getElementById('explication_incident'));" id='explication_incident' name='explication_incident' class='form-control' required><?= isset($item) ? $item->explication_incident : '' ?></textarea>
 
 	<!-- Display all drivers into a list -->
 	<label for="id_user">Conducteur</label>

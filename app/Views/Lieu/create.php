@@ -11,7 +11,7 @@
 
 	<!-- Type postal code -->
 	<label>Code postal</label>
-	<input type="text" oninput="setUpper(document.getElementById('code_postal'));" pattern="^[0-9]{5}$ id="code_postal" name="code_postal" value="<?= isset($item) ? $item->code_postal : '' ?>" class="form-control" required>
+	<input type="text" oninput="setUpper(document.getElementById('code_postal'));" pattern="^[0-9]{5}$" id="code_postal" name="code_postal" value="<?= isset($item) ? $item->code_postal : '' ?>" class="form-control" required>
 
 	<!-- Type street number  -->
 	<label>Numéro</label>

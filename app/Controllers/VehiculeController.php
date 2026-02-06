@@ -70,7 +70,6 @@ class VehiculeController extends Controller
 		$data['assurance'] = $this->assuranceModel
 			->select('MAX(assurance.id), assurance.date_contrat, assurance.nom_assurance')
 			->join('assurance_vehicule', 'assurance_vehicule.id_assurance = assurance.id', 'left')
-			->where('assurance_vehicule.id_vehicule', $id)
 			->groupBy('assurance.id')
 			->orderBy('assurance.id', 'DESC')
 			->findAll(1);

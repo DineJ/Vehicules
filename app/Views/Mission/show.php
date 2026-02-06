@@ -41,13 +41,13 @@
 			<!-- Display starting date -->
 			<tr>
 				<td class="td-hidden">Date départ</td>
-				<td data-label="Date départ"><?= date('d/m/Y', strtotime($item->date_depart)) ?></td>
+				<td data-label="Date départ"><?= date('d/m/Y H:i', strtotime($item->date_depart)) ?></td>
 			</tr>
 
 			<!-- Display ending date -->
 			<tr>
 				<td class="td-hidden">Date arrivée</td>
-				<td data-label="Date arrivée"><?= date('d/m/Y', strtotime($item->date_arrivee)) ?></td>
+				<td data-label="Date arrivée"><?= date('d/m/Y H:i', strtotime($item->date_arrivee)) ?></td>
 			</tr>
 
 			<!-- Display starting Km -->
@@ -79,7 +79,7 @@
 </div>
 
 
-<?= createSection($infractions, 'Infraction', 'mission', ['date_infraction' => 'Date infraction', 'commentaire' => 'Commentaire', 'points' => 'Points', 'prix' => 'Prix', 'stationnement' => 'Stationnement'], '1', '1', $item->id);?>
+<?= createSection($infractions, 'Infraction', 'mission', ['date_infraction' => 'Date infraction', 'commentaire' => 'Commentaire', 'points' => 'Points', 'prix' => 'Prix', 'stationnement' => 'Stationnement'], 1, 1, $item->id);?>
 
 <script src="<?= base_url('js/main.js') ?>"></script>
 <script src="<?= base_url('js/validateForm.js') ?>"></script>

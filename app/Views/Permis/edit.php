@@ -3,13 +3,12 @@
 
 <h2><?= $title ?></h2>
 
-<form method="post" action="<?= site_url('Permis/update/'.$item->id_user) ?>" onsubmit="return validateFormPermis()">
+<form method="post" action="<?= site_url('Permis/update/'.$item->num_permis) ?>" onsubmit="return validateFormPermis()">
 
 	<input type="hidden" name="id_user" id="id_user" value="<?= isset($item) ? $item->id_user : -1 ?>">
 
 	<label>Numéro</label>
-	<input type='text' pattern="^[0-9]{10}" id='num_permis' name='num_permis' value='<?= isset($item) ? $item->num_permis : '' ?>' class='form-control' required>
-	<input type='hidden' id='oldnum_permis' name='oldnum_permis' value='<?= isset($item) ? $item->num_permis : '' ?>'>
+	<input type='text' pattern="^[0-9]{10}" id='num_permis' name='num_permis' value='<?= isset($item) ? $item->num_permis : '' ?>' class='form-control' readonly required>
 
 	<label>Date d'obtention</label>
 	<input type='date' id='date_permis' name='date_permis' value='<?= isset($item) ? substr($item->date_permis, 0, 10) : '' ?>' class='form-control' required>
@@ -21,18 +20,18 @@
 
 	<label>Catégorie</label>
 	<div>
-		<select id="type_permis" name="type_permis" required>
-			<option value="B">B</option>
-			<option value="BE">BE</option>
-			<option value="C">C</option>
-			<option value="C1">C1</option>
-			<option value="C1E">C1E</option>
+		<select id="type_permis" name="type_permis" class="form-control" required>
+			<option value="B" <?= ($item->type_permis === 'B')   ? 'selected' : '' ?>>B</option>
+			<option value="BE" <?= ($item->type_permis === 'BE')   ? 'selected' : '' ?>>BE</option>
+			<option value="C" <?= ($item->type_permis === 'C')   ? 'selected' : '' ?>>C</option>
+			<option value="C1" <?= ($item->type_permis === 'C1')   ? 'selected' : '' ?>>C1</option>
+			<option value="C1E" <?= ($item->type_permis === 'C1E')   ? 'selected' : '' ?>>C1E</option>
 		</select>
 	</div>
 	<input type='hidden' id='oldtype_permis' name='oldtype_permis' value='<?= isset($item) ? $item->type_permis : '' ?>'>
 
 
-	<a href="<?= site_url('User/show/'.$item->id_user) ?>" class="btn btn-secondary mt-3">Retour</a>
+	<a href="<?= site_url('User/show/'.$item->id_user) ?>" id="btnRetour" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>
 

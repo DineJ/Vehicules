@@ -75,20 +75,6 @@ class MissionController extends Controller
 		return view('Mission/show', $data);
 	}
 
-
-	// CREATION FORM
-	public function create()
-	{
-		// Query to get datas from other table
-		$data['utilisateurs'] = $this->userModel->findAll();
-		$data['lieux'] = $this->lieuModel->findAll();
-		$data['vehicules'] = $this->vehiculeModel->findAll();
-		$data['motifs'] = $this->model->getMotifEnum();
-		$data['title'] = "Créer Mission";
-		return view('Mission/create', $data);
-	}
-
-
 	// INSERT INTO DATABASE
 	public function store()
 	{
@@ -161,6 +147,17 @@ class MissionController extends Controller
 		$data['lieux'] = $this->lieuModel->findAll();
 		$data['motifs'] = $this->model->getMotifEnum();
 		$data['item'] = $this->model;
+
+		$redirection = $this->model
+			->select('mission.date_depart, mission.date_arrivee')
+			->where('mission.id_user', session()->get('user')['id'])
+			->where('mission.date_depart = mission.date_arrivee', null, false)
+			->findAll();
+
+		if($redirection)
+		{
+			return redirect()->to('/Non_admin');
+		}
 
 		return view('Mission/start', $data);
 	}

@@ -78,6 +78,7 @@ class Incident extends Entity
 
 	public function setdateIncident($dateIncident)
 	{
+		$dateIncident = str_replace('T', ' ', $dateIncident);
 		$validation = \Config\Services::validation();
 		$validation->setRules(['date_incident' => 'valid_date[Y-m-d H:i:s]']);
 

@@ -1,3 +1,4 @@
+
 <?= $this->extend('layouts/main') ?> <!-- Extend the base layout -->
 <?= $this->section('content') ?> <!-- Start the main content section -->
 
@@ -18,8 +19,9 @@ function paginateNumber (&$count)
 # Display usefull datas
 function usefullDatas ($entity,$entity_name, $columns_entity, $message, $resetData=null, $valueResetData=null)
 { ?>
-	<div class="table-responsive">
-		<h4 class="centerTitle"><?= $entity_name . ' : ' . $message ?></h4>
+	<h4 id="<?= $entity_name ?>hideTitle" class="leftTitle" title="Cliquez pour afficher" onclick="hideDiv(['<?= $entity_name ?>hideTitle', '<?= $entity_name ?>hideDiv'])">▶ <?= $entity_name . ' : ' . $message ?></h4>
+	<div id="<?= $entity_name ?>hideDiv" class="table-responsive" style="display:none;">
+		<h4 class="leftTitle" title="Cliquez pour fermer" onclick="hideDiv(['<?= $entity_name ?>hideTitle', '<?= $entity_name ?>hideDiv'])">▼ <?= $entity_name . ' : ' . $message ?></h4>
 		<!-- Test if atleast one <?= $entity_name ?> exist -->
 		<?php if (empty($entity))
 		{ ?>
@@ -44,7 +46,7 @@ function usefullDatas ($entity,$entity_name, $columns_entity, $message, $resetDa
 		?>
 		<a href="<?= site_url(''.$entity_name.'') ?>" class="btn btn-secondary">Retour vers <?= $entity_name ?></a>
 	</div>
-	</br></br>
+	</br>
 <?php
 }
 
@@ -120,7 +122,7 @@ function entityColumns($entities, $entity_name, $columns_entity, $message, $rese
 
 
 usefullDatas($user, 'User', ['Conducteur'], 'Désactivé', 'actif', '1');
-usefullDatas($ip, 'Ip', ['IP'], 'Désactivée', 'nb_echec', '0');
+usefullDatas($ip, 'Ip', ['IP', 'Nombre échecs'], 'Désactivée', 'nb_echec', '0');
 usefullDatas($vehicule, 'Vehicule', ['Plaque', 'Marque', 'Modèle'], 'Désactivé', 'actif', '1');
 usefullDatas($lieu, 'Lieu', ['Adresse'], 'Désactivé', 'actif', '1');
 usefullDatas($infraction, 'Infraction', ['Plaque', 'Conducteur', 'Date', 'Points', 'Prix'], 'Récent');
@@ -128,5 +130,7 @@ usefullDatas($mission, 'Mission', ['Plaque', 'Conducteur', 'Motif', 'Départ', '
 usefullDatas($incident, 'Incident', ['Plaque', 'Conducteur', 'Type', 'Date'], 'Récent');
 ?>
 
+
+<script src="<?php echo base_url('js/hideLayout.js'); ?>"></script>
 <?= $this->endSection() ?> <!-- End the content section -->
 

@@ -16,7 +16,7 @@
 
 	<!-- Type a short explication -->
 	<label>Commentaire</label>
-	<textarea oninput="setUpper(document.getElementById('commentaire'));" id="commentaire" name="commentaire" class="form-control"><?= isset($item) ? $item->commentaire : '' ?></textarea>
+	<textarea oninput="setUpper(document.getElementById('commentaire'));" id="commentaire" name="commentaire" class="form-control" required><?= isset($item) ? $item->commentaire : '' ?></textarea>
 	<input type="hidden" id="oldcommentaire" name="oldcommentaire" value="<?= isset($item) ? $item->commentaire : '' ?>">
 
 	<!-- Type how many points did you lose-->

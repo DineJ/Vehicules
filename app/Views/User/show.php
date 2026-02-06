@@ -49,12 +49,11 @@
 <div>
 	<form method="post" action="<?= site_url('User/update/'.$item->id) ?>">
 
+		<!-- Redirection button -->
+		<a href="<?= site_url('User') ?>" class="btn btn-secondary">Retour</a>
+
 		<!-- Redirection button to edit user form-->
 		<a href="<?= site_url('User/edit/'.$item->id) ?>" class="btn btn-warning">Modifier</a>
-
-		<!-- Redirection button to create incident form -->
-		<a href="<?= site_url('Incident/create') ?>?user=<?= $item->id?>" class="btn btn-warning">Ajouter incident</a>
-
 
 		<!-- Disabled account button -->
 		<input type="hidden" name="actif" id="actif" value="<?= $item->actif ? 0 : 1 ?>">
@@ -65,76 +64,11 @@
 	</form>
 </div>
 
-<!-- Creation of a section license -->
-<div style="margin-left: 3rem; margin-top: 1.5rem; width: 95%; padding: 1rem; border: 1px solid #ccc; border-left: 4px solid #6f42c1; border-radius: 8px;">
-	<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-		<h6 style="margin: 0; color: #6f42c1;">↳ Permis</h6>
-
-		<!-- Test if an user has a license or not -->
-		<?php if (!isset($permis)) { ?>
-
-		<!-- Redirection button to create license form-->
-		<a href="<?= site_url('Permis/create/'.$item->id) ?>" class="btn btn-success">Ajouter</a>
-	</div>
-	<div class="table-responsive">
-		<table class="table table-striped table-bordered mt-3">
-
-			<tbody>
-
-				<!-- User has no license yet -->
-				<tr>
-					<td class="label-permis">Pas de permis enregistrer</td>
-				</tr>
-	<?php
-	}
-	else
-	{
-	?>
-
-	<!-- Redirection button to edit license form -->
-	<a href="<?= site_url('Permis/edit/' . $permis->id_user) ?>" class="btn btn-warning">Modifer</a>
-</div>
+<?= createSection($permis, 'Permis', 'user', ['id' => 'Numéro', 'date_permis' => 'Date obtention', 'update_permis' => 'Date expiration', 'type_permis' => 'Catégorie'], 1, 1, $item->id); ?>
 
 
-<div class="table-responsive">
-	<!-- Display license form -->
-	<table class="table table-striped table-bordered mt-3">
-		<tbody>
+<script src="<?= base_url('js/popupModal.js') ?>"></script>
+<script src="<?= base_url('js/main.js') ?>"></script>
+<script src="<?= base_url('js/validateForm.js') ?>"></script>
 
-			<!-- Display license number -->
-			<tr>
-				<td class="td-hidden">Numéro</td>
-				<td data-label="Numéro"><?= $permis->num_permis ?></td>
-			</tr>
-
-			<!-- Display license issue date -->
-			<tr>
-				<td class="td-hidden">Date d'obtention</td>
-				<td data-label="Date obtention"><?= substr($permis->date_permis, 0, 10) ?></td>
-			</tr>
-
-			<!-- Display license expiration date -->
-			<tr>
-				<td class="td-hidden">Date d'expiration</td>
-				<td data-label="Date expiration"><?= substr($permis->update_permis, 0, 10) ?></td>
-			</tr>
-
-			<!-- Display license category -->
-			<tr>
-				<td class="td-hidden">Catégorie</td>
-				<td data-label="Catégorie"><?= $permis->type_permis ?></td>
-			</tr>
-
-	<?php
-	}
-	?>
-			</tbody>
-		</table>
-	</div>
-</div>
-
-</br>
-
-<!-- Redirection button -->
-<a href="<?= site_url('User') ?>" class="btn btn-secondary">Retour</a>
 <?= $this->endSection() ?>

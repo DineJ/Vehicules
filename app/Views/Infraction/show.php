@@ -55,7 +55,7 @@
 		<a href="<?= site_url('Infraction') ?>" class="btn btn-secondary">Retour</a>
 
 		<!-- Redirection button to show Mission form -->
-		<a href="<?= site_url('Mission/show/'.$item->id) ?>" class="btn btn-warning">Voir Mission</a>
+		<a href="<?= site_url('Mission/show/'.$missionId->id_mission) ?>" class="btn btn-warning">Voir Mission</a>
 
 	</form>
 </div>

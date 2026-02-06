@@ -29,6 +29,7 @@ class SuiviController extends Controller
 		$builder = $this->incidentModel->select('incident.id, vehicule.plaque, incident.date_incident, suivi.date_intervention, suivi.description, suivi.id as id')
 										->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
 										->join('suivi', 'suivi.id_incident = incident.id', 'left')
+										->where('suivi.id_incident = incident.id')
 										->orderBy('vehicule.id');
 
 		// Search bar query
@@ -69,14 +70,8 @@ class SuiviController extends Controller
 		$data['title'] = "Créer Suivi"; 
 		$data['no_navbar'] = 'no-navbar';
 
-		// Get ID from modal to pre-fill form
-		$modal_incident_id = $this->request->getPost('modal_id_incident');
-
-		// Check is function create is call by modal or classic way
-		if (!empty($modal_incident_id))
-		{
-			$data['modal_incident_id'] = $modal_incident_id;
-		}
+                // Retrive the id of modal_id to prefill a form
+                $data['incidentId'] = ($this->request->getPost('modal_id') ?? $this->request->getGet('modal_id'));
 
 		// Query to get datas
 		$data['incidents'] = $this->incidentModel

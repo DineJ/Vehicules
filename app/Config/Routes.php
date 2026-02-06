@@ -30,8 +30,6 @@ $routes->group('', ['filter' => 'Redirection:admin'], function($routes)
 
 	$routes->get('Mission', 'MissionController::index');
 	$routes->get('Mission/show/(:num)', 'MissionController::show/$1');
-	$routes->get('Mission/create', 'MissionController::create');
-	$routes->post('Mission/store', 'MissionController::store');
 	$routes->get('Mission/edit/(:num)', 'MissionController::edit/$1');
 	$routes->post('Mission/update/(:num)', 'MissionController::update/$1');
 	$routes->get('Mission/delete/(:num)', 'MissionController::delete/$1');
@@ -94,10 +92,10 @@ $routes->group('', ['filter' => 'Redirection:admin'], function($routes)
 
 
 	// Routes for Permis
-	$routes->get('Permis/create/(:num)', 'PermisController::create/$1'); // Route that leads to the display of creating a specific data
+	$routes->match(['post', 'get'], 'Permis/create/', 'PermisController::create/'); // Route that leads to the display of creating a specific data
 	$routes->post('Permis/store/', 'PermisController::store'); // Route that leads to the insert fuction of the DB
-	$routes->get('Permis/edit/(:num)', 'PermisController::edit/$1'); // Route that leads to the display of editing a specific data
-	$routes->post('Permis/update/(:num)', 'PermisController::update/$1'); // Route that leads to the update fuction of the DB
+	$routes->get('Permis/edit/(:segment)', 'PermisController::edit/$1'); // Route that leads to the display of editing a specific data
+	$routes->post('Permis/update/(:segment)', 'PermisController::update/$1'); // Route that leads to the update fuction of the DB
 	$routes->get('Permis/delete/(:num)', 'PermisController::delete/$1'); // Not used
 
 
