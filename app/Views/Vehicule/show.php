@@ -48,7 +48,7 @@
 				<tr>
 					<td class="td-hidden">CG</td>
 					<td data-label="CG">
-						<a href="<?= esc($item->cg) ?>" taget="_blank" rel="noopener noreferrer">Carte grise</a>
+						<?= !empty($item->cg) ? '<a href="' .esc($item->cg).'" target="_blank" rel="noopener noreferrer">Carte grise</a>' : 'Pas de carte grise' ?>
 					</td>
 				</tr>
 
@@ -56,7 +56,7 @@
                                 <tr>
                                         <td class="td-hidden">CV</td>
                                         <td data-label="CV">
-                                                <a href="<?= esc($item->cv) ?>" taget="_blank" rel="noopener noreferrer">Carte verte</a>
+                                                <?= !empty($item->cv) ? '<a href="' .esc($item->cv).'" target="_blank" rel="noopener noreferrer">Carte verte</a>' : 'Pas de carte verte' ?>
                                         </td>
                                 </tr>
 
