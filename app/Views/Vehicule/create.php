@@ -30,7 +30,7 @@
 	<input type="date" id="ct" name="ct" value="<?= esc(isset($item) ? $item->ct : '', 'attr') ?>" class="form-control" required>
 
 	<!-- Registration certificate URL -->
-	<label>Carte grie</label>
+	<label>CG</label>
 	<input type="url" id="cg" name="cg" value="<?= esc(isset($item) ? $item->cg : '', 'attr') ?>" class="form-control" required>
 
 	<!-- Redirection button -->
