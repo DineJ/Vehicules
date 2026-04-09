@@ -40,8 +40,8 @@ class Vehicule extends Entity
 		'date_achat' => 'valid_date[Y-m-d]',
 		'date_immat' => 'valid_date[Y-m-d]',
 		'ct' => 'valid_date[Y-m-d]',
-		'cg' => 'string[max_length[255]',
-		'cv' => 'string[max_length[255]',
+		'cg' => 'string|max_length[255]',
+		'cv' => 'string|max_length[255]',
 		'actif' => 'integer|max_length[1]',
 	];
 
