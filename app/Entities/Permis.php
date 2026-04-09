@@ -138,7 +138,7 @@ class Permis extends Entity
 			throw new \InvalidArgumentException("❌ Valeur invalide pour 'lien_permis': " . implode(', ', $validation->getErrors()));
 		}
 
-		$this->attributes['lien_permis'] = $lien_Permis;
+		$this->attributes['lien_permis'] = $lienPermis;
 		return $this;
 	}
 }

@@ -51,7 +51,7 @@ class UserController extends Controller
 
 		$data['item'] = $this->model->find($id);
 		$data['permis'] = $this->permisModel
-			->select('num_permis id, permis.id_user, update_permis, date_permis, type_permis')
+			->select('num_permis id, permis.id_user, date_permis, update_permis, type_permis, lien_permis')
 			->join('user', 'user.id = permis.id_user', 'left')
 			->where('user.id', $id)
 			->orderBy('permis.update_permis', 'DESC')

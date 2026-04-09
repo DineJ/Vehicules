@@ -117,6 +117,11 @@ function columnType(string $column_name, $column_value, $columns_entity)
 		return '<td data-label="'.$columns_entity[$column_name].'">'.esc($column_value->format($format)).'</td>';
 	}
 
+	else if (filter_var($column_value, FILTER_VALIDATE_URL))
+	{
+		return '<td data-label="'.$columns_entity[$column_name].'"><a href="'.esc($column_value).'" target="_blank" rel="noopener noreferrer">Ouvrir</a></td>';
+	}
 	return '<td class="concatenation" data-label="'.$columns_entity[$column_name].'">'.esc($column_value).'</td>';
+
 }
 ?>
