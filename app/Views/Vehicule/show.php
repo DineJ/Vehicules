@@ -47,7 +47,9 @@
 				<!-- Display cg -->
 				<tr>
 					<td class="td-hidden">CG</td>
-					<td data-label="CG"><?= esc($item->cg) ?></td>
+					<td data-label="CG">
+						<a href="<?= esc($item->cg) ?>" taget="_blank" rel="noopener noreferrer">Carte grise</a>
+					</td>
 				</tr>
 
 				<!-- Display actif -->
