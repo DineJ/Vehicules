@@ -31,6 +31,10 @@
 	<label>Mail</label>
 	<input type='email' pattern="^[a-zA-Z0-9]+([_\-\.]{1}[a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}$" id='mail' name='mail' value='<?= isset($item) ? $item->mail : '' ?>' class='form-control' required>
 
+	<!-- License url -->
+	<label>Permis (non obligatoire)</label>
+	<input type="url" id="permis" name="permis" value='<?= esc(isset($item) ? $item->permis : '', 'attr') ?>' class="form-control">
+
 	<!-- Redirection button -->
 	<a href="<?= site_url('User') ?>" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>

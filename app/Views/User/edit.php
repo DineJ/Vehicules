@@ -36,6 +36,11 @@
 	<input type='email' pattern="^[a-zA-Z0-9]+([_\-\.]{1}[a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}$" id='mail' name='mail' value='<?= isset($item) ? $item->mail : '' ?>' class='form-control' required>
 	<input type='hidden' id='oldmail' name='oldmail' value='<?= isset($item) ? $item->mail : '' ?>'>
 
+	<!-- License url -->
+	<label>Permis</label>
+	<input type="url" id="permis" name="permis" value="<?= esc(isset($item) ? $item->permis : '', 'attr') ?>" class="form-control">
+	<input type="hidden" id="oldpermis" name="oldpermis" value="<?= esc(isset($item) ? $item->permis : '', 'attr') ?>" class="form-control">
+
 	<!-- Redirection button -->
 	<a href="<?= site_url('User/show/'.$item->id) ?>" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>

@@ -37,6 +37,14 @@
 				<td data-label="Mail"><?= $item->mail ?></td>
 			</tr>
 
+			<!-- Display license -->
+                        <tr>
+                        	<td class="td-hidden">Permis</td>
+                                <td data-label="Permis">
+                                	<?= !empty($item->permis) ? '<a href="' .esc($item->permis).'" target="_blank" rel="noopener noreferrer">Permis</a>' : 'Pas de permis'?>
+                               	</td>
+                     	</tr>
+
 			<!-- Display if an account is disabled or not -->
 			<tr>
 				<td class="td-hidden">Actif</td>
