@@ -46,7 +46,7 @@
 
 				<!-- Display cg -->
 				<tr>
-					<td class="td-hidden">CG</td>
+					<td class="td-hidden">Carte grise</td>
 					<td data-label="CG">
 						<?= !empty($item->cg) ? '<a href="' .esc($item->cg).'" target="_blank" rel="noopener noreferrer">Carte grise</a>' : 'Pas de carte grise' ?>
 					</td>
@@ -54,7 +54,7 @@
 
                                 <!-- Display cv -->
                                 <tr>
-                                        <td class="td-hidden">CV</td>
+                                        <td class="td-hidden">Carte verte</td>
                                         <td data-label="CV">
                                                 <?= !empty($item->cv) ? '<a href="' .esc($item->cv).'" target="_blank" rel="noopener noreferrer">Carte verte</a>' : 'Pas de carte verte' ?>
                                         </td>

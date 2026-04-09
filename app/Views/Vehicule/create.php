@@ -26,15 +26,15 @@
 	<input type="date" id="date_immat" name="date_immat" value="<?= esc(isset($item) ? $item->date_immat : '', 'attr') ?>" class="form-control" required>
 
 	<!-- Type date -->
-	<label>CT</label>
+	<label>Contrôle technique</label>
 	<input type="date" id="ct" name="ct" value="<?= esc(isset($item) ? $item->ct : '', 'attr') ?>" class="form-control" required>
 
 	<!-- Registration certificate URL -->
-	<label>CG</label>
+	<label>Carte grise</label>
 	<input type="url" id="cg" name="cg" value="<?= esc(isset($item) ? $item->cg : '', 'attr') ?>" class="form-control" required>
 
 	<!-- Green card URL -->
-	<label>CV</label>
+	<label>Carte verte</label>
 	<input type="url" id="cv" name="cv" value="<?= esc(isset($item) ? $item->cv : '', 'attr') ?>" class="form-control" required>
 
 	<!-- Redirection button -->
