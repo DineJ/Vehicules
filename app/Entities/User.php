@@ -25,7 +25,6 @@ class User extends Entity
 		'admin' => 'integer',
 		'telephone' => 'string',
 		'mail' => 'string',
-		'permis' => 'string',
 		'actif' => 'integer',
 		'clef_connexion' => 'string',
 	];
@@ -37,7 +36,6 @@ class User extends Entity
 		'admin' => 'integer|max_length[1]',
 		'telephone' => 'string|max_length[10]',
 		'mail' => 'string|max_length[100]',
-		'permis' => 'string|max_length[255]',
 		'actif' => 'integer|max_length[1]',
 		'clef_connexion' => 'string|max_length[255]',
 
@@ -150,24 +148,6 @@ class User extends Entity
 		$this->attributes['mail'] = $mail;
 		return $this;
 	}
-
-	public function getpermis()
-	{
-		return $this->attributes['permis'] ?? null;
-	}
-	
-	public function setpermis($permis)
-	{
-		$validation = \Config\Services::validation();
-		$validation->setRules(['permis' => 'string']);
-
-		if (!$validation->run(['permis' => $permis])) {
-			throw new \InvalidArgumentException("❌ Valeur invalide pour 'permis': " . implode(', ', $validation->getErrors()));
-                }
-
-                $this->attributes['permis'] = $permis;
-                return $this;
-        }
 
 	public function getactif()
 	{
