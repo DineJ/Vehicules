@@ -396,6 +396,17 @@ function validateFormVehicule()
 			compare++;
 		}
 
+		// Get values
+		let cv = document.getElementById('cv').value;
+		let oldcv = document.getElementById('cv').value
+		row++;
+
+		// Check values
+		if (cv == oldcv)
+		{
+			compare++;
+		}
+
 		// Check counts
 		if (compare == row)
 		{

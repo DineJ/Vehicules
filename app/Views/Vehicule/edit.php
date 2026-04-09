@@ -39,6 +39,10 @@
 	<label>CG</label>
 	<input type="url" id="cg" name="cg" value="<?= esc(isset($item) ? $item->cg : '', 'attr') ?>" class="form-control" required>
 
+        <!-- Type url -->
+        <label>CV</label>
+        <input type="url" id="cv" name="cv" value="<?= esc(isset($item) ? $item->cv : '', 'attr') ?>" class="form-control" required>
+
 	<!-- Redirection button -->
 	<a href="<?= site_url('Vehicule/show/'.$item->id) ?>" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>

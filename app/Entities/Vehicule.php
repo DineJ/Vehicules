@@ -28,6 +28,7 @@ class Vehicule extends Entity
 		'date_immat' => 'datetime',
 		'ct' => 'datetime',
 		'cg' => 'string',
+		'cv' => 'string',
 		'actif' => 'integer',
 	];
 
@@ -40,6 +41,7 @@ class Vehicule extends Entity
 		'date_immat' => 'valid_date[Y-m-d]',
 		'ct' => 'valid_date[Y-m-d]',
 		'cg' => 'string[max_length[255]',
+		'cv' => 'string[max_length[255]',
 		'actif' => 'integer|max_length[1]',
 	];
 
@@ -199,6 +201,25 @@ class Vehicule extends Entity
                 }
 
                 $this->attributes['cg'] = $cg;
+                return $this;
+        }
+
+       public function getcv()
+        {
+                return $this->attributes['cv'] ?? null;
+        }
+
+
+        public function setcv($cv)
+        {
+                $validation = \Config\Services::validation();
+                $validation->setRules(['cv' => 'string']);
+
+                if (!$validation->run(['cv' => $cv])) {
+                        throw new \InvalidArgumentException("❌ Valeur invalide pour 'cv': " . implode(', ', $validation->getErrors()));
+                }
+
+                $this->attributes['cv'] = $cv;
                 return $this;
         }
 

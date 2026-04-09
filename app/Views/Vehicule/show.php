@@ -52,6 +52,14 @@
 					</td>
 				</tr>
 
+                                <!-- Display cv -->
+                                <tr>
+                                        <td class="td-hidden">CV</td>
+                                        <td data-label="CV">
+                                                <a href="<?= esc($item->cv) ?>" taget="_blank" rel="noopener noreferrer">Carte verte</a>
+                                        </td>
+                                </tr>
+
 				<!-- Display actif -->
 				<tr>
 					<td class="td-hidden">Actif</td>
