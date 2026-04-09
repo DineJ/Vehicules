@@ -107,6 +107,17 @@ function validateFormPermis()
 		compare++;
 	}
 
+	// Get values
+	let lien_permis = document.getElementById('lien_permis').value;
+	let oldlien_permis = document.getElementById('oldtype_permis').value;
+	row++;
+
+	// Chek values
+	if (lien_permis == oldlien_permis)
+	{
+		compare++;
+	}
+
 	if (compare == row)
 	{
 		alert("les valeurs sont identiques");
@@ -295,17 +306,6 @@ function validateFormUser()
 
 	// Check values
 	if (mail == oldmail)
-	{
-		compare++;
-	}
-
-	// Get values
-	let permis = document.getElementById('permis').value;
-	let oldpermis = document.getElementById('oldpermis').value;
-	row++;
-
-	// Get values
-	if (permis == oldpermis)
 	{
 		compare++;
 	}

@@ -10,6 +10,6 @@ class PermisModel extends Model
     protected $useAutoIncrement = false;
     protected $primaryKey = 'num_permis';
     protected $returnType = 'App\Entities\Permis';
-    protected $allowedFields = ['id_user','num_permis', 'date_permis', 'update_permis', 'type_permis'];
+    protected $allowedFields = ['id_user','num_permis', 'date_permis', 'update_permis', 'type_permis', 'lien_permis'];
     
 }
