@@ -44,6 +44,12 @@
 					<td data-label="CT"><?= esc(date('d/m/Y', strtotime($item->ct))) ?></td>
 				</tr>
 
+				<!-- Display cg -->
+				<tr>
+					<td class="td-hidden">CG</td>
+					<td data-label="CG"><?= esc($item->cg) ?></td>
+				</tr>
+
 				<!-- Display actif -->
 				<tr>
 					<td class="td-hidden">Actif</td>

@@ -35,6 +35,9 @@
 	<input type="date" id="ct" name="ct" value="<?= esc(isset($item) ? substr($item->ct, 0, 10) : '', 'attr') ?>" class="form-control" required>
 	<input type="hidden" id="oldct" name="oldct" value="<?= esc(isset($item) ? substr($item->ct, 0, 10) : '', 'attr') ?>">
 
+	<!-- Type url -->
+	<label>CG</label>
+	<input type="url" id="cg" name="cg" value="<?= esc(isset($item) ? $item->cg : '', 'attr') ?>" class="form-control" required>
 
 	<!-- Redirection button -->
 	<a href="<?= site_url('Vehicule/show/'.$item->id) ?>" class="btn btn-secondary mt-3">Retour</a>
