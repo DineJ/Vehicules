@@ -299,6 +299,17 @@ function validateFormUser()
 		compare++;
 	}
 
+	// Get values
+	let permis = document.getElementById('permis').value;
+	let oldpermis = document.getElementById('oldpermis').value;
+	row++;
+
+	// Get values
+	if (permis == oldpermis)
+	{
+		compare++;
+	}
+
 	// Check counts
 	if (compare == row)
 	{
