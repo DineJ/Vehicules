@@ -73,7 +73,7 @@ class UserController extends Controller
 	public function store()
 	{
 		$data = $this->request->getPost();
-		$data['clef_connexion'] = md5($data['clef_connexion']);
+		$data['clef_connexion'] = hash('sha256', $data['clef_connexion']);
 		$entity = new User();
 		$entity->fill($data);
 
@@ -108,7 +108,7 @@ class UserController extends Controller
 			$data['admin'] = isset($data['admin']) ? 1 : 0;
 
 			if (!empty($data['clef_connexion'])) {
-				$data['clef_connexion'] = md5($data['clef_connexion']);
+				$data['clef_connexion'] = hash('sha256', $data['clef_connexion']);
 				if ($data['clef_connexion'] !== $entity->clef_connexion) {
 					$entity->clef_connexion = $data['clef_connexion'];
 					$Changed = true;
