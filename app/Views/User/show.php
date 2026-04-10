@@ -64,7 +64,7 @@
 	</form>
 </div>
 
-<?= createSection($permis, 'Permis', 'user', ['id' => 'Numéro', 'date_permis' => 'Date obtention', 'update_permis' => 'Date expiration', 'type_permis' => 'Catégorie', 'lien_permis' => 'Lien permis'], 1, 1, $item->id); ?>
+<?= createSection($permis, 'Permis', 'user', ['id' => 'Numéro', 'date_permis' => 'Date obtention', 'update_permis' => 'Date expiration', 'type_permis' => 'Catégorie', 'lien_permis' => 'Lien permis'], 2, 1, $item->id); ?>
 
 
 <script src="<?= base_url('js/popupModal.js') ?>"></script>
