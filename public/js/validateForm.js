@@ -107,6 +107,17 @@ function validateFormPermis()
 		compare++;
 	}
 
+	// Get values
+	let lien_permis = document.getElementById('lien_permis').value;
+	let oldlien_permis = document.getElementById('oldtype_permis').value;
+	row++;
+
+	// Chek values
+	if (lien_permis == oldlien_permis)
+	{
+		compare++;
+	}
+
 	if (compare == row)
 	{
 		alert("les valeurs sont identiques");
@@ -381,6 +392,28 @@ function validateFormVehicule()
 
 		// Check values 
 		if (ct == oldct)
+		{
+			compare++;
+		}
+
+		// Get values
+		let cg = document.getElementById('cg').value;
+		let oldcg = document.getElementById('oldcg').value;
+		row++;
+
+		// Check values
+		if (cg == oldcg)
+		{
+			compare++;
+		}
+
+		// Get values
+		let cv = document.getElementById('cv').value;
+		let oldcv = document.getElementById('cv').value
+		row++;
+
+		// Check values
+		if (cv == oldcv)
 		{
 			compare++;
 		}

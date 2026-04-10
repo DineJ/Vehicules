@@ -51,7 +51,7 @@ class UserController extends Controller
 
 		$data['item'] = $this->model->find($id);
 		$data['permis'] = $this->permisModel
-			->select('num_permis id, permis.id_user, update_permis, date_permis, type_permis')
+			->select('num_permis id, permis.id_user, date_permis, update_permis, type_permis, lien_permis')
 			->join('user', 'user.id = permis.id_user', 'left')
 			->where('user.id', $id)
 			->orderBy('permis.update_permis', 'DESC')
@@ -73,7 +73,7 @@ class UserController extends Controller
 	public function store()
 	{
 		$data = $this->request->getPost();
-		$data['clef_connexion'] = md5($data['clef_connexion']);
+		$data['clef_connexion'] = hash('sha256', $data['clef_connexion']);
 		$entity = new User();
 		$entity->fill($data);
 
@@ -108,7 +108,7 @@ class UserController extends Controller
 			$data['admin'] = isset($data['admin']) ? 1 : 0;
 
 			if (!empty($data['clef_connexion'])) {
-				$data['clef_connexion'] = md5($data['clef_connexion']);
+				$data['clef_connexion'] = hash('sha256', $data['clef_connexion']);
 				if ($data['clef_connexion'] !== $entity->clef_connexion) {
 					$entity->clef_connexion = $data['clef_connexion'];
 					$Changed = true;

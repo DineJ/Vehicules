@@ -21,7 +21,8 @@ class Permis extends Entity
         'num_permis' => 'string',
         'date_permis' => 'datetime',
         'update_permis' => 'datetime',
-        'type_permis' => 'string',
+	'type_permis' => 'string',
+	'lien_permis' => 'string',
     ];
 
     protected $validationRules = [
@@ -29,7 +30,8 @@ class Permis extends Entity
         'num_permis' => 'string|max_length[12]',
         'date_permis' => 'valid_date[Y-m-d]',
         'update_permis' => 'valid_date[Y-m-d]',
-        'type_permis' => 'string',
+	'type_permis' => 'string',
+	'lien_permis' => 'string|max_length[255]',
     ];
 
 	public function getidUser()
@@ -119,6 +121,24 @@ class Permis extends Entity
 		}
 
 		$this->attributes['type_permis'] = $typePermis;
+		return $this;
+	}
+
+	public function getlienPermis()
+	{
+		return $this->attributes['lien_permis'] ?? null;
+	}
+
+	public function setlienPermis($lienPermis)
+	{
+		$validation = \Config\Services::validation();
+		$validation->setRules(['lien_permis' => 'string']);
+
+		if (!$validation->run(['lien_permis' => $lienPermis])) {
+			throw new \InvalidArgumentException("❌ Valeur invalide pour 'lien_permis': " . implode(', ', $validation->getErrors()));
+		}
+
+		$this->attributes['lien_permis'] = $lienPermis;
 		return $this;
 	}
 }

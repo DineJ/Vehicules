@@ -44,6 +44,22 @@
 					<td data-label="CT"><?= esc(date('d/m/Y', strtotime($item->ct))) ?></td>
 				</tr>
 
+				<!-- Display cg -->
+				<tr>
+					<td class="td-hidden">Carte grise</td>
+					<td data-label="CG">
+						<?= !empty($item->cg) ? '<a href="' .esc($item->cg).'" target="_blank" rel="noopener noreferrer">Carte grise</a>' : 'Pas de carte grise' ?>
+					</td>
+				</tr>
+
+                                <!-- Display cv -->
+                                <tr>
+                                        <td class="td-hidden">Carte verte</td>
+                                        <td data-label="CV">
+                                                <?= !empty($item->cv) ? '<a href="' .esc($item->cv).'" target="_blank" rel="noopener noreferrer">Carte verte</a>' : 'Pas de carte verte' ?>
+                                        </td>
+                                </tr>
+
 				<!-- Display actif -->
 				<tr>
 					<td class="td-hidden">Actif</td>

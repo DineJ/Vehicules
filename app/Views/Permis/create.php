@@ -29,6 +29,10 @@
 		</select>
 	</div>
 
+	<!-- License URL -->
+	<label>Lien permis</label>
+	<input type="url" id="lien_permis" name="lien_permis" value="<?= esc(isset($item) ? $item->lien_permis : '', 'attr') ?>" class="form-control" required>
+
 	<a href="<?= site_url('User/show/'.$userId) ?>" id="btnRetour" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>

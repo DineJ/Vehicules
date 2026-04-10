@@ -11,15 +11,19 @@ function createSection($entities, $entity_name1, $entity_name2, $columns_entity,
 		</div>
 		<div id="table_<?= $entity_name1 ?>" class="table-responsive">
 
-			<?php if ($button_add)
-			{ ?>
+		<?php
+			$empty_entities = (!isset($entities) || empty($entities));
+
+			if ($button_add == 1 || ($empty_entities && $button_add == 2))
+			{ 
+		?>
 			<button type="button" class="btn btn-purple btn-popup-post" data-url-id="<?= site_url($entity_name1 .'/create') ?>" data-object-id="<?= $id ?>" data-title-id="Modal : Ajouter <?= $entity_name1 ?>">Ajouter <?= $entity_name1 ?></button>
 			</br>
 			<?php
 			} ?>
 
 			<!-- Test if <?= $entity_name2 ?> has <?= $entity_name2 ?> or not -->
-			<?php if (!isset($entities) || empty($entities))
+			<?php if ($empty_entities)
 			{
 			?>
 				<table class="table table-striped table-bordered mt-3">
@@ -117,6 +121,11 @@ function columnType(string $column_name, $column_value, $columns_entity)
 		return '<td data-label="'.$columns_entity[$column_name].'">'.esc($column_value->format($format)).'</td>';
 	}
 
+	else if (filter_var($column_value, FILTER_VALIDATE_URL))
+	{
+		return '<td data-label="'.$columns_entity[$column_name].'"><a href="'.esc($column_value).'" target="_blank" rel="noopener noreferrer">Ouvrir</a></td>';
+	}
 	return '<td class="concatenation" data-label="'.$columns_entity[$column_name].'">'.esc($column_value).'</td>';
+
 }
 ?>

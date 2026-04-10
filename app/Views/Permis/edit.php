@@ -31,6 +31,11 @@
 	<input type='hidden' id='oldtype_permis' name='oldtype_permis' value='<?= isset($item) ? $item->type_permis : '' ?>'>
 
 
+	<!-- License url -->
+	<label>Lien permis</label>
+	<input type="url" id="lien_permis" name="lien_permis" value="<?= esc(isset($item) ? $item->lien_permis : '', 'attr') ?>" class="form-control" required>
+	<input type="hidden" id="oldlien_permis" name="oldlien_permis" value="<?= esc(isset($item) ? $item->lien_permis : '', 'attr') ?>" class="form-control" required>
+
 	<a href="<?= site_url('User/show/'.$item->id_user) ?>" id="btnRetour" class="btn btn-secondary mt-3">Retour</a>
 	<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 </form>

@@ -123,3 +123,7 @@ nb-configuration.xml
 
 /results/
 /phpunit*.xml
+
+
+# ENV
+.env

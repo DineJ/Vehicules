@@ -28,7 +28,7 @@
 				<th>Modèle</th>
 				<th>Date achat</th>
 				<th>Date immat</th>
-				<th>CT</th>
+				<th>Contrôle technique</th>
 				<th>Actions</th>
 			</tr>
 		</thead>

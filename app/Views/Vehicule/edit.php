@@ -31,10 +31,19 @@
 	<input type="hidden" id="olddate_immat" name="olddate_immat" value="<?= esc(isset($item) ? substr($item->date_immat, 0, 10) : '', 'attr') ?>">
 
 	<!-- Type date -->
-	<label>CT</label>
+	<label>Contrôle technique</label>
 	<input type="date" id="ct" name="ct" value="<?= esc(isset($item) ? substr($item->ct, 0, 10) : '', 'attr') ?>" class="form-control" required>
 	<input type="hidden" id="oldct" name="oldct" value="<?= esc(isset($item) ? substr($item->ct, 0, 10) : '', 'attr') ?>">
 
+	<!-- Type url -->
+	<label>Carte grise</label>
+	<input type="url" id="cg" name="cg" value="<?= esc(isset($item) ? $item->cg : '', 'attr') ?>" class="form-control" required>
+	<input type="hidden" id="oldcg" name="oldcg" value="<?= esc(isset($item) ? $item->cg : '', 'attr') ?>">
+
+        <!-- Type url -->
+        <label>Carte verte</label>
+        <input type="url" id="cv" name="cv" value="<?= esc(isset($item) ? $item->cv : '', 'attr') ?>" class="form-control" required>
+	<input type="hidden" id="oldcv" name="oldcv" value="<?= esc(isset($item) ? $item->cv : '', 'attr') ?>">
 
 	<!-- Redirection button -->
 	<a href="<?= site_url('Vehicule/show/'.$item->id) ?>" class="btn btn-secondary mt-3">Retour</a>
