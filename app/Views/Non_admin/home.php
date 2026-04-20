@@ -2,11 +2,14 @@
 <?= $this->section('content') ?>
 
 
-<?php $missionCommence = $missions['0']->date_depart == $missions['0']->date_arrivee ?>
+<?php if (!empty($missions))
+	{
+		$missionCommence = $missions['0']->date_depart == $missions['0']->date_arrivee;
+	} ?>
 
 <h2> Espace des conducteurs</h2>
 
-<?php if ($missionCommence)
+<?php if (isset($missionCommence) && $missionCommence)
 {?>
 	<div id="hideModal" style="display:block;">
 		<?php createSection($missions, 'Mission', 'Non_admin', ['nom_complet' => 'Conducteur', 'plaque' => 'Plaque', 'lieu_depart' => 'Lieu de départ', 'lieu_arrive' => 'Lieu arrivé', 'motif' => 'Motif', 'date_depart' => 'Date départ', 'km_depart' => 'Km départ'], 0, 0); ?>
