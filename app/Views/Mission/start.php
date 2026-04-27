@@ -31,7 +31,7 @@
 
 				<!-- Match id with value -->
 				<option value="<?= esc($ld->id) ?>" <?=(isset($item) && $item->id_lieu_depart == $ld->id) ? 'selected' : '' ?>>
-					<?= esc($ld->numero) . ' ' . esc($ld->adresse) . ' ' . esc($ld->nom_lieu) ?>
+					<?= esc($ld->surnom) . ' (' . esc($ld->nom_lieu) . ')' ?>
 				</option>
 
 
@@ -48,7 +48,7 @@
 
 				<!-- Match id with value -->
 				<option value="<?= esc($la->id) ?>" <?=(isset($item) && $item->id_lieu_arrive == $la->id) ? 'selected' : '' ?>>
-					<?= esc($la->numero) . ' ' . esc($la->adresse) . ' ' . esc($la->nom_lieu) ?>
+					<?= esc($la->surnom) . ' (' . esc($la->nom_lieu) . ')' ?>
 				</option>
 
 			<?php endforeach; ?>
