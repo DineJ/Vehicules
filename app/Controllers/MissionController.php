@@ -148,6 +148,20 @@ class MissionController extends Controller
 		$data['motifs'] = $this->model->getMotifEnum();
 		$data['item'] = $this->model;
 
+		$missionsPending = $this->model
+			->select('mission.id_user, mission.id_vehicule, CONCAT(user.nom, " ", user.prenom) AS conducteur')
+			->join('user', 'user.id = mission.id_user', 'left')
+			->where('mission.date_depart = mission.date_arrivee', null, false)
+			->findAll();
+
+		$vehiclesUsed = [];
+
+		foreach ($missionsPending as $mission) {
+			$vehiclesUsed[$mission->id_vehicule] = $mission->conducteur;
+		}
+
+		$data['vehiclesUsed'] = $vehiclesUsed;
+
 		$redirection = $this->model
 			->select('mission.date_depart, mission.date_arrivee')
 			->where('mission.id_user', session()->get('user')['id'])
