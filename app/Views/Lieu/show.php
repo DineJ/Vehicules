@@ -8,6 +8,12 @@
 	<table class="table table-striped table-bordered mt-3">
 		<tbody>
 
+			<!-- Display city's nickname -->
+			<tr>
+				<td class="td-hidden">Surnom</td>
+				<td data-label="Surnom"><?= $item->surnom ?></td>
+			</tr>
+
 			<!-- Display city's name -->
 			<tr>
 				<td class="td-hidden">Ville</td>

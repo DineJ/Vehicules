@@ -56,7 +56,7 @@ class AdminController extends Controller
 			->getResult();
 
 		$data['lieu'] = $this->lieuModel
-			->select('id, CONCAT(numero, " ", adresse, " ", nom_lieu, " ", code_postal) AS Adresse')
+			->select('id, surnom AS Surnom, CONCAT(numero, " ", adresse, " ", nom_lieu, " ", code_postal) AS Adresse')
 			->where('actif =', 0)
 			->get()
 			->getResult();
