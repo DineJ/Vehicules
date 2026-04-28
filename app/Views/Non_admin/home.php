@@ -28,8 +28,15 @@
 			<button type="button" class="btn btn-warning mt-3" onclick="hideDiv(['hideForm', 'hideModal', 'hideButton'])">Retour</button>
 			<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
 		</div>
+
 			<button type="button" id="hideButton" class="btn btn-primary mt-3" onclick="hideDiv(['hideForm', 'hideModal', 'hideButton']); document.getElementById('km_arrive').focus()">Finir la mission</button>
 
+			<?php if ($missions['0']->km_depart == $missions['0']->km_arrive) // Check is a mission is pending
+			{ ?>
+				<!-- Create a button to swap return to your previous location-->
+				<a href="<?= site_url('Mission/renew/'.$missions['0']->id) ?>" class="btn btn-warning">Retour départ</a>
+			<?php
+			} ?>
 	</form>
 <?php
 }
