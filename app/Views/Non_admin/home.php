@@ -34,7 +34,7 @@
 			<?php if ($missions['0']->km_depart == $missions['0']->km_arrive) // Check is a mission is pending
 			{ ?>
 				<!-- Create a button to swap return to your previous location-->
-				<a href="<?= site_url('Mission/renew/'.$missions['0']->id) ?>" class="btn btn-warning">Retour départ</a>
+				<a href="<?= site_url('Mission/renew/'.$missions['0']->id) ?>" class="btn btn-warning mt-3" >Retour <?= $missions['0']->Surnom ?></a>
 			<?php
 			} ?>
 	</form>
