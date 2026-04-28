@@ -27,17 +27,8 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 INSERT INTO `user` VALUES
-(1,'JRIDI','DINE',0,'0624221008','dinejridi1@gmail.com',1,'3e5d8f902ea30adfe5ce81191016bdf9c56a0a78916157ee953f7ef847a73708'),
-(2,'THIERRY','T',1,'0102030405','non@gnma.com',1,'efc9f38a3ed4d3378634b2046dc66db5e36f6470ff03d54f695531008cad6576'),
-(3,'PAS','PERMIS',0,'0102030406','dinejridi@gmaisl.com',0,'ca287eda7ae05481385d1db8e9416e6a'),
-(4,'Oui','Oui',0,'0011220011','test@gmail.com',1,'1'),
-(5,'Oui','Oui',1,'0011220011','testz@gmail.com',1,'1'),
-(6,'Oui','Oui',0,'0011220011','teset@gmail.com',1,'1'),
-(7,'Oui','Oui',0,'0011220011','tezzst@gmail.com',1,'1'),
-(8,'Oui','Oui',1,'0011220011','tdest@gmail.com',1,'1'),
-(9,'Oui','Oui',0,'0011220011','tdesddt@gmail.com',1,'1'),
-(10,'Oui','Oui',0,'0011220011','tdwesddt@gmail.com',1,'1'),
-(11,'Oui','Oui',0,'0011220011','tdffwesddt@gmail.com',0,'1');
+(1,'TOTO','TATA',0,'0123456789','toto@gmail.com',1,'b188f429056f143854354596583bef63caaa3b18d697f7d4a12b28df6ac44d11'),
+(2,'TITI','TUTU',1,'9876543210','titi@gmail.com',1,'9d2c596705b928184505b9451b5db2d6268689d27c22a99df06ae9c1ecc3682e'),
 UNLOCK TABLES;
 
 
@@ -56,16 +47,8 @@ CREATE TABLE `vehicule` (
 
 LOCK TABLES `vehicule` WRITE;
 INSERT INTO `vehicule` VALUES
-(1,'AB123CD','Renault','Clio','2020-01-01','2020-01-01','2025-01-01',1),
-(2,'BC-234-DE','Peugeot','208','2021-05-31','2021-05-31','2031-05-22',1),
-(3,'CD345EF','Volkswagen','Golf','2019-03-10','2019-03-10','2024-03-10',1),
-(4,'DE456FG','Audi','A3','2018-07-01','2018-07-01','2023-07-01',1),
-(5,'EF567GH','BMW','X3','2022-02-20','2022-02-20','2027-02-20',1),
-(7,'AB999CD','Z','D','2025-10-24','2025-10-31','2025-10-31',0),
-(8,'AC-128-SG','CITROEN','C3','2025-10-16','2025-10-31','2025-11-01',0),
-(9,'BH-434-','PEUGOT','CCCC','2025-10-19','2025-10-31','2025-11-08',0),
-(10,'TT-123-','C','E','2025-10-30','2025-10-30','2025-10-30',0),
-(11,'TT-123-OU','T','R','2025-10-30','2025-10-30','2025-10-30',0);
+(1,'BC-234-DE','Peugeot','208','2021-05-31','2021-05-31','2031-05-22',1),
+(2,'AC-128-SG','CITROEN','C3','2025-10-16','2025-10-31','2025-11-01',0),
 UNLOCK TABLES;
 
 DELIMITER //
@@ -99,88 +82,6 @@ INSERT INTO `type_incident` VALUES
 (3,'Fuite',0),
 (4,'Défectuosité',0),
 (5,'Problème technique',0),
-(6,'TEST',0),
-(7,'NNNC',0),
-(8,'INCIDENT',0),
-(9,'TEST-INCIDENTV2',0),
-(10,'INCIDENTTTT',0),
-(11,'DZDV',0),
-(12,'EEEF',0),
-(13,'EE',0),
-(14,'TESTOUI',0),
-(15,'TTT',0),
-(16,'FFF',0),
-(17,'DINE',0),
-(18,'EOFPKOFZ',0),
-(19,'DDDD',0),
-(20,'DEDD',0),
-(21,'FFF',0),
-(22,'DDD',0),
-(23,'CCC',0),
-(24,'FF',0),
-(25,'GFGFGG',0),
-(26,'FFF',0),
-(27,'FVEF',0),
-(28,'GTTT',0),
-(29,'DFBDFB',0),
-(30,'FBEBE',0),
-(31,'FBEBE',0),
-(32,'DFBEB',0),
-(33,'RRR',0),
-(34,'FFF',0),
-(35,'TESTE',0),
-(36,'ALPHA',0),
-(37,'BETA',0),
-(38,'CHARLIE',0),
-(39,'BRUNO',0),
-(40,'P',0),
-(41,'D',0),
-(42,'FEF',0),
-(43,'DFZEFZF',0),
-(44,'TTTTT',0),
-(45,'TTZFZFZEF',0),
-(46,'FÉF\"HG\"\H(\\"H(',0),
-(47,'TEST',0),
-(48,'THIERRY',0),
-(49,'DINE',0),
-(50,'E',0),
-(51,'OIUIJ',0),
-(52,'NON',0),
-(53,'LALALALAL',0),
-(54,'TESTMODAL',1),
-(55,'MODALREFRESH',1),
-(56,'REFRESH2.0',0),
-(57,'REFRESHHHHEDHEZUID',0),
-(58,'AAAAAA',0),
-(59,'TESTREUTN',0),
-(60,'RERREER',0),
-(61,'TESTZZZZZ',0),
-(62,'DFFDZFZEFGZGZGZ\"GZG',0),
-(63,'AZXWFD',0),
-(64,'TESTETDSQTER',0),
-(65,'POIU',0),
-(66,'FZFZ',0),
-(67,'FEZF',0),
-(68,'FFFF',0),
-(69,'HHH',0),
-(70,'EFZFZ',0),
-(71,'BJN N,K B ',0),
-(72,'KLKKKKKKI',0),
-(73,'CHECK',0),
-(74,'PMO',0),
-(75,'XXXXX',0),
-(76,'POPPPPPPPPPPPPPPPP',0),
-(77,'TUTUTUTUTUT',0),
-(78,'MMM',1),
-(79,'MOMOMMO',0),
-(80,'MOMOMOMOMO_MTIUOMT_M',0),
-(81,'ALERT',0),
-(82,'ALERT2',0),
-(83,'ÇA MARCHE',0),
-(84,'DDDZDZD\"\"\"\"',0),
-(85,'MAMAMIAM',0),
-(86,'TESTDEFOU',1),
-(87,'JS',1);
 UNLOCK TABLES;
 
 
@@ -195,9 +96,6 @@ LOCK TABLES `assurance` WRITE;
 INSERT INTO `assurance` VALUES
 (1,'2025-03-01', 'AXA'),
 (2,'2025-02-15', 'EDF'),
-(3,'2025-01-20', 'VANDY'),
-(4,'2024-12-10', 'TOTO'),
-(5,'2024-11-05', 'OKI');
 UNLOCK TABLES;
 
 DELIMITER //
@@ -225,9 +123,6 @@ LOCK TABLES `assurance_vehicule` WRITE;
 INSERT INTO `assurance_vehicule` VALUES
 (1,1),
 (2,2),
-(3,3),
-(4,4),
-(5,5);
 UNLOCK TABLES;
 
 
@@ -248,10 +143,6 @@ INSERT INTO `lieu` VALUES
 (3,'Marseille','13000',3,'30 boulevard Saint-Pierre',1),
 (4,'Toulouse','31000',4,'40 rue de la Garonne',1),
 (5,'Nice','06000',5,'50 avenue des Anges',1),
-(14,'','',0,'',0),
-(21,'','',0,'',0),
-(60,'','',0,'',0),
-(77,'','',0,'',0);
 UNLOCK TABLES;
 
 
@@ -342,14 +233,6 @@ DELIMITER ;
 
 LOCK TABLES `incident` WRITE;
 INSERT INTO `incident` VALUES
-(3,2,1,3,'2025-07-02',' OUI C LONG OUI C LONG OUI C LONGOUI C LONGOUI C LONGOUI C LONGOUI C LONG  TOUJOURS LONG OUI C LONGOUI C LONGOUI C LONGOUI C LONG\r\n  OUI C LONG OUI C LONG OUI C LONGOUI C LONGOUI C LONGOUI C LONGOUI C LONG  TOUJOURS LONG OUI C LONGOI C LONGOUI C LONGOUI C LONG\r\n OUI C LONG OUI C LONG OUI C LONGOUI C LONGOUI C LONGOUI C LONGOUI C LONG  TOUJOURS LONG OUI C LONGOUI C LONGOUI C LONGOUI C LONG\r\n OUI C LONG OUI C LONG OUI C LONGOUI C LONGOUI C LONGOUI C LONGOUI C LONG  TOUJOURS LONG OUI C LONGOUI C LONGOUI C LONGOUI C LONG\r\n OUI C LONG OUI C LONG OUI C LONGOUI C LONGOUI C LONGOUI C LONGOUI C LONG  TOUJOURS LONG OUI C LONGOUI C LONGOUI C LONGOUI C LONG OUI C LONG OUI C LONG OUI C LONGOUI C LONGOUI C LONGOUI C LONGOUI C LONG  TOUJOURS LONG OUI C LONGOUI C LONGOUI C LONGOUI C LONG\r\n'),
-(5,4,2,4,'2025-07-29','OUILLE FOUILLE TOUILLLE'),
-(7,2,1,41,'2025-09-03','DZED'),
-(8,2,1,6,'2025-09-03','DZED'),
-(9,4,8,6,'2025-09-03','DAÉ\"RÉ'),
-(10,3,3,5,'2025-09-10','EFEZF'),
-(11,1,1,1,'2025-09-23',''),
-(12,5,5,9,'2025-09-20','FF');
 UNLOCK TABLES;
 
 CREATE TABLE `infraction` (
@@ -400,8 +283,7 @@ CREATE TABLE `permis` (
 LOCK TABLES `permis` WRITE;
 INSERT INTO `permis` VALUES
 (1,'1234567888','2025-06-01','2038-11-03','C'),
-(4,'1234567900','2025-09-04','2025-09-28','C'),
-(8,'1234267893','2222-02-23','2223-02-22','C1');
+(2,'1234567900','2025-09-04','2025-09-28','C'),
 UNLOCK TABLES;
 
 DELIMITER //
@@ -430,31 +312,6 @@ CREATE TABLE `historique` (
 
 LOCK TABLES `historique` WRITE;
 INSERT INTO `historique` VALUES
-(1,3,'2025-07-23 12:05:00','2025-07-23 12:06:07'),
-(1,3,'2025-07-23 12:06:09','2025-07-23 12:10:01'),
-(1,3,'2025-07-23 12:41:02','2025-07-23 12:41:08'),
-(1,3,'2025-07-23 12:41:47','2025-07-23 12:42:29'),
-(1,3,'2025-07-23 12:58:00','2025-07-23 12:58:32'),
-(1,3,'2025-07-23 13:30:36','2025-07-23 13:31:15'),
-(1,3,'2025-08-06 04:36:44','2025-08-06 04:38:17'),
-(1,3,'2025-08-07 06:21:28','2025-08-07 06:21:41'),
-(1,3,'2025-08-07 06:21:46','2025-08-07 06:21:53'),
-(2,3,'2025-07-23 06:38:24','2025-07-23 06:40:17'),
-(2,3,'2025-07-23 06:42:22','2025-07-23 06:43:43'),
-(2,3,'2025-07-23 06:53:22','2025-07-23 06:53:38'),
-(2,3,'2025-07-23 07:23:34','2025-07-23 07:23:50'),
-(2,3,'2025-07-23 11:23:35','2025-07-23 11:23:35'),
-(2,3,'2025-07-23 12:03:28','2025-07-23 12:04:47'),
-(2,3,'2025-07-23 12:20:04','2025-07-23 12:31:37'),
-(2,3,'2025-07-23 12:39:23','2025-07-23 12:40:46'),
-(2,3,'2025-07-23 12:58:41','2025-07-23 13:00:32'),
-(2,3,'2025-07-23 13:28:37','2025-07-23 13:29:36'),
-(2,3,'2025-07-23 13:34:36','2025-07-23 13:34:53'),
-(2,3,'2025-07-25 04:24:00','2025-07-25 04:24:35'),
-(2,3,'2025-07-25 04:43:32','2025-07-25 04:49:00'),
-(2,3,'2025-07-25 04:54:47','2025-07-25 05:12:41'),
-(2,3,'2025-07-28 04:07:03','2025-07-28 04:33:07'),
-(2,3,'2025-07-28 04:45:00','2025-07-28 04:45:24');
 UNLOCK TABLES;
 
 
@@ -470,10 +327,9 @@ CREATE TABLE `suivi` (
 
 LOCK TABLES `suivi` WRITE;
 INSERT INTO `suivi` VALUES
-(20,3,'2025-09-01','INTERVENTION PRÉVENTIVE SUR LE MOTEUR. ...'),
-(21,5,'2025-09-12','Inspection générale après signalement'),
-(22,7,'2025-09-09','Contrôle des niveaux d’huile.'),
-(23,8,'2025-09-02','Réglage du système électrique. Zd'),
-(24,9,'2025-09-08','Changement de pneus usés.'),
-(25,10,'2025-09-10','Vérification du système de climatisation');
+(1,1,'2025-09-01','INTERVENTION PRÉVENTIVE SUR LE MOTEUR. ...'),
+(2,2,'2025-09-12','Inspection générale après signalement'),
+(3,3,'2025-09-09','Contrôle des niveaux d’huile.'),
+(4,4,'2025-09-02','Réglage du système électrique. Zd'),
+(5,5,'2025-09-08','Changement de pneus usés.'),
 UNLOCK TABLES;
