@@ -578,6 +578,17 @@ function validateFormLieuEdit()
 	let row = 0;
 
 	// Get values
+	let surnom = document.getElementById('surnom').value;
+	let oldsurnom = document.getElementById('oldsurnom').value;
+	row++;
+
+	// Check values
+	if (surnom == oldsurnom)
+	{
+		compare++;
+	}
+
+	// Get values
 	let nom_lieu = document.getElementById('nom_lieu').value;
 	let oldnom_lieu = document.getElementById('oldnom_lieu').value;
 	row++;

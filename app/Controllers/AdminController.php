@@ -56,7 +56,7 @@ class AdminController extends Controller
 			->getResult();
 
 		$data['lieu'] = $this->lieuModel
-			->select('id, CONCAT(numero, " ", adresse, " ", nom_lieu, " ", code_postal) AS Adresse')
+			->select('id, surnom AS Surnom, CONCAT(numero, " ", adresse, " ", nom_lieu, " ", code_postal) AS Adresse')
 			->where('actif =', 0)
 			->get()
 			->getResult();
@@ -72,12 +72,12 @@ class AdminController extends Controller
 			->getResult();
 
 		$data['mission'] = $this->missionModel
-			  ->select('CONCAT(user.nom, " ", user.prenom) AS Conducteur, vehicule.plaque AS Plaque, motif AS Motif, CONCAT(l1.numero, " ", l1.adresse, " ", l1.nom_lieu, " ", l1.code_postal) AS Départ, mission.date_depart AS Début, CONCAT(l2.numero, " ", l2.adresse, " ", l2.nom_lieu, " ", l2.code_postal) AS Arrivé,
+			  ->select('CONCAT(user.nom, " ", user.prenom) AS Conducteur, vehicule.plaque AS Plaque, motif AS Motif, l1.surnom AS `Lieu départ`, CONCAT(l1.numero, " ", l1.adresse, " ", l1.nom_lieu, " ", l1.code_postal) AS `Adresse départ`, mission.date_depart AS Début, l2.surnom AS `Lieu arrivé`, CONCAT(l2.numero, " ", l2.adresse, " ", l2.nom_lieu, " ", l2.code_postal) AS `Adresse arrivé`,
 			CASE
 				WHEN mission.date_arrivee = mission.date_depart
 				THEN "En cours"
 			ELSE mission.date_arrivee
-			END Fin', false)
+			END AS Fin', false)
 			->join('user', 'user.id = mission.id_user', 'left')
 			->join('vehicule', 'vehicule.id = mission.id_vehicule', 'left')
 			->join('lieu l1', 'l1.id = mission.id_lieu_depart', 'left')
@@ -108,7 +108,7 @@ class AdminController extends Controller
 		helper('section');
 
 		$data['missions'] = $this->missionModel
-					 ->select('mission.id, CONCAT(user.nom, " ", user.prenom) AS nom_complet, mission.id_vehicule, vehicule.plaque, CONCAT(l1.numero, " ", l1.adresse, " ", l1.nom_lieu) AS lieu_depart, CONCAT(l2.numero, " ", l2.adresse, " ", l2.nom_lieu) AS lieu_arrive, mission.motif, mission.date_depart, mission.date_arrivee, mission.km_depart')
+					 ->select('mission.id, CONCAT(user.nom, " ", user.prenom) AS nom_complet, mission.id_vehicule, vehicule.plaque, CONCAT(l1.numero, " ", l1.adresse, " ", l1.nom_lieu) AS lieu_depart, CONCAT(l2.numero, " ", l2.adresse, " ", l2.nom_lieu) AS lieu_arrive, mission.motif, mission.date_depart, mission.date_arrivee, mission.km_depart, mission.km_arrive, l1.surnom as Surnom')
 					 ->join('user', 'user.id = mission.id_user', 'left')
 					 ->join('vehicule', 'vehicule.id = mission.id_vehicule', 'left')
 					 ->join('lieu l1', 'l1.id = mission.id_lieu_depart', 'left')

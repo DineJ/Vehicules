@@ -5,6 +5,10 @@
 
 <form method="post" action="<?= site_url('Lieu/store/') ?>">
 
+	<!-- Type city's nickname -->
+	<label>Surnom</label>
+	<input type="text" oninput="setUpper(document.getElementById('surnom'));" id="surnom" name="surnom" value="<?= isset($item) ? $item->surnom : '' ?>" class="form-control" required>
+
 	<!-- Type city's name -->
 	<label>Ville</label>
 	<input type="text" oninput="setUpper(document.getElementById('nom_lieu'));" id="nom_lieu" name="nom_lieu" value="<?= isset($item) ? $item->nom_lieu : '' ?>" class="form-control" required>

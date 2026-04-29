@@ -124,9 +124,9 @@ function entityColumns($entities, $entity_name, $columns_entity, $message, $rese
 usefullDatas($user, 'User', ['Conducteur'], 'Désactivé', 'actif', '1');
 usefullDatas($ip, 'Ip', ['IP', 'Nombre échecs'], 'Désactivée', 'nb_echec', '0');
 usefullDatas($vehicule, 'Vehicule', ['Plaque', 'Marque', 'Modèle'], 'Désactivé', 'actif', '1');
-usefullDatas($lieu, 'Lieu', ['Adresse'], 'Désactivé', 'actif', '1');
+usefullDatas($lieu, 'Lieu', ['Surnom', 'Adresse'], 'Désactivé', 'actif', '1');
 usefullDatas($infraction, 'Infraction', ['Plaque', 'Conducteur', 'Date', 'Points', 'Prix'], 'Récent');
-usefullDatas($mission, 'Mission', ['Plaque', 'Conducteur', 'Motif', 'Départ', 'Début', 'Arrivé', 'Fin'], 'Récent');
+usefullDatas($mission, 'Mission', ['Plaque', 'Conducteur', 'Motif', 'Lieu départ', 'Adresse départ', 'Début', 'Lieu arrivé', 'Adresse arrivé', 'Fin'], 'Récent');
 usefullDatas($incident, 'Incident', ['Plaque', 'Conducteur', 'Type', 'Date'], 'Récent');
 ?>
 

@@ -9,5 +9,5 @@ class LieuModel extends Model
 	protected $table = 'lieu';
 	protected $primaryKey = 'id';
 	protected $returnType = 'App\Entities\Lieu';
-	protected $allowedFields = ['nom_lieu', 'code_postal', 'numero', 'adresse', 'actif'];
+	protected $allowedFields = ['nom_lieu', 'code_postal', 'numero', 'adresse', 'actif', 'surnom'];
 }

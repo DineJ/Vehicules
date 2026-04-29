@@ -14,6 +14,7 @@ use CodeIgniter\Validation\ValidationException;
  * @property $numero
  * @property $adresse
  * @property $actif
+ * @property $surnom
  */
 class Lieu extends Entity
 {
@@ -24,6 +25,7 @@ class Lieu extends Entity
 		'numero' => 'integer',
 		'adresse' => 'string',
 		'actif' => 'integer',
+		'surnom' => 'string',
 	];
 
 	protected $validationRules = [
@@ -33,6 +35,7 @@ class Lieu extends Entity
 		'numero' => 'integer|max_length[11]',
 		'adresse' => 'string|max_length[255]',
 		'actif' => 'integer|max_length[1]',
+		'surnom' => 'string[|max_length[255',
 	];
 
 
@@ -155,4 +158,23 @@ class Lieu extends Entity
 		return $this;
 	}
 
+
+	public function getsurnom()
+	{
+		return $this->attributes['surnom'] ?? null;
+	}
+
+
+	public function setsurnom($surnom)
+	{
+		$validation = \Config\Services::validation();
+		$validation->setRules(['surnom' => 'string']);
+
+		if (!$validation->run(['surnom' => $surnom])) {
+			throw new \InvalidArgumentException("❌ Valeur invalide pour 'surnom': " . implode(', ', $validation->getErrors()));
+                }
+
+                $this->attributes['surnom'] = $surnom;
+                return $this;
+	}
 }

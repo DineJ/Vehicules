@@ -9,16 +9,19 @@
 		<!-- Display all vehicles -->
 		<label for="id_vehicule">Véhicule</label>
 		<select id="id_vehicule" name="id_vehicule" onchange="disabledDefault('id_vehicule')" class="form-control trigger" data-target="bloc2" required>
+
 			<option value=""> Choisir votre véhicule </option>
-			<?php foreach($vehicules as $v): ?>
-				
+			<?php foreach($vehicules as $v):
+				$isUsed = isset($vehiclesUsed[$v->id]);
+				$driver = $isUsed ? $vehiclesUsed[$v->id] : null;
+			?>
 				<!-- Match id with value -->
-				<option value="<?= esc($v->id) ?>" data-fill="<?= $v->km_depart ?>" <?=(isset($item) && $item->id_vehicule == $v->id) ? 'selected' : '' ?>>
+				<option value="<?= esc($v->id) ?>" data-fill="<?= esc($v->km_depart) ?>"<?= $isUsed ? 'disabled' : '' ?>>
 					<?= esc($v->plaque) ?>
+					<?= $isUsed ? ' (' . esc($driver) . ')' : '' ?>
 				</option>
-
-
 			<?php endforeach; ?>
+
 		</select>
 	</div>
 
@@ -31,7 +34,7 @@
 
 				<!-- Match id with value -->
 				<option value="<?= esc($ld->id) ?>" <?=(isset($item) && $item->id_lieu_depart == $ld->id) ? 'selected' : '' ?>>
-					<?= esc($ld->numero) . ' ' . esc($ld->adresse) . ' ' . esc($ld->nom_lieu) ?>
+					<?= esc($ld->surnom) . ' (' . esc($ld->nom_lieu) . ')' ?>
 				</option>
 
 
@@ -48,7 +51,7 @@
 
 				<!-- Match id with value -->
 				<option value="<?= esc($la->id) ?>" <?=(isset($item) && $item->id_lieu_arrive == $la->id) ? 'selected' : '' ?>>
-					<?= esc($la->numero) . ' ' . esc($la->adresse) . ' ' . esc($la->nom_lieu) ?>
+					<?= esc($la->surnom) . ' (' . esc($la->nom_lieu) . ')' ?>
 				</option>
 
 			<?php endforeach; ?>

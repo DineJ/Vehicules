@@ -148,6 +148,20 @@ class MissionController extends Controller
 		$data['motifs'] = $this->model->getMotifEnum();
 		$data['item'] = $this->model;
 
+		$missionsPending = $this->model
+			->select('mission.id_user, mission.id_vehicule, CONCAT(user.nom, " ", user.prenom) AS conducteur')
+			->join('user', 'user.id = mission.id_user', 'left')
+			->where('mission.date_depart = mission.date_arrivee', null, false)
+			->findAll();
+
+		$vehiclesUsed = [];
+
+		foreach ($missionsPending as $mission) {
+			$vehiclesUsed[$mission->id_vehicule] = $mission->conducteur;
+		}
+
+		$data['vehiclesUsed'] = $vehiclesUsed;
+
 		$redirection = $this->model
 			->select('mission.date_depart, mission.date_arrivee')
 			->where('mission.id_user', session()->get('user')['id'])
@@ -161,4 +175,60 @@ class MissionController extends Controller
 
 		return view('Mission/start', $data);
 	}
+
+	// End current mission and start a new mission to go the starting point
+	public function renew($id)
+	{
+		// Catch the date
+		$date = date('Y-m-d H:i:s');
+		$entity = $this->model->find($id);
+
+		// Duplicate object
+		$entityClone = clone $entity;
+		// Unset ID, it's auto increment in the DB
+		unset($entityClone->id);
+
+		// Use getter and setter
+		$km = $entity->getkmArrive();
+		# $entity->setkmArrive($km);
+		$entity->setdateArrivee($date);
+
+		// Use getter and setter
+		$entityClone->setkmDepart($km);
+		$entityClone->setkmArrive(($km+1));
+		$entityClone->setdateDepart($date);
+		$entityClone->setdateArrivee($date);
+
+		// Get previsous and next location
+		$laClone = $entityClone->getidLieuArrive();
+		$leClone = $entityClone->getidLieuDepart();
+
+		// Swap location
+		$entityClone->setidLieuArrive($leClone);
+		$entityClone->setidLieuDepart($laClone);
+
+		if (!$this->model->save($entity))
+                {
+                        return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
+		}
+
+                if (!$this->model->insert($entityClone))
+                {
+                        return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
+                }
+
+                if (session()->get('user')['admin'])
+                {
+                        return redirect()->to('/Mission');
+                }
+                else
+                {
+                        return redirect()->to('/Non_admin');
+                }
+
+                return redirect()->to('/Mission');
+	}
+
+
+
 }

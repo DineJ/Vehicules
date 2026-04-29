@@ -12,6 +12,7 @@
 		<!-- Datas name -->
 		<thead>
 			<tr>
+				<th>Surnom</th>
 				<th>Ville</th>
 				<th>Code postal</th>
 				<th>Numéro</th>
@@ -24,6 +25,7 @@
 			<!-- Display datas -->
 			<?php foreach ($items as $item): ?>
 				<tr>
+					<td data-label="Surnom"><?= esc($item->surnom) ?></td>
 					<td data-label="Ville"><?= esc($item->nom_lieu) ?></td>
 					<td data-label="Code postal"><?= esc($item->code_postal) ?></td>
 					<td data-label="Numéro"><?= esc($item->numero) ?></td>
