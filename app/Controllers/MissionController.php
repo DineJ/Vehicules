@@ -115,9 +115,11 @@ class MissionController extends Controller
 	// UPDATE DATABASE
 	public function update($id)
 	{
+		$date = date('Y-m-d H:i:s');
 		$data = $this->request->getPost();
 		$entity = $this->model->find($id);
 		$entity->fill($data);
+		$entity->setdateArrivee($date);
 
 		if (!$this->model->save($entity))
 		{
