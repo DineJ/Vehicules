@@ -35,18 +35,17 @@ class MissionController extends Controller
 			 ->join('user', 'user.id = mission.id_user', 'left')
 			 ->join('lieu l1', 'l1.id = mission.id_lieu_depart', 'left')
 			 ->join('lieu l2', 'l2.id = mission.id_lieu_arrive', 'left')
-			 ->orderBy('id_vehicule');
-
+			 ->orderBy('mission.date_depart', 'DESC');
 
 		if ($search)
 		{
-			$query = '%'.$search.'%';
-			$builder->like('id_vehicule', $query)
-						->orLike('id_user', $query)
-						->orLike('id_lieu_depart', $query)
-						->orLike('id_lieu_arrive', $query)
-						->orLike('date_depart', $query)
-						->orderBy('id_vehicule');
+			$builder->groupStart()
+				->like('vehicule.plaque', $search)
+				->orLike('CONCAT(user.nom, " ", user.prenom)', $search)
+				->orLike('DATE_FORMAT(mission.date_depart, "%d/%m/%Y")', $search)
+				->groupEnd();
+
+			$builder->orderBy('mission.date_depart', 'DESC');
 		}
 		else
 		{
