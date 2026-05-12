@@ -18,7 +18,7 @@ class Type_incidentController extends Controller
 	// Display datas
 	public function index()
 	{
-		$data['items'] = $this->model->paginate(5); // Display 5 resultats
+		$data['items'] = $this->model->paginate(20); // Display 5 resultats
 		$data['pager'] = $this->model->pager; // Add pager
 
 		return view('Type_incident/index', $data);

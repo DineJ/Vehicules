@@ -39,7 +39,7 @@ class SuiviController extends Controller
 		}
 
 		// Paginate directement sur le builder
-		$data['items'] = $builder->paginate(5); // Display 5 results
+		$data['items'] = $builder->paginate(20); // Display 20 results
 		$data['pager'] = $builder->pager; // Add pager
 		$data['search'] = $search;
 		$data['page'] = 'index'; // Page identifier for css style

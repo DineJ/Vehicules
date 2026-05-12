@@ -42,7 +42,7 @@ class VehiculeController extends Controller
 		}
 
 		$data['search'] = $search;
-		$data['items'] = $this->model->paginate(5); // Display 5 results
+		$data['items'] = $this->model->paginate(20); // Display 20 results
 		$data['pager'] = $this->model->pager; // Add pager
 
 		return view('Vehicule/index', $data);

@@ -19,7 +19,7 @@ class PermisController extends Controller
 	// LISTE AVEC PAGINATION
 	public function index()
 	{
-		$data['items'] = $this->model->paginate(5); // Affiche 5 résultats par page
+		$data['items'] = $this->model->paginate(20); // Affiche 5 résultats par page
 		$data['pager'] = $this->model->pager; // Ajoute le pager
 
 		return view('Permis/index', $data);

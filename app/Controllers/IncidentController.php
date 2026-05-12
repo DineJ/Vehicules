@@ -55,7 +55,7 @@ class IncidentController extends Controller
 		}
 
 		$data['search'] = $search;
-		$data['items'] = $builder->paginate(5);
+		$data['items'] = $builder->paginate(20);
 		$data['pager'] = $builder->pager;
 		$data['page'] = 'index';
 
