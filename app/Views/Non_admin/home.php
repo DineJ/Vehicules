@@ -15,7 +15,7 @@
 		<?php createSection($missions, 'Mission', 'Non_admin', ['nom_complet' => 'Conducteur', 'plaque' => 'Plaque', 'lieu_depart' => 'Lieu de départ', 'lieu_arrive' => 'Lieu arrivé', 'motif' => 'Motif', 'date_depart' => 'Date départ', 'km_depart' => 'Km départ'], 0, 0); ?>
 	</div>
 
-	<form  method="post" action="<?= site_url('Mission/end/'.$missions['0']->id) ?>" onsubmit="return check(<?= $missions['0']->km_depart ?>, 'km_arrive')">
+	<form method="post" action="<?= site_url('Mission/end/'.$missions['0']->id) ?>" onsubmit="return check(<?= $missions['0']->km_depart ?>, 'km_arrive', 'Êtes-vous sûr du KM ?')">
 
 		<div id="hideForm" style="display:none;">
 			<!-- Select end KM -->
@@ -34,10 +34,11 @@
 			<?php if ($missions['0']->km_depart == $missions['0']->km_arrive) // Check is a mission is pending
 			{ ?>
 				<!-- Create a button to swap return to your previous location-->
-				<a href="<?= site_url('Mission/renew/'.$missions['0']->id) ?>" class="btn btn-warning mt-3" >Retour <?= $missions['0']->Surnom ?></a>
+				<a href="<?= site_url('Mission/renew/'.$missions['0']->id) ?>" class="btn btn-warning mt-3" onclick="return verification('Êtes-vous sûr de faire le retour <?= $missions['0']->Surnom ?> ?')">Retour <?= $missions['0']->Surnom ?></a>
 			<?php
 			} ?>
 	</form>
+
 <?php
 }
 else
@@ -53,15 +54,22 @@ else
 <script src="<?= base_url('js/popupModal.js') ?>"></script>
 <script src="<?= base_url('js/hideLayout.js') ?>"></script>
 <script>
-	function check(valueId, idValued)
+	function check(valueId, idValued, message)
 	{
 		const idChecked = document.getElementById(idValued).value;
 
 		if(valueId >= idChecked)
 		{
-			alert("La valuer est trop basse");
+			alert("La valeur est trop basse");
 			return false;
 		}
+
+		return verification(message)
+	}
+
+	function verification(message)
+	{
+		return confirm(message)
 	}
 
 </script>
