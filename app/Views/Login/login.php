@@ -7,7 +7,7 @@
 	<div class="mb-2">
 		<!-- Password input with length constraints -->
 		<div id="qr-reader" style="width:300px; display:block;"></div>
-		<input type="password" id="clef_connexion" name="clef_connexion" class="form-control"
+		<input type="hidden" id="clef_connexion" name="clef_connexion" class="form-control"
 				minlength="16" maxlength="32"
 				placeholder="Mot de passe entre 16 et 32 caracteres" autocomplete="new-password" required>
 	</div>
