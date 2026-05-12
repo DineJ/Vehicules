@@ -2,6 +2,8 @@
 <?= $this->extend('layouts/main') ?> <!-- Extend the base layout -->
 <?= $this->section('content') ?> <!-- Start the main content section -->
 
+<h3><strong>Les données sont automatiquement récupérer grâce à l'activité du site</strong></h3>
+</br>
 <?php
 
 const COUNT_ITEMS = 3;
@@ -18,32 +20,17 @@ function paginateNumber (&$count)
 
 # Display usefull datas
 function usefullDatas ($entity,$entity_name, $columns_entity, $message, $resetData=null, $valueResetData=null)
-{ ?>
+{
+	if (empty($entity))
+		return ?>
+
 	<h4 id="<?= $entity_name ?>hideTitle" class="leftTitle" title="Cliquez pour afficher" onclick="hideDiv(['<?= $entity_name ?>hideTitle', '<?= $entity_name ?>hideDiv'])">▶ <?= $entity_name . ' : ' . $message ?></h4>
 	<div id="<?= $entity_name ?>hideDiv" class="table-responsive" style="display:none;">
 		<h4 class="leftTitle" title="Cliquez pour fermer" onclick="hideDiv(['<?= $entity_name ?>hideTitle', '<?= $entity_name ?>hideDiv'])">▼ <?= $entity_name . ' : ' . $message ?></h4>
-		<!-- Test if atleast one <?= $entity_name ?> exist -->
-		<?php if (empty($entity))
-		{ ?>
-			<table class="table table-striped table-bordered mt-3">
-				<tbody>
-					<!-- None <?= $entity_name . ' : ' . $message ?> -->
-					<tr>
-						<td class="labelAlign"> Aucun <?= $entity_name ?></td>
-					</tr>
-				</tbody>
-			</table>
-		<?php
-		}
-		else
-		{
-		?>
-			<!-- Display <?= $entity_name . ' ' . $message ?> -->
+		<!-- Display <?= $entity_name . ' ' . $message ?> -->
 			<table class="table table-striped table-bordered mt-3">
 				<?php entityColumns($entity,$entity_name, $columns_entity, $message,  $resetData, $valueResetData); ?>
 			</table>
-		<?php }
-		?>
 		<a href="<?= site_url(''.$entity_name.'') ?>" class="btn btn-secondary">Retour vers <?= $entity_name ?></a>
 	</div>
 	</br>
