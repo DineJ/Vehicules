@@ -15,7 +15,7 @@
 		<?php createSection($missions, 'Mission', 'Non_admin', ['nom_complet' => 'Conducteur', 'plaque' => 'Plaque', 'lieu_depart' => 'Lieu de départ', 'lieu_arrive' => 'Lieu arrivé', 'motif' => 'Motif', 'date_depart' => 'Date départ', 'km_depart' => 'Km départ'], 0, 0); ?>
 	</div>
 
-	<form  method="post" action="<?= site_url('Mission/end/'.$missions['0']->id) ?>" onsubmit="return check(<?= $missions['0']->km_depart ?>, 'km_arrive')">
+	<form method="post" action="<?= site_url('Mission/end/'.$missions['0']->id) ?>" onsubmit="return check(<?= $missions['0']->km_depart ?>, 'km_arrive', 'Êtes-vous sûr de vouloir enregistrer ?')">
 
 		<div id="hideForm" style="display:none;">
 			<!-- Select end KM -->
@@ -53,7 +53,7 @@ else
 <script src="<?= base_url('js/popupModal.js') ?>"></script>
 <script src="<?= base_url('js/hideLayout.js') ?>"></script>
 <script>
-	function check(valueId, idValued)
+	function check(valueId, idValued, message)
 	{
 		const idChecked = document.getElementById(idValued).value;
 
@@ -62,7 +62,10 @@ else
 			alert("La valeur est trop basse");
 			return false;
 		}
+
+		return confirm(message)
 	}
+
 
 </script>
 <?= $this->endSection() ?>
