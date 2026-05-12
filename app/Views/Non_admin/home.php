@@ -59,7 +59,7 @@ else
 
 		if(valueId >= idChecked)
 		{
-			alert("La valuer est trop basse");
+			alert("La valeur est trop basse");
 			return false;
 		}
 	}
