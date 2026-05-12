@@ -52,7 +52,7 @@ class MissionController extends Controller
 			$this->model->orderBy('id_vehicule');
 		}
 		$data['search'] = $search;
-		$data['items'] = $builder->paginate(5); // Display 5 results
+		$data['items'] = $builder->paginate(20); // Display 20 results
 		$data['pager'] = $builder->pager; // Add pager
 
 		return view('Mission/index', $data);
