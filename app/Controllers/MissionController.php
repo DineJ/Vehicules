@@ -7,6 +7,7 @@ use App\Models\VehiculeModel;
 use App\Models\UserModel;
 use App\Models\LieuModel;
 use App\Models\InfractionModel;
+use App\Models\IncidentModel;
 use App\Entities\Mission;
 use CodeIgniter\Controller;
 
@@ -21,7 +22,7 @@ class MissionController extends Controller
 		$this->userModel = new UserModel();
 		$this->lieuModel = new LieuModel();
 		$this->infractionModel = new InfractionModel();
-
+		$this->incidentModel = new IncidentModel();
 	}
 
 	// SEARCH BAR
@@ -230,6 +231,41 @@ class MissionController extends Controller
                 return redirect()->to('/Mission');
 	}
 
+	public function checkEntretien($idVehicule)
+	{
+		// Request to get lastest checking
+		$incident = $this->incidentModel
+			->where('id_vehicule', $idVehicule)
+			->where('id_type_incident', 1)
+			->orderBy('date_incident', 'DESC')
+			->first();
 
+		// No incident found
+		if (!$incident) {
+			return $this->response->setJSON([
+				'warning' => true
+			]);
+		}
 
+		// Conversion date to DateTime
+		$dateEntretien = new \DateTime($incident->date_incident);
+		$today = new \DateTime();
+
+		// Compare current date and the date of the lastest checking
+		$diff = $today->diff($dateEntretien)->days;
+
+		// Return for JS
+		return $this->response->setJSON([
+			'warning' => $diff > 7,
+			'date_entretien' => $dateEntretien->format('d/m/Y'),
+			'days' => $diff
+		]);
+	}
+
+	public function checking($idVehicule)
+	{
+		$data['vehicule'] = $this->vehiculeModel->find($idVehicule);
+
+		return view('Mission/checking', $data);
+	}
 }
