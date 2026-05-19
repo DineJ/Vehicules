@@ -9,6 +9,7 @@ use App\Models\VehiculeModel;
 use App\Models\Type_incidentModel;
 use App\Models\MissionModel;
 use App\Entities\Incident;
+use App\Entities\Suivi;
 use CodeIgniter\Controller;
 
 class IncidentController extends Controller
@@ -181,16 +182,32 @@ class IncidentController extends Controller
 	// Save checking datass
 	public function saveChecking($idVehicle)
 	{
-		$data = $this->request->getPost();
-		$data['id_vehicule'] = $idVehicle;
-		$data['id_user'] = session()->get('user')['id'];
-		$data['id_type_incident'] = 1;
-		$data['date_incident'] = date('Y-m-d H:i:s');
+		$data_incident = $this->request->getPost();
+		$data_incident['id_vehicule'] = $idVehicle;
+		$data_incident['id_user'] = session()->get('user')['id'];
+		$data_incident['id_type_incident'] = 1;
+		$data_incident['date_incident'] = date('Y-m-d H:i:s');
+		$description = $data_incident['explication_incident'];
+		$data_incident['explication_incident'] = "Entretien de routine";
 
-		$entity = new Incident();
-		$entity->fill($data);
+		$entity_incident = new Incident();
+		$entity_incident->fill($data_incident);
 
-		if (!$this->model->insert($entity))
+		$idIncident = $this->model->insert($entity_incident);
+
+		if (!$idIncident)
+		{
+			return redirect()->back()->with('error', 'Erreur lors de l\'ajout de l\'incident.');
+		}
+
+		$data_suivi['id_incident'] = $idIncident;
+		$data_suivi['date_intervention'] = date('Y-m-d');
+		$data_suivi['description'] = $description;
+
+		$entity_suivi = new Suivi();
+		$entity_suivi->fill($data_suivi);
+
+		if (!$this->suiviModel->insert($entity_suivi))
 		{
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
 		}
