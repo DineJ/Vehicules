@@ -182,17 +182,21 @@ class IncidentController extends Controller
 	// Save checking datass
 	public function saveChecking($idVehicle)
 	{
+		// incident entity
 		$data_incident = $this->request->getPost();
 		$data_incident['id_vehicule'] = $idVehicle;
 		$data_incident['id_user'] = session()->get('user')['id'];
 		$data_incident['id_type_incident'] = 1;
 		$data_incident['date_incident'] = date('Y-m-d H:i:s');
+
+		// create a temp var to save datas from the checking form
 		$description = $data_incident['explication_incident'];
 		$data_incident['explication_incident'] = "Entretien de routine";
 
 		$entity_incident = new Incident();
 		$entity_incident->fill($data_incident);
 
+		// Get the ID
 		$idIncident = $this->model->insert($entity_incident);
 
 		if (!$idIncident)
@@ -200,6 +204,7 @@ class IncidentController extends Controller
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout de l\'incident.');
 		}
 
+		// suivi entity
 		$data_suivi['id_incident'] = $idIncident;
 		$data_suivi['date_intervention'] = date('Y-m-d');
 		$data_suivi['description'] = $description;
