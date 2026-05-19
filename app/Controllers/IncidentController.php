@@ -177,4 +177,32 @@ class IncidentController extends Controller
 
 		return view('Incident/declarer', $data);
 	}
+
+	// Save checking datass
+	public function saveChecking($idVehicle)
+	{
+		$data = $this->request->getPost();
+		$data['id_vehicule'] = $idVehicle;
+		$data['id_user'] = session()->get('user')['id'];
+		$data['id_type_incident'] = 1;
+		$data['date_incident'] = date('Y-m-d H:i:s');
+
+		$entity = new Incident();
+		$entity->fill($data);
+
+		if (!$this->model->insert($entity))
+		{
+			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
+		}
+
+		if (session()->get('user')['admin'])
+		{
+			return redirect()->to('/Incident');
+		}
+		else
+		{
+			return redirect()->to('Non_admin');
+		}
+
+	}
 }

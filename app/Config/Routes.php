@@ -125,6 +125,7 @@ $routes->group('', ['filter' => 'Redirection:nonadmin'], function($routes)
 	$routes->post('Incident/start_end', 'IncidentController::store'); // Route that leads to the insert function of the DB
 	$routes->get('Mission/checkEntretien/(:num)', 'MissionController::checkEntretien/$1');
 	$routes->get('Mission/checking/(:num)', 'MissionController::checking/$1');
+	$routes->post('Incident/saveChecking/(:num)', 'IncidentController::saveChecking/$1');
 });
 
 
