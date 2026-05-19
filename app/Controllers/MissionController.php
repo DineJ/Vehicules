@@ -210,25 +210,25 @@ class MissionController extends Controller
 		$entityClone->setidLieuDepart($laClone);
 
 		if (!$this->model->save($entity))
-                {
-                        return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
+		{
+			return redirect()->back()->with('error', 'Erreur lors de la mise à jour.');
 		}
 
-                if (!$this->model->insert($entityClone))
-                {
-                        return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
-                }
+		if (!$this->model->insert($entityClone))
+		{
+			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
+		}
 
-                if (session()->get('user')['admin'])
-                {
-                        return redirect()->to('/Mission');
-                }
-                else
-                {
-                        return redirect()->to('/Non_admin');
-                }
+		if (session()->get('user')['admin'])
+		{
+			return redirect()->to('/Mission');
+		}
+		else
+		{
+			return redirect()->to('/Non_admin');
+		}
 
-                return redirect()->to('/Mission');
+		return redirect()->to('/Mission');
 	}
 
 	public function checkEntretien($idVehicule)
