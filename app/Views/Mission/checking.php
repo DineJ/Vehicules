@@ -1,8 +1,8 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<?php vehicle_checking_form("un","block","none","deux","Usure des pneus",["front_tires" => "Pneux avant","rear_tires" => "Pneux arrière"], ["Usés","Pas usés"], ["pneu_usé.png"]) ?>
-<?php vehicle_checking_form("deux","none","un","none","Pression des pneus",["front_tires" => "Pneux avant","rear_tires" => "Pneux arrière"], ["Usés","Pas usés"], ["pneu_usé.png"]) ?>
+<?php vehicle_checking_form("un","block","none","deux","Usure des pneus (visuel)",["front_tires" => "Pneux avant","rear_tires" => "Pneux arrière"], ["Usés","Pas usés"], ["oeil.png","pneu_usé.png"]) ?>
+<?php vehicle_checking_form("deux","none","un","none","Pression des pneus (visuel)",["front_tires" => "Pneux avant","rear_tires" => "Pneux arrière"], ["Usés","Pas usés"], ["oeil.png","pneu_usé.png"]) ?>
 
 <script>
 	document.getElementById('checkingForm').addEventListener('submit', function () {

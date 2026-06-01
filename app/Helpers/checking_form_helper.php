@@ -5,9 +5,11 @@ function vehicle_checking_form($name,$hide,$prev,$next,$title,$rows,$checkboxs,$
 	<div style="display:<?= $hide ?>;" name="<?= $name ?>" id="<?= $name ?>">
 		<h2 class="text-center text-danger fw-bold p-3 rounded"><?= $title ?></h2>
 
-		<?php foreach ($images as $image): ?>
-			<img class="d-block mx-auto" src="<?= base_url('images/'.$image) ?>" alt="Image véhicule" width="<?= $size ?>">
-		<?php endforeach ?>
+		<div class="d-flex flex-wrap justify-content-center gap-2">
+			<?php foreach ($images as $image): ?>
+				<img class="center" src="<?= base_url('images/'.$image) ?>" alt="Image véhicule" width="<?= $size ?>">
+			<?php endforeach ?>
+		</div>
 
 		<br>
 
