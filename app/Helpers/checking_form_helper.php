@@ -46,7 +46,7 @@ function vehicle_checking_form($name,$hide,$prev,$next,$title,$rows,$checkboxs,$
 
 		<?php if ($next != 'none')
 		{ ?>
-			<button type="button" class="btn btn-primary mt-3" onclick="document.getElementById('<?= $next ?>').style.display='block';document.getElementById('<?= $name ?>').style.display='none';">Continuer le contrôle</button>
+			<button type="button" class="btn btn-primary mt-3" onclick="nextStep('<?= $name ?>', '<?= $next ?>')">Continuer le contrôle</button>
 		<?php }
 		else { ?>
 			<button type="submit" class="btn btn-primary mt-3">Terminer le contrôle</button>
@@ -65,3 +65,39 @@ function vehicle_checking_form($name,$hide,$prev,$next,$title,$rows,$checkboxs,$
 <?php
 }
 ?>
+
+<script>
+	// Check if the form is filled out and display the next form
+	function nextStep(currentForm, nextForm)
+	{
+		const container = document.getElementById(currentForm);
+
+		// Get all radios buttons from current form
+		const radios = container.querySelectorAll('input[type="radio"]');
+
+		// Create an array that will delete every duplicates
+		const groups = [...new Set(
+			Array.from(radios).map(r => r.name)
+		)];
+
+		// Create an empty array to stock datas
+		const missing = [];
+
+		// Put in the array named "missing" every radios button without any values
+		groups.forEach(group => {
+			if (!container.querySelector(`input[name="${group}"]:checked`)) {
+				missing.push(group);
+			}
+		});
+
+		// Check if missins is empty or not
+		if (missing.length > 0) {
+			alert("Veuillez répondre à toutes les questions avant de continuer.");
+			return;
+		}
+
+		// Display next form
+		document.getElementById(nextForm).style.display = 'block';
+		container.style.display = 'none';
+	}
+</script>
