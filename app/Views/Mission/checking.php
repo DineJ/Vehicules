@@ -18,9 +18,8 @@
 <script>
 	document.getElementById('checkingForm').addEventListener('submit', function () {
 		const data = {};
-		document.querySelectorAll('.checking-item').forEach(function (checkbox) {
-			const label = checkbox.dataset.label;
-			data[label] = checkbox.checked ? 'OK' : 'Défectueux';
+		document.querySelectorAll('.checking-item').forEach(function (radio) {
+			data[radio.dataset.label] = radio.value == 1 ? 'OK' : 'Défectueux';
 		});
 		document.getElementById('explication_incident').value = JSON.stringify(data);
 	});

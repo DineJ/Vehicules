@@ -16,7 +16,7 @@ function vehicle_checking_form($name,$hide,$prev,$next,$title,$rows,$checkboxs,$
 		<table class="table table-bordered border table-striped align-middle">
 			<tbody>
 
-				<?php foreach ($rows as $row): ?>
+				<?php foreach ($rows as $key => $row): ?>
 					<tr>
 						<td class="fw-bold"><?= esc($row) ?></td>
 
@@ -27,7 +27,7 @@ function vehicle_checking_form($name,$hide,$prev,$next,$title,$rows,$checkboxs,$
 							<td class="text-center">
 
 								<label style="font-weight:bold; color:<?= ($count == 1 ? "green" : "red") ?>;">
-									<input type="radio" id="<?= esc($row) ?>" data-label="<?= esc($checkbox) ?>" name="<?= esc($row) ?>"
+									<input type="radio" id="<?= esc($row) ?>" class="checking-item" data-label="<?= esc($row) ?>" name="<?= esc($key) ?>"
 										value="<?= $count ?>">
 										<?= esc($checkbox)?>
 								</label>
