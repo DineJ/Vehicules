@@ -44,25 +44,22 @@ function vehicle_checking_form($name,$hide,$prev,$next,$title,$rows,$checkboxs,$
 
 		<?php if ($next != 'none')
 		{ ?>
-			<button type="button" class="btn btn-primary mt-3" onclick="document.getElementById('<?= $next ?>').style.display='block';document.getElementById('<?= $name ?>').style.display='none';">Valider le contrôle (fonction)</button>
+			<button type="button" class="btn btn-primary mt-3" onclick="document.getElementById('<?= $next ?>').style.display='block';document.getElementById('<?= $name ?>').style.display='none';">Continuer le contrôle</button>
 		<?php }
 		else { ?>
-			<button type="submit" class="btn btn-primary mt-3">Valider le contrôle</button>
+			<button type="submit" class="btn btn-primary mt-3">Terminer le contrôle</button>
 		<?php } ?>
 
 		<?php if ($prev != 'none')
 		{ ?>
-			<button type="button" class="btn btn-secondary mt-3" onclick="document.getElementById('<?= $prev ?>').style.display='block';document.getElementById('<?= $name ?>').style.display='none';">Retour (fonction)</button>
+			<button type="button" class="btn btn-secondary mt-3" onclick="document.getElementById('<?= $prev ?>').style.display='block';document.getElementById('<?= $name ?>').style.display='none';">Retour</button>
 		<?php }
 		else
 		{ ?>
-		<a href="<?= site_url('Mission/debut') ?>" class="btn btn-secondary mt-3">Retour</a>
+		<a href="<?= site_url('Mission/debut') ?>" class="btn btn-secondary mt-3">Arrêter le contrôle</a>
 		<?php } ?>
 
 	</div>
 <?php
 }
 ?>
-
-<?php vehicle_checking_form("un","block","none","deux","Usure des pneus",["front_tires" => "Pneux avant","rear_tires" => "Pneux arrière"], ["Usés","Pas usés"], ["pneu_usé.png"]) ?>
-<?php vehicle_checking_form("deux","none","un","none","Pression des pneus",["front_tires" => "Pneux avant","rear_tires" => "Pneux arrière"], ["Usés","Pas usés"], ["pneu_usé.png"]) ?>
