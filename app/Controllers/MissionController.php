@@ -264,6 +264,8 @@ class MissionController extends Controller
 
 	public function checking($idVehicule)
 	{
+		//load helper
+		helper('checking_form');
 		$data['vehicule'] = $this->vehiculeModel->find($idVehicule);
 
 		return view('Mission/checking', $data);
