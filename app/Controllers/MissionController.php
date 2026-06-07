@@ -247,8 +247,12 @@ class MissionController extends Controller
 			]);
 		}
 
+		$dateIncident = is_array($incident)
+			? $incident['date_incident']
+			: $incident->date_incident;
+
 		// Conversion date to DateTime
-		$dateEntretien = new \DateTime($incident->date_incident);
+		$dateEntretien = new \DateTime($dateIncident);
 		$today = new \DateTime();
 
 		// Compare current date and the date of the lastest checking
@@ -261,6 +265,7 @@ class MissionController extends Controller
 			'days' => $diff
 		]);
 	}
+
 
 	public function checking($idVehicule)
 	{

@@ -114,8 +114,8 @@ class AdminController extends Controller
 					 ->join('lieu l1', 'l1.id = mission.id_lieu_depart', 'left')
 					 ->join('lieu l2', 'l2.id = mission.id_lieu_arrive', 'left')
 					 ->where('id_user', session()->get('user')['id'])
+					 ->where('mission.date_depart = mission.date_arrivee')
 					 ->orderBy('date_depart', 'DESC')
-					 ->limit(1)
 					 ->findAll();
 		return view('Non_admin/home', $data);
 	}
