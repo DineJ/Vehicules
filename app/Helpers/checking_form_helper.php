@@ -27,8 +27,13 @@ function vehicle_checking_form($name,$hide,$prev,$next,$title,$rows,$checkboxs,$
 							<td class="text-center">
 
 								<label style="font-weight:bold; color:<?= ($count == 1 ? "green" : "red") ?>;">
-									<input type="radio" id="<?= esc($row) ?>" class="checking-item" data-label="<?= esc($row) ?>" name="<?= esc($key) ?>"
-										value="<?= $count ?>">
+									<input type="radio"
+										id="<?= $key ?>"
+										class="checking-item"
+										data-images="<?= implode(',',$images) ?>"
+										data-label="<?= esc($row) ?>"
+										name="<?= $key ?>"
+										value="<?= $checkbox ?>">
 										<?= esc($checkbox)?>
 								</label>
 							</td>
@@ -67,36 +72,70 @@ function vehicle_checking_form($name,$hide,$prev,$next,$title,$rows,$checkboxs,$
 ?>
 
 <script>
-	// Check if the form is filled out and display the next form
-	function nextStep(currentForm, nextForm)
-	{
-		const container = document.getElementById(currentForm);
-
-		// Get all radios buttons from current form
+	function validateContainer(container, message) {
+		// Get all radio buttons inside the given container
 		const radios = container.querySelectorAll('input[type="radio"]');
 
-		// Create an array that will delete every duplicates
-		const groups = [...new Set(
-			Array.from(radios).map(r => r.name)
-		)];
+		// Get unique radio group names
+		const groups = [...new Set(Array.from(radios).map(radio => radio.name))];
 
-		// Create an empty array to stock datas
-		const missing = [];
-
-		// Put in the array named "missing" every radios button without any values
-		groups.forEach(group => {
+		// Check if every group has one checked radio button
+		for (const group of groups) {
 			if (!container.querySelector(`input[name="${group}"]:checked`)) {
-				missing.push(group);
+				alert(message);
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	document.getElementById('checkingForm').addEventListener('submit', function (event) {
+		// Validate the entire form before allowing submit
+		if (!validateContainer(this, "Veuillez répondre à toutes les questions avant de terminer le contrôle.")) {
+			event.preventDefault();
+			return false;
+		}
+
+		// Build JSON data for the server
+		const data = {};
+
+		document.querySelectorAll('.checking-item').forEach(function (radio) {
+			if (radio.checked === true) {
+				data[radio.dataset.label] = {
+					etat: radio.value,
+					images: radio.dataset.images
+						? radio.dataset.images.split(',')
+						: []
+				};
 			}
 		});
 
-		// Check if missins is empty or not
-		if (missing.length > 0) {
-			alert("Veuillez répondre à toutes les questions avant de continuer.");
+		// Store JSON inside hidden input
+		document.getElementById('explication_incident').value = JSON.stringify(data);
+	});
+
+	function validateStep(container) {
+		const radios = container.querySelectorAll('input[type="radio"]');
+		const groups = [...new Set(Array.from(radios).map(radio => radio.name))];
+
+		for (const group of groups) {
+			if (!container.querySelector(`input[name="${group}"]:checked`)) {
+				alert("Veuillez répondre à toutes les questions avant de continuer.");
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	function nextStep(currentForm, nextForm) {
+		const container = document.getElementById(currentForm);
+
+		if (!validateStep(container)) {
 			return;
 		}
 
-		// Display next form
 		document.getElementById(nextForm).style.display = 'block';
 		container.style.display = 'none';
 	}
