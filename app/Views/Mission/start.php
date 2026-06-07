@@ -97,6 +97,26 @@
 <script src="<?= base_url('js/displayBloc.js') ?>"></script>
 <script>
 	prefill('id_vehicule', 'km_depart');
+
+	document.getElementById('id_vehicule').addEventListener('change', function () {
+
+		// Get vehicule ID
+		const vehiculeId = this.value;
+
+		// AJAX interaction
+		fetch("<?= site_url('Mission/checkEntretien') ?>/" + vehiculeId)
+			.then(response => response.json())
+			.then(data => {
+
+				// if > 7 days
+				if (data.warning)
+				{
+					// Redirect to the checking form
+					window.location.href = "<?= site_url('Mission/checking') ?>/" + vehiculeId;
+				}
+
+			})
+	});
 </script>
 
 <?= $this->endSection() ?>

@@ -34,8 +34,6 @@ $routes->group('', ['filter' => 'Redirection:admin'], function($routes)
 	$routes->post('Mission/update/(:num)', 'MissionController::update/$1');
 	$routes->get('Mission/delete/(:num)', 'MissionController::delete/$1');
 
-
-
 	// Routes for Assurance
 	$routes->get('Assurance', 'AssuranceController::index');
 	$routes->get('Assurance/show/(:num)', 'AssuranceController::show/$1');
@@ -125,7 +123,9 @@ $routes->group('', ['filter' => 'Redirection:nonadmin'], function($routes)
 	$routes->post('Mission/end/(:num)', 'MissionController::update/$1'); // Route that leads to the update function of the DB
 	$routes->get('Incident/declarer', 'IncidentController::debut'); //Route that lead to a new incident
 	$routes->post('Incident/start_end', 'IncidentController::store'); // Route that leads to the insert function of the DB
-
+	$routes->get('Mission/checkEntretien/(:num)', 'MissionController::checkEntretien/$1');
+	$routes->get('Mission/checking/(:num)', 'MissionController::checking/$1');
+	$routes->post('Incident/saveChecking/(:num)', 'IncidentController::saveChecking/$1');
 });
 
 
