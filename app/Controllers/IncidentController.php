@@ -11,6 +11,7 @@ use App\Models\MissionModel;
 use App\Entities\Incident;
 use App\Entities\Suivi;
 use CodeIgniter\Controller;
+use Dompdf\Dompdf;
 
 class IncidentController extends Controller
 {
@@ -217,14 +218,8 @@ class IncidentController extends Controller
 			return redirect()->back()->with('error', 'Erreur lors de l\'ajout.');
 		}
 
-		if (session()->get('user')['admin'])
-		{
-			return redirect()->to('/Incident');
-		}
-		else
-		{
-			return redirect()->to('Non_admin');
-		}
+		exec('cd ' . ROOTPATH .' && php spark mail:send-checking ' . escapeshellarg($idIncident) .' >> ' . WRITEPATH . 'mail-debug.log 2>&1 &');
 
+		return redirect()->to('Mission/debut');
 	}
 }
