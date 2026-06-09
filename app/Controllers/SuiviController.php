@@ -26,7 +26,7 @@ class SuiviController extends Controller
 		$search = $this->request->getGet('q');
 
 		// Query display
-		$builder = $this->incidentModel->select('incident.id, vehicule.plaque, incident.date_incident, suivi.date_intervention, suivi.description, suivi.id as id')
+		$builder = $this->incidentModel->select('incident.id as incident_id, vehicule.plaque, incident.date_incident, suivi.date_intervention, suivi.description, suivi.id as suivi_id')
 										->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
 										->join('suivi', 'suivi.id_incident = incident.id', 'left')
 										->where('suivi.id_incident = incident.id')
@@ -128,6 +128,28 @@ class SuiviController extends Controller
 		}
 
 		return redirect()->to('/Suivi');
+	}
+
+	// PDF
+	public function pdf($incidentId)
+	{
+		// How pdf name are build
+		$filename = 'controle_vehicule_' .$incidentId. '.pdf';
+
+		// Path to pdf
+		$path = WRITEPATH . 'uploads/' .$filename;
+
+		// Check if the file exist
+		if (!is_file($path))
+		{
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
+
+		// return PDF to the browser
+		return $this->response
+					->setHeader('Content-Type', 'application/pdf') // Type of the file (here PDF)
+					->setHeader('Content-Disposition', 'inline; filename="' . $filename . '"') // Display PDF before downloading
+					->setBody(file_get_contents($path)); // Read pdf
 	}
 
 
