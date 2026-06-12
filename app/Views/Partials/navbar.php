@@ -18,7 +18,7 @@ $name = session()->get('user')['name'] ?? null;
 		<?php if (!($hideUser ?? false)): ?>
 			<div class="d-flex justify-content-center h5 mb-0" style="width: inherit;">
 				<!-- Display a different message if you are admin or not -->
-				<?= ($admin) ? 'Tableau de bord administrateur' : 'Espace de ' . ($name ? $name : 'INCONNU') ?>
+				<?= ($admin) ? 'Tableau de bord administrateur' : 'Espace ' . ($name ? $name : 'voiture') ?>
 			</div>
 		<?php endif; ?>
 
