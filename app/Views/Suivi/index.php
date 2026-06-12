@@ -38,7 +38,7 @@
 					</td>
 					<td data-label="Date Intervention" ><?= esc(date('d/m/Y', strtotime($item->date_intervention))) ?></td>
 					<td data-label="description">
-						<?php if (isControleVehiculeJson($item->description)): ?>
+						<?php if ($item->id_type_incident == 1): ?> <!-- Test if id_incident == daily maintenance -->
 							<a href="<?= site_url('Suivi/pdf/' . $item->incident_id) ?>" target="_blank">
 								Voir le contrôle de routine
 							</a>

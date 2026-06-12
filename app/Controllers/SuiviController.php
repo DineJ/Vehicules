@@ -26,7 +26,7 @@ class SuiviController extends Controller
 		$search = $this->request->getGet('q');
 
 		// Query display
-		$builder = $this->incidentModel->select('incident.id as incident_id, vehicule.plaque, incident.date_incident, suivi.date_intervention, suivi.description, suivi.id as suivi_id')
+		$builder = $this->incidentModel->select('incident.id as incident_id, incident.id_type_incident, vehicule.plaque, incident.date_incident, suivi.date_intervention, suivi.description, suivi.id as suivi_id')
 										->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
 										->join('suivi', 'suivi.id_incident = incident.id', 'left')
 										->where('suivi.id_incident = incident.id')
@@ -56,7 +56,7 @@ class SuiviController extends Controller
 
 		// Query to get datas
 		$data['incident'] = $this->incidentModel
-		->select('incident.id as incident_id, vehicule.id as vehicule_id, vehicule.plaque, incident.date_incident')
+		->select('incident.id as incident_id, incident.id_type_incident, vehicule.id as vehicule_id, vehicule.plaque, incident.date_incident')
 		->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
 		->find($data['item']->id_incident);
 
@@ -110,6 +110,8 @@ class SuiviController extends Controller
 		->select('incident.id as incident_id, vehicule.id as vehicule_id, vehicule.plaque, incident.date_incident')
 		->join('vehicule', 'vehicule.id = incident.id_vehicule', 'left')
 		->findAll();
+
+		$data['incident'] = $this->incidentModel->find($data['item']->id_incident);
 
 		return view('Suivi/edit', $data);
 	}

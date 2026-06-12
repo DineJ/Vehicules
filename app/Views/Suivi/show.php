@@ -22,7 +22,7 @@
 			<tr>
 				<td>Description</td>
 				<td>
-					<?php if (isControleVehiculeJson($item->description)): ?>
+					<?php if ($incident->id_type_incident == 1): ?> <!-- Test if id_incident == daily maintenance -->
 						<a href="<?= site_url('Suivi/pdf/' . $incident->incident_id) ?>">
 							Voir le contrôle de routine
 						</a>
