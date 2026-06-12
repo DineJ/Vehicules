@@ -21,7 +21,15 @@
 			<!-- Display description -->
 			<tr>
 				<td>Description</td>
-				<td class="long-text"><?= $item->description ?></td>
+				<td>
+					<?php if ($incident->id_type_incident == 1): ?> <!-- Test if id_incident == daily maintenance -->
+						<a href="<?= site_url('Suivi/pdf/' . $incident->incident_id) ?>">
+							Voir le contrôle de routine
+						</a>
+					<?php else:
+						echo esc($item->description);
+					endif; ?>
+				</td>
 			</tr>
 
 		</tbody>

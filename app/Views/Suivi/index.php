@@ -37,10 +37,18 @@
 						<?= esc('Vehicule : ' . $item->plaque . ' — Date : ' . date('d/m/Y', strtotime($item->date_incident))) ?>
 					</td>
 					<td data-label="Date Intervention" ><?= esc(date('d/m/Y', strtotime($item->date_intervention))) ?></td>
-					<td data-label="Description" class="long-text"><?= esc($item->description) ?></td>
+					<td data-label="description">
+						<?php if ($item->id_type_incident == 1): ?> <!-- Test if id_incident == daily maintenance -->
+							<a href="<?= site_url('Suivi/pdf/' . $item->incident_id) ?>" target="_blank">
+								Voir le contrôle de routine
+							</a>
+						<?php else:
+							echo esc($item->description);
+						endif; ?>
+					</td>
 					<td data-label="Actions">
 						<!-- Redirection button -->
-						<a href="<?= site_url('Suivi/show/'.$item->id) ?>" class="btn btn-info btn-sm">Voir</a>
+						<a href="<?= site_url('Suivi/show/'.$item->suivi_id) ?>" class="btn btn-info btn-sm">Voir</a>
 					</td>
 				</tr>
 			<?php endforeach; ?>

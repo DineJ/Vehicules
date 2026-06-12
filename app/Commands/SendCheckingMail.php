@@ -65,7 +65,7 @@ class SendCheckingMail extends BaseCommand
 		$description = $suivi->description;
 
 		// Prepare data for the PDF view
-		$data = ['vehicule' => $vehicule,'checks' => json_decode($description, true),'driver' => $user->prenom . ' ' . $user->nom];
+		$data = ['vehicule' => $vehicule,'checks' => json_decode($description, true),'driver' => $user->prenom . ' ' . $user->nom, 'hideUser' => true];
 
 		// Generate HTML from the PDF template
 		$html = view('Pdf/entretien', $data);

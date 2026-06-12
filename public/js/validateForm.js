@@ -179,14 +179,17 @@ function validateFormSuivi()
 	}
 
 	// Get values
-	let description = document.getElementById('description').value;
+	let descriptionElement = document.getElementById('description');
 	let olddescription = document.getElementById('olddescription').value;
-	row++;
 
-	// Check values 
-	if (description == olddescription)
-	{
-		compare++;
+	// Check values
+	if (descriptionElement) {
+		let description = descriptionElement.value;
+		row++;
+
+		if (description == olddescription) {
+			compare++;
+		}
 	}
 
 	// Check counts

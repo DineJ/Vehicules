@@ -26,7 +26,13 @@
 
 	<!-- Type a short explication -->
 	<label>Description</label>
-	<textarea oninput="setUpper(document.getElementById('description'));" id="description" name="description" class="form-control" required><?= isset($item) ? $item->description : '' ?></textarea>
+	<?php if ($incident->id_type_incident == 1): ?> <!-- Test if id_incident == daily maintenance -->
+		<a href="<?= site_url('Suivi/pdf/' . $item->id_incident) ?>" class="form-control" target="_blank">
+			Voir le contrôle de routine
+		</a>
+	<?php else: ?>
+		<textarea oninput="setUpper(document.getElementById('description'));" id="description" name="description" class="form-control" required><?= isset($item) ? $item->description : '' ?></textarea>
+	<?php endif ?>
 	<input type="hidden" id="olddescription" name="olddescription" value="<?= isset($item) ? $item->description : '' ?>">
 
 	<!-- Redirection button -->

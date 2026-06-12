@@ -51,6 +51,7 @@ $routes->group('', ['filter' => 'Redirection:admin'], function($routes)
 	$routes->post('Suivi/store', 'SuiviController::store'); // Route that leads to the insert fuction of the DB
 	$routes->get('Suivi/edit/(:num)', 'SuiviController::edit/$1'); // Route that leads to the display of editing a specific data
 	$routes->post('Suivi/update/(:num)', 'SuiviController::update/$1'); // Route that leads to the update fuction of the DB
+	$routes->get('Suivi/pdf/(:num)', 'SuiviController::pdf/$1'); // Route that display the PDF
 	$routes->get('Suivi/delete/(:num)', 'SuiviController::delete/$1'); // Not used
 
 
