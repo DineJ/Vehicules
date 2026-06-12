@@ -2,7 +2,7 @@
 <?= $this->extend('layouts/main') ?> <!-- Extend the base layout -->
 <?= $this->section('content') ?> <!-- Start the main content section -->
 
-<h3><strong>Les données sont automatiquement récupérer grâce à l'activité du site</strong></h3>
+<h3><strong>Les informations essentielles de l'activité</strong></h3>
 </br>
 <?php
 
