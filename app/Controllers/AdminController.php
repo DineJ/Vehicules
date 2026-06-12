@@ -135,4 +135,68 @@ class AdminController extends Controller
 		return redirect()->to('/Admin/administrator');
 	}
 
+
+	public function extraction_view()
+	{
+		return view('Admin/extraction');
+	}
+
+	// Extract datas into a csv file
+	public function extraction_datas()
+	{
+		// Get datas
+		$type = $this->request->getGet('type');
+		$month = $this->request->getGet('mois');
+		$year = $this->request->getGet('annee');
+
+		// Convert date
+		$start = $year . '-' . $month . '-01';
+		$end = date('Y-m-t', strtotime($start));
+
+		// in case we have multiple buttons
+		switch ($type) {
+			case 'mission':
+				$data['items'] = $this->missionModel
+					->select('vehicule.plaque, CONCAT(user.nom, " ", user.prenom) AS nom_complet, mission.motif, mission.date_depart, mission.date_arrivee, l1.surnom AS surnom_depart , l2.surnom AS surnom_arrive, mission.km_depart, mission.km_arrive')
+					->join('user', 'user.id = mission.id_user', 'left')
+					->join('vehicule', 'vehicule.id = mission.id_vehicule', 'left')
+					->join('lieu l1', 'l1.id = mission.id_lieu_depart', 'left')
+					->join('lieu l2', 'l2.id = mission.id_lieu_arrive', 'left')
+					->where('mission.date_depart >=', $start)
+					->where('mission.date_depart <=', $end)
+					->orderBy('nom_complet, mission.date_depart', 'DESC')
+					->findAll();
+				break;
+
+			default:
+				return redirect()->back()->with('error', 'Type d’extraction invalide.');
+		}
+
+		// Generate a dynamic file name.
+		$filename = $type . '_' . $month . '_' . $year . '.csv';
+
+		// Create the CSV header row.
+		$csv = "Conducteur;Date départ;Date arrivée;Plaque;Motif;Lieu départ;KM départ;Lieu arrivée;KM arrivé\n";
+
+		// Loop through all records returned by the query.
+		foreach ($data['items'] as $item) {
+			$csv .= $item->nom_complet . ';'
+				. $item->date_depart . ';'
+				. $item->date_arrivee . ';'
+				. $item->plaque . ';'
+				. $item->motif . ';'
+				. $item->surnom_depart . ';'
+				. $item->km_depart . ';'
+				. $item->surnom_arrive . ';'
+				. $item->km_arrive
+				. "\n";
+		}
+
+		// Return the CSV file as a downloadable response.
+		return $this->response
+			->setHeader('Content-Type', 'text/csv; charset=UTF-8') // Tell the browser that the response is a CSV file.
+			->setHeader('Content-Disposition', 'attachment; filename="' . $filename . '"') // Force the browser to download the file instead of displaying it.
+			->setBody("\xEF\xBB\xBF" . $csv); // Add UTF-8 BOM for Excel compatibility and send the CSV content.
+	}
+
 }
