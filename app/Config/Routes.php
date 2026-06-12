@@ -109,7 +109,8 @@ $routes->group('', ['filter' => 'Redirection:admin'], function($routes)
 
 	// Routes for Admin
 	$routes->get('Admin', 'AdminController::administrator'); // Route that leads to admin view
-
+	$routes->get('Extraction', 'AdminController::extraction_view'); // Route that leads to extraction view
+	$routes->get('Extraction/datas', 'AdminController::extraction_datas'); // Route that allow to download datas into a csv file
 });
 
 

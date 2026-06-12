@@ -45,6 +45,7 @@ $name = session()->get('user')['name'] ?? null;
 							<li><a class="dropdown-item" href="/User">Utilisateur</a></li>
 							<li><a class="dropdown-item" href="/Vehicule">Véhicule</a></li>
 							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="/Extraction">Extraction</a></li>
 							<li><a class="dropdown-item" href="/Login/logout">Déconnexion</a></li>
 						</ul>
 					<?php endif; ?>
