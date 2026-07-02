@@ -18,6 +18,10 @@
 	<form method="post" action="<?= site_url('Mission/end/'.$missions['0']->id) ?>" onsubmit="return check(<?= $missions['0']->km_depart ?>, 'km_arrive', 'Êtes-vous sûr du KM ?')">
 
 		<div id="hideForm" style="display:none;">
+			<!-- Display starting KM -->
+			<label>Km départ</label>
+			<input type="text" id="km_depart" name="km_depart" value="<?= esc($missions['0']->km_depart) ?>" class="form-control" readonly>
+
 			<!-- Select end KM -->
 			<label>Km d'arrivé</label>
 			<input type="number" id="km_arrive" name="km_arrive" value="" class="form-control" required>
