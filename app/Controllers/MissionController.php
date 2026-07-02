@@ -140,10 +140,14 @@ class MissionController extends Controller
 	// START A MISSION AS USER
 	public function debut()
 	{
+		// Get lastest mission for EACH vehicles
 		$data['vehicules'] = $this->vehiculeModel
-					  ->select('vehicule.plaque, vehicule.id, COALESCE(MAX(mission.km_arrive), 0) AS km_depart')
-					  ->join('mission', 'mission.id_vehicule = vehicule.id', 'left')
-					  ->groupBy('vehicule.id, vehicule.plaque')
+					  ->select('vehicule.plaque, vehicule.id, COALESCE(mission.km_arrive,0) as km_depart')
+					  ->join('mission', 'mission.id = (
+														SELECT MAX(m2.id)
+														FROM mission m2
+														WHERE m2.id_vehicule = vehicule.id)',
+														'left',false)
 					  ->findAll();
 
 		$data['lieux'] = $this->lieuModel->findAll();
