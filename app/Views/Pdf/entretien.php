@@ -10,7 +10,7 @@
 <?php $etatValidate = ['Ok', 'Gonflés', 'Pas usés', 'Allumés']; ?>
 <div class="container mt-5">
 
-	<h2>Contrôle véhicule : <?= esc($vehicule->plaque) ?> <br>Conducteur : <?= esc($driver) ?></h2>
+	<h2>Contrôle véhicule : <?= esc($vehicule->plaque) ?> <br>Kilométrage : <?= esc($km) ?> <br>Conducteur : <?= esc($driver) ?></h2>
 	<h3>Effectué le : <?= date('d/m/Y à H:i:s'); ?></h3>
 
 	<div class="table-responsive">

@@ -6,6 +6,7 @@ use App\Models\IncidentModel;
 use App\Models\SuiviModel;
 use App\Models\VehiculeModel;
 use App\Models\UserModel;
+use App\Models\MissionModel;
 use CodeIgniter\CLI\BaseCommand;
 use Dompdf\Dompdf;
 
@@ -33,6 +34,7 @@ class SendCheckingMail extends BaseCommand
 		$suiviModel = new SuiviModel();
 		$vehiculeModel = new VehiculeModel();
 		$userModel = new UserModel();
+		$missionModel = new MissionModel();
 
 		// Load the incident
 		$incident = $incidentModel->find($idIncident);
@@ -64,8 +66,18 @@ class SendCheckingMail extends BaseCommand
 		// Decode the JSON payload containing the vehicle inspection data
 		$description = $suivi->description;
 
+		// Retrive vehicle km
+		$mission = $missionModel
+			->select('km_arrive')
+			->where('id_vehicule', $incident->id_vehicule)
+			->orderBy('id', 'DESC')
+			->first();
+
+		// In case this is the first mission of the vehicle
+		$km = $mission->km_arrive ?? 0;
+
 		// Prepare data for the PDF view
-		$data = ['vehicule' => $vehicule,'checks' => json_decode($description, true),'driver' => $user->prenom . ' ' . $user->nom, 'hideUser' => true];
+		$data = ['vehicule' => $vehicule,'checks' => json_decode($description, true),'driver' => $user->prenom . ' ' . $user->nom, 'hideUser' => true,'km' => $km];
 
 		// Generate HTML from the PDF template
 		$html = view('Pdf/entretien', $data);
